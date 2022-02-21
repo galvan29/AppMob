@@ -36,13 +36,14 @@ class _State extends State<PageLoginPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    margin: const EdgeInsets.only(
-                      top: 400,
+                    margin: EdgeInsets.only(
+                      top: MediaQuery.of(context).size.height * 0.20,
                     ),
                     padding: EdgeInsets.zero,
                     width: double.maxFinite,
                     decoration: const BoxDecoration(),
                     child: Text(r'''MyTraining''',
+                        style: TextStyle(height: 5, fontSize: 30, color: Colors.white),
                         textAlign: TextAlign.center,
                         maxLines: 1),
                   ),
