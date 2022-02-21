@@ -1,43 +1,44 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Hello World',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      debugShowCheckedModeBanner: false,
+      title: 'Kindacode.com',
+      home: HomePage(),
     );
   }
 }
 
-class MyHomePage extends StatelessWidget {
-  final String title;
-
-  const MyHomePage({@required this.title});
-
-  @override
+class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text(title),
-        ),
-        body: new Stack(children: <Widget>[
-          new Container(
-            decoration: new BoxDecoration(
-              image: new DecorationImage(
-                image: new AssetImage("Image/SFONDO.jpg"),
-                fit: BoxFit.cover,
+    return Container(
+      decoration: BoxDecoration(
+          image: DecorationImage(
+            fit: BoxFit.cover,
+            image: NetworkImage(
+              'https://www.kindacode.com/wp-content/uploads/2021/01/blue.jpg',
+            ),
+          )),
+      child: Scaffold(
+          backgroundColor: Colors.transparent,
+          body: Center(
+            child: Card(
+              elevation: 10,
+              color: Colors.white,
+              child: Container(
+                width: 300,
+                height: 300,
+                alignment: Alignment.center,
+                child: Text('www.kindacode.com', style: TextStyle(fontSize: 24)),
               ),
             ),
-          ),
-          new Center(
-            child: new Text("Hello background"),
-          ),
-        ]));
+          )),
+    );
   }
 }
