@@ -1,13 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:myapp/auth/auth_state.dart';
-
-import 'package:myapp/src/pages/index.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:map/map.dart';
-import 'package:latlng/latlng.dart';
-import 'package:paged_vertical_calendar/paged_vertical_calendar.dart';
 
 class PageLoginPage extends StatefulWidget {
   const PageLoginPage({
@@ -51,15 +43,6 @@ class _State extends State<PageLoginPage> {
                     width: double.maxFinite,
                     decoration: const BoxDecoration(),
                     child: Text(r'''MyTraining''',
-                        style: GoogleFonts.adventPro(
-                          textStyle: TextStyle(
-                            color: const Color(0xFFFFFFFF),
-                            fontWeight: FontWeight.w400,
-                            fontSize: 50,
-                            fontStyle: FontStyle.normal,
-                            decoration: TextDecoration.none,
-                          ),
-                        ),
                         textAlign: TextAlign.center,
                         maxLines: 1),
                   ),
@@ -71,15 +54,6 @@ class _State extends State<PageLoginPage> {
                     width: double.maxFinite,
                     decoration: const BoxDecoration(),
                     child: Text(r'''Login''',
-                        style: GoogleFonts.adventPro(
-                          textStyle: TextStyle(
-                            color: const Color(0xFFFFFFFF),
-                            fontWeight: FontWeight.w400,
-                            fontSize: 25,
-                            fontStyle: FontStyle.normal,
-                            decoration: TextDecoration.none,
-                          ),
-                        ),
                         textAlign: TextAlign.center,
                         maxLines: 1),
                   ),
@@ -109,15 +83,6 @@ class _State extends State<PageLoginPage> {
                           focusedBorder: OutlineInputBorder(),
                           hintText: r'''   Nome Utente''',
                           contentPadding: EdgeInsets.zero,
-                        ),
-                        style: GoogleFonts.adventPro(
-                          textStyle: TextStyle(
-                            color: const Color(0xFFFFFFFF),
-                            fontWeight: FontWeight.w400,
-                            fontSize: 16,
-                            fontStyle: FontStyle.normal,
-                            decoration: TextDecoration.none,
-                          ),
                         ),
                         textAlign: TextAlign.left,
                         maxLines: 1,
@@ -155,15 +120,6 @@ class _State extends State<PageLoginPage> {
                           hintText: r'''   Password''',
                           contentPadding: const EdgeInsets.only(),
                         ),
-                        style: GoogleFonts.adventPro(
-                          textStyle: TextStyle(
-                            color: const Color(0xFFFFFFFF),
-                            fontWeight: FontWeight.w400,
-                            fontSize: 16,
-                            fontStyle: FontStyle.normal,
-                            decoration: TextDecoration.none,
-                          ),
-                        ),
                         textAlign: TextAlign.left,
                         maxLines: 1,
                         minLines: 1,
@@ -183,40 +139,6 @@ class _State extends State<PageLoginPage> {
                     padding: EdgeInsets.zero,
                     width: double.maxFinite,
                     decoration: const BoxDecoration(),
-                    child: GestureDetector(
-                        onTap: () async {
-                          await Navigator.push<void>(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => PageSchedePage(),
-                            ),
-                          );
-                        },
-                        child: Container(
-                            width: 10,
-                            height: 30,
-                            decoration: BoxDecoration(
-                              color: const Color(0xFF3285FF),
-                              borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(8),
-                                topRight: Radius.circular(8),
-                                bottomRight: Radius.circular(8),
-                                bottomLeft: Radius.circular(8),
-                              ),
-                            ),
-                            child: Text(
-                              '''Login''',
-                              style: GoogleFonts.adventPro(
-                                textStyle: TextStyle(
-                                  color: const Color(0xFFFFFFFF),
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 16,
-                                  fontStyle: FontStyle.normal,
-                                  decoration: TextDecoration.none,
-                                ),
-                              ),
-                              textAlign: TextAlign.center,
-                            ))),
                   ),
                 ],
               ),
