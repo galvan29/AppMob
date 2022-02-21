@@ -23,20 +23,21 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(title),
-      ),
-      body: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage("helloworld/Image/SFONDO.jpg"),
-            fit: BoxFit.cover,
+        appBar: AppBar(
+          title: Text(title),
+        ),
+        body: new Stack(children: <Widget>[
+          new Container(
+            decoration: new BoxDecoration(
+              image: new DecorationImage(
+                image: new AssetImage("Image/SFONDO.jpg"),
+                fit: BoxFit.cover,
+              ),
+            ),
           ),
-        ),
-        child: Text(
-          'ffff',
-        ),
-      ),
-    );
+          new Center(
+            child: new Text("Hello background"),
+          ),
+        ]));
   }
 }
