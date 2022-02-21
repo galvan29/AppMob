@@ -23,6 +23,7 @@ class HomePage extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
           image: DecorationImage(
+            fit: BoxFit.cover,
             repeat: ImageRepeat.repeat,
             image: AssetImage('Image/SFONDO.jpg'),
           )),
