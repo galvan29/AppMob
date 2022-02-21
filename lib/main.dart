@@ -1,3 +1,4 @@
+// main.dart
 import 'package:flutter/material.dart';
 
 void main() {
@@ -20,10 +21,8 @@ class HomePage extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
           image: DecorationImage(
-            fit: BoxFit.cover,
-            image: NetworkImage(
-              'https://www.kindacode.com/wp-content/uploads/2021/01/blue.jpg',
-            ),
+            repeat: ImageRepeat.repeat,
+            image: AssetImage('Image/SFONDO.jpg'),
           )),
       child: Scaffold(
           backgroundColor: Colors.transparent,
@@ -35,7 +34,8 @@ class HomePage extends StatelessWidget {
                 width: 300,
                 height: 300,
                 alignment: Alignment.center,
-                child: Text('www.kindacode.com', style: TextStyle(fontSize: 24)),
+                child:
+                Text('www.kindacode.com', style: TextStyle(fontSize: 24)),
               ),
             ),
           )),
