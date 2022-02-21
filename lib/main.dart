@@ -29,7 +29,7 @@ class MyHomePage extends StatelessWidget {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage("Image/SFONDO.jpg"),
+            image: AssetImage("helloworld/Image/SFONDO.jpg"),
             fit: BoxFit.cover,
           ),
         ),
