@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 
 import 'login.dart';
-
+//fahvhoavadbvjab
 void main() {
   runApp(MyApp());
 }
@@ -23,7 +23,7 @@ class HomePage extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
           image: DecorationImage(
-            fit: BoxFit.cover,
+            //fit: BoxFit.cover,
             repeat: ImageRepeat.repeat,
             image: AssetImage('Image/SFONDO.jpg'),
           )),
