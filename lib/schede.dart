@@ -23,11 +23,12 @@ class _State extends State<PageSchedePage> {
     super.initState();
   }
 
-  var currentIndex = 0;
+  int _currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
+    final colorScheme = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(120),
@@ -189,16 +190,47 @@ class _State extends State<PageSchedePage> {
       ),
       backgroundColor: const Color.fromARGB(255, 34, 1, 48),
       body: Stack(),
-      bottomNavigationBar: Container(
-        
-      ),
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        currentIndex: _currentIndex,
+        backgroundColor: Colors.transparent,
+        selectedItemColor: Colors.white,
+        unselectedItemColor: colorScheme.onSurface.withOpacity(.60),
+        selectedFontSize: MediaQuery.of(context).size.height * 0.02,
+        unselectedFontSize: MediaQuery.of(context).size.height * 0.02,
+        onTap: (value) {
+          setState(() => _currentIndex = value);
+        },
+        items: [
+          BottomNavigationBarItem(
+            title: Text('Ciao',
+              style: GoogleFonts.adventPro(
+                textStyle: TextStyle(
+                  fontStyle: FontStyle.normal,
+                  decoration: TextDecoration.none,
+                ))),
+            icon: Icon(Icons.favorite),
+          ),
+          BottomNavigationBarItem(
+            title: Text('Ciao',
+                style: GoogleFonts.adventPro(
+                    textStyle: TextStyle(
+                      fontStyle: FontStyle.normal,
+                      decoration: TextDecoration.none,
+                    ))),
+            icon: Icon(Icons.music_note),
+          ),
+          BottomNavigationBarItem(
+            title: Text('Ciao',
+                style: GoogleFonts.adventPro(
+                    textStyle: TextStyle(
+                      fontStyle: FontStyle.normal,
+                      decoration: TextDecoration.none,
+                    ))),
+            icon: Icon(Icons.location_on),
+          ),
+        ],
+      )
     );
   }
-
-  List<IconData> listOfIcons = [
-    Icons.favorite_rounded,
-    Icons.favorite_rounded,
-    Icons.settings_rounded,
-    Icons.person_rounded,
-  ];
 }
