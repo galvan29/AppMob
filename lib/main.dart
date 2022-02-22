@@ -42,8 +42,8 @@ class HomePage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      margin: const EdgeInsets.only(
-                        top: 400,
+                      margin: EdgeInsets.only(
+                        top: MediaQuery.of(context).size.height * 0.48,
                       ),
                       padding: EdgeInsets.zero,
                       width: double.maxFinite,
@@ -100,15 +100,17 @@ class HomePage extends StatelessWidget {
                           },
                           child: Container(
                               width: double.maxFinite,
-                              height: 30,
+                              height: 40,
+                              padding: EdgeInsets.only(top:8),
                               decoration: BoxDecoration(
-                                color: const Color(0xFF3285FF),
+                                color: Colors.black.withOpacity(0.05),
                                 borderRadius: BorderRadius.only(
                                   topLeft: Radius.circular(5),
                                   topRight: Radius.circular(5),
                                   bottomRight: Radius.circular(5),
                                   bottomLeft: Radius.circular(5),
                                 ),
+                                  border: Border.all(color: Colors.white)
                               ),
                               child: Text(
                                 '''Login''',
@@ -122,8 +124,9 @@ class HomePage extends StatelessWidget {
                                   ),
                                 ),
                                 textAlign: TextAlign.center,
-                              ))),
-                    ),
+                              )
+                                ),
+                          )),
                     Container(
                       margin: const EdgeInsets.only(
                         left: 50,
@@ -144,15 +147,17 @@ class HomePage extends StatelessWidget {
                           },
                           child: Container(
                               width: 10,
-                              height: 30,
+                              height: 40,
+                              padding: EdgeInsets.only(top:8),
                               decoration: BoxDecoration(
-                                color: const Color(0xFF3285FF),
+                                color: Colors.black.withOpacity(0.05),
                                 borderRadius: BorderRadius.only(
                                   topLeft: Radius.circular(5),
                                   topRight: Radius.circular(5),
                                   bottomRight: Radius.circular(5),
                                   bottomLeft: Radius.circular(5),
                                 ),
+                                  border: Border.all(color: Colors.white)
                               ),
                               child: Text(
                                 '''Register''',

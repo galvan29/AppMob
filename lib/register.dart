@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:google_fonts/google_fonts.dart';
 
 class PageRegisterPage extends StatefulWidget {
   const PageRegisterPage({
@@ -26,24 +26,32 @@ class _State extends State<PageRegisterPage> {
         children: [
           Stack(
             children: [
-              Container(
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                        // repeat: ImageRepeat.repeat,
-                        image: AssetImage('assets/image/sfondo.jpg'),
-                        fit: BoxFit.cover,))),
+              Image.network(
+                r'''https://i.pinimg.com/736x/fd/51/40/fd5140c875e584cb8cc7063a6469c19b.jpg''',
+                width: double.maxFinite,
+                height: double.maxFinite,
+                fit: BoxFit.cover,
+              ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
                     margin: EdgeInsets.only(
-                      top: MediaQuery.of(context).size.height * 0.20,
+                      top: MediaQuery.of(context).size.height * 0.48,
                     ),
                     padding: EdgeInsets.zero,
                     width: double.maxFinite,
                     decoration: const BoxDecoration(),
                     child: Text(r'''MyTraining''',
-                        style: TextStyle(height: 5, fontSize: 30, color: Colors.white),
+                        style: GoogleFonts.adventPro(
+                          textStyle: TextStyle(
+                            color: const Color(0xFFFFFFFF),
+                            fontWeight: FontWeight.w400,
+                            fontSize: 50,
+                            fontStyle: FontStyle.normal,
+                            decoration: TextDecoration.none,
+                          ),
+                        ),
                         textAlign: TextAlign.center,
                         maxLines: 1),
                   ),
@@ -54,7 +62,16 @@ class _State extends State<PageRegisterPage> {
                     padding: EdgeInsets.zero,
                     width: double.maxFinite,
                     decoration: const BoxDecoration(),
-                    child: Text(r'''Login''',
+                    child: Text(r'''Register''',
+                        style: GoogleFonts.adventPro(
+                          textStyle: TextStyle(
+                            color: const Color(0xFFFFFFFF),
+                            fontWeight: FontWeight.w400,
+                            fontSize: 25,
+                            fontStyle: FontStyle.normal,
+                            decoration: TextDecoration.none,
+                          ),
+                        ),
                         textAlign: TextAlign.center,
                         maxLines: 1),
                   ),
@@ -84,6 +101,15 @@ class _State extends State<PageRegisterPage> {
                           focusedBorder: OutlineInputBorder(),
                           hintText: r'''   Nome Utente''',
                           contentPadding: EdgeInsets.zero,
+                        ),
+                        style: GoogleFonts.adventPro(
+                          textStyle: TextStyle(
+                            color: const Color(0xFFFFFFFF),
+                            fontWeight: FontWeight.w400,
+                            fontSize: 16,
+                            fontStyle: FontStyle.normal,
+                            decoration: TextDecoration.none,
+                          ),
                         ),
                         textAlign: TextAlign.left,
                         maxLines: 1,
@@ -121,6 +147,15 @@ class _State extends State<PageRegisterPage> {
                           hintText: r'''   Password''',
                           contentPadding: const EdgeInsets.only(),
                         ),
+                        style: GoogleFonts.adventPro(
+                          textStyle: TextStyle(
+                            color: const Color(0xFFFFFFFF),
+                            fontWeight: FontWeight.w400,
+                            fontSize: 16,
+                            fontStyle: FontStyle.normal,
+                            decoration: TextDecoration.none,
+                          ),
+                        ),
                         textAlign: TextAlign.left,
                         maxLines: 1,
                         minLines: 1,
@@ -130,16 +165,6 @@ class _State extends State<PageRegisterPage> {
                         autocorrect: false,
                       ),
                     ),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.only(
-                      left: 50,
-                      top: 10,
-                      right: 50,
-                    ),
-                    padding: EdgeInsets.zero,
-                    width: double.maxFinite,
-                    decoration: const BoxDecoration(),
                   ),
                 ],
               ),
