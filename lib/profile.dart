@@ -4,16 +4,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'login.dart';
 import 'register.dart';
 
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
+class Profile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'App',
+      title: 'Kindacode.com',
       home: HomePage(),
     );
   }
@@ -48,7 +44,7 @@ class HomePage extends StatelessWidget {
                       padding: EdgeInsets.zero,
                       width: double.maxFinite,
                       decoration: const BoxDecoration(),
-                      child: Text(r'''MyTraining''',
+                      child: Text(r'''PROFILOOOOO''',
                           style: GoogleFonts.adventPro(
                             textStyle: TextStyle(
                               color: const Color(0xFFFFFFFF),
@@ -82,14 +78,14 @@ class HomePage extends StatelessWidget {
                           maxLines: 1),
                     ),
                     Container(
-                      margin: const EdgeInsets.only(
-                        left: 50,
-                        top: 100,
-                        right: 50,
-                      ),
-                      padding: EdgeInsets.zero,
-                      decoration: const BoxDecoration(),
-                      child: GestureDetector(
+                        margin: const EdgeInsets.only(
+                          left: 50,
+                          top: 100,
+                          right: 50,
+                        ),
+                        padding: EdgeInsets.zero,
+                        decoration: const BoxDecoration(),
+                        child: GestureDetector(
                           onTap: () async {
                             await Navigator.push<void>(
                               context,
@@ -103,13 +99,13 @@ class HomePage extends StatelessWidget {
                               height: 40,
                               padding: EdgeInsets.only(top:8),
                               decoration: BoxDecoration(
-                                color: Colors.black.withOpacity(0.05),
-                                borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(5),
-                                  topRight: Radius.circular(5),
-                                  bottomRight: Radius.circular(5),
-                                  bottomLeft: Radius.circular(5),
-                                ),
+                                  color: Colors.black.withOpacity(0.05),
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(5),
+                                    topRight: Radius.circular(5),
+                                    bottomRight: Radius.circular(5),
+                                    bottomLeft: Radius.circular(5),
+                                  ),
                                   border: Border.all(color: Colors.white)
                               ),
                               child: Text(
@@ -125,8 +121,8 @@ class HomePage extends StatelessWidget {
                                 ),
                                 textAlign: TextAlign.center,
                               )
-                                ),
-                          )),
+                          ),
+                        )),
                     Container(
                       margin: const EdgeInsets.only(
                         left: 50,
@@ -150,13 +146,13 @@ class HomePage extends StatelessWidget {
                               height: 40,
                               padding: EdgeInsets.only(top:8),
                               decoration: BoxDecoration(
-                                color: Colors.black.withOpacity(0.05),
-                                borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(5),
-                                  topRight: Radius.circular(5),
-                                  bottomRight: Radius.circular(5),
-                                  bottomLeft: Radius.circular(5),
-                                ),
+                                  color: Colors.black.withOpacity(0.05),
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(5),
+                                    topRight: Radius.circular(5),
+                                    bottomRight: Radius.circular(5),
+                                    bottomLeft: Radius.circular(5),
+                                  ),
                                   border: Border.all(color: Colors.white)
                               ),
                               child: Text(

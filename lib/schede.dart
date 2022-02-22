@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'bro.dart';
 import 'main.dart';
+import 'profile.dart';
+import 'viewGraph.dart';
+import 'training.dart';
 
 class PageSchedePage extends StatefulWidget {
   const PageSchedePage({
@@ -35,34 +39,63 @@ class _State extends State<PageSchedePage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              margin: const EdgeInsets.only(
-                top: 20,
+              margin: EdgeInsets.only(
+                top: MediaQuery.of(context).size.height * 0.04,
+                left: MediaQuery.of(context).size.height * 0.03,
+                right: MediaQuery.of(context).size.height * 0.03,
               ),
               padding: EdgeInsets.zero,
               width: double.maxFinite,
               decoration: const BoxDecoration(
-                color: Color(0xFF000000),
+                color: Colors.transparent,
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(r'''SCHEDE''',
+                  Text('CARDS',
                       style: GoogleFonts.adventPro(
                         textStyle: TextStyle(
                           color: const Color(0xFFFFFFFF),
                           fontWeight: FontWeight.w400,
-                          fontSize: 40,
+                          fontSize: MediaQuery.of(context).size.height * 0.05,
                           fontStyle: FontStyle.normal,
                           decoration: TextDecoration.none,
                         ),
                       ),
                       textAlign: TextAlign.left,
                       maxLines: 1),
-                  Icon(
-                    MdiIcons.fromString('''account-box'''),
-                    size: 50,
-                    color: Color(0xFFFFFFFF),
-                  ),
+                  Container(
+                      padding: EdgeInsets.zero,
+                      decoration: const BoxDecoration(),
+                      child: GestureDetector(
+                        onTap: () async {
+                          await Navigator.push<void>(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Profile(),
+                            ),
+                          );
+                        },
+                        child: Container(
+                            height: MediaQuery.of(context).size.height * 0.05,
+                            width: MediaQuery.of(context).size.height * 0.05,
+                            decoration: BoxDecoration(
+                                color: Colors.black.withOpacity(0),
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(5),
+                                  topRight: Radius.circular(5),
+                                  bottomRight: Radius.circular(5),
+                                  bottomLeft: Radius.circular(5),
+                                ),
+                                border: Border.all(color: Colors.white, width: 2)
+                            ),
+                            child: Icon(
+                              Icons.perm_identity_sharp,
+                              size: MediaQuery.of(context).size.height * 0.037,
+                              color: Color(0xFFFFFFFF),
+                            )
+                        ),
+                      ))
                 ],
               ),
             ),
@@ -83,13 +116,8 @@ class _State extends State<PageSchedePage> {
             SpeedDialChild(
               child: Icon(Icons.construction),
               label: 'Modifica',
-              onTap: () async {
-                await Navigator.push<void>(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => MyApp(),
-                  ),
-                );
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => Bro()));
               },
             ),
             SpeedDialChild(
@@ -128,34 +156,38 @@ class _State extends State<PageSchedePage> {
         unselectedFontSize: MediaQuery.of(context).size.height * 0.02,
         onTap: (value) {
           setState(() => _currentIndex = value);
+          if(value==1)
+            Navigator.push(context, MaterialPageRoute(builder: (context) => Training()));
+          else if(value==2)
+            Navigator.push(context, MaterialPageRoute(builder: (context) => ViewGraph()));
         },
         items: [
           BottomNavigationBarItem(
-            title: Text('Ciao',
+            title: Text('Cards',
               style: GoogleFonts.adventPro(
                 textStyle: TextStyle(
                   fontStyle: FontStyle.normal,
                   decoration: TextDecoration.none,
                 ))),
-            icon: Icon(Icons.favorite),
+            icon: Icon(Icons.article_outlined),
           ),
           BottomNavigationBarItem(
-            title: Text('Ciao',
+            title: Text('Training',
                 style: GoogleFonts.adventPro(
                     textStyle: TextStyle(
                       fontStyle: FontStyle.normal,
                       decoration: TextDecoration.none,
                     ))),
-            icon: Icon(Icons.music_note),
+            icon: Icon(Icons.fitness_center_sharp),
           ),
           BottomNavigationBarItem(
-            title: Text('Ciao',
+            title: Text('Graph',
                 style: GoogleFonts.adventPro(
                     textStyle: TextStyle(
                       fontStyle: FontStyle.normal,
                       decoration: TextDecoration.none,
                     ))),
-            icon: Icon(Icons.location_on),
+            icon: Icon(Icons.bar_chart),
           ),
         ],
       )

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'schede.dart';
+
 class PageRegisterPage extends StatefulWidget {
   const PageRegisterPage({
     Key? key,
@@ -191,6 +193,52 @@ class _State extends State<PageRegisterPage> {
                       autocorrect: false,
                     ),
                   ),
+                  Container(
+                      margin: const EdgeInsets.only(
+                        left: 50,
+                        top: 20,
+                        right: 50,
+                      ),
+                      padding: EdgeInsets.zero,
+                      decoration: const BoxDecoration(),
+                      child: GestureDetector(
+                        onTap: () async {
+                          await Navigator.push<void>(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => PageSchedePage(),
+                            ),
+                          );
+                        },
+                        child: Container(
+                            width: double.maxFinite,
+                            height: 40,
+                            padding: EdgeInsets.only(top:7),
+                            decoration: BoxDecoration(
+                                color: Colors.black.withOpacity(0.05),
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(5),
+                                  topRight: Radius.circular(5),
+                                  bottomRight: Radius.circular(5),
+                                  bottomLeft: Radius.circular(5),
+                                ),
+                                border: Border.all(color: Colors.white, width: 2)
+                            ),
+                            child: Text(
+                              '''Login''',
+                              style: GoogleFonts.adventPro(
+                                textStyle: TextStyle(
+                                  color: const Color(0xFFFFFFFF),
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 16,
+                                  fontStyle: FontStyle.normal,
+                                  decoration: TextDecoration.none,
+                                ),
+                              ),
+                              textAlign: TextAlign.center,
+                            )
+                        ),
+                      )),
                 ],
               ),
             ],
