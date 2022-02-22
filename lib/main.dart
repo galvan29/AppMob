@@ -27,8 +27,8 @@ class HomePage extends StatelessWidget {
         children: [
           Stack(
             children: [
-              Image.network(
-                r'''https://i.pinimg.com/736x/fd/51/40/fd5140c875e584cb8cc7063a6469c19b.jpg''',
+              Image.asset(
+                "assets/image/sfondo1.jpg",
                 width: double.maxFinite,
                 height: double.maxFinite,
                 fit: BoxFit.cover,
