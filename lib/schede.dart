@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'main.dart';
 
+PersistentTabController _controller = PersistentTabController(initialIndex: 0);
 
 class PageSchedePage extends StatefulWidget {
   const PageSchedePage({
@@ -182,8 +184,45 @@ class _State extends State<PageSchedePage> {
           ],
         ),
       ),
-      backgroundColor: const Color(0xFF000000),
+      backgroundColor: const Color.fromARGB(255, 34, 1, 48),
       body: Stack(
+        children: [
+          Positioned(
+              left: MediaQuery.of(context).size.width * 0.15,
+              right: MediaQuery.of(context).size.width * 0.15,
+              bottom: 0,
+              child: Container(
+                margin: const EdgeInsets.only(
+                  bottom: 21,
+                ),
+                padding: EdgeInsets.zero,
+                width: double.maxFinite,
+                decoration: const BoxDecoration(
+                  color: Color(0xFF000000),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Icon(
+                      MdiIcons.fromString('''apps-box'''),
+                      size: 60,
+                      color: Color(0xFFFFFFFF),
+                    ),
+                    Icon(
+                      MdiIcons.fromString('''anvil'''),
+                      size: 60,
+                      color: Color(0xFFFFFFFF),
+                    ),
+                    Icon(
+                      MdiIcons.fromString('''align-vertical-bottom'''),
+                      size: 60,
+                      color: Color(0xFFFFFFFF),
+                    ),
+                  ],
+                ),
+              )),
+        ],
       ),
     );
   }
