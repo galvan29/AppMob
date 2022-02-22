@@ -23,9 +23,9 @@ class HomePage extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
           image: DecorationImage(
-            //fit: BoxFit.cover,
-            repeat: ImageRepeat.repeat,
-            image: AssetImage('Image/SFONDO.jpg'),
+           // repeat: ImageRepeat.repeat,
+            image: AssetImage('assets/image/sfondo.jpg'),
+            fit: BoxFit.cover,
           )),
       child: GestureDetector(
           onTap: () async {
@@ -40,7 +40,6 @@ class HomePage extends StatelessWidget {
               width: 10,
               height: 30,
               decoration: BoxDecoration(
-                color: const Color(0xFF3285FF),
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(5),
                   topRight: Radius.circular(5),
