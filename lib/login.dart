@@ -136,7 +136,7 @@ class _State extends State<PageLoginPage> {
                       ),
                       width: double.maxFinite,
                       decoration: const BoxDecoration(
-                        color: Color(0xFF69B2D5),
+                        color: Colors.white,
                       ),
                       child: TextField(
                         onChanged: (String value) async {},
