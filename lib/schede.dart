@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'main.dart';
-
-PersistentTabController _controller = PersistentTabController(initialIndex: 0);
 
 class PageSchedePage extends StatefulWidget {
   const PageSchedePage({
@@ -23,6 +21,7 @@ class _State extends State<PageSchedePage> {
     super.initState();
   }
 
+  ValueNotifier<bool> isDialOpen = ValueNotifier(false);
   int _currentIndex = 0;
 
   @override
@@ -30,7 +29,7 @@ class _State extends State<PageSchedePage> {
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
     return Scaffold(
-      appBar: PreferredSize(
+        appBar: PreferredSize(
         preferredSize: const Size.fromHeight(120),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -67,130 +66,59 @@ class _State extends State<PageSchedePage> {
                 ],
               ),
             ),
-            Container(
-              margin: const EdgeInsets.only(
-                top: 15,
-              ),
-              padding: EdgeInsets.zero,
-              width: double.maxFinite,
-              decoration: const BoxDecoration(
-                color: Color(0xFF000000),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  GestureDetector(
-                      onTap: () async {
-                        await Navigator.push<void>(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => MyApp(),
-                          ),
-                        );
-                      },
-                      child: Container(
-                          width: 110,
-                          height: 48,
-                          decoration: BoxDecoration(
-                            color: const Color(0xFF3285FF),
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(8),
-                              topRight: Radius.circular(8),
-                              bottomRight: Radius.circular(8),
-                              bottomLeft: Radius.circular(8),
-                            ),
-                          ),
-                          child: Text(
-                            '''Aggiungi''',
-                            style: GoogleFonts.poppins(
-                              textStyle: TextStyle(
-                                color: const Color(0xFFFFFFFF),
-                                fontWeight: FontWeight.w400,
-                                fontSize: 16,
-                                fontStyle: FontStyle.normal,
-                                decoration: TextDecoration.none,
-                              ),
-                            ),
-                            textAlign: TextAlign.center,
-                          ))),
-                  GestureDetector(
-                      onTap: () async {
-                        await Navigator.push<void>(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => MyApp(),
-                          ),
-                        );
-                      },
-                      child: Container(
-                          width: 110,
-                          height: 48,
-                          decoration: BoxDecoration(
-                            color: const Color(0xFF3285FF),
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(8),
-                              topRight: Radius.circular(8),
-                              bottomRight: Radius.circular(8),
-                              bottomLeft: Radius.circular(8),
-                            ),
-                          ),
-                          child: Text(
-                            '''Modifica''',
-                            style: GoogleFonts.poppins(
-                              textStyle: TextStyle(
-                                color: const Color(0xFFFFFFFF),
-                                fontWeight: FontWeight.w400,
-                                fontSize: 16,
-                                fontStyle: FontStyle.normal,
-                                decoration: TextDecoration.none,
-                              ),
-                            ),
-                            textAlign: TextAlign.center,
-                          ))),
-                  GestureDetector(
-                      onTap: () async {
-                        await Navigator.push<void>(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => MyApp(),
-                          ),
-                        );
-                      },
-                      child: Container(
-                          width: 110,
-                          height: 48,
-                          decoration: BoxDecoration(
-                            color: const Color(0xFF3285FF),
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(8),
-                              topRight: Radius.circular(8),
-                              bottomRight: Radius.circular(8),
-                              bottomLeft: Radius.circular(8),
-                            ),
-                          ),
-                          child: Text(
-                            '''Elimina''',
-                            style: GoogleFonts.poppins(
-                              textStyle: TextStyle(
-                                color: const Color(0xFFFFFFFF),
-                                fontWeight: FontWeight.w400,
-                                fontSize: 16,
-                                fontStyle: FontStyle.normal,
-                                decoration: TextDecoration.none,
-                              ),
-                            ),
-                            textAlign: TextAlign.center,
-                          ))),
-                ],
-              ),
-            ),
           ],
         ),
       ),
-      backgroundColor: const Color.fromARGB(255, 34, 1, 48),
-      body: Stack(),
-      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: const Color.fromARGB(255, 34, 1, 48),
+        body: Stack(),
+        floatingActionButton: SpeedDial(
+          animatedIcon: AnimatedIcons.menu_close,
+          openCloseDial: isDialOpen,
+          backgroundColor: Colors.transparent,
+          overlayOpacity: 0,
+          spacing: 15,
+          spaceBetweenChildren: 15,
+          closeManually: true,
+          children: [
+            SpeedDialChild(
+              child: Icon(Icons.construction),
+              label: 'Modifica',
+              onTap: () async {
+                await Navigator.push<void>(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => MyApp(),
+                  ),
+                );
+              },
+            ),
+            SpeedDialChild(
+              child: Icon(Icons.remove),
+              label: 'Elimina',
+              onTap: () async {
+                await Navigator.push<void>(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => MyApp(),
+                  ),
+                );
+              },
+            ),
+            SpeedDialChild(
+              child: Icon(Icons.add),
+              label: 'Aggiungi',
+              onTap: () async {
+                await Navigator.push<void>(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => MyApp(),
+                  ),
+                );
+              },
+            ),
+          ],
+        ),
+        bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         currentIndex: _currentIndex,
         backgroundColor: Colors.transparent,
