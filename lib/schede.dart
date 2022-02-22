@@ -23,8 +23,11 @@ class _State extends State<PageSchedePage> {
     super.initState();
   }
 
+  var currentIndex = 0;
+
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(120),
@@ -185,45 +188,17 @@ class _State extends State<PageSchedePage> {
         ),
       ),
       backgroundColor: const Color.fromARGB(255, 34, 1, 48),
-      body: Stack(
-        children: [
-          Positioned(
-              left: MediaQuery.of(context).size.width * 0.15,
-              right: MediaQuery.of(context).size.width * 0.15,
-              bottom: 0,
-              child: Container(
-                margin: const EdgeInsets.only(
-                  bottom: 21,
-                ),
-                padding: EdgeInsets.zero,
-                width: double.maxFinite,
-                decoration: const BoxDecoration(
-                  color: Color(0xFF000000),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Icon(
-                      MdiIcons.fromString('''apps-box'''),
-                      size: 60,
-                      color: Color(0xFFFFFFFF),
-                    ),
-                    Icon(
-                      MdiIcons.fromString('''anvil'''),
-                      size: 60,
-                      color: Color(0xFFFFFFFF),
-                    ),
-                    Icon(
-                      MdiIcons.fromString('''align-vertical-bottom'''),
-                      size: 60,
-                      color: Color(0xFFFFFFFF),
-                    ),
-                  ],
-                ),
-              )),
-        ],
+      body: Stack(),
+      bottomNavigationBar: Container(
+        
       ),
     );
   }
+
+  List<IconData> listOfIcons = [
+    Icons.favorite_rounded,
+    Icons.favorite_rounded,
+    Icons.settings_rounded,
+    Icons.person_rounded,
+  ];
 }
