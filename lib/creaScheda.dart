@@ -6,8 +6,10 @@ import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'bro.dart';
 import 'main.dart';
 import 'profile.dart';
+import 'schedeStruct.dart';
 import 'training.dart';
 import 'schede.dart';
+import 'dart:math';
 
 class CreaScheda extends StatefulWidget {
   const CreaScheda({
@@ -31,8 +33,6 @@ class _State extends State<CreaScheda> {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final textTheme = Theme.of(context).textTheme;
     return Scaffold(
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(120),
@@ -93,7 +93,7 @@ class _State extends State<CreaScheda> {
                               child: Icon(
                                 Icons.perm_identity_sharp,
                                 size:
-                                MediaQuery.of(context).size.height * 0.037,
+                                    MediaQuery.of(context).size.height * 0.037,
                                 color: Color(0xFFFFFFFF),
                               )),
                         ))
@@ -104,53 +104,56 @@ class _State extends State<CreaScheda> {
           ),
         ),
         backgroundColor: const Color.fromARGB(255, 34, 1, 48),
-        body: Stack(),
-        bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          currentIndex: _currentIndex,
-          backgroundColor: Colors.transparent,
-          selectedItemColor: Colors.white,
-          unselectedItemColor: colorScheme.onSurface.withOpacity(.60),
-          selectedFontSize: MediaQuery.of(context).size.height * 0.02,
-          unselectedFontSize: MediaQuery.of(context).size.height * 0.02,
-          onTap: (value) {
-            setState(() => _currentIndex = value);
-            if (value == 0)
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => PageSchedePage()));
-            else if (value == 1)
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => Training()));
-          },
-          items: [
-            BottomNavigationBarItem(
-              title: Text('Cards',
-                  style: GoogleFonts.adventPro(
-                      textStyle: TextStyle(
-                        fontStyle: FontStyle.normal,
-                        decoration: TextDecoration.none,
-                      ))),
-              icon: Icon(Icons.article_outlined),
-            ),
-            BottomNavigationBarItem(
-              title: Text('Training',
-                  style: GoogleFonts.adventPro(
-                      textStyle: TextStyle(
-                        fontStyle: FontStyle.normal,
-                        decoration: TextDecoration.none,
-                      ))),
-              icon: Icon(Icons.fitness_center_sharp),
-            ),
-            BottomNavigationBarItem(
-              title: Text('Graph',
-                  style: GoogleFonts.adventPro(
-                      textStyle: TextStyle(
-                        fontStyle: FontStyle.normal,
-                        decoration: TextDecoration.none,
-                      ))),
-              icon: Icon(Icons.bar_chart),
-            ),
-          ],
-        ));
+        body: Stack(children: [
+          Container(
+          //SchedeStruct a = new SchedeStruct(rng.nextInt(2), "fff", 120);
+          ),
+          Container(
+              margin: const EdgeInsets.only(
+                left: 50,
+                top: 20,
+                right: 50,
+              ),
+              padding: EdgeInsets.zero,
+              decoration: const BoxDecoration(),
+              child: GestureDetector(
+                onTap: () {
+                  //PageSchedePage().aggiungi(a);
+                  Navigator.push<void>(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => PageSchedePage(),
+                    ),
+                  );
+                },
+                child: Container(
+                    width: double.maxFinite,
+                    height: 40,
+                    padding: EdgeInsets.only(top: 7),
+                    decoration: BoxDecoration(
+                        color: Colors.black.withOpacity(0.05),
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(5),
+                          topRight: Radius.circular(5),
+                          bottomRight: Radius.circular(5),
+                          bottomLeft: Radius.circular(5),
+                        ),
+                        border:
+                        Border.all(color: Colors.white, width: 2)),
+                    child: Text(
+                      '''Login''',
+                      style: GoogleFonts.adventPro(
+                        textStyle: TextStyle(
+                          color: const Color(0xFFFFFFFF),
+                          fontWeight: FontWeight.w500,
+                          fontSize: 16,
+                          fontStyle: FontStyle.normal,
+                          decoration: TextDecoration.none,
+                        ),
+                      ),
+                      textAlign: TextAlign.center,
+                    )),
+              ))
+        ]));
   }
 }
