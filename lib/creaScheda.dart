@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:helloworld/schede.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'bro.dart';
 import 'main.dart';
-import 'viewGraph.dart';
-import 'schede.dart';
 import 'profile.dart';
+import 'training.dart';
+import 'schede.dart';
 
-class Training extends StatefulWidget {
-  const Training({
+class CreaScheda extends StatefulWidget {
+  const CreaScheda({
     Key? key,
   }) : super(key: key);
 
@@ -17,7 +18,7 @@ class Training extends StatefulWidget {
   _State createState() => _State();
 }
 
-class _State extends State<Training> {
+class _State extends State<CreaScheda> {
   final datasets = <String, dynamic>{};
 
   @override
@@ -26,7 +27,7 @@ class _State extends State<Training> {
   }
 
   ValueNotifier<bool> isDialOpen = ValueNotifier(false);
-  int _currentIndex = 1;
+  int _currentIndex = 2;
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +53,7 @@ class _State extends State<Training> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('TRAINING',
+                    Text('CREATE CARDS',
                         style: GoogleFonts.adventPro(
                           textStyle: TextStyle(
                             color: const Color(0xFFFFFFFF),
@@ -92,7 +93,7 @@ class _State extends State<Training> {
                               child: Icon(
                                 Icons.perm_identity_sharp,
                                 size:
-                                    MediaQuery.of(context).size.height * 0.037,
+                                MediaQuery.of(context).size.height * 0.037,
                                 color: Color(0xFFFFFFFF),
                               )),
                         ))
@@ -117,36 +118,36 @@ class _State extends State<Training> {
             if (value == 0)
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => PageSchedePage()));
-            else if (value == 2)
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => ViewGraph()));
+            else if (value == 1)
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => Training()));
           },
           items: [
             BottomNavigationBarItem(
               title: Text('Cards',
                   style: GoogleFonts.adventPro(
                       textStyle: TextStyle(
-                    fontStyle: FontStyle.normal,
-                    decoration: TextDecoration.none,
-                  ))),
+                        fontStyle: FontStyle.normal,
+                        decoration: TextDecoration.none,
+                      ))),
               icon: Icon(Icons.article_outlined),
             ),
             BottomNavigationBarItem(
               title: Text('Training',
                   style: GoogleFonts.adventPro(
                       textStyle: TextStyle(
-                    fontStyle: FontStyle.normal,
-                    decoration: TextDecoration.none,
-                  ))),
+                        fontStyle: FontStyle.normal,
+                        decoration: TextDecoration.none,
+                      ))),
               icon: Icon(Icons.fitness_center_sharp),
             ),
             BottomNavigationBarItem(
               title: Text('Graph',
                   style: GoogleFonts.adventPro(
                       textStyle: TextStyle(
-                    fontStyle: FontStyle.normal,
-                    decoration: TextDecoration.none,
-                  ))),
+                        fontStyle: FontStyle.normal,
+                        decoration: TextDecoration.none,
+                      ))),
               icon: Icon(Icons.bar_chart),
             ),
           ],

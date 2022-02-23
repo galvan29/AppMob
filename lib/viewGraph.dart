@@ -105,49 +105,6 @@ class _State extends State<ViewGraph> {
         ),
         backgroundColor: const Color.fromARGB(255, 34, 1, 48),
         body: Stack(),
-        floatingActionButton: SpeedDial(
-          animatedIcon: AnimatedIcons.menu_close,
-          openCloseDial: isDialOpen,
-          backgroundColor: Colors.transparent,
-          overlayOpacity: 0,
-          spacing: 15,
-          spaceBetweenChildren: 15,
-          closeManually: true,
-          children: [
-            SpeedDialChild(
-              child: Icon(Icons.construction),
-              label: 'Modifica',
-              onTap: () {
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => Bro()));
-              },
-            ),
-            SpeedDialChild(
-              child: Icon(Icons.remove),
-              label: 'Elimina',
-              onTap: () async {
-                await Navigator.push<void>(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => MyApp(),
-                  ),
-                );
-              },
-            ),
-            SpeedDialChild(
-              child: Icon(Icons.add),
-              label: 'Aggiungi',
-              onTap: () async {
-                await Navigator.push<void>(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => MyApp(),
-                  ),
-                );
-              },
-            ),
-          ],
-        ),
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           currentIndex: _currentIndex,

@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:helloworld/sqlite_service.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'bro.dart';
 import 'main.dart';
 import 'profile.dart';
+import 'schedeStruct.dart';
 import 'viewGraph.dart';
 import 'training.dart';
-import 'dart:async';
-import 'package:path/path.dart';
-import 'package:sqflite/sqflite.dart';
-import 'package:flutter/widgets.dart';
+import 'creaScheda.dart';
 
 class PageSchedePage extends StatefulWidget {
   const PageSchedePage({
@@ -111,62 +108,211 @@ class _State extends State<PageSchedePage> {
         ),
         backgroundColor: const Color.fromARGB(255, 34, 1, 48),
         body: Container(
-          child: Row(
+          child: Column(
             children: [
               for (var scheda in _schede)
-                Text(
-                  "1",
-                  style: GoogleFonts.adventPro(
-                    textStyle: TextStyle(
-                      color: const Color(0xFFFFFFFF),
-                      fontWeight: FontWeight.w400,
-                      fontSize: 100,
-                      fontStyle: FontStyle.normal,
-                      decoration: TextDecoration.none,
-                    ),
+                Container(
+                  padding: EdgeInsets.zero,
+                  margin: EdgeInsets.only(
+                    top: MediaQuery.of(context).size.height * 0.02,
+                    left: MediaQuery.of(context).size.width * 0.05,
                   ),
-                )
+                  width: MediaQuery.of(context).size.width * 0.90,
+                  height: MediaQuery.of(context).size.height * 0.10,
+                  decoration: BoxDecoration(
+                    color: Colors.transparent,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(8),
+                      topRight: Radius.circular(8),
+                      bottomRight: Radius.circular(8),
+                      bottomLeft: Radius.circular(8),
+                    ),
+                      border: Border.all(
+                        color: Colors.white,
+                      )
+                  ),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            padding: EdgeInsets.zero,
+                            width: MediaQuery.of(context).size.width * 0.30,
+                            decoration: BoxDecoration(
+                              color: Colors.transparent,
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(8),
+                                  topRight: Radius.circular(8),
+                                  bottomRight: Radius.circular(8),
+                                  bottomLeft: Radius.circular(8),
+                                ),
+                                border: Border.all(
+                                  color: Colors.transparent,
+                                )
+                            ),
+                            child: Text("Nome Scheda",
+                                style: GoogleFonts.adventPro(
+                                  textStyle: TextStyle(
+                                    color: const Color(0xFFFFFFFF),
+                                    fontWeight: FontWeight.w400,
+                                    fontSize:
+                                        MediaQuery.of(context).size.width *
+                                            0.05,
+                                    fontStyle: FontStyle.normal,
+                                    decoration: TextDecoration.none,
+                                  ),
+                                ),
+                                textAlign: TextAlign.left,
+                                maxLines: 1),
+                          ),
+                          Container(
+                            width: 100,
+                            decoration: BoxDecoration(
+                                color: Colors.transparent,
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(8),
+                                  topRight: Radius.circular(8),
+                                  bottomRight: Radius.circular(8),
+                                  bottomLeft: Radius.circular(8),
+                                ),
+                                border: Border.all(
+                                  color: Colors.transparent,
+                                )),
+                            child: Text("Durata Scheda",
+                                style: GoogleFonts.adventPro(
+                                  textStyle: TextStyle(
+                                    color: const Color(0xFFFFFFFF),
+                                    fontWeight: FontWeight.w400,
+                                    fontSize:
+                                        MediaQuery.of(context).size.width * 0.035,
+                                    fontStyle: FontStyle.normal,
+                                    decoration: TextDecoration.none,
+                                  ),
+                                ),
+                                textAlign: TextAlign.left,
+                                maxLines: 1),
+                          ),
+                        ],
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(
+                          left: MediaQuery.of(context).size.width * 0.25,
+                        ),
+                        height: MediaQuery.of(context).size.height * 0.05,
+                        width: MediaQuery.of(context).size.width * 0.15,
+                        decoration: BoxDecoration(
+                            color: Colors.transparent,
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(8),
+                              topRight: Radius.circular(8),
+                              bottomRight: Radius.circular(8),
+                              bottomLeft: Radius.circular(8),
+                            ),
+                            border: Border.all(
+                              color: Colors.white,
+                            )
+
+                        ),
+                        child: GestureDetector(
+                            child: Container(
+                                padding: EdgeInsets.only(
+                                    top: MediaQuery.of(context).size.height * 0.01),
+                                decoration: BoxDecoration(
+                                  color: Colors.transparent,
+                                ),
+                                child: Text(
+                                  "START",
+                                  style: GoogleFonts.adventPro(
+                                    textStyle: TextStyle(
+                                      color: const Color(0xFFFFFFFF),
+                                      fontWeight: FontWeight.w400,
+                                      fontSize:
+                                      MediaQuery.of(context).size.width *
+                                          0.035,
+                                      fontStyle: FontStyle.normal,
+                                      decoration: TextDecoration.none,
+                                    ),
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ))),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(
+                          left: MediaQuery.of(context).size.width * 0.01,
+                        ),
+                        height: MediaQuery.of(context).size.height * 0.05,
+                        width: MediaQuery.of(context).size.width * 0.15,
+                        decoration: BoxDecoration(
+                            color: Colors.transparent,
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(8),
+                              topRight: Radius.circular(8),
+                              bottomRight: Radius.circular(8),
+                              bottomLeft: Radius.circular(8),
+                            ),
+                            border: Border.all(
+                              color: Colors.white,
+                            )
+                        ),
+                        child: GestureDetector(
+                            child: Container(
+                                padding: EdgeInsets.only(
+                                    top: MediaQuery.of(context).size.height * 0.01),
+                                decoration: BoxDecoration(
+                                  color: Colors.transparent,
+                                ),
+                                child: Text(
+                                  "OPTIONS",
+                                  style: GoogleFonts.adventPro(
+                                    textStyle: TextStyle(
+                                      color: const Color(0xFFFFFFFF),
+                                      fontWeight: FontWeight.w400,
+                                      fontSize:
+                                      MediaQuery.of(context).size.width *
+                                          0.035,
+                                      fontStyle: FontStyle.normal,
+                                      decoration: TextDecoration.none,
+                                    ),
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ))),
+                      ),
+                    ],
+                  ),
+                ),
+              Container(
+                  margin: EdgeInsets.only(
+                    top: MediaQuery.of(context).size.height * 0.05,
+                    left: MediaQuery.of(context).size.width * 0.08 ,
+                  ),
+                  decoration: const BoxDecoration(),
+                  child: GestureDetector(
+                    onTap: () {
+                      SchedeStruct a = new SchedeStruct(1, "fff", 120);
+                      _schede.add(a);
+                    },
+                    child: Container(
+                        width: MediaQuery.of(context).size.width * 0.08,
+                        height: MediaQuery.of(context).size.height * 0.040,
+                        decoration: BoxDecoration(
+                            color: Colors.black.withOpacity(0.05),
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(5),
+                              topRight: Radius.circular(5),
+                              bottomRight: Radius.circular(5),
+                              bottomLeft: Radius.circular(5),
+                            ),
+                            border: Border.all(color: Colors.white, width: 2)),
+                        child: Icon(
+                          Icons.add,
+                          size: MediaQuery.of(context).size.height * 0.037,
+                          color: Color(0xFFFFFFFF),
+                        )),
+                  )),
             ],
           ),
-        ),
-        floatingActionButton: SpeedDial(
-          animatedIcon: AnimatedIcons.menu_close,
-          openCloseDial: isDialOpen,
-          backgroundColor: Colors.transparent,
-          overlayOpacity: 0,
-          spacing: 15,
-          spaceBetweenChildren: 15,
-          closeManually: true,
-          children: [
-            SpeedDialChild(
-              child: Icon(Icons.construction),
-              label: 'Modifica',
-              onTap: () {
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => Bro()));
-              },
-            ),
-            SpeedDialChild(
-              child: Icon(Icons.remove),
-              label: 'Elimina',
-              onTap: () async {
-                await Navigator.push<void>(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => MyApp(),
-                  ),
-                );
-              },
-            ),
-            SpeedDialChild(
-              child: Icon(Icons.add),
-              label: 'Aggiungi',
-              onTap: () {
-                SchedeStruct element = new SchedeStruct(4, "CiaoBro");
-                _schede.add(element);
-              },
-            ),
-          ],
         ),
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
@@ -215,15 +361,5 @@ class _State extends State<PageSchedePage> {
             ),
           ],
         ));
-  }
-}
-
-class SchedeStruct {
-  late final int id;
-  late final String description;
-
-  SchedeStruct(int a, String b) {
-    id = a;
-    description = b;
   }
 }
