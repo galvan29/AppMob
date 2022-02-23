@@ -118,7 +118,8 @@ class _State extends State<CreaScheda> {
               decoration: const BoxDecoration(),
               child: GestureDetector(
                 onTap: () {
-                  //PageSchedePage().aggiungi(a);
+                  SchedeStruct a = new SchedeStruct(1, "fff", 120);
+                  PageSchedePage().aggiungi(a);
                   Navigator.push<void>(
                     context,
                     MaterialPageRoute(
