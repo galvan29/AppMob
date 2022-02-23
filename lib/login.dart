@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import 'package:sqflite/sqflite.dart';
 import 'schede.dart';
+import 'dart:io';
+import 'package:path/path.dart';
+import 'package:path_provider/path_provider.dart';
 
 class PageLoginPage extends StatefulWidget {
   const PageLoginPage({
@@ -14,6 +17,8 @@ class PageLoginPage extends StatefulWidget {
 
 class _State extends State<PageLoginPage> {
   final datasets = <String, dynamic>{};
+  final usernameController = TextEditingController();
+  final passwordController = TextEditingController();
 
   @override
   void initState() {
@@ -98,6 +103,7 @@ class _State extends State<PageLoginPage> {
                           color: Colors.white.withOpacity(0),
                         )),
                     child: TextField(
+                      controller: usernameController,
                       onChanged: (String value) async {},
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(
@@ -156,6 +162,7 @@ class _State extends State<PageLoginPage> {
                           color: Colors.white.withOpacity(0),
                         )),
                     child: TextField(
+                      controller: passwordController,
                       onChanged: (String value) async {},
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(
@@ -202,13 +209,20 @@ class _State extends State<PageLoginPage> {
                       padding: EdgeInsets.zero,
                       decoration: const BoxDecoration(),
                       child: GestureDetector(
-                        onTap: () async {
-                          await Navigator.push<void>(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => PageSchedePage(),
-                            ),
-                          );
+                        onTap: () {
+                          print(DatabaseHelper.istance.getPasswordVerified(usernameController.toString()).toString().toString());
+                          if(DatabaseHelper.istance.getPasswordVerified(usernameController.toString()).toString()==passwordController.toString()){
+                            print("CIAOOOOOOOOOOOOOO");
+                            Navigator.push<void>(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => PageSchedePage(),
+                              ),
+                            );
+                          }
+                          else{
+                            print("Sbagliato coddue");
+                          }
                         },
                         child: Container(
                             width: double.maxFinite,
@@ -245,5 +259,68 @@ class _State extends State<PageLoginPage> {
         ],
       ),
     );
+  }
+}
+
+class Utenti{
+  final String nomeUtente;
+  final String password;
+
+  Utenti({required this.nomeUtente, required this.password});
+
+  factory Utenti.fromMap(Map<String, dynamic> json) => new Utenti(
+    nomeUtente: json['nomeUtente'],
+    password: json['password']
+  );
+
+  Map<String, dynamic> toMap(){
+    return {
+      'nomeUtente': nomeUtente,
+      'password':password,
+    };
+  }
+}
+
+class DatabaseHelper{
+  DatabaseHelper._privateConstructur();
+  static final DatabaseHelper istance = DatabaseHelper._privateConstructur();
+
+  static Database? _database;
+  Future<Database> get database async => _database ??= await _initDatabase();
+
+  Future<Database> _initDatabase() async {
+    Directory documentDirectory = await getApplicationDocumentsDirectory();
+    String path = join(documentDirectory.path, 'utenti.db');
+
+    return await openDatabase(
+      path,
+      version: 1,
+      onCreate: _onCreate,
+    );
+  }
+
+  Future _onCreate(Database db, int version) async{
+    await db.execute('''
+      CREATE TABLE utenti(
+        nomeUtente TEXT PRIMARY KEY,
+        password TEXT
+      )
+    ''');
+
+    Utenti utente = new Utenti(nomeUtente: 'ciao', password: 'bro');
+    db.insert('utenti', utente.toMap());
+  }
+
+  Future<String> getPasswordVerified(String nomeUtente) async{
+    Database db= await istance.database;
+   // Directory documentDirectory = await getApplicationDocumentsDirectory();
+    //print("cacaa"+documentDirectory.path);
+    var password = await db.query('utenti', where: 'nomeUtente = ?', whereArgs: [nomeUtente]);
+    return password.toString();
+  }
+
+  Future<int> add(Utenti utente) async {
+    Database db= await istance.database;
+    return await db.insert('utenti', utente.toMap());
   }
 }
