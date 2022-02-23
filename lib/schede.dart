@@ -319,6 +319,7 @@ class _State extends State<PageSchedePage> {
                     decoration: const BoxDecoration(),
                     child: GestureDetector(
                       onTap: () async {
+                        PageSchedePage().aggiungi(SchedeStruct(1, "Nome Scheda", 120));
                         await Navigator.push<void>(
                           context,
                           MaterialPageRoute(
