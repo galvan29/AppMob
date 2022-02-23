@@ -82,14 +82,14 @@ class HomePage extends StatelessWidget {
                           maxLines: 1),
                     ),
                     Container(
-                      margin: const EdgeInsets.only(
-                        left: 50,
-                        top: 100,
-                        right: 50,
-                      ),
-                      padding: EdgeInsets.zero,
-                      decoration: const BoxDecoration(),
-                      child: GestureDetector(
+                        margin: const EdgeInsets.only(
+                          left: 50,
+                          top: 100,
+                          right: 50,
+                        ),
+                        padding: EdgeInsets.zero,
+                        decoration: const BoxDecoration(),
+                        child: GestureDetector(
                           onTap: () async {
                             await Navigator.push<void>(
                               context,
@@ -101,17 +101,16 @@ class HomePage extends StatelessWidget {
                           child: Container(
                               width: double.maxFinite,
                               height: 40,
-                              padding: EdgeInsets.only(top:8),
+                              padding: EdgeInsets.only(top: 8),
                               decoration: BoxDecoration(
-                                color: Colors.black.withOpacity(0.05),
-                                borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(5),
-                                  topRight: Radius.circular(5),
-                                  bottomRight: Radius.circular(5),
-                                  bottomLeft: Radius.circular(5),
-                                ),
-                                  border: Border.all(color: Colors.white)
-                              ),
+                                  color: Colors.black.withOpacity(0.05),
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(5),
+                                    topRight: Radius.circular(5),
+                                    bottomRight: Radius.circular(5),
+                                    bottomLeft: Radius.circular(5),
+                                  ),
+                                  border: Border.all(color: Colors.white)),
                               child: Text(
                                 '''Login''',
                                 style: GoogleFonts.adventPro(
@@ -124,9 +123,8 @@ class HomePage extends StatelessWidget {
                                   ),
                                 ),
                                 textAlign: TextAlign.center,
-                              )
-                                ),
-                          )),
+                              )),
+                        )),
                     Container(
                       margin: const EdgeInsets.only(
                         left: 50,
@@ -148,17 +146,16 @@ class HomePage extends StatelessWidget {
                           child: Container(
                               width: 10,
                               height: 40,
-                              padding: EdgeInsets.only(top:8),
+                              padding: EdgeInsets.only(top: 8),
                               decoration: BoxDecoration(
-                                color: Colors.black.withOpacity(0.05),
-                                borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(5),
-                                  topRight: Radius.circular(5),
-                                  bottomRight: Radius.circular(5),
-                                  bottomLeft: Radius.circular(5),
-                                ),
-                                  border: Border.all(color: Colors.white)
-                              ),
+                                  color: Colors.black.withOpacity(0.05),
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(5),
+                                    topRight: Radius.circular(5),
+                                    bottomRight: Radius.circular(5),
+                                    bottomLeft: Radius.circular(5),
+                                  ),
+                                  border: Border.all(color: Colors.white)),
                               child: Text(
                                 '''Register''',
                                 style: GoogleFonts.adventPro(

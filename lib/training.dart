@@ -87,14 +87,14 @@ class _State extends State<Training> {
                                     bottomRight: Radius.circular(5),
                                     bottomLeft: Radius.circular(5),
                                   ),
-                                  border: Border.all(color: Colors.white, width: 2)
-                              ),
+                                  border: Border.all(
+                                      color: Colors.white, width: 2)),
                               child: Icon(
                                 Icons.perm_identity_sharp,
-                                size: MediaQuery.of(context).size.height * 0.037,
+                                size:
+                                    MediaQuery.of(context).size.height * 0.037,
                                 color: Color(0xFFFFFFFF),
-                              )
-                          ),
+                              )),
                         ))
                   ],
                 ),
@@ -117,7 +117,8 @@ class _State extends State<Training> {
               child: Icon(Icons.construction),
               label: 'Modifica',
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => Bro()));
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => Bro()));
               },
             ),
             SpeedDialChild(
@@ -156,41 +157,42 @@ class _State extends State<Training> {
           unselectedFontSize: MediaQuery.of(context).size.height * 0.02,
           onTap: (value) {
             setState(() => _currentIndex = value);
-            if(value==0)
-              Navigator.push(context, MaterialPageRoute(builder: (context) => PageSchedePage()));
-            else if(value==2)
-              Navigator.push(context, MaterialPageRoute(builder: (context) => ViewGraph()));
+            if (value == 0)
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => PageSchedePage()));
+            else if (value == 2)
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => ViewGraph()));
           },
           items: [
             BottomNavigationBarItem(
               title: Text('Cards',
                   style: GoogleFonts.adventPro(
                       textStyle: TextStyle(
-                        fontStyle: FontStyle.normal,
-                        decoration: TextDecoration.none,
-                      ))),
+                    fontStyle: FontStyle.normal,
+                    decoration: TextDecoration.none,
+                  ))),
               icon: Icon(Icons.article_outlined),
             ),
             BottomNavigationBarItem(
               title: Text('Training',
                   style: GoogleFonts.adventPro(
                       textStyle: TextStyle(
-                        fontStyle: FontStyle.normal,
-                        decoration: TextDecoration.none,
-                      ))),
+                    fontStyle: FontStyle.normal,
+                    decoration: TextDecoration.none,
+                  ))),
               icon: Icon(Icons.fitness_center_sharp),
             ),
             BottomNavigationBarItem(
               title: Text('Graph',
                   style: GoogleFonts.adventPro(
                       textStyle: TextStyle(
-                        fontStyle: FontStyle.normal,
-                        decoration: TextDecoration.none,
-                      ))),
+                    fontStyle: FontStyle.normal,
+                    decoration: TextDecoration.none,
+                  ))),
               icon: Icon(Icons.bar_chart),
             ),
           ],
-        )
-    );
+        ));
   }
 }
