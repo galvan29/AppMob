@@ -22,10 +22,10 @@ class PageSchedePage extends StatefulWidget {
   _State createState() => _State();
 }
 
+List<SchedeStruct> _schede = [];
+
 class _State extends State<PageSchedePage> {
   final datasets = <String, dynamic>{};
-
-  late List<SchedeStruct> _schede;
 
   @override
   void initState() {
@@ -111,9 +111,21 @@ class _State extends State<PageSchedePage> {
         ),
         backgroundColor: const Color.fromARGB(255, 34, 1, 48),
         body: Container(
-          child: Column(
+          child: Row(
             children: [
-              for ( var scheda in _schede) Text("1")
+              for (var scheda in _schede)
+                Text(
+                  "1",
+                  style: GoogleFonts.adventPro(
+                    textStyle: TextStyle(
+                      color: const Color(0xFFFFFFFF),
+                      fontWeight: FontWeight.w400,
+                      fontSize: 100,
+                      fontStyle: FontStyle.normal,
+                      decoration: TextDecoration.none,
+                    ),
+                  ),
+                )
             ],
           ),
         ),
@@ -150,7 +162,7 @@ class _State extends State<PageSchedePage> {
               child: Icon(Icons.add),
               label: 'Aggiungi',
               onTap: () {
-                SchedeStruct element=new SchedeStruct(4, "CiaoBro");
+                SchedeStruct element = new SchedeStruct(4, "CiaoBro");
                 _schede.add(element);
               },
             ),
@@ -206,11 +218,12 @@ class _State extends State<PageSchedePage> {
   }
 }
 
-class SchedeStruct{
+class SchedeStruct {
   late final int id;
   late final String description;
-  SchedeStruct(int a, String b){
-    id=a;
-    description=b;
+
+  SchedeStruct(int a, String b) {
+    id = a;
+    description = b;
   }
 }
