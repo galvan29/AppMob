@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:helloworld/creaEsercizio.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'bro.dart';
 import 'main.dart';
 import 'options.dart';
 import 'profile.dart';
+import 'schede.dart';
 import 'schedeStruct.dart';
 import 'viewGraph.dart';
 import 'training.dart';
-import 'utente.dart';
 import 'creaScheda.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 
-class PageSchedePage extends StatefulWidget {
-  const PageSchedePage({
+class Esercizi extends StatefulWidget {
+  const Esercizi({
     Key? key,
   }) : super(key: key);
 
@@ -32,7 +33,7 @@ class PageSchedePage extends StatefulWidget {
 
 List<SchedeStruct> _schede = [];
 
-class _State extends State<PageSchedePage> {
+class _State extends State<Esercizi> {
   final datasets = <String, dynamic>{};
 
   @override
@@ -54,44 +55,40 @@ class _State extends State<PageSchedePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
+                margin: EdgeInsets.only(
+                  top: MediaQuery.of(context).size.height * 0.04,
+                  left: MediaQuery.of(context).size.height * 0.03,
+                  right: MediaQuery.of(context).size.height * 0.03,
+                ),
                 padding: EdgeInsets.zero,
                 width: double.maxFinite,
-                height: MediaQuery.of(context).size.height * 0.13,
-                decoration: BoxDecoration(color: const Color.fromARGB(255, 180, 212, 250), border: Border.all(color: Colors.black, width: 1)),
+                decoration: const BoxDecoration(
+                  color: Colors.transparent,
+                ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Container(
-                      padding: EdgeInsets.zero,
-                      decoration: const BoxDecoration(),
-                      margin: EdgeInsets.only(
-                        left: MediaQuery.of(context).size.width * 0.05,
-                      ),
-                      child: Text('CARDS',
-                          style: GoogleFonts.adventPro(
-                            textStyle: TextStyle(
-                              color: const Color(0xFF000000),
-                              fontWeight: FontWeight.w400,
-                              fontSize: MediaQuery.of(context).size.height * 0.05,
-                              fontStyle: FontStyle.normal,
-                              decoration: TextDecoration.none,
-                            ),
+                    Text('Nome Scheda con Posto per aggiungere Esercizi',
+                        style: GoogleFonts.adventPro(
+                          textStyle: TextStyle(
+                            color: const Color(0xFFFFFFFF),
+                            fontWeight: FontWeight.w400,
+                            fontSize: MediaQuery.of(context).size.height * 0.05,
+                            fontStyle: FontStyle.normal,
+                            decoration: TextDecoration.none,
                           ),
-                          textAlign: TextAlign.left,
-                          maxLines: 1),
-                    ),
+                        ),
+                        textAlign: TextAlign.left,
+                        maxLines: 1),
                     Container(
                         padding: EdgeInsets.zero,
                         decoration: const BoxDecoration(),
-                        margin: EdgeInsets.only(
-                          right: MediaQuery.of(context).size.width * 0.05,
-                        ),
                         child: GestureDetector(
                           onTap: () async {
                             await Navigator.push<void>(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => PageUtentePage(),
+                                builder: (context) => Profile(),
                               ),
                             );
                           },
@@ -106,33 +103,22 @@ class _State extends State<PageSchedePage> {
                                     bottomRight: Radius.circular(5),
                                     bottomLeft: Radius.circular(5),
                                   ),
-                                  border: Border.all(color: Colors.black, width: 2)),
+                                  border: Border.all(
+                                      color: Colors.white, width: 2)),
                               child: Icon(
                                 Icons.perm_identity_sharp,
-                                size: MediaQuery.of(context).size.height * 0.037,
-                                color: Color(0xFF000000),
+                                size:
+                                MediaQuery.of(context).size.height * 0.037,
+                                color: Color(0xFFFFFFFF),
                               )),
                         ))
                   ],
                 ),
               ),
-              Container(
-                height: 0,
-                width: MediaQuery.of(context).size.height * 1,
-                decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(0),
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(5),
-                      topRight: Radius.circular(5),
-                      bottomRight: Radius.circular(5),
-                      bottomLeft: Radius.circular(5),
-                    ),
-                    border: Border.all(color: Colors.black, width: 1)),
-              ),
             ],
           ),
         ),
-        backgroundColor: const Color.fromARGB(255, 205, 225, 247),
+        backgroundColor: const Color.fromARGB(255, 34, 1, 48),
         body: Container(
           child: new SingleChildScrollView(
             child: Column(
@@ -155,7 +141,7 @@ class _State extends State<PageSchedePage> {
                           bottomLeft: Radius.circular(8),
                         ),
                         border: Border.all(
-                          color: Colors.black,
+                          color: Colors.white,
                         )),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -180,9 +166,11 @@ class _State extends State<PageSchedePage> {
                               child: Text("Nome Scheda",
                                   style: GoogleFonts.adventPro(
                                     textStyle: TextStyle(
-                                      color: const Color(0xFF000000),
+                                      color: const Color(0xFFFFFFFF),
                                       fontWeight: FontWeight.w400,
-                                      fontSize: MediaQuery.of(context).size.width * 0.05,
+                                      fontSize:
+                                      MediaQuery.of(context).size.width *
+                                          0.05,
                                       fontStyle: FontStyle.normal,
                                       decoration: TextDecoration.none,
                                     ),
@@ -206,9 +194,11 @@ class _State extends State<PageSchedePage> {
                               child: Text("Durata Scheda",
                                   style: GoogleFonts.adventPro(
                                     textStyle: TextStyle(
-                                      color: const Color(0xFF000000),
+                                      color: const Color(0xFFFFFFFF),
                                       fontWeight: FontWeight.w400,
-                                      fontSize: MediaQuery.of(context).size.width * 0.035,
+                                      fontSize:
+                                      MediaQuery.of(context).size.width *
+                                          0.035,
                                       fontStyle: FontStyle.normal,
                                       decoration: TextDecoration.none,
                                     ),
@@ -233,11 +223,13 @@ class _State extends State<PageSchedePage> {
                                 bottomLeft: Radius.circular(8),
                               ),
                               border: Border.all(
-                                color: Colors.black,
+                                color: Colors.white,
                               )),
                           child: GestureDetector(
                               child: Container(
-                                  padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.01),
+                                  padding: EdgeInsets.only(
+                                      top: MediaQuery.of(context).size.height *
+                                          0.01),
                                   decoration: BoxDecoration(
                                     color: Colors.transparent,
                                   ),
@@ -245,9 +237,11 @@ class _State extends State<PageSchedePage> {
                                     "START",
                                     style: GoogleFonts.adventPro(
                                       textStyle: TextStyle(
-                                        color: const Color(0xFF000000),
+                                        color: const Color(0xFFFFFFFF),
                                         fontWeight: FontWeight.w400,
-                                        fontSize: MediaQuery.of(context).size.width * 0.035,
+                                        fontSize:
+                                        MediaQuery.of(context).size.width *
+                                            0.035,
                                         fontStyle: FontStyle.normal,
                                         decoration: TextDecoration.none,
                                       ),
@@ -270,18 +264,16 @@ class _State extends State<PageSchedePage> {
                                 bottomLeft: Radius.circular(8),
                               ),
                               border: Border.all(
-                                color: Colors.black,
+                                color: Colors.white,
                               )),
                           child: DropdownButtonHideUnderline(
                             child: DropdownButton2(
-                              customButton: Icon(
+                              customButton: const Icon(
                                 Icons.list,
                                 size: 46,
-                                color: const Color.fromARGB(255, 0, 0, 0),
+                                color: Colors.red,
                               ),
-                              customItemsIndexes: const [
-                                3
-                              ],
+                              customItemsIndexes: const [3],
                               customItemsHeight: 8,
                               items: [
                                 ...MenuItems.firstItems.map(
@@ -290,7 +282,8 @@ class _State extends State<PageSchedePage> {
                                     child: MenuItems.buildItem(item),
                                   ),
                                 ),
-                                const DropdownMenuItem<Divider>(enabled: false, child: Divider()),
+                                const DropdownMenuItem<Divider>(
+                                    enabled: false, child: Divider()),
                                 ...MenuItems.secondItems.map(
                                       (item) => DropdownMenuItem<MenuItem>(
                                     value: item,
@@ -302,12 +295,14 @@ class _State extends State<PageSchedePage> {
                                 MenuItems.onChanged(context, value as MenuItem);
                               },
                               itemHeight: 48,
-                              itemPadding: const EdgeInsets.only(left: 16, right: 16),
+                              itemPadding:
+                              const EdgeInsets.only(left: 16, right: 16),
                               dropdownWidth: 160,
-                              dropdownPadding: const EdgeInsets.symmetric(vertical: 6),
+                              dropdownPadding:
+                              const EdgeInsets.symmetric(vertical: 6),
                               dropdownDecoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(4),
-                                color: const Color.fromARGB(255, 180, 212, 250),
+                                color: Colors.redAccent,
                               ),
                               dropdownElevation: 8,
                               offset: const Offset(0, 8),
@@ -318,7 +313,6 @@ class _State extends State<PageSchedePage> {
                     ),
                   ),
                 Container(
-                    alignment: Alignment.topCenter,
                     margin: EdgeInsets.only(
                       top: MediaQuery.of(context).size.height * 0.05,
                       left: MediaQuery.of(context).size.width * 0.05,
@@ -331,7 +325,7 @@ class _State extends State<PageSchedePage> {
                         await Navigator.push<void>(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => CreaScheda(),
+                            builder: (context) => CreaEsercizio(),
                           ),
                         );
                       },
@@ -346,11 +340,12 @@ class _State extends State<PageSchedePage> {
                                 bottomRight: Radius.circular(5),
                                 bottomLeft: Radius.circular(5),
                               ),
-                              border: Border.all(color: Colors.black, width: 1)),
+                              border:
+                              Border.all(color: Colors.white, width: 2)),
                           child: Icon(
                             Icons.add,
                             size: MediaQuery.of(context).size.height * 0.037,
-                            color: Color(0xFF000000),
+                            color: Color(0xFFFFFFFF),
                           )),
                     )),
               ],
@@ -360,20 +355,23 @@ class _State extends State<PageSchedePage> {
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           currentIndex: _currentIndex,
-          backgroundColor: const Color.fromARGB(255, 180, 212, 250),
-          selectedItemColor: Colors.white.withOpacity(0.5),
+          backgroundColor: Colors.transparent,
+          selectedItemColor: Colors.white,
           unselectedItemColor: colorScheme.onSurface.withOpacity(.60),
           selectedFontSize: MediaQuery.of(context).size.height * 0.02,
           unselectedFontSize: MediaQuery.of(context).size.height * 0.02,
           onTap: (value) {
             setState(() => _currentIndex = value);
             if (value == 1)
-              Navigator.push(context, MaterialPageRoute(builder: (context) => Training()));
-            else if (value == 2) Navigator.push(context, MaterialPageRoute(builder: (context) => ViewGraph()));
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => Training()));
+            else if (value == 2)
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => ViewGraph()));
           },
           items: [
             BottomNavigationBarItem(
-              title: Text('Schede',
+              title: Text('Cards',
                   style: GoogleFonts.adventPro(
                       textStyle: TextStyle(
                         fontStyle: FontStyle.normal,
@@ -382,7 +380,7 @@ class _State extends State<PageSchedePage> {
               icon: Icon(Icons.article_outlined),
             ),
             BottomNavigationBarItem(
-              title: Text('Allenamento',
+              title: Text('Training',
                   style: GoogleFonts.adventPro(
                       textStyle: TextStyle(
                         fontStyle: FontStyle.normal,
@@ -391,7 +389,7 @@ class _State extends State<PageSchedePage> {
               icon: Icon(Icons.fitness_center_sharp),
             ),
             BottomNavigationBarItem(
-              title: Text('Grafici',
+              title: Text('Graph',
                   style: GoogleFonts.adventPro(
                       textStyle: TextStyle(
                         fontStyle: FontStyle.normal,

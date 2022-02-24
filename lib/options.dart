@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'esercizi.dart';
 import 'schede.dart';
 import 'schedeStruct.dart';
 import 'training.dart';
@@ -48,7 +49,7 @@ class MenuItems {
         Navigator.push<void>(
           context,
           MaterialPageRoute(
-            builder: (context) => Training(),
+            builder: (context) => Esercizi(),
           ),
         );
         break;

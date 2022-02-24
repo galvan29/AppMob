@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:helloworld/esercizi.dart';
 import 'package:helloworld/schede.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
@@ -90,7 +91,7 @@ class _State extends State<CreaEsercizio> {
                           await Navigator.push<void>(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => PageSchedePage(),
+                              builder: (context) => Esercizi(),
                             ),
                           );
                         },
