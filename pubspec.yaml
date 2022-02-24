@@ -24,6 +24,7 @@ dependencies:
   flutter_speed_dial: any
   path: ^1.8.0
   dropdown_button2: ^1.1.1
+  shared_preferences: ^2.0.13
 
 
 

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -12,6 +14,10 @@ import 'training.dart';
 import 'utente.dart';
 import 'creaScheda.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:sqflite/sqflite.dart';
+import 'package:path/path.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class PageSchedePage extends StatefulWidget {
   const PageSchedePage({
@@ -137,7 +143,7 @@ class _State extends State<PageSchedePage> {
           child: new SingleChildScrollView(
             child: Column(
               children: [
-                for (var scheda in _schede)
+                //for (var scheda in _schede)
                   Container(
                     padding: EdgeInsets.zero,
                     margin: EdgeInsets.only(
@@ -317,6 +323,7 @@ class _State extends State<PageSchedePage> {
                       ],
                     ),
                   ),
+                //pulsante add per nuova scheda
                 Container(
                     alignment: Alignment.topCenter,
                     margin: EdgeInsets.only(
@@ -401,5 +408,73 @@ class _State extends State<PageSchedePage> {
             ),
           ],
         ));
+  }
+}
+
+class Schede {
+  final String nomeUtente;
+  final String nome;
+  final String durata;
+
+  Schede({required this.nomeUtente, required this.nome, required this.durata});
+
+  factory Schede.fromMap(Map<String, dynamic> json) =>
+      new Schede(nomeUtente: json['nomeUtente'], nome: json['nome'], durata: json['durata']);
+
+  Map<String, dynamic> toMap() {
+    return {
+      'nomeUtente': nomeUtente,
+      'nome': nome,
+      'durata': durata,
+    };
+  }
+}
+
+class DatabaseHelper2 {
+  DatabaseHelper2._privateConstructur();
+
+  static final DatabaseHelper2 istance = DatabaseHelper2._privateConstructur();
+
+  static Database? _database;
+
+  Future<Database> get database async => _database ??= await _initDatabase();
+
+  Future<Database> _initDatabase() async {
+    Directory documentDirectory = await getApplicationDocumentsDirectory();
+    String path = join(documentDirectory.path, 'schede.db');
+
+    return await openDatabase(
+      path,
+      version: 1,
+      onCreate: _onCreate,
+    );
+  }
+
+  Future _onCreate(Database db, int version) async {
+    await db.execute('''
+      CREATE TABLE schede(
+        nomeUtente TEXT,
+        nome TEXT PRIMARY KEY,
+        durata TEXT
+      ) 
+    ''');
+  }
+
+  Future<List<Schede>> getSchede(String nomeUtente) async {
+    Database db = await istance.database;
+    var schede = await db.query('schede',
+        columns: ['nome', 'durata'],
+        where: 'nomeUtente = ?',
+        whereArgs: [nomeUtente]);
+    List<Schede> schedeList = schede.isNotEmpty
+        ?  schede.map((c) => Schede.fromMap(c)).toList()
+    : [];
+    return schedeList;
+  }
+
+  Future<int> add(Schede scheda) async {
+    Database db = await istance.database;
+    print("Utente creato");
+    return await db.insert('utenti', scheda.toMap());
   }
 }

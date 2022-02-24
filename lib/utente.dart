@@ -11,6 +11,7 @@ import 'viewGraph.dart';
 import 'training.dart';
 import 'creaScheda.dart';
 import 'schede.dart';
+import 'login.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 
 class PageUtentePage extends StatefulWidget {
@@ -124,35 +125,260 @@ class _State extends State<PageUtentePage> {
         backgroundColor: const Color.fromARGB(255, 228, 229, 224),
         body: Container(
           child: new SingleChildScrollView(
-            child: Column(children: [
-              Container(
-                margin: EdgeInsets.only(
-                  top: MediaQuery.of(context).size.height * 0.48,
-                ),
-                padding: EdgeInsets.zero,
-                width: double.maxFinite,
-                decoration: const BoxDecoration(),
-                child: TextFormField(
-                  cursorColor: Theme.of(context).cursorColor,
-                  initialValue: 'Input text',
-                  maxLength: 20,
-                  decoration: InputDecoration(
-                    icon: Icon(Icons.favorite),
-                    labelText: 'Label text',
-                    labelStyle: TextStyle(
-                      color: Color(0xFF6200EE),
-                    ),
-                    helperText: 'Helper text',
-                    suffixIcon: Icon(
-                      Icons.check_circle,
-                    ),
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Color(0xFF6200EE)),
-                    ),
+            child: Column(
+              children: [
+                Container(
+                  margin: EdgeInsets.only(
+                    left: MediaQuery.of(context).size.height * 0.03,
+                    right: MediaQuery.of(context).size.height * 0.03,
+                  ),
+                  decoration: BoxDecoration(
+                      color: Colors.black.withOpacity(0),
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(5),
+                        topRight: Radius.circular(5),
+                        bottomRight: Radius.circular(5),
+                        bottomLeft: Radius.circular(5),
+                      ),
+                      border: Border.all(color: Colors.transparent, width: 0)),
+                  child: new SingleChildScrollView(
+                    child: Column(children: [
+                      Container(
+                        margin: EdgeInsets.only(
+                          top: MediaQuery.of(context).size.height * 0.01,
+                        ),
+                        padding: EdgeInsets.zero,
+                        width: double.maxFinite,
+                        decoration: const BoxDecoration(),
+                        child: TextFormField(
+                          cursorColor: Theme.of(context).cursorColor,
+                          initialValue: '',
+                          maxLength: 20,
+                          decoration: InputDecoration(
+                            labelText: 'Inserire Nome',
+                            labelStyle: TextStyle(
+                              color: Color(0xFF6200EE),
+                            ),
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Color(0xFF6200EE)),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ]),
                   ),
                 ),
-              ),
-            ]),
+                Container(
+                  margin: EdgeInsets.only(
+                    left: MediaQuery.of(context).size.height * 0.03,
+                    right: MediaQuery.of(context).size.height * 0.03,
+                  ),
+                  decoration: BoxDecoration(
+                      color: Colors.black.withOpacity(0),
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(5),
+                        topRight: Radius.circular(5),
+                        bottomRight: Radius.circular(5),
+                        bottomLeft: Radius.circular(5),
+                      ),
+                      border: Border.all(color: Colors.transparent, width: 0)),
+                  child: new SingleChildScrollView(
+                    child: Column(children: [
+                      Container(
+                        margin: EdgeInsets.only(
+                          top: MediaQuery.of(context).size.height * 0.01,
+                        ),
+                        padding: EdgeInsets.zero,
+                        width: double.maxFinite,
+                        decoration: const BoxDecoration(),
+                        child: TextFormField(
+                          cursorColor: Theme.of(context).cursorColor,
+                          initialValue: '',
+                          maxLength: 20,
+                          decoration: InputDecoration(
+                            labelText: 'Inserire Cognome',
+                            labelStyle: TextStyle(
+                              color: Color(0xFF6200EE),
+                            ),
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Color(0xFF6200EE)),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ]),
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(
+                    left: MediaQuery.of(context).size.height * 0.03,
+                    right: MediaQuery.of(context).size.height * 0.03,
+                  ),
+                  decoration: BoxDecoration(
+                      color: Colors.black.withOpacity(0),
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(5),
+                        topRight: Radius.circular(5),
+                        bottomRight: Radius.circular(5),
+                        bottomLeft: Radius.circular(5),
+                      ),
+                      border: Border.all(color: Colors.transparent, width: 0)),
+                  child: new SingleChildScrollView(
+                    child: Column(children: [
+                      Container(
+                        margin: EdgeInsets.only(
+                          top: MediaQuery.of(context).size.height * 0.01,
+                        ),
+                        padding: EdgeInsets.zero,
+                        width: double.maxFinite,
+                        decoration: const BoxDecoration(),
+                        child: TextFormField(
+                          cursorColor: Theme.of(context).cursorColor,
+                          initialValue: '',
+                          maxLength: 2,
+                          decoration: InputDecoration(
+                            labelText: 'Inserire Età',
+                            labelStyle: TextStyle(
+                              color: Color(0xFF6200EE),
+                            ),
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Color(0xFF6200EE)),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ]),
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(
+                    left: MediaQuery.of(context).size.height * 0.03,
+                    right: MediaQuery.of(context).size.height * 0.03,
+                  ),
+                  decoration: BoxDecoration(
+                      color: Colors.black.withOpacity(0),
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(5),
+                        topRight: Radius.circular(5),
+                        bottomRight: Radius.circular(5),
+                        bottomLeft: Radius.circular(5),
+                      ),
+                      border: Border.all(color: Colors.transparent, width: 0)),
+                  child: new SingleChildScrollView(
+                    child: Column(children: [
+                      Container(
+                        margin: EdgeInsets.only(
+                          top: MediaQuery.of(context).size.height * 0.01,
+                        ),
+                        padding: EdgeInsets.zero,
+                        width: double.maxFinite,
+                        decoration: const BoxDecoration(),
+                        child: TextFormField(
+                          cursorColor: Theme.of(context).cursorColor,
+                          initialValue: '',
+                          maxLength: 3,
+                          decoration: InputDecoration(
+                            labelText: 'Inserire Peso',
+                            labelStyle: TextStyle(
+                              color: Color(0xFF6200EE),
+                            ),
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Color(0xFF6200EE)),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ]),
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(
+                    left: MediaQuery.of(context).size.height * 0.03,
+                    right: MediaQuery.of(context).size.height * 0.03,
+                  ),
+                  decoration: BoxDecoration(
+                      color: Colors.black.withOpacity(0),
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(5),
+                        topRight: Radius.circular(5),
+                        bottomRight: Radius.circular(5),
+                        bottomLeft: Radius.circular(5),
+                      ),
+                      border: Border.all(color: Colors.transparent, width: 0)),
+                  child: new SingleChildScrollView(
+                    child: Column(children: [
+                      Container(
+                        margin: EdgeInsets.only(
+                          top: MediaQuery.of(context).size.height * 0.01,
+                        ),
+                        padding: EdgeInsets.zero,
+                        width: double.maxFinite,
+                        decoration: const BoxDecoration(),
+                        child: TextFormField(
+                          cursorColor: Theme.of(context).cursorColor,
+                          initialValue: '',
+                          maxLength: 3,
+                          decoration: InputDecoration(
+                            labelText: 'Inserire Altezza',
+                            labelStyle: TextStyle(
+                              color: Color(0xFF6200EE),
+                            ),
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Color(0xFF6200EE)),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ]),
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.only(
+                    left: 50,
+                    top: 10,
+                    right: 50,
+                  ),
+                  padding: EdgeInsets.zero,
+                  width: double.maxFinite,
+                  decoration: const BoxDecoration(),
+                  child: GestureDetector(
+                      onTap: () async {
+                        await Navigator.push<void>(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => PageSchedePage(),
+                          ),
+                        );
+                      },
+                      child: Container(
+                          width: 10,
+                          height: 40,
+                          padding: EdgeInsets.only(top: 8),
+                          decoration: BoxDecoration(
+                              color: Colors.black.withOpacity(0.05),
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(5),
+                                topRight: Radius.circular(5),
+                                bottomRight: Radius.circular(5),
+                                bottomLeft: Radius.circular(5),
+                              ),
+                              border: Border.all(color: Colors.white)),
+                          child: Text(
+                            '''Registra Utente''',
+                            style: GoogleFonts.adventPro(
+                              textStyle: TextStyle(
+                                color: const Color(0xFFFFFFFF),
+                                fontWeight: FontWeight.w500,
+                                fontSize: 16,
+                                fontStyle: FontStyle.normal,
+                                decoration: TextDecoration.none,
+                              ),
+                            ),
+                            textAlign: TextAlign.center,
+                          ))),
+                ),
+              ],
+            ),
           ),
         ),
         bottomNavigationBar: BottomNavigationBar(

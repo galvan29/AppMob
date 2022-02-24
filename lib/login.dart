@@ -6,6 +6,7 @@ import 'schede.dart';
 import 'dart:io';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class PageLoginPage extends StatefulWidget {
   const PageLoginPage({
@@ -16,7 +17,6 @@ class PageLoginPage extends StatefulWidget {
   _State createState() => _State();
 }
 
-bool giusta = false;
 
 class _State extends State<PageLoginPage> {
   final datasets = <String, dynamic>{};
@@ -26,6 +26,17 @@ class _State extends State<PageLoginPage> {
   @override
   void initState() {
     super.initState();
+  }
+
+  saveValue() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('nomeUtente', usernameController.text);
+  }
+
+  getValue() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? stringValue = prefs.getString('nomeUtente');
+    return stringValue;
   }
 
   @override
@@ -215,6 +226,7 @@ class _State extends State<PageLoginPage> {
                         onTap: () {
                           DatabaseHelper.istance.getPasswordVerified(usernameController.text).then((val) {
                             if (val == passwordController.text) {
+                              saveValue();
                               Navigator.push<void>(
                                 context,
                                 MaterialPageRoute(
@@ -390,7 +402,6 @@ class DatabaseHelper {
   }
 
   Future<String> getPasswordVerified(String nomeUtente) async {
-    giusta = false;
     Database db = await istance.database;
     var utenteConTutto = await db.query('utenti',
         columns: ['password'],

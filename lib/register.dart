@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:helloworld/login.dart';
-
+import 'package:path/path.dart';
+import 'package:path_provider/path_provider.dart';
 import 'schede.dart';
+import 'package:sqflite/sqflite.dart';
 
 class PageRegisterPage extends StatefulWidget {
   const PageRegisterPage({
