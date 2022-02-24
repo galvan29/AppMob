@@ -400,7 +400,7 @@ class DatabaseHelper {
         .toString()
         .replaceAll("[{password: ", "")
         .replaceAll("}]", "");
-    print("Password trovata: "+pass);
+    print("Password che ho trovato: "+pass);
     return pass;
   }
 

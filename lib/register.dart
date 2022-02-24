@@ -208,7 +208,7 @@ class _State extends State<PageRegisterPage> {
                       decoration: const BoxDecoration(),
                       child: GestureDetector(
                         onTap: () {
-                          Utenti utente = new Utenti(nomeUtente: usernameController.toString(), password: passwordController.toString());
+                          Utenti utente = new Utenti(nomeUtente: usernameController.text, password: passwordController.text);
                           DatabaseHelper.istance.getPasswordVerified(usernameController.text).then((val) {
                             if (val == '[]') {
                               print("Utente inesistente, procedo a creare utente");
@@ -296,7 +296,7 @@ class _State extends State<PageRegisterPage> {
                                 border: Border.all(color: Colors.white, width: 2)
                             ),
                             child: Text(
-                              '''Login''',
+                              '''Register''',
                               style: GoogleFonts.adventPro(
                                 textStyle: TextStyle(
                                   color: const Color(0xFFFFFFFF),
