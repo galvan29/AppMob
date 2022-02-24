@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:helloworld/login.dart';
 
 import 'schede.dart';
 
@@ -14,6 +15,8 @@ class PageRegisterPage extends StatefulWidget {
 
 class _State extends State<PageRegisterPage> {
   final datasets = <String, dynamic>{};
+  final usernameController = TextEditingController();
+  final passwordController = TextEditingController();
 
   @override
   void initState() {
@@ -97,6 +100,7 @@ class _State extends State<PageRegisterPage> {
                         border: Border.all(color: Colors.white.withOpacity(0),)
                     ),
                     child: TextField(
+                      controller: usernameController,
                       onChanged: (String value) async {},
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(
@@ -154,6 +158,7 @@ class _State extends State<PageRegisterPage> {
                         border: Border.all(color: Colors.white.withOpacity(0),)
                     ),
                     child: TextField(
+                      controller: passwordController,
                       onChanged: (String value) async {},
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(
@@ -202,13 +207,79 @@ class _State extends State<PageRegisterPage> {
                       padding: EdgeInsets.zero,
                       decoration: const BoxDecoration(),
                       child: GestureDetector(
-                        onTap: () async {
-                          await Navigator.push<void>(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => PageSchedePage(),
-                            ),
-                          );
+                        onTap: () {
+                          Utenti utente = new Utenti(nomeUtente: usernameController.toString(), password: passwordController.toString());
+                          DatabaseHelper.istance.getPasswordVerified(usernameController.text).then((val) {
+                            if (val == '[]') {
+                              print("Utente inesistente, procedo a creare utente");
+                              DatabaseHelper.istance.add(utente);
+                              Navigator.push<void>(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => PageLoginPage(),
+                                ),
+                              );
+                            } else {
+                              // set up the buttons
+                              Widget continueButton = TextButton(
+                                child: Text("Riprova",
+                                  style: GoogleFonts.adventPro(
+                                    textStyle: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: MediaQuery.of(context).size.height * 0.016,
+                                      fontStyle: FontStyle.normal,
+                                      decoration: TextDecoration.none,
+                                    ),
+                                  ),
+                                ),
+                                onPressed: () {
+                                  Navigator.push<void>(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => PageRegisterPage(),
+                                    ),
+                                  );
+                                },
+                              );
+
+                              // set up the AlertDialog
+                              AlertDialog alert = AlertDialog(
+                                title: Text("Attenzione",
+                                  style: GoogleFonts.adventPro(
+                                    textStyle: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: MediaQuery.of(context).size.height * 0.025,
+                                      fontStyle: FontStyle.normal,
+                                      decoration: TextDecoration.none,
+                                    ),
+                                  ),
+                                ),
+                                content: Text("Nome Utente già presente",
+                                  style: GoogleFonts.adventPro(
+                                    textStyle: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: MediaQuery.of(context).size.height * 0.016,
+                                      fontStyle: FontStyle.normal,
+                                      decoration: TextDecoration.none,
+                                    ),
+                                  ),
+                                ),
+                                actions: [
+                                  continueButton,
+                                ],
+                              );
+
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return alert;
+                                },
+                              );
+                            }
+                          });
                         },
                         child: Container(
                             width: double.maxFinite,

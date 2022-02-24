@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:helloworld/register.dart';
 import 'package:sqflite/sqflite.dart';
 import 'schede.dart';
 import 'dart:io';
@@ -14,6 +15,8 @@ class PageLoginPage extends StatefulWidget {
   @override
   _State createState() => _State();
 }
+
+bool giusta = false;
 
 class _State extends State<PageLoginPage> {
   final datasets = <String, dynamic>{};
@@ -210,19 +213,97 @@ class _State extends State<PageLoginPage> {
                       decoration: const BoxDecoration(),
                       child: GestureDetector(
                         onTap: () {
-                          print(DatabaseHelper.istance.getPasswordVerified(usernameController.toString()).toString().toString());
-                          if(DatabaseHelper.istance.getPasswordVerified(usernameController.toString()).toString()==passwordController.toString()){
-                            print("CIAOOOOOOOOOOOOOO");
-                            Navigator.push<void>(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => PageSchedePage(),
-                              ),
-                            );
-                          }
-                          else{
-                            print("Sbagliato coddue");
-                          }
+                          DatabaseHelper.istance.getPasswordVerified(usernameController.text).then((val) {
+                            if (val == passwordController.text) {
+                              Navigator.push<void>(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => PageSchedePage(),
+                                ),
+                              );
+                            } else {
+                              // set up the buttons
+                              Widget cancelButton = TextButton(
+                                child: Text("Riprova",
+                                  style: GoogleFonts.adventPro(
+                                    textStyle: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: MediaQuery.of(context).size.height * 0.016,
+                                      fontStyle: FontStyle.normal,
+                                      decoration: TextDecoration.none,
+                                    ),
+                                  ),
+                                ),
+                                onPressed: () {
+                                  Navigator.push<void>(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => PageLoginPage(),
+                                    ),
+                                  );
+                                },
+                              );
+                              Widget continueButton = TextButton(
+                                child: Text("Registrati",
+                                  style: GoogleFonts.adventPro(
+                                    textStyle: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: MediaQuery.of(context).size.height * 0.016,
+                                      fontStyle: FontStyle.normal,
+                                      decoration: TextDecoration.none,
+                                    ),
+                                  ),
+                                ),
+                                onPressed: () {
+                                  Navigator.push<void>(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => PageRegisterPage(),
+                                    ),
+                                  );
+                                },
+                              );
+
+                              // set up the AlertDialog
+                              AlertDialog alert = AlertDialog(
+                                title: Text("Attenzione",
+                                  style: GoogleFonts.adventPro(
+                                    textStyle: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: MediaQuery.of(context).size.height * 0.025,
+                                      fontStyle: FontStyle.normal,
+                                      decoration: TextDecoration.none,
+                                    ),
+                                  ),
+                                ),
+                                content: Text("Nome Utente o Password errata",
+                                  style: GoogleFonts.adventPro(
+                                    textStyle: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: MediaQuery.of(context).size.height * 0.016,
+                                      fontStyle: FontStyle.normal,
+                                      decoration: TextDecoration.none,
+                                    ),
+                                  ),
+                                ),
+                                actions: [
+                                  cancelButton,
+                                  continueButton,
+                                ],
+                              );
+
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return alert;
+                                },
+                              );
+                            }
+                          });
                         },
                         child: Container(
                             width: double.maxFinite,
@@ -262,30 +343,30 @@ class _State extends State<PageLoginPage> {
   }
 }
 
-class Utenti{
+class Utenti {
   final String nomeUtente;
   final String password;
 
   Utenti({required this.nomeUtente, required this.password});
 
-  factory Utenti.fromMap(Map<String, dynamic> json) => new Utenti(
-    nomeUtente: json['nomeUtente'],
-    password: json['password']
-  );
+  factory Utenti.fromMap(Map<String, dynamic> json) =>
+      new Utenti(nomeUtente: json['nomeUtente'], password: json['password']);
 
-  Map<String, dynamic> toMap(){
+  Map<String, dynamic> toMap() {
     return {
       'nomeUtente': nomeUtente,
-      'password':password,
+      'password': password,
     };
   }
 }
 
-class DatabaseHelper{
+class DatabaseHelper {
   DatabaseHelper._privateConstructur();
+
   static final DatabaseHelper istance = DatabaseHelper._privateConstructur();
 
   static Database? _database;
+
   Future<Database> get database async => _database ??= await _initDatabase();
 
   Future<Database> _initDatabase() async {
@@ -299,28 +380,33 @@ class DatabaseHelper{
     );
   }
 
-  Future _onCreate(Database db, int version) async{
+  Future _onCreate(Database db, int version) async {
     await db.execute('''
       CREATE TABLE utenti(
         nomeUtente TEXT PRIMARY KEY,
         password TEXT
-      )
+      ) 
     ''');
-
-    Utenti utente = new Utenti(nomeUtente: 'ciao', password: 'bro');
-    db.insert('utenti', utente.toMap());
   }
 
-  Future<String> getPasswordVerified(String nomeUtente) async{
-    Database db= await istance.database;
-   // Directory documentDirectory = await getApplicationDocumentsDirectory();
-    //print("cacaa"+documentDirectory.path);
-    var password = await db.query('utenti', where: 'nomeUtente = ?', whereArgs: [nomeUtente]);
-    return password.toString();
+  Future<String> getPasswordVerified(String nomeUtente) async {
+    giusta = false;
+    Database db = await istance.database;
+    var utenteConTutto = await db.query('utenti',
+        columns: ['password'],
+        where: 'nomeUtente = ?',
+        whereArgs: [nomeUtente]);
+    String pass = utenteConTutto
+        .toString()
+        .replaceAll("[{password: ", "")
+        .replaceAll("}]", "");
+    print("Password trovata: "+pass);
+    return pass;
   }
 
   Future<int> add(Utenti utente) async {
-    Database db= await istance.database;
+    Database db = await istance.database;
+    print("Utente creato");
     return await db.insert('utenti', utente.toMap());
   }
 }
