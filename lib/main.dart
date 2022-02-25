@@ -5,6 +5,7 @@ import 'login.dart';
 import 'register.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp());
 }
 

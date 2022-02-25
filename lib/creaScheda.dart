@@ -4,6 +4,7 @@ import 'package:helloworld/schede.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'bro.dart';
+import 'login.dart';
 import 'main.dart';
 import 'options.dart';
 import 'profile.dart';
@@ -87,6 +88,10 @@ class _State extends State<CreaScheda> {
                         decoration: const BoxDecoration(),
                         child: GestureDetector(
                           onTap: () async {
+                            PageLoginPage().getValueLogin().then((val) {
+                              Schede scheda = new Schede(nomeUtente: val, nome: 'Scheda 19', durata: '120');
+                              DatabaseHelper2.istance.add(scheda);
+                            });
                             await Navigator.push<void>(
                               context,
                               MaterialPageRoute(

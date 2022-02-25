@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'bro.dart';
+import 'login.dart';
 import 'main.dart';
 import 'options.dart';
 import 'profile.dart';
@@ -63,7 +64,9 @@ class _State extends State<PageSchedePage> {
                 padding: EdgeInsets.zero,
                 width: double.maxFinite,
                 height: MediaQuery.of(context).size.height * 0.13,
-                decoration: BoxDecoration(color: const Color.fromARGB(255, 180, 212, 250), border: Border.all(color: Colors.black, width: 1)),
+                decoration: BoxDecoration(
+                    color: const Color.fromARGB(255, 180, 212, 250),
+                    border: Border.all(color: Colors.black, width: 1)),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -78,7 +81,8 @@ class _State extends State<PageSchedePage> {
                             textStyle: TextStyle(
                               color: const Color(0xFF000000),
                               fontWeight: FontWeight.w400,
-                              fontSize: MediaQuery.of(context).size.height * 0.05,
+                              fontSize:
+                                  MediaQuery.of(context).size.height * 0.05,
                               fontStyle: FontStyle.normal,
                               decoration: TextDecoration.none,
                             ),
@@ -86,6 +90,42 @@ class _State extends State<PageSchedePage> {
                           textAlign: TextAlign.left,
                           maxLines: 1),
                     ),
+                    Container(
+                    alignment: Alignment.topCenter,
+                    margin: EdgeInsets.only(
+                      top: MediaQuery.of(context).size.height * 0.05,
+                      left: MediaQuery.of(context).size.width * 0.05,
+                      right: MediaQuery.of(context).size.width * 0.05,
+                    ),
+                    decoration: const BoxDecoration(),
+                    child: GestureDetector(
+                      onTap: () async {
+                        await Navigator.push<void>(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => CreaScheda(),
+                          ),
+                        );
+                      },
+                      child: Container(
+                          width: MediaQuery.of(context).size.width * 0.10,
+                          height: MediaQuery.of(context).size.height * 0.040,
+                          decoration: BoxDecoration(
+                              color: Colors.black.withOpacity(0.05),
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(5),
+                                topRight: Radius.circular(5),
+                                bottomRight: Radius.circular(5),
+                                bottomLeft: Radius.circular(5),
+                              ),
+                              border:
+                                  Border.all(color: Colors.black, width: 1)),
+                          child: Icon(
+                            Icons.add,
+                            size: MediaQuery.of(context).size.height * 0.037,
+                            color: Color(0xFF000000),
+                          )),
+                    )),
                     Container(
                         padding: EdgeInsets.zero,
                         decoration: const BoxDecoration(),
@@ -112,10 +152,12 @@ class _State extends State<PageSchedePage> {
                                     bottomRight: Radius.circular(5),
                                     bottomLeft: Radius.circular(5),
                                   ),
-                                  border: Border.all(color: Colors.black, width: 2)),
+                                  border: Border.all(
+                                      color: Colors.black, width: 2)),
                               child: Icon(
                                 Icons.perm_identity_sharp,
-                                size: MediaQuery.of(context).size.height * 0.037,
+                                size:
+                                    MediaQuery.of(context).size.height * 0.037,
                                 color: Color(0xFF000000),
                               )),
                         ))
@@ -140,191 +182,45 @@ class _State extends State<PageSchedePage> {
         ),
         backgroundColor: const Color.fromARGB(255, 205, 225, 247),
         body: Container(
-          child: new SingleChildScrollView(
-            child: Column(
-              children: [
-                //for (var scheda in _schede)
-                  Container(
-                    padding: EdgeInsets.zero,
-                    margin: EdgeInsets.only(
-                      top: MediaQuery.of(context).size.height * 0.02,
-                      left: MediaQuery.of(context).size.width * 0.05,
-                    ),
-                    width: MediaQuery.of(context).size.width * 0.90,
-                    height: MediaQuery.of(context).size.height * 0.10,
-                    decoration: BoxDecoration(
-                        color: Colors.transparent,
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(8),
-                          topRight: Radius.circular(8),
-                          bottomRight: Radius.circular(8),
-                          bottomLeft: Radius.circular(8),
-                        ),
-                        border: Border.all(
-                          color: Colors.black,
-                        )),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              padding: EdgeInsets.zero,
-                              width: MediaQuery.of(context).size.width * 0.30,
+          child: FutureBuilder<List<Schede>>(
+              future: DatabaseHelper2.istance.getSchede(),
+              builder:
+                  (BuildContext context, AsyncSnapshot<List<Schede>> snapshot) {
+                if (!snapshot.hasData) return Center(child: Text("Loading..."));
+                return snapshot.data!.isEmpty
+                    ? Center(child: Text("No element"))
+                    : ListView(
+                        children: snapshot.data!.map((scheda) {
+                          return Center(
+                            child: Container(
+                              margin: const EdgeInsets.only(
+                                left: 50,
+                                right: 50,
+                                top: 20,
+                              ),
+                              width: double.maxFinite,
+                              height: MediaQuery.of(context).size.height * 0.08,
                               decoration: BoxDecoration(
-                                  color: Colors.transparent,
                                   borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(8),
-                                    topRight: Radius.circular(8),
-                                    bottomRight: Radius.circular(8),
-                                    bottomLeft: Radius.circular(8),
+                                    topLeft: Radius.circular(5),
+                                    topRight: Radius.circular(5),
+                                    bottomRight: Radius.circular(5),
+                                    bottomLeft: Radius.circular(5),
                                   ),
                                   border: Border.all(
-                                    color: Colors.transparent,
+                                    color: Colors.black,
                                   )),
-                              child: Text("Nome Scheda",
-                                  style: GoogleFonts.adventPro(
-                                    textStyle: TextStyle(
-                                      color: const Color(0xFF000000),
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: MediaQuery.of(context).size.width * 0.05,
-                                      fontStyle: FontStyle.normal,
-                                      decoration: TextDecoration.none,
-                                    ),
-                                  ),
-                                  textAlign: TextAlign.left,
-                                  maxLines: 1),
+                              child: ListTile(
+                              title: Text(scheda.nome),
+                              subtitle: Text(scheda.durata),
                             ),
-                            Container(
-                              width: 100,
-                              decoration: BoxDecoration(
-                                  color: Colors.transparent,
-                                  borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(8),
-                                    topRight: Radius.circular(8),
-                                    bottomRight: Radius.circular(8),
-                                    bottomLeft: Radius.circular(8),
-                                  ),
-                                  border: Border.all(
-                                    color: Colors.transparent,
-                                  )),
-                              child: Text("Durata Scheda",
-                                  style: GoogleFonts.adventPro(
-                                    textStyle: TextStyle(
-                                      color: const Color(0xFF000000),
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: MediaQuery.of(context).size.width * 0.035,
-                                      fontStyle: FontStyle.normal,
-                                      decoration: TextDecoration.none,
-                                    ),
-                                  ),
-                                  textAlign: TextAlign.left,
-                                  maxLines: 1),
-                            ),
-                          ],
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(
-                            left: MediaQuery.of(context).size.width * 0.25,
-                          ),
-                          height: MediaQuery.of(context).size.height * 0.05,
-                          width: MediaQuery.of(context).size.width * 0.15,
-                          decoration: BoxDecoration(
-                              color: Colors.transparent,
-                              borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(8),
-                                topRight: Radius.circular(8),
-                                bottomRight: Radius.circular(8),
-                                bottomLeft: Radius.circular(8),
-                              ),
-                              border: Border.all(
-                                color: Colors.black,
-                              )),
-                          child: GestureDetector(
-                              child: Container(
-                                  padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.01),
-                                  decoration: BoxDecoration(
-                                    color: Colors.transparent,
-                                  ),
-                                  child: Text(
-                                    "START",
-                                    style: GoogleFonts.adventPro(
-                                      textStyle: TextStyle(
-                                        color: const Color(0xFF000000),
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: MediaQuery.of(context).size.width * 0.035,
-                                        fontStyle: FontStyle.normal,
-                                        decoration: TextDecoration.none,
-                                      ),
-                                    ),
-                                    textAlign: TextAlign.center,
-                                  ))),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(
-                            left: MediaQuery.of(context).size.width * 0.01,
-                          ),
-                          height: MediaQuery.of(context).size.height * 0.05,
-                          width: MediaQuery.of(context).size.width * 0.15,
-                          decoration: BoxDecoration(
-                              color: Colors.transparent,
-                              borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(8),
-                                topRight: Radius.circular(8),
-                                bottomRight: Radius.circular(8),
-                                bottomLeft: Radius.circular(8),
-                              ),
-                              border: Border.all(
-                                color: Colors.black,
-                              )),
-                          child: DropdownButtonHideUnderline(
-                            child: DropdownButton2(
-                              customButton: Icon(
-                                Icons.list,
-                                size: 46,
-                                color: const Color.fromARGB(255, 0, 0, 0),
-                              ),
-                              customItemsIndexes: const [
-                                3
-                              ],
-                              customItemsHeight: 8,
-                              items: [
-                                ...MenuItems.firstItems.map(
-                                      (item) => DropdownMenuItem<MenuItem>(
-                                    value: item,
-                                    child: MenuItems.buildItem(item),
-                                  ),
-                                ),
-                                const DropdownMenuItem<Divider>(enabled: false, child: Divider()),
-                                ...MenuItems.secondItems.map(
-                                      (item) => DropdownMenuItem<MenuItem>(
-                                    value: item,
-                                    child: MenuItems.buildItem(item),
-                                  ),
-                                ),
-                              ],
-                              onChanged: (value) {
-                                MenuItems.onChanged(context, value as MenuItem);
-                              },
-                              itemHeight: 48,
-                              itemPadding: const EdgeInsets.only(left: 16, right: 16),
-                              dropdownWidth: 160,
-                              dropdownPadding: const EdgeInsets.symmetric(vertical: 6),
-                              dropdownDecoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(4),
-                                color: const Color.fromARGB(255, 180, 212, 250),
-                              ),
-                              dropdownElevation: 8,
-                              offset: const Offset(0, 8),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                //pulsante add per nuova scheda
-                Container(
+                            )
+                          );
+                        }).toList(),
+                      );
+              }),
+          //pulsante add per nuova scheda
+          /*   Container(
                     alignment: Alignment.topCenter,
                     margin: EdgeInsets.only(
                       top: MediaQuery.of(context).size.height * 0.05,
@@ -334,7 +230,6 @@ class _State extends State<PageSchedePage> {
                     decoration: const BoxDecoration(),
                     child: GestureDetector(
                       onTap: () async {
-                        PageSchedePage().aggiungi(SchedeStruct(1, "Nome Scheda", 120));
                         await Navigator.push<void>(
                           context,
                           MaterialPageRoute(
@@ -353,16 +248,14 @@ class _State extends State<PageSchedePage> {
                                 bottomRight: Radius.circular(5),
                                 bottomLeft: Radius.circular(5),
                               ),
-                              border: Border.all(color: Colors.black, width: 1)),
+                              border:
+                                  Border.all(color: Colors.black, width: 1)),
                           child: Icon(
                             Icons.add,
                             size: MediaQuery.of(context).size.height * 0.037,
                             color: Color(0xFF000000),
                           )),
-                    )),
-              ],
-            ),
-          ),
+                    )),*/
         ),
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
@@ -375,35 +268,38 @@ class _State extends State<PageSchedePage> {
           onTap: (value) {
             setState(() => _currentIndex = value);
             if (value == 1)
-              Navigator.push(context, MaterialPageRoute(builder: (context) => Training()));
-            else if (value == 2) Navigator.push(context, MaterialPageRoute(builder: (context) => ViewGraph()));
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => Training()));
+            else if (value == 2)
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => ViewGraph()));
           },
           items: [
             BottomNavigationBarItem(
               title: Text('Schede',
                   style: GoogleFonts.adventPro(
                       textStyle: TextStyle(
-                        fontStyle: FontStyle.normal,
-                        decoration: TextDecoration.none,
-                      ))),
+                    fontStyle: FontStyle.normal,
+                    decoration: TextDecoration.none,
+                  ))),
               icon: Icon(Icons.article_outlined),
             ),
             BottomNavigationBarItem(
               title: Text('Allenamento',
                   style: GoogleFonts.adventPro(
                       textStyle: TextStyle(
-                        fontStyle: FontStyle.normal,
-                        decoration: TextDecoration.none,
-                      ))),
+                    fontStyle: FontStyle.normal,
+                    decoration: TextDecoration.none,
+                  ))),
               icon: Icon(Icons.fitness_center_sharp),
             ),
             BottomNavigationBarItem(
               title: Text('Grafici',
                   style: GoogleFonts.adventPro(
                       textStyle: TextStyle(
-                        fontStyle: FontStyle.normal,
-                        decoration: TextDecoration.none,
-                      ))),
+                    fontStyle: FontStyle.normal,
+                    decoration: TextDecoration.none,
+                  ))),
               icon: Icon(Icons.bar_chart),
             ),
           ],
@@ -418,8 +314,10 @@ class Schede {
 
   Schede({required this.nomeUtente, required this.nome, required this.durata});
 
-  factory Schede.fromMap(Map<String, dynamic> json) =>
-      new Schede(nomeUtente: json['nomeUtente'], nome: json['nome'], durata: json['durata']);
+  factory Schede.fromMap(Map<String, dynamic> json) => new Schede(
+      nomeUtente: json['nomeUtente'],
+      nome: json['nome'],
+      durata: json['durata']);
 
   Map<String, dynamic> toMap() {
     return {
@@ -454,27 +352,29 @@ class DatabaseHelper2 {
     await db.execute('''
       CREATE TABLE schede(
         nomeUtente TEXT,
-        nome TEXT PRIMARY KEY,
+        nome TEXT,
         durata TEXT
       ) 
     ''');
   }
 
-  Future<List<Schede>> getSchede(String nomeUtente) async {
+  Future<List<Schede>> getSchede() async {
+    String str = "";
+    PageLoginPage().getValueLogin().then((val) {
+      str = val;
+    });
     Database db = await istance.database;
     var schede = await db.query('schede',
-        columns: ['nome', 'durata'],
-        where: 'nomeUtente = ?',
-        whereArgs: [nomeUtente]);
-    List<Schede> schedeList = schede.isNotEmpty
-        ?  schede.map((c) => Schede.fromMap(c)).toList()
-    : [];
+        columns: ['nome', 'durata'], where: 'nomeUtente = ?', whereArgs: [str]);
+    List<Schede> schedeList =
+        schede.isNotEmpty ? schede.map((c) => Schede.fromMap(c)).toList() : [];
+    print("Recupero nome utente loggato e schede: ");
     return schedeList;
   }
 
   Future<int> add(Schede scheda) async {
     Database db = await istance.database;
-    print("Utente creato");
-    return await db.insert('utenti', scheda.toMap());
+    print("Scheda creata");
+    return await db.insert('schede', scheda.toMap());
   }
 }

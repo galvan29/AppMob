@@ -15,6 +15,13 @@ class PageLoginPage extends StatefulWidget {
 
   @override
   _State createState() => _State();
+
+  getValueLogin() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String stringValue="";
+    stringValue = prefs.getString('nomeUtente')!;
+    return stringValue;
+  }
 }
 
 
@@ -31,12 +38,6 @@ class _State extends State<PageLoginPage> {
   saveValue() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString('nomeUtente', usernameController.text);
-  }
-
-  getValue() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? stringValue = prefs.getString('nomeUtente');
-    return stringValue;
   }
 
   @override
@@ -411,7 +412,6 @@ class DatabaseHelper {
         .toString()
         .replaceAll("[{password: ", "")
         .replaceAll("}]", "");
-    print("Password che ho trovato: "+pass);
     return pass;
   }
 
