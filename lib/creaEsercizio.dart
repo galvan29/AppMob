@@ -83,8 +83,8 @@ class _State extends State<CreaEsercizio> {
                             );
                           },
                           child: Container(
-                              height: MediaQuery.of(context).size.height * 0.05,
                               width: MediaQuery.of(context).size.height * 0.05,
+                              height: MediaQuery.of(context).size.height * 0.13,
                               decoration: BoxDecoration(
                                   color: Colors.black.withOpacity(0),
                                   borderRadius: BorderRadius.only(

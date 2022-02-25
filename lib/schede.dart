@@ -91,41 +91,43 @@ class _State extends State<PageSchedePage> {
                           maxLines: 1),
                     ),
                     Container(
-                    alignment: Alignment.topCenter,
-                    margin: EdgeInsets.only(
-                      top: MediaQuery.of(context).size.height * 0.05,
-                      left: MediaQuery.of(context).size.width * 0.05,
-                      right: MediaQuery.of(context).size.width * 0.05,
-                    ),
-                    decoration: const BoxDecoration(),
-                    child: GestureDetector(
-                      onTap: () async {
-                        await Navigator.push<void>(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => CreaScheda(),
-                          ),
-                        );
-                      },
-                      child: Container(
-                          width: MediaQuery.of(context).size.width * 0.10,
-                          height: MediaQuery.of(context).size.height * 0.040,
-                          decoration: BoxDecoration(
-                              color: Colors.black.withOpacity(0.05),
-                              borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(5),
-                                topRight: Radius.circular(5),
-                                bottomRight: Radius.circular(5),
-                                bottomLeft: Radius.circular(5),
+                        alignment: Alignment.topCenter,
+                        margin: EdgeInsets.only(
+                          top: MediaQuery.of(context).size.height * 0.05,
+                          left: MediaQuery.of(context).size.width * 0.05,
+                          right: MediaQuery.of(context).size.width * 0.05,
+                        ),
+                        decoration: const BoxDecoration(),
+                        child: GestureDetector(
+                          onTap: () async {
+                            await Navigator.push<void>(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => CreaScheda(),
                               ),
-                              border:
-                                  Border.all(color: Colors.black, width: 1)),
-                          child: Icon(
-                            Icons.add,
-                            size: MediaQuery.of(context).size.height * 0.037,
-                            color: Color(0xFF000000),
-                          )),
-                    )),
+                            );
+                          },
+                          child: Container(
+                              width: MediaQuery.of(context).size.width * 0.10,
+                              height:
+                                  MediaQuery.of(context).size.height * 0.040,
+                              decoration: BoxDecoration(
+                                  color: Colors.black.withOpacity(0.05),
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(5),
+                                    topRight: Radius.circular(5),
+                                    bottomRight: Radius.circular(5),
+                                    bottomLeft: Radius.circular(5),
+                                  ),
+                                  border: Border.all(
+                                      color: Colors.black, width: 1)),
+                              child: Icon(
+                                Icons.add,
+                                size:
+                                    MediaQuery.of(context).size.height * 0.037,
+                                color: Color(0xFF000000),
+                              )),
+                        )),
                     Container(
                         padding: EdgeInsets.zero,
                         decoration: const BoxDecoration(),
@@ -192,30 +194,32 @@ class _State extends State<PageSchedePage> {
                     : ListView(
                         children: snapshot.data!.map((scheda) {
                           return Center(
-                            child: Container(
-                              margin: const EdgeInsets.only(
-                                left: 50,
-                                right: 50,
-                                top: 20,
-                              ),
-                              width: double.maxFinite,
-                              height: MediaQuery.of(context).size.height * 0.08,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(5),
-                                    topRight: Radius.circular(5),
-                                    bottomRight: Radius.circular(5),
-                                    bottomLeft: Radius.circular(5),
-                                  ),
-                                  border: Border.all(
-                                    color: Colors.black,
-                                  )),
-                              child: ListTile(
+                              child: Container(
+                                margin: const EdgeInsets.only(
+                                  left: 50,
+                                  right: 50,
+                                  top: 20,
+                                ),
+                            width: double.maxFinite,
+                            height: MediaQuery.of(context).size.height * 0.08,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(5),
+                                  topRight: Radius.circular(5),
+                                  bottomRight: Radius.circular(5),
+                                  bottomLeft: Radius.circular(5),
+                                ),
+                                border: Border.all(
+                                  color: Colors.black,
+                                )),
+                            child: ListTile(
                               title: Text(scheda.nome),
                               subtitle: Text(scheda.durata),
+                              onTap: () {
+                                print('ciao amico: '+scheda.id.toString());
+                              },
                             ),
-                            )
-                          );
+                          ));
                         }).toList(),
                       );
               }),
@@ -308,19 +312,26 @@ class _State extends State<PageSchedePage> {
 }
 
 class Schede {
+  final int? id;
   final String nomeUtente;
   final String nome;
   final String durata;
 
-  Schede({required this.nomeUtente, required this.nome, required this.durata});
+  Schede(
+      {this.id,
+      required this.nomeUtente,
+      required this.nome,
+      required this.durata});
 
   factory Schede.fromMap(Map<String, dynamic> json) => new Schede(
+      id: json['id'],
       nomeUtente: json['nomeUtente'],
       nome: json['nome'],
       durata: json['durata']);
 
   Map<String, dynamic> toMap() {
     return {
+      'id': id,
       'nomeUtente': nomeUtente,
       'nome': nome,
       'durata': durata,
@@ -351,6 +362,7 @@ class DatabaseHelper2 {
   Future _onCreate(Database db, int version) async {
     await db.execute('''
       CREATE TABLE schede(
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
         nomeUtente TEXT,
         nome TEXT,
         durata TEXT
@@ -365,7 +377,9 @@ class DatabaseHelper2 {
     });
     Database db = await istance.database;
     var schede = await db.query('schede',
-        columns: ['nome', 'durata'], where: 'nomeUtente = ?', whereArgs: [str]);
+        columns: ['id', 'nome', 'durata'],
+        where: 'nomeUtente = ?',
+        whereArgs: [str]);
     List<Schede> schedeList =
         schede.isNotEmpty ? schede.map((c) => Schede.fromMap(c)).toList() : [];
     print("Recupero nome utente loggato e schede: ");
