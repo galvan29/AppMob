@@ -90,13 +90,16 @@ class _State extends State<PageEserciziPage> {
                       margin: EdgeInsets.only(
                         left: MediaQuery.of(context).size.width * 0.05,
                       ),
-                      child: Text('Nome Scheda',
+                      child: Text("Non riesco",
+                         // PageSchedePage().getValueNomeScheda().then((val2) async {
+                         //   return await val2;
+                         // }),
                           style: GoogleFonts.adventPro(
                             textStyle: TextStyle(
                               color: const Color(0xFF000000),
                               fontWeight: FontWeight.w400,
                               fontSize:
-                              MediaQuery.of(context).size.height * 0.05,
+                                  MediaQuery.of(context).size.height * 0.05,
                               fontStyle: FontStyle.normal,
                               decoration: TextDecoration.none,
                             ),
@@ -137,7 +140,7 @@ class _State extends State<PageEserciziPage> {
                               child: Icon(
                                 Icons.add,
                                 size:
-                                MediaQuery.of(context).size.height * 0.037,
+                                    MediaQuery.of(context).size.height * 0.037,
                                 color: Color(0xFF000000),
                               )),
                         )),
@@ -172,7 +175,7 @@ class _State extends State<PageEserciziPage> {
                               child: Icon(
                                 Icons.perm_identity_sharp,
                                 size:
-                                MediaQuery.of(context).size.height * 0.037,
+                                    MediaQuery.of(context).size.height * 0.037,
                                 color: Color(0xFF000000),
                               )),
                         ))
@@ -205,43 +208,44 @@ class _State extends State<PageEserciziPage> {
                 return snapshot.data!.isEmpty
                     ? Center(child: Text("No element"))
                     : ListView(
-                  children: snapshot.data!.map((esercizi) {
-                    return Center(
-                        child: Container(
-                          margin: const EdgeInsets.only(
-                            left: 50,
-                            right: 50,
-                            top: 20,
-                          ),
-                          width: double.maxFinite,
-                          height: MediaQuery.of(context).size.height * 0.09,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(5),
-                                topRight: Radius.circular(5),
-                                bottomRight: Radius.circular(5),
-                                bottomLeft: Radius.circular(5),
-                              ),
-                              border: Border.all(
-                                color: Colors.black,
-                              )),
-                          child: ListTile(
-                            title: Text(esercizi.nome),
-                            subtitle: Text("Peso:" +
-                                esercizi.peso.toString() +
-                                "\nRipetizioni: " +
-                                esercizi.rip.toString() +
-                                "\nSerie: " +
-                                esercizi.serie.toString() +
-                                "\nNote: " +
-                                esercizi.note.toString()),
-                            onTap: () {
-                              saveValueIdScheda("Id esercizio: "+esercizi.id.toString());
-                            },
-                          ),
-                        ));
-                  }).toList(),
-                );
+                        children: snapshot.data!.map((esercizi) {
+                          return Center(
+                              child: Container(
+                            margin: const EdgeInsets.only(
+                              left: 50,
+                              right: 50,
+                              top: 20,
+                            ),
+                            width: double.maxFinite,
+                            height: MediaQuery.of(context).size.height * 0.09,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(5),
+                                  topRight: Radius.circular(5),
+                                  bottomRight: Radius.circular(5),
+                                  bottomLeft: Radius.circular(5),
+                                ),
+                                border: Border.all(
+                                  color: Colors.black,
+                                )),
+                            child: ListTile(
+                              title: Text(esercizi.nome),
+                              subtitle: Text("Peso:" +
+                                  esercizi.peso.toString() +
+                                  "\nRipetizioni: " +
+                                  esercizi.rip.toString() +
+                                  "\nSerie: " +
+                                  esercizi.serie.toString() +
+                                  "\nNote: " +
+                                  esercizi.note.toString()),
+                              onTap: () {
+                                saveValueIdScheda(
+                                    "Id esercizio: " + esercizi.id.toString());
+                              },
+                            ),
+                          ));
+                        }).toList(),
+                      );
               }),
           //pulsante add per nuova scheda
           /*   Container(
@@ -303,27 +307,27 @@ class _State extends State<PageEserciziPage> {
               title: Text('Schede',
                   style: GoogleFonts.adventPro(
                       textStyle: TextStyle(
-                        fontStyle: FontStyle.normal,
-                        decoration: TextDecoration.none,
-                      ))),
+                    fontStyle: FontStyle.normal,
+                    decoration: TextDecoration.none,
+                  ))),
               icon: Icon(Icons.article_outlined),
             ),
             BottomNavigationBarItem(
               title: Text('Allenamento',
                   style: GoogleFonts.adventPro(
                       textStyle: TextStyle(
-                        fontStyle: FontStyle.normal,
-                        decoration: TextDecoration.none,
-                      ))),
+                    fontStyle: FontStyle.normal,
+                    decoration: TextDecoration.none,
+                  ))),
               icon: Icon(Icons.fitness_center_sharp),
             ),
             BottomNavigationBarItem(
               title: Text('Grafici',
                   style: GoogleFonts.adventPro(
                       textStyle: TextStyle(
-                        fontStyle: FontStyle.normal,
-                        decoration: TextDecoration.none,
-                      ))),
+                    fontStyle: FontStyle.normal,
+                    decoration: TextDecoration.none,
+                  ))),
               icon: Icon(Icons.bar_chart),
             ),
           ],
@@ -334,6 +338,7 @@ class _State extends State<PageEserciziPage> {
 class Esercizi {
   final String? id;
   final String idScheda;
+  final String nomeScheda;
   final String nome;
   final String rip;
   final String serie;
@@ -343,6 +348,7 @@ class Esercizi {
   Esercizi({
     this.id,
     required this.idScheda,
+    required this.nomeScheda,
     required this.nome,
     required this.rip,
     required this.serie,
@@ -353,6 +359,7 @@ class Esercizi {
   factory Esercizi.fromMap(Map<String, dynamic> json) => new Esercizi(
       id: json['id'],
       idScheda: json['idScheda'],
+      nomeScheda: json['nomeScheda'],
       nome: json['nome'],
       rip: json['rip'],
       serie: json['serie'],
@@ -363,6 +370,7 @@ class Esercizi {
     return {
       'id': id,
       'idScheda': idScheda,
+      'nomeScheda': nomeScheda,
       'nome': nome,
       'rip': rip,
       'serie': serie,
@@ -397,6 +405,7 @@ class DatabaseHelper3 {
       CREATE TABLE esercizi(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         idScheda TEXT,
+        nomeScheda TEXT,
         nome TEXT,
         rip TEXT,
         serie TEXT,
@@ -413,7 +422,7 @@ class DatabaseHelper3 {
     });
     Database db = await istance.database;
     var esercizi = await db.query('esercizi',
-        columns: ['nome', 'rip', 'serie', 'peso', 'note'],
+        columns: ['nome', 'nomeScheda', 'rip', 'serie', 'peso', 'note'],
         where: 'idScheda = ?',
         whereArgs: [str]);
     List<Esercizi> eserciziList = esercizi.isNotEmpty

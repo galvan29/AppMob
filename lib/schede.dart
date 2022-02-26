@@ -47,7 +47,7 @@ class PageSchedePage extends StatefulWidget {
   getValueNomeScheda() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String stringValue="";
-    stringValue = prefs.getString('id')!;
+    stringValue = prefs.getString('nomeScheda')!;
     return stringValue;
   }
 }

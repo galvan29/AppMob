@@ -99,10 +99,12 @@ class _State extends State<CreaEsercizio> {
                                     bottomRight: Radius.circular(5),
                                     bottomLeft: Radius.circular(5),
                                   ),
-                                  border: Border.all(color: Colors.black, width: 2)),
+                                  border: Border.all(
+                                      color: Colors.black, width: 2)),
                               child: Icon(
                                 Icons.arrow_back,
-                                size: MediaQuery.of(context).size.height * 0.037,
+                                size:
+                                    MediaQuery.of(context).size.height * 0.037,
                                 color: Color(0xFF000000),
                               )),
                         ))
@@ -348,9 +350,19 @@ class _State extends State<CreaEsercizio> {
                   decoration: const BoxDecoration(),
                   child: GestureDetector(
                       onTap: () async {
-                        PageSchedePage().getValueIdScheda().then((val) {
-                          Esercizi esercizio = new Esercizi(idScheda: val, nome: nomeController.text, rip: ripController.text, serie: serieController.text, peso: pesoController.text, note: noteController.text);
-                          DatabaseHelper3.istance.add(esercizio);
+                        PageSchedePage().getValueNomeScheda().then((val2) {
+                          PageSchedePage().getValueIdScheda().then((val) {
+                            Esercizi esercizio = new Esercizi(
+                                idScheda: val,
+                                nome: nomeController.text,
+                                rip: ripController.text,
+                                serie: serieController.text,
+                                peso: pesoController.text,
+                                note: noteController.text,
+                                nomeScheda: val2,
+                            );
+                            DatabaseHelper3.istance.add(esercizio);
+                          });
                         });
                         await Navigator.push<void>(
                           context,
@@ -401,35 +413,38 @@ class _State extends State<CreaEsercizio> {
           onTap: (value) {
             setState(() => _currentIndex = value);
             if (value == 1)
-              Navigator.push(context, MaterialPageRoute(builder: (context) => Training()));
-            else if (value == 2) Navigator.push(context, MaterialPageRoute(builder: (context) => ViewGraph()));
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => Training()));
+            else if (value == 2)
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => ViewGraph()));
           },
           items: [
             BottomNavigationBarItem(
               title: Text('Schede',
                   style: GoogleFonts.adventPro(
                       textStyle: TextStyle(
-                        fontStyle: FontStyle.normal,
-                        decoration: TextDecoration.none,
-                      ))),
+                    fontStyle: FontStyle.normal,
+                    decoration: TextDecoration.none,
+                  ))),
               icon: Icon(Icons.article_outlined),
             ),
             BottomNavigationBarItem(
               title: Text('Allenamento',
                   style: GoogleFonts.adventPro(
                       textStyle: TextStyle(
-                        fontStyle: FontStyle.normal,
-                        decoration: TextDecoration.none,
-                      ))),
+                    fontStyle: FontStyle.normal,
+                    decoration: TextDecoration.none,
+                  ))),
               icon: Icon(Icons.fitness_center_sharp),
             ),
             BottomNavigationBarItem(
               title: Text('Grafici',
                   style: GoogleFonts.adventPro(
                       textStyle: TextStyle(
-                        fontStyle: FontStyle.normal,
-                        decoration: TextDecoration.none,
-                      ))),
+                    fontStyle: FontStyle.normal,
+                    decoration: TextDecoration.none,
+                  ))),
               icon: Icon(Icons.bar_chart),
             ),
           ],
