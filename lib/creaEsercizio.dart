@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:helloworld/esercizi.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'bro.dart';
@@ -25,6 +26,11 @@ class CreaEsercizio extends StatefulWidget {
 
 class _State extends State<CreaEsercizio> {
   final datasets = <String, dynamic>{};
+  final nomeController = TextEditingController();
+  final pesoController = TextEditingController();
+  final ripController = TextEditingController();
+  final serieController = TextEditingController();
+  final noteController = TextEditingController();
 
   @override
   void initState() {
@@ -150,9 +156,9 @@ class _State extends State<CreaEsercizio> {
                         padding: EdgeInsets.zero,
                         width: double.maxFinite,
                         decoration: const BoxDecoration(),
-                        child: TextFormField(
+                        child: TextField(
+                          controller: nomeController,
                           cursorColor: Theme.of(context).cursorColor,
-                          initialValue: '',
                           maxLength: 30,
                           decoration: InputDecoration(
                             labelText: 'Inserire Nome Esercizio',
@@ -191,9 +197,9 @@ class _State extends State<CreaEsercizio> {
                         padding: EdgeInsets.zero,
                         width: double.maxFinite,
                         decoration: const BoxDecoration(),
-                        child: TextFormField(
+                        child: TextField(
+                          controller: ripController,
                           cursorColor: Theme.of(context).cursorColor,
-                          initialValue: '',
                           maxLength: 3,
                           decoration: InputDecoration(
                             labelText: 'Inserire Numero Ripetizioni',
@@ -232,9 +238,9 @@ class _State extends State<CreaEsercizio> {
                         padding: EdgeInsets.zero,
                         width: double.maxFinite,
                         decoration: const BoxDecoration(),
-                        child: TextFormField(
+                        child: TextField(
+                          controller: serieController,
                           cursorColor: Theme.of(context).cursorColor,
-                          initialValue: '',
                           maxLength: 3,
                           decoration: InputDecoration(
                             labelText: 'Inserire Numero Serie',
@@ -273,9 +279,9 @@ class _State extends State<CreaEsercizio> {
                         padding: EdgeInsets.zero,
                         width: double.maxFinite,
                         decoration: const BoxDecoration(),
-                        child: TextFormField(
+                        child: TextField(
+                          controller: pesoController,
                           cursorColor: Theme.of(context).cursorColor,
-                          initialValue: '',
                           maxLength: 3,
                           decoration: InputDecoration(
                             labelText: 'Inserire Peso',
@@ -314,9 +320,9 @@ class _State extends State<CreaEsercizio> {
                         padding: EdgeInsets.zero,
                         width: double.maxFinite,
                         decoration: const BoxDecoration(),
-                        child: TextFormField(
+                        child: TextField(
+                          controller: noteController,
                           cursorColor: Theme.of(context).cursorColor,
-                          initialValue: '',
                           decoration: InputDecoration(
                             labelText: 'Note',
                             labelStyle: TextStyle(
@@ -342,10 +348,14 @@ class _State extends State<CreaEsercizio> {
                   decoration: const BoxDecoration(),
                   child: GestureDetector(
                       onTap: () async {
+                        PageSchedePage().getValueIdScheda().then((val) {
+                          Esercizi esercizio = new Esercizi(idScheda: val, nome: nomeController.text, rip: ripController.text, serie: serieController.text, peso: pesoController.text, note: noteController.text);
+                          DatabaseHelper3.istance.add(esercizio);
+                        });
                         await Navigator.push<void>(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => PageSchedePage(),
+                            builder: (context) => PageEserciziPage(),
                           ),
                         );
                       },

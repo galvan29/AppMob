@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:helloworld/creaEsercizio.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'bro.dart';
+import 'login.dart';
 import 'main.dart';
 import 'options.dart';
 import 'profile.dart';
@@ -11,11 +14,16 @@ import 'schede.dart';
 import 'schedeStruct.dart';
 import 'viewGraph.dart';
 import 'training.dart';
+import 'utente.dart';
 import 'creaScheda.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:sqflite/sqflite.dart';
+import 'package:path/path.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class Esercizi extends StatefulWidget {
-  const Esercizi({
+class PageEserciziPage extends StatefulWidget {
+  const PageEserciziPage({
     Key? key,
   }) : super(key: key);
 
@@ -29,16 +37,28 @@ class Esercizi extends StatefulWidget {
   void rimuovi(SchedeStruct scheda) {
     _schede.removeWhere((item) => item.id == 1);
   }
+
+  getValueLogin() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String stringValue = "";
+    stringValue = prefs.getString('id')!;
+    return stringValue;
+  }
 }
 
 List<SchedeStruct> _schede = [];
 
-class _State extends State<Esercizi> {
+class _State extends State<PageEserciziPage> {
   final datasets = <String, dynamic>{};
 
   @override
   void initState() {
     super.initState();
+  }
+
+  saveValueIdScheda(String id) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('id', id);
   }
 
   ValueNotifier<bool> isDialOpen = ValueNotifier(false);
@@ -55,40 +75,84 @@ class _State extends State<Esercizi> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                margin: EdgeInsets.only(
-                  top: MediaQuery.of(context).size.height * 0.04,
-                  left: MediaQuery.of(context).size.height * 0.03,
-                  right: MediaQuery.of(context).size.height * 0.03,
-                ),
                 padding: EdgeInsets.zero,
                 width: double.maxFinite,
-                decoration: const BoxDecoration(
-                  color: Colors.transparent,
-                ),
+                height: MediaQuery.of(context).size.height * 0.13,
+                decoration: BoxDecoration(
+                    color: const Color.fromARGB(255, 180, 212, 250),
+                    border: Border.all(color: Colors.black, width: 1)),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('Nome Scheda con Posto per aggiungere Esercizi',
-                        style: GoogleFonts.adventPro(
-                          textStyle: TextStyle(
-                            color: const Color(0xFFFFFFFF),
-                            fontWeight: FontWeight.w400,
-                            fontSize: MediaQuery.of(context).size.height * 0.05,
-                            fontStyle: FontStyle.normal,
-                            decoration: TextDecoration.none,
-                          ),
-                        ),
-                        textAlign: TextAlign.left,
-                        maxLines: 1),
                     Container(
-                        padding: EdgeInsets.zero,
+                      padding: EdgeInsets.zero,
+                      decoration: const BoxDecoration(),
+                      margin: EdgeInsets.only(
+                        left: MediaQuery.of(context).size.width * 0.05,
+                      ),
+                      child: Text('Nome Scheda',
+                          style: GoogleFonts.adventPro(
+                            textStyle: TextStyle(
+                              color: const Color(0xFF000000),
+                              fontWeight: FontWeight.w400,
+                              fontSize:
+                              MediaQuery.of(context).size.height * 0.05,
+                              fontStyle: FontStyle.normal,
+                              decoration: TextDecoration.none,
+                            ),
+                          ),
+                          textAlign: TextAlign.left,
+                          maxLines: 1),
+                    ),
+                    Container(
+                        alignment: Alignment.topCenter,
+                        margin: EdgeInsets.only(
+                          top: MediaQuery.of(context).size.height * 0.04,
+                          left: MediaQuery.of(context).size.width * 0.25,
+                        ),
                         decoration: const BoxDecoration(),
                         child: GestureDetector(
                           onTap: () async {
                             await Navigator.push<void>(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => Profile(),
+                                builder: (context) => CreaEsercizio(),
+                              ),
+                            );
+                          },
+                          child: Container(
+                              width: 60,
+                              height: 60,
+                              // MediaQuery.of(context).size.height * 0.05,
+                              decoration: BoxDecoration(
+                                  color: Colors.black.withOpacity(0.05),
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(5),
+                                    topRight: Radius.circular(5),
+                                    bottomRight: Radius.circular(5),
+                                    bottomLeft: Radius.circular(5),
+                                  ),
+                                  border: Border.all(
+                                      color: Colors.black, width: 1)),
+                              child: Icon(
+                                Icons.add,
+                                size:
+                                MediaQuery.of(context).size.height * 0.037,
+                                color: Color(0xFF000000),
+                              )),
+                        )),
+                    Container(
+                        padding: EdgeInsets.zero,
+                        decoration: const BoxDecoration(),
+                        margin: EdgeInsets.only(
+                          right: MediaQuery.of(context).size.width * 0.05,
+                        ),
+                        child: GestureDetector(
+                          onTap: () async {
+                            await Navigator.push<void>(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => PageUtentePage(),
                               ),
                             );
                           },
@@ -104,215 +168,84 @@ class _State extends State<Esercizi> {
                                     bottomLeft: Radius.circular(5),
                                   ),
                                   border: Border.all(
-                                      color: Colors.white, width: 2)),
+                                      color: Colors.black, width: 2)),
                               child: Icon(
                                 Icons.perm_identity_sharp,
                                 size:
                                 MediaQuery.of(context).size.height * 0.037,
-                                color: Color(0xFFFFFFFF),
+                                color: Color(0xFF000000),
                               )),
                         ))
                   ],
                 ),
               ),
+              Container(
+                height: 0,
+                width: MediaQuery.of(context).size.height * 1,
+                decoration: BoxDecoration(
+                    color: Colors.black.withOpacity(0),
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(5),
+                      topRight: Radius.circular(5),
+                      bottomRight: Radius.circular(5),
+                      bottomLeft: Radius.circular(5),
+                    ),
+                    border: Border.all(color: Colors.black, width: 1)),
+              ),
             ],
           ),
         ),
-        backgroundColor: const Color.fromARGB(255, 34, 1, 48),
+        backgroundColor: const Color.fromARGB(255, 205, 225, 247),
         body: Container(
-          child: new SingleChildScrollView(
-            child: Column(
-              children: [
-                for (var scheda in _schede)
-                  Container(
-                    padding: EdgeInsets.zero,
-                    margin: EdgeInsets.only(
-                      top: MediaQuery.of(context).size.height * 0.02,
-                      left: MediaQuery.of(context).size.width * 0.05,
-                    ),
-                    width: MediaQuery.of(context).size.width * 0.90,
-                    height: MediaQuery.of(context).size.height * 0.10,
-                    decoration: BoxDecoration(
-                        color: Colors.transparent,
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(8),
-                          topRight: Radius.circular(8),
-                          bottomRight: Radius.circular(8),
-                          bottomLeft: Radius.circular(8),
-                        ),
-                        border: Border.all(
-                          color: Colors.white,
-                        )),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              padding: EdgeInsets.zero,
-                              width: MediaQuery.of(context).size.width * 0.30,
-                              decoration: BoxDecoration(
-                                  color: Colors.transparent,
-                                  borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(8),
-                                    topRight: Radius.circular(8),
-                                    bottomRight: Radius.circular(8),
-                                    bottomLeft: Radius.circular(8),
-                                  ),
-                                  border: Border.all(
-                                    color: Colors.transparent,
-                                  )),
-                              child: Text("Nome Scheda",
-                                  style: GoogleFonts.adventPro(
-                                    textStyle: TextStyle(
-                                      color: const Color(0xFFFFFFFF),
-                                      fontWeight: FontWeight.w400,
-                                      fontSize:
-                                      MediaQuery.of(context).size.width *
-                                          0.05,
-                                      fontStyle: FontStyle.normal,
-                                      decoration: TextDecoration.none,
-                                    ),
-                                  ),
-                                  textAlign: TextAlign.left,
-                                  maxLines: 1),
-                            ),
-                            Container(
-                              width: 100,
-                              decoration: BoxDecoration(
-                                  color: Colors.transparent,
-                                  borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(8),
-                                    topRight: Radius.circular(8),
-                                    bottomRight: Radius.circular(8),
-                                    bottomLeft: Radius.circular(8),
-                                  ),
-                                  border: Border.all(
-                                    color: Colors.transparent,
-                                  )),
-                              child: Text("Durata Scheda",
-                                  style: GoogleFonts.adventPro(
-                                    textStyle: TextStyle(
-                                      color: const Color(0xFFFFFFFF),
-                                      fontWeight: FontWeight.w400,
-                                      fontSize:
-                                      MediaQuery.of(context).size.width *
-                                          0.035,
-                                      fontStyle: FontStyle.normal,
-                                      decoration: TextDecoration.none,
-                                    ),
-                                  ),
-                                  textAlign: TextAlign.left,
-                                  maxLines: 1),
-                            ),
-                          ],
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(
-                            left: MediaQuery.of(context).size.width * 0.25,
+          child: FutureBuilder<List<Esercizi>>(
+              future: DatabaseHelper3.istance.getEsercizi(),
+              builder: (BuildContext context,
+                  AsyncSnapshot<List<Esercizi>> snapshot) {
+                if (!snapshot.hasData) return Center(child: Text("Loading..."));
+                return snapshot.data!.isEmpty
+                    ? Center(child: Text("No element"))
+                    : ListView(
+                  children: snapshot.data!.map((esercizi) {
+                    return Center(
+                        child: Container(
+                          margin: const EdgeInsets.only(
+                            left: 50,
+                            right: 50,
+                            top: 20,
                           ),
-                          height: MediaQuery.of(context).size.height * 0.05,
-                          width: MediaQuery.of(context).size.width * 0.15,
+                          width: double.maxFinite,
+                          height: MediaQuery.of(context).size.height * 0.09,
                           decoration: BoxDecoration(
-                              color: Colors.transparent,
                               borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(8),
-                                topRight: Radius.circular(8),
-                                bottomRight: Radius.circular(8),
-                                bottomLeft: Radius.circular(8),
+                                topLeft: Radius.circular(5),
+                                topRight: Radius.circular(5),
+                                bottomRight: Radius.circular(5),
+                                bottomLeft: Radius.circular(5),
                               ),
                               border: Border.all(
-                                color: Colors.white,
+                                color: Colors.black,
                               )),
-                          child: GestureDetector(
-                              child: Container(
-                                  padding: EdgeInsets.only(
-                                      top: MediaQuery.of(context).size.height *
-                                          0.01),
-                                  decoration: BoxDecoration(
-                                    color: Colors.transparent,
-                                  ),
-                                  child: Text(
-                                    "START",
-                                    style: GoogleFonts.adventPro(
-                                      textStyle: TextStyle(
-                                        color: const Color(0xFFFFFFFF),
-                                        fontWeight: FontWeight.w400,
-                                        fontSize:
-                                        MediaQuery.of(context).size.width *
-                                            0.035,
-                                        fontStyle: FontStyle.normal,
-                                        decoration: TextDecoration.none,
-                                      ),
-                                    ),
-                                    textAlign: TextAlign.center,
-                                  ))),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(
-                            left: MediaQuery.of(context).size.width * 0.01,
+                          child: ListTile(
+                            title: Text(esercizi.nome),
+                            subtitle: Text("Peso:" +
+                                esercizi.peso.toString() +
+                                "\nRipetizioni: " +
+                                esercizi.rip.toString() +
+                                "\nSerie: " +
+                                esercizi.serie.toString() +
+                                "\nNote: " +
+                                esercizi.note.toString()),
+                            onTap: () {
+                              saveValueIdScheda("Id esercizio: "+esercizi.id.toString());
+                            },
                           ),
-                          height: MediaQuery.of(context).size.height * 0.05,
-                          width: MediaQuery.of(context).size.width * 0.15,
-                          decoration: BoxDecoration(
-                              color: Colors.transparent,
-                              borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(8),
-                                topRight: Radius.circular(8),
-                                bottomRight: Radius.circular(8),
-                                bottomLeft: Radius.circular(8),
-                              ),
-                              border: Border.all(
-                                color: Colors.white,
-                              )),
-                          child: DropdownButtonHideUnderline(
-                            child: DropdownButton2(
-                              customButton: const Icon(
-                                Icons.list,
-                                size: 46,
-                                color: Colors.red,
-                              ),
-                              customItemsIndexes: const [3],
-                              customItemsHeight: 8,
-                              items: [
-                                ...MenuItems.firstItems.map(
-                                      (item) => DropdownMenuItem<MenuItem>(
-                                    value: item,
-                                    child: MenuItems.buildItem(item),
-                                  ),
-                                ),
-                                const DropdownMenuItem<Divider>(
-                                    enabled: false, child: Divider()),
-                                ...MenuItems.secondItems.map(
-                                      (item) => DropdownMenuItem<MenuItem>(
-                                    value: item,
-                                    child: MenuItems.buildItem(item),
-                                  ),
-                                ),
-                              ],
-                              onChanged: (value) {
-                                MenuItems.onChanged(context, value as MenuItem);
-                              },
-                              itemHeight: 48,
-                              itemPadding:
-                              const EdgeInsets.only(left: 16, right: 16),
-                              dropdownWidth: 160,
-                              dropdownPadding:
-                              const EdgeInsets.symmetric(vertical: 6),
-                              dropdownDecoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(4),
-                                color: Colors.redAccent,
-                              ),
-                              dropdownElevation: 8,
-                              offset: const Offset(0, 8),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                Container(
+                        ));
+                  }).toList(),
+                );
+              }),
+          //pulsante add per nuova scheda
+          /*   Container(
+                    alignment: Alignment.topCenter,
                     margin: EdgeInsets.only(
                       top: MediaQuery.of(context).size.height * 0.05,
                       left: MediaQuery.of(context).size.width * 0.05,
@@ -321,11 +254,10 @@ class _State extends State<Esercizi> {
                     decoration: const BoxDecoration(),
                     child: GestureDetector(
                       onTap: () async {
-                        PageSchedePage().aggiungi(SchedeStruct(1, "Nome Scheda", 120));
                         await Navigator.push<void>(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => CreaEsercizio(),
+                            builder: (context) => CreaScheda(),
                           ),
                         );
                       },
@@ -341,22 +273,19 @@ class _State extends State<Esercizi> {
                                 bottomLeft: Radius.circular(5),
                               ),
                               border:
-                              Border.all(color: Colors.white, width: 2)),
+                                  Border.all(color: Colors.black, width: 1)),
                           child: Icon(
                             Icons.add,
                             size: MediaQuery.of(context).size.height * 0.037,
-                            color: Color(0xFFFFFFFF),
+                            color: Color(0xFF000000),
                           )),
-                    )),
-              ],
-            ),
-          ),
+                    )),*/
         ),
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           currentIndex: _currentIndex,
-          backgroundColor: Colors.transparent,
-          selectedItemColor: Colors.white,
+          backgroundColor: const Color.fromARGB(255, 180, 212, 250),
+          selectedItemColor: Colors.white.withOpacity(0.5),
           unselectedItemColor: colorScheme.onSurface.withOpacity(.60),
           selectedFontSize: MediaQuery.of(context).size.height * 0.02,
           unselectedFontSize: MediaQuery.of(context).size.height * 0.02,
@@ -371,7 +300,7 @@ class _State extends State<Esercizi> {
           },
           items: [
             BottomNavigationBarItem(
-              title: Text('Cards',
+              title: Text('Schede',
                   style: GoogleFonts.adventPro(
                       textStyle: TextStyle(
                         fontStyle: FontStyle.normal,
@@ -380,7 +309,7 @@ class _State extends State<Esercizi> {
               icon: Icon(Icons.article_outlined),
             ),
             BottomNavigationBarItem(
-              title: Text('Training',
+              title: Text('Allenamento',
                   style: GoogleFonts.adventPro(
                       textStyle: TextStyle(
                         fontStyle: FontStyle.normal,
@@ -389,7 +318,7 @@ class _State extends State<Esercizi> {
               icon: Icon(Icons.fitness_center_sharp),
             ),
             BottomNavigationBarItem(
-              title: Text('Graph',
+              title: Text('Grafici',
                   style: GoogleFonts.adventPro(
                       textStyle: TextStyle(
                         fontStyle: FontStyle.normal,
@@ -399,5 +328,104 @@ class _State extends State<Esercizi> {
             ),
           ],
         ));
+  }
+}
+
+class Esercizi {
+  final String? id;
+  final String idScheda;
+  final String nome;
+  final String rip;
+  final String serie;
+  final String peso;
+  final String note;
+
+  Esercizi({
+    this.id,
+    required this.idScheda,
+    required this.nome,
+    required this.rip,
+    required this.serie,
+    required this.peso,
+    required this.note,
+  });
+
+  factory Esercizi.fromMap(Map<String, dynamic> json) => new Esercizi(
+      id: json['id'],
+      idScheda: json['idScheda'],
+      nome: json['nome'],
+      rip: json['rip'],
+      serie: json['serie'],
+      peso: json['peso'],
+      note: json['note']);
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'idScheda': idScheda,
+      'nome': nome,
+      'rip': rip,
+      'serie': serie,
+      'peso': peso,
+      'note': note
+    };
+  }
+}
+
+class DatabaseHelper3 {
+  DatabaseHelper3._privateConstructur();
+
+  static final DatabaseHelper3 istance = DatabaseHelper3._privateConstructur();
+
+  static Database? _database;
+
+  Future<Database> get database async => _database ??= await _initDatabase();
+
+  Future<Database> _initDatabase() async {
+    Directory documentDirectory = await getApplicationDocumentsDirectory();
+    String path = join(documentDirectory.path, 'esercizi.db');
+
+    return await openDatabase(
+      path,
+      version: 1,
+      onCreate: _onCreate,
+    );
+  }
+
+  Future _onCreate(Database db, int version) async {
+    await db.execute('''
+      CREATE TABLE esercizi(
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        idScheda TEXT,
+        nome TEXT,
+        rip TEXT,
+        serie TEXT,
+        peso TEXT,
+        note TEXT
+      ) 
+    ''');
+  }
+
+  Future<List<Esercizi>> getEsercizi() async {
+    String str = "";
+    PageSchedePage().getValueIdScheda().then((val) {
+      str = val;
+    });
+    Database db = await istance.database;
+    var esercizi = await db.query('esercizi',
+        columns: ['nome', 'rip', 'serie', 'peso', 'note'],
+        where: 'idScheda = ?',
+        whereArgs: [str]);
+    List<Esercizi> eserciziList = esercizi.isNotEmpty
+        ? esercizi.map((c) => Esercizi.fromMap(c)).toList()
+        : [];
+    print("Recupero esercizi: ");
+    return eserciziList;
+  }
+
+  Future<int> add(Esercizi esercizio) async {
+    Database db = await istance.database;
+    print("Esercizio creato");
+    return await db.insert('esercizi', esercizio.toMap());
   }
 }

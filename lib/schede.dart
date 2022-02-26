@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:helloworld/esercizi.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'bro.dart';
@@ -35,6 +36,20 @@ class PageSchedePage extends StatefulWidget {
   void rimuovi(SchedeStruct scheda) {
     _schede.removeWhere((item) => item.id == 1);
   }
+
+  getValueIdScheda() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String stringValue="";
+    stringValue = prefs.getString('id')!;
+    return stringValue;
+  }
+
+  getValueNomeScheda() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String stringValue="";
+    stringValue = prefs.getString('id')!;
+    return stringValue;
+  }
 }
 
 List<SchedeStruct> _schede = [];
@@ -45,6 +60,16 @@ class _State extends State<PageSchedePage> {
   @override
   void initState() {
     super.initState();
+  }
+
+  saveValueIdScheda(String id) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('id', id);
+  }
+
+  saveValueNomeScheda(String nomeScheda) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('nomeScheda', nomeScheda);
   }
 
   ValueNotifier<bool> isDialOpen = ValueNotifier(false);
@@ -216,6 +241,14 @@ class _State extends State<PageSchedePage> {
                               title: Text(scheda.nome),
                               subtitle: Text(scheda.durata),
                               onTap: () {
+                                saveValueIdScheda(scheda.id.toString());
+                                saveValueNomeScheda(scheda.nome);
+                                Navigator.push<void>(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => PageEserciziPage(),
+                                  ),
+                                );
                                 print('ciao amico: '+scheda.id.toString());
                               },
                             ),

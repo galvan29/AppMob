@@ -49,7 +49,7 @@ class MenuItems {
         Navigator.push<void>(
           context,
           MaterialPageRoute(
-            builder: (context) => Esercizi(),
+            builder: (context) => PageEserciziPage(),
           ),
         );
         break;
