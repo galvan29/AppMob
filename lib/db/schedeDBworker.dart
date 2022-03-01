@@ -37,7 +37,7 @@ class SchedeDBworker {
     return scheda;
   }
 
-  Map<String, dynamic> utenteToMap(Scheda scheda) {
+  Map<String, dynamic> schedaToMap(Scheda scheda) {
     Map<String, dynamic> map = Map<String, dynamic>();
     map["id"] = scheda.id;
     map["nomeScheda"] = scheda.nomeScheda;
@@ -71,7 +71,7 @@ class SchedeDBworker {
 
   Future update(Scheda scheda) async {
     Database? db = await _getDB();
-    return await db!.update("schede", utenteToMap(scheda), where: "id = ?", whereArgs: [scheda.id]);
+    return await db!.update("schede", schedaToMap(scheda), where: "id = ?", whereArgs: [scheda.id]);
   }
 
   Future delete(int inID) async {

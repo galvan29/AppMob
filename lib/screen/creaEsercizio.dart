@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:mytraining/db/eserciziDBworker.dart';
+import 'package:mytraining/db/eserciziDBworker.dart';
+import 'package:mytraining/db/eserciziDBworker.dart';
 import 'package:mytraining/db/schedeDBworker.dart';
-import 'package:mytraining/models/schedeModel.dart';
+import 'package:mytraining/models/eserciziModel.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mytraining/models/schedeModel.dart';
 
-class CreaScheda extends StatelessWidget{
+class CreaEsercizio extends StatelessWidget{
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -91,7 +95,7 @@ class CreaScheda extends StatelessWidget{
             children: [
               FlatButton(
                 onPressed: (){
-                  schedeModel.setStackIndex(0);
+                  schedeModel.setStackIndex(2);
                 },
                 child: const Text("Cancel"),
               ),
@@ -113,7 +117,7 @@ class CreaScheda extends StatelessWidget{
               leading: const Icon(Icons.title),
               title: TextFormField(
                 decoration: const InputDecoration(hintText: "Nome Scheda"),
-                initialValue: schedeModel.schedaBeingEdited == null ? null : schedeModel.schedaBeingEdited.nomeScheda,
+                initialValue: eserciziModel.esercizioBeingEdited == null ? null : eserciziModel.esercizioBeingEdited.nomeEsercizio,
                 validator: (String? inValue){
                   if(inValue!.isEmpty){
                     return "Please enter a name";
@@ -121,25 +125,72 @@ class CreaScheda extends StatelessWidget{
                   return null;
                 },
                 onChanged: (String inValue){
-                  schedeModel.schedaBeingEdited.nomeScheda = inValue;
+                  eserciziModel.esercizioBeingEdited.nomeEsercizio = inValue;
                 },
               ),
             ),
             ListTile(
-              leading: const Icon(Icons.content_paste),
+              leading: const Icon(Icons.title),
               title: TextFormField(
-                decoration: const InputDecoration(hintText: "Duration"),
-                keyboardType: TextInputType.number,
-                maxLines: 1,
-                initialValue: schedeModel.schedaBeingEdited == null ? null : schedeModel.schedaBeingEdited.durataScheda,
+                decoration: const InputDecoration(hintText: "Nome Scheda"),
+                initialValue: eserciziModel.esercizioBeingEdited == null ? null : eserciziModel.esercizioBeingEdited.ripEsercizio,
                 validator: (String? inValue){
                   if(inValue!.isEmpty){
-                    return "Please enter duration";
+                    return "Please enter a rip";
                   }
                   return null;
                 },
                 onChanged: (String inValue){
-                  schedeModel.schedaBeingEdited.durataScheda = inValue;
+                  eserciziModel.esercizioBeingEdited.ripEsercizio = inValue;
+                },
+              ),
+            ),
+            ListTile(
+              leading: const Icon(Icons.title),
+              title: TextFormField(
+                decoration: const InputDecoration(hintText: "Nome Scheda"),
+                initialValue: eserciziModel.esercizioBeingEdited == null ? null : eserciziModel.esercizioBeingEdited.serieEsercizio,
+                validator: (String? inValue){
+                  if(inValue!.isEmpty){
+                    return "Please enter a serie";
+                  }
+                  return null;
+                },
+                onChanged: (String inValue){
+                  eserciziModel.esercizioBeingEdited.serieEsercizio = inValue;
+                },
+              ),
+            ),
+            ListTile(
+              leading: const Icon(Icons.title),
+              title: TextFormField(
+                decoration: const InputDecoration(hintText: "Nome Scheda"),
+                initialValue: eserciziModel.esercizioBeingEdited == null ? null : eserciziModel.esercizioBeingEdited.pesoEsercizio,
+                validator: (String? inValue){
+                  if(inValue!.isEmpty){
+                    return "Please enter a peso";
+                  }
+                  return null;
+                },
+                onChanged: (String inValue){
+                  eserciziModel.esercizioBeingEdited.pesoEsercizio = inValue;
+                },
+              ),
+            ),
+            ListTile(
+              leading: const Icon(Icons.title),
+              title: TextFormField(
+                decoration: const InputDecoration(hintText: "Nome Scheda"),
+                maxLines: 2,
+                initialValue: eserciziModel.esercizioBeingEdited == null ? null : eserciziModel.esercizioBeingEdited.noteEsercizio,
+                validator: (String? inValue){
+                  if(inValue!.isEmpty){
+                    return "Please enter a note";
+                  }
+                  return null;
+                },
+                onChanged: (String inValue){
+                  eserciziModel.esercizioBeingEdited.noteEsercizio = inValue;
                 },
               ),
             ),
@@ -157,15 +208,16 @@ class CreaScheda extends StatelessWidget{
 
     //_formKey.currentState.save();
 
-    if(schedeModel.schedaBeingEdited.id==-1){
-      await SchedeDBworker.schedeDBworker.create(schedeModel.schedaBeingEdited);
+    if(eserciziModel.esercizioBeingEdited.id==-1){
+      await EserciziDBworker.eserciziDBworker.create(eserciziModel.esercizioBeingEdited);
     } else {
-      await SchedeDBworker.schedeDBworker.update(schedeModel.schedaBeingEdited);
+      await EserciziDBworker.eserciziDBworker.update(eserciziModel.esercizioBeingEdited);
     }
 
     schedeModel.loadData(SchedeDBworker.schedeDBworker);
-
-    schedeModel.setStackIndex(0);
+    eserciziModel.loadData(EserciziDBworker.eserciziDBworker);
+    print("Ricaricati entrambi i database");
+    schedeModel.setStackIndex(2);
 
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(

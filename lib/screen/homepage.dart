@@ -13,14 +13,14 @@ class HomePage extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
     return Scaffold(
         appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(120),
+          preferredSize: Size.fromHeight(MediaQuery.of(context).size.height * 0.07),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
                 padding: EdgeInsets.zero,
                 width: double.maxFinite,
-                height: MediaQuery.of(context).size.height * 0.05,
+                height: MediaQuery.of(context).size.height * 0.07,
                 decoration: const BoxDecoration(
                     color: Color.fromARGB(255, 180, 212, 250),
                     border: Border(
@@ -36,7 +36,8 @@ class HomePage extends StatelessWidget {
                       padding: EdgeInsets.zero,
                       decoration: const BoxDecoration(),
                       margin: EdgeInsets.only(
-                        left: MediaQuery.of(context).size.width * 0.05,
+                        left: MediaQuery.of(context).size.width * 0.01,
+                        top: MediaQuery.of(context).size.width * 0.05,
                       ),
                       child: Text('MyTraining',
                           style: GoogleFonts.adventPro(
@@ -55,7 +56,8 @@ class HomePage extends StatelessWidget {
                         padding: EdgeInsets.zero,
                         decoration: const BoxDecoration(),
                         margin: EdgeInsets.only(
-                          right: MediaQuery.of(context).size.width * 0.05,
+                          right: MediaQuery.of(context).size.width * 0.03,
+                          top: MediaQuery.of(context).size.width * 0.05,
                         ),
                         child: GestureDetector(
                           onTap: () {

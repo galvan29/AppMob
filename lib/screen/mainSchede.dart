@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mytraining/db/schedeDBworker.dart';
 import 'package:mytraining/models/schedeModel.dart';
+import 'package:mytraining/screen/creaEsercizio.dart';
 import 'package:mytraining/screen/creaScheda.dart';
 import 'package:mytraining/screen/schede.dart';
+import 'package:mytraining/screen/visualizzaScheda.dart';
 import 'package:provider/provider.dart';
 
 class MainSchede extends StatelessWidget {
@@ -18,7 +20,7 @@ class MainSchede extends StatelessWidget {
         builder: (context, schedeModel, child) {
           return IndexedStack(
             index: schedeModel.stackIndex,
-            children: [Schede(), CreaScheda()],
+            children: [Schede(), CreaScheda(), VisualizzaScheda(), CreaEsercizio()],
           );
         },
       ),

@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:mytraining/db/eserciziDBworker.dart';
+import 'package:mytraining/db/schedeDBworker.dart';
+import 'package:mytraining/models/eserciziModel.dart';
+import 'package:mytraining/models/schedeModel.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mytraining/models/utentiModel.dart';
 
-
-class Profilo extends StatelessWidget {
+class VisualizzaScheda extends StatelessWidget {
   final datasets = <String, dynamic>{};
   ValueNotifier<bool> isDialOpen = ValueNotifier(false);
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
     return Scaffold(
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(MediaQuery.of(context).size.height * 0.07),
@@ -87,74 +88,78 @@ class Profilo extends StatelessWidget {
             ],
           ),
         ),
-        backgroundColor: const Color.fromARGB(255, 228, 229, 224),
-        body: Form(
-          key: _formKey,
-          child: ListView(
-            children: [
-              Text("Da fixare",),
-              ListTile(
-                leading: const Icon(Icons.title),
-                title: TextFormField(
-                  decoration: const InputDecoration(hintText: "Nome Utente"),
-                  initialValue: utentiModel.utenteBeingEdited == null ? null : utentiModel.utenteBeingEdited.nomeUtente,
-                  validator: (String? inValue){
-                    if(inValue!.isEmpty){
-                      return "Please enter a name";
-                    }
-                    return null;
+        floatingActionButton: FloatingActionButton(
+          child: const Icon(Icons.add, color: Colors.white),
+          onPressed: (){
+            eserciziModel.esercizioBeingEdited = Esercizio();
+            schedeModel.setStackIndex(3);
+            print("Creazione Esercizio");
+          },
+        ),
+        body: ListView.builder(
+          itemCount: schedeModel.schedeList.length,
+          itemBuilder: (BuildContext inBuildContext, int inIndex){
+            Esercizio esercizio = eserciziModel.eserciziList[inIndex];
+            Color color = Colors.white;
+
+            return Card(
+              margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+              elevation: 8,
+              child: Slidable(
+                actionPane: const SlidableScrollActionPane(),
+                actionExtentRatio: .25,
+                secondaryActions: [
+                  IconSlideAction(
+                    caption: "Delete",
+                    color: Colors.red,
+                    icon: Icons.delete,
+                    onTap: (){
+                      //_deleteNote(context, note);
+                    },
+                  ),
+                ],
+                child: ListTile(
+                  title: Text(esercizio.nomeEsercizio),
+                  subtitle: Text("Rip: "+esercizio.ripEsercizio +
+                  "\n Serie: "+esercizio.serieEsercizio+
+                      "\n Peso: "+esercizio.pesoEsercizio+
+                      "\n Note: "+esercizio.noteEsercizio),
+                  tileColor: color,
+                  onLongPress: () async {
+                    eserciziModel.esercizioBeingEdited = await EserciziDBworker.eserciziDBworker.get(esercizio.id);
+                    schedeModel.setStackIndex(3);
                   },
-                  onChanged: (String inValue){
-                    utentiModel.utenteBeingEdited.nomeUtente = inValue;
+                  onTap: () {
+
                   },
                 ),
               ),
-            ],
-          ),
-        ),
-        bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          backgroundColor: const Color.fromARGB(255, 180, 212, 250),
-          selectedItemColor: Colors.white.withOpacity(0.5),
-          unselectedItemColor: colorScheme.onSurface.withOpacity(.60),
-          selectedFontSize: MediaQuery.of(context).size.height * 0.02,
-          unselectedFontSize: MediaQuery.of(context).size.height * 0.02,
-          onTap: (value) {
-            if (value == 0) {
-              utentiModel.setStackIndex(3);
-            } else if (value == 1) {
-              utentiModel.setStackIndex(4);
-            }
+            );
+
           },
-          items: [
-            BottomNavigationBarItem(
-              title: Text('Homepage',
-                  style: GoogleFonts.adventPro(
-                      textStyle: const TextStyle(
-                        fontStyle: FontStyle.normal,
-                        decoration: TextDecoration.none,
-                      ))),
-              icon: const Icon(Icons.home),
-            ),
-            BottomNavigationBarItem(
-              title: Text('Schede',
-                  style: GoogleFonts.adventPro(
-                      textStyle: const TextStyle(
-                        fontStyle: FontStyle.normal,
-                        decoration: TextDecoration.none,
-                      ))),
-              icon: const Icon(Icons.article_outlined),
-            ),
-            BottomNavigationBarItem(
-              title: Text('Profilo',
-                  style: GoogleFonts.adventPro(
-                      textStyle: const TextStyle(
-                        fontStyle: FontStyle.normal,
-                        decoration: TextDecoration.none,
-                      ))),
-              icon: const Icon(Icons.perm_identity_sharp),
-            ),
-          ],
-        ));
+        ),
+      //va in alto magari
+      bottomNavigationBar: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+          child: Row(
+            children: [
+              FlatButton(
+                onPressed: (){
+                  schedeModel.setStackIndex(0);
+                },
+                child: const Text("Indietro"),
+              ),
+              const Spacer(),
+              FlatButton(
+                onPressed: (){
+                  //_save(context);
+                  schedeModel.setStackIndex(0);
+                },
+                child: const Text("Visionato"),
+              ),
+            ],
+          )
+      ));
   }
 }
+
