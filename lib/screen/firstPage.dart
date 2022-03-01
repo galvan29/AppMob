@@ -1,21 +1,10 @@
-// main.dart
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'login.dart';
-import 'register.dart';
+import 'package:mytraining/models/utentiModel.dart';
 
-class Profile extends StatelessWidget {
+
+class FirstPage extends StatelessWidget {
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Kindacode.com',
-      home: HomePage(),
-    );
-  }
-}
-
-class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFF000000),
@@ -44,10 +33,10 @@ class HomePage extends StatelessWidget {
                       padding: EdgeInsets.zero,
                       width: double.maxFinite,
                       decoration: const BoxDecoration(),
-                      child: Text(r'''PROFILOOOOO''',
+                      child: Text(r'''MyTraining''',
                           style: GoogleFonts.adventPro(
-                            textStyle: TextStyle(
-                              color: const Color(0xFFFFFFFF),
+                            textStyle: const TextStyle(
+                              color: Color(0xFFFFFFFF),
                               fontWeight: FontWeight.w400,
                               fontSize: 50,
                               fontStyle: FontStyle.normal,
@@ -66,8 +55,8 @@ class HomePage extends StatelessWidget {
                       decoration: const BoxDecoration(),
                       child: Text(r'''Schedule your training''',
                           style: GoogleFonts.adventPro(
-                            textStyle: TextStyle(
-                              color: const Color(0xFFFFFFFF),
+                            textStyle: const TextStyle(
+                              color: Color(0xFFFFFFFF),
                               fontWeight: FontWeight.w400,
                               fontSize: 25,
                               fontStyle: FontStyle.normal,
@@ -86,33 +75,27 @@ class HomePage extends StatelessWidget {
                         padding: EdgeInsets.zero,
                         decoration: const BoxDecoration(),
                         child: GestureDetector(
-                          onTap: () async {
-                            await Navigator.push<void>(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => PageLoginPage(),
-                              ),
-                            );
+                          onTap: () {
+                            utentiModel.setStackIndex(1);
                           },
                           child: Container(
                               width: double.maxFinite,
                               height: 40,
-                              padding: EdgeInsets.only(top:8),
+                              padding: const EdgeInsets.only(top: 8),
                               decoration: BoxDecoration(
                                   color: Colors.black.withOpacity(0.05),
-                                  borderRadius: BorderRadius.only(
+                                  borderRadius: const BorderRadius.only(
                                     topLeft: Radius.circular(5),
                                     topRight: Radius.circular(5),
                                     bottomRight: Radius.circular(5),
                                     bottomLeft: Radius.circular(5),
                                   ),
-                                  border: Border.all(color: Colors.white)
-                              ),
+                                  border: Border.all(color: Colors.white)),
                               child: Text(
                                 '''Login''',
                                 style: GoogleFonts.adventPro(
-                                  textStyle: TextStyle(
-                                    color: const Color(0xFFFFFFFF),
+                                  textStyle: const TextStyle(
+                                    color: Color(0xFFFFFFFF),
                                     fontWeight: FontWeight.w500,
                                     fontSize: 16,
                                     fontStyle: FontStyle.normal,
@@ -120,8 +103,7 @@ class HomePage extends StatelessWidget {
                                   ),
                                 ),
                                 textAlign: TextAlign.center,
-                              )
-                          ),
+                              )),
                         )),
                     Container(
                       margin: const EdgeInsets.only(
@@ -133,33 +115,27 @@ class HomePage extends StatelessWidget {
                       width: double.maxFinite,
                       decoration: const BoxDecoration(),
                       child: GestureDetector(
-                          onTap: () async {
-                            await Navigator.push<void>(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => PageRegisterPage(),
-                              ),
-                            );
+                          onTap: () {
+                            utentiModel.setStackIndex(2);
                           },
                           child: Container(
                               width: 10,
                               height: 40,
-                              padding: EdgeInsets.only(top:8),
+                              padding: const EdgeInsets.only(top: 8),
                               decoration: BoxDecoration(
                                   color: Colors.black.withOpacity(0.05),
-                                  borderRadius: BorderRadius.only(
+                                  borderRadius: const BorderRadius.only(
                                     topLeft: Radius.circular(5),
                                     topRight: Radius.circular(5),
                                     bottomRight: Radius.circular(5),
                                     bottomLeft: Radius.circular(5),
                                   ),
-                                  border: Border.all(color: Colors.white)
-                              ),
+                                  border: Border.all(color: Colors.white)),
                               child: Text(
                                 '''Register''',
                                 style: GoogleFonts.adventPro(
-                                  textStyle: TextStyle(
-                                    color: const Color(0xFFFFFFFF),
+                                  textStyle: const TextStyle(
+                                    color: Color(0xFFFFFFFF),
                                     fontWeight: FontWeight.w500,
                                     fontSize: 16,
                                     fontStyle: FontStyle.normal,

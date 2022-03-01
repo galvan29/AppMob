@@ -1,34 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:helloworld/login.dart';
-import 'package:path/path.dart';
-import 'package:path_provider/path_provider.dart';
-import 'schede.dart';
-import 'package:sqflite/sqflite.dart';
+import 'package:mytraining/models/utentiModel.dart';
 
-class PageRegisterPage extends StatefulWidget {
-  const PageRegisterPage({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  _State createState() => _State();
-}
-
-class _State extends State<PageRegisterPage> {
+class RegisterPage extends StatelessWidget {
   final datasets = <String, dynamic>{};
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset:false,
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.add, color: Colors.white),
+        onPressed: (){
+          //utentiModel.utenteBeingEdited = Utente();
+          utentiModel.setStackIndex(1);
+        },
+      ),
       backgroundColor: const Color(0xFF000000),
       body: Stack(
         children: [
@@ -52,8 +41,8 @@ class _State extends State<PageRegisterPage> {
                     decoration: const BoxDecoration(),
                     child: Text(r'''MyTraining''',
                         style: GoogleFonts.adventPro(
-                          textStyle: TextStyle(
-                            color: const Color(0xFFFFFFFF),
+                          textStyle: const TextStyle(
+                            color: Color(0xFFFFFFFF),
                             fontWeight: FontWeight.w400,
                             fontSize: 50,
                             fontStyle: FontStyle.normal,
@@ -72,8 +61,8 @@ class _State extends State<PageRegisterPage> {
                     decoration: const BoxDecoration(),
                     child: Text(r'''Register''',
                         style: GoogleFonts.adventPro(
-                          textStyle: TextStyle(
-                            color: const Color(0xFFFFFFFF),
+                          textStyle: const TextStyle(
+                            color: Color(0xFFFFFFFF),
                             fontWeight: FontWeight.w400,
                             fontSize: 25,
                             fontStyle: FontStyle.normal,
@@ -91,9 +80,9 @@ class _State extends State<PageRegisterPage> {
                     ),
                     width: double.maxFinite,
                     height: 40,
-                    padding: EdgeInsets.only(top:8),
+                    padding: const EdgeInsets.only(top:8),
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.only(
+                        borderRadius: const BorderRadius.only(
                           topLeft: Radius.circular(5),
                           topRight: Radius.circular(5),
                           bottomRight: Radius.circular(5),
@@ -106,17 +95,17 @@ class _State extends State<PageRegisterPage> {
                       onChanged: (String value) async {},
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(
-                          borderSide: const BorderSide(
+                          borderSide: BorderSide(
                               color: Colors.white, width: 0.0
                           ),
                         ),
                         enabledBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
+                          borderSide: BorderSide(
                               color: Colors.white, width: 0.0
                           ),
                         ),
                         focusedBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
+                          borderSide: BorderSide(
                               color: Colors.white, width: 0.0
                           ),
                         ),
@@ -125,8 +114,8 @@ class _State extends State<PageRegisterPage> {
                         contentPadding: EdgeInsets.only(left: 15),
                       ),
                       style: GoogleFonts.adventPro(
-                        textStyle: TextStyle(
-                          color: const Color(0xFFFFFFFF),
+                        textStyle: const TextStyle(
+                          color: Color(0xFFFFFFFF),
                           fontWeight: FontWeight.w400,
                           fontSize: 16,
                           fontStyle: FontStyle.normal,
@@ -149,9 +138,9 @@ class _State extends State<PageRegisterPage> {
                     ),
                     width: double.maxFinite,
                     height: 40,
-                    padding: EdgeInsets.only(top:8),
+                    padding: const EdgeInsets.only(top:8),
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.only(
+                        borderRadius: const BorderRadius.only(
                           topLeft: Radius.circular(5),
                           topRight: Radius.circular(5),
                           bottomRight: Radius.circular(5),
@@ -164,17 +153,17 @@ class _State extends State<PageRegisterPage> {
                       onChanged: (String value) async {},
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(
-                          borderSide: const BorderSide(
+                          borderSide: BorderSide(
                               color: Colors.white, width: 0.0
                           ),
                         ),
                         enabledBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
+                          borderSide: BorderSide(
                               color: Colors.white, width: 0.0
                           ),
                         ),
                         focusedBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
+                          borderSide: BorderSide(
                               color: Colors.white, width: 0.0
                           ),
                         ),
@@ -183,8 +172,8 @@ class _State extends State<PageRegisterPage> {
                         contentPadding: EdgeInsets.only(left: 15),
                       ),
                       style: GoogleFonts.adventPro(
-                        textStyle: TextStyle(
-                          color: const Color(0xFFFFFFFF),
+                        textStyle: const TextStyle(
+                          color: Color(0xFFFFFFFF),
                           fontWeight: FontWeight.w400,
                           fontSize: 16,
                           fontStyle: FontStyle.normal,
@@ -210,17 +199,12 @@ class _State extends State<PageRegisterPage> {
                       decoration: const BoxDecoration(),
                       child: GestureDetector(
                         onTap: () {
-                          Utenti utente = new Utenti(nomeUtente: usernameController.text, password: passwordController.text);
+                          /*Utenti utente = new Utenti(nomeUtente: usernameController.text, password: passwordController.text);
                           DatabaseHelper.istance.getPasswordVerified(usernameController.text).then((val) {
                             if (val == '[]') {
                               print("Utente inesistente, procedo a creare utente");
                               DatabaseHelper.istance.add(utente);
-                              Navigator.push<void>(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => PageLoginPage(),
-                                ),
-                              );
+                              utentiModel.setStackIndex(0);
                             } else {
                               // set up the buttons
                               Widget continueButton = TextButton(
@@ -236,12 +220,7 @@ class _State extends State<PageRegisterPage> {
                                   ),
                                 ),
                                 onPressed: () {
-                                  Navigator.push<void>(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => PageRegisterPage(),
-                                    ),
-                                  );
+                                  utentiModel.setStackIndex(1);
                                 },
                               );
 
@@ -281,15 +260,15 @@ class _State extends State<PageRegisterPage> {
                                 },
                               );
                             }
-                          });
+                          }); */
                         },
                         child: Container(
                             width: double.maxFinite,
                             height: 40,
-                            padding: EdgeInsets.only(top:7),
+                            padding: const EdgeInsets.only(top:7),
                             decoration: BoxDecoration(
                                 color: Colors.black.withOpacity(0.05),
-                                borderRadius: BorderRadius.only(
+                                borderRadius: const BorderRadius.only(
                                   topLeft: Radius.circular(5),
                                   topRight: Radius.circular(5),
                                   bottomRight: Radius.circular(5),
@@ -300,8 +279,8 @@ class _State extends State<PageRegisterPage> {
                             child: Text(
                               '''Register''',
                               style: GoogleFonts.adventPro(
-                                textStyle: TextStyle(
-                                  color: const Color(0xFFFFFFFF),
+                                textStyle: const TextStyle(
+                                  color: Color(0xFFFFFFFF),
                                   fontWeight: FontWeight.w500,
                                   fontSize: 16,
                                   fontStyle: FontStyle.normal,

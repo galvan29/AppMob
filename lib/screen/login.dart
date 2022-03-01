@@ -1,50 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:helloworld/register.dart';
-import 'package:sqflite/sqflite.dart';
-import 'schede.dart';
-import 'dart:io';
-import 'package:path/path.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:mytraining/models/utentiModel.dart';
 
-class PageLoginPage extends StatefulWidget {
-  const PageLoginPage({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  _State createState() => _State();
-
-  getValueLogin() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String stringValue="";
-    stringValue = prefs.getString('nomeUtente')!;
-    return stringValue;
-  }
-}
-
-
-class _State extends State<PageLoginPage> {
+class LoginPage extends StatelessWidget {
   final datasets = <String, dynamic>{};
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
 
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  saveValue() async {
+  /*saveValue() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString('nomeUtente', usernameController.text);
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: const Color(0xFF000000),
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.add, color: Colors.white),
+        onPressed: (){
+          //utentiModel.utenteBeingEdited = Utente();
+          utentiModel.setStackIndex(3);
+        },
+      ),
       body: Stack(
         children: [
           Stack(
@@ -67,8 +46,8 @@ class _State extends State<PageLoginPage> {
                     decoration: const BoxDecoration(),
                     child: Text(r'''MyTraining''',
                         style: GoogleFonts.adventPro(
-                          textStyle: TextStyle(
-                            color: const Color(0xFFFFFFFF),
+                          textStyle: const TextStyle(
+                            color: Color(0xFFFFFFFF),
                             fontWeight: FontWeight.w400,
                             fontSize: 50,
                             fontStyle: FontStyle.normal,
@@ -87,8 +66,8 @@ class _State extends State<PageLoginPage> {
                     decoration: const BoxDecoration(),
                     child: Text(r'''Login''',
                         style: GoogleFonts.adventPro(
-                          textStyle: TextStyle(
-                            color: const Color(0xFFFFFFFF),
+                          textStyle: const TextStyle(
+                            color: Color(0xFFFFFFFF),
                             fontWeight: FontWeight.w400,
                             fontSize: 25,
                             fontStyle: FontStyle.normal,
@@ -106,9 +85,9 @@ class _State extends State<PageLoginPage> {
                     ),
                     width: double.maxFinite,
                     height: 50,
-                    padding: EdgeInsets.only(top: 8),
+                    padding: const EdgeInsets.only(top: 8),
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.only(
+                        borderRadius: const BorderRadius.only(
                           topLeft: Radius.circular(5),
                           topRight: Radius.circular(5),
                           bottomRight: Radius.circular(5),
@@ -123,26 +102,26 @@ class _State extends State<PageLoginPage> {
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(
                           borderSide:
-                              const BorderSide(color: Colors.white, width: 0.0),
+                           BorderSide(color: Colors.white, width: 0.0),
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderSide:
-                              const BorderSide(color: Colors.white, width: 0.0),
+                           BorderSide(color: Colors.white, width: 0.0),
                         ),
                         focusedBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
+                          borderSide:  BorderSide(
                             color: Colors.white,
                             width: 0.0,
                           ),
                         ),
                         hintText: r'''Nome Utente''',
                         hintStyle:
-                            TextStyle(fontSize: 16.0, color: Colors.white),
+                        TextStyle(fontSize: 16.0, color: Colors.white),
                         contentPadding: EdgeInsets.only(left: 15),
                       ),
                       style: GoogleFonts.adventPro(
-                        textStyle: TextStyle(
-                          color: const Color(0xFFFFFFFF),
+                        textStyle: const TextStyle(
+                          color: Color(0xFFFFFFFF),
                           fontWeight: FontWeight.w400,
                           fontSize: 16,
                           fontStyle: FontStyle.normal,
@@ -165,12 +144,12 @@ class _State extends State<PageLoginPage> {
                     ),
                     width: double.maxFinite,
                     height: 50,
-                    padding: EdgeInsets.only(top: 8),
+                    padding: const EdgeInsets.only(top: 8),
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.only(
+                        borderRadius: const BorderRadius.only(
                           topLeft: Radius.circular(5),
-                          topRight: Radius.circular(5),
-                          bottomRight: Radius.circular(5),
+                          topRight:  Radius.circular(5),
+                          bottomRight:  Radius.circular(5),
                           bottomLeft: Radius.circular(5),
                         ),
                         border: Border.all(
@@ -182,24 +161,24 @@ class _State extends State<PageLoginPage> {
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(
                           borderSide:
-                              const BorderSide(color: Colors.white, width: 0.0),
+                           BorderSide(color: Colors.white, width: 0.0),
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderSide:
-                              const BorderSide(color: Colors.white, width: 0.0),
+                           BorderSide(color: Colors.white, width: 0.0),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderSide:
-                              const BorderSide(color: Colors.white, width: 0.0),
+                           BorderSide(color: Colors.white, width: 0.0),
                         ),
                         hintText: r'''Password''',
                         hintStyle:
-                            TextStyle(fontSize: 16.0, color: Colors.white),
+                        TextStyle(fontSize: 16.0, color: Colors.white),
                         contentPadding: EdgeInsets.only(left: 15),
                       ),
                       style: GoogleFonts.adventPro(
-                        textStyle: TextStyle(
-                          color: const Color(0xFFFFFFFF),
+                        textStyle: const TextStyle(
+                          color: Color(0xFFFFFFFF),
                           fontWeight: FontWeight.w400,
                           fontSize: 16,
                           fontStyle: FontStyle.normal,
@@ -225,7 +204,7 @@ class _State extends State<PageLoginPage> {
                       decoration: const BoxDecoration(),
                       child: GestureDetector(
                         onTap: () {
-                          DatabaseHelper.istance.getPasswordVerified(usernameController.text).then((val) {
+                          /*DatabaseHelper.istance.getPasswordVerified(usernameController.text).then((val) {
                             if (val == passwordController.text) {
                               saveValue();
                               Navigator.push<void>(
@@ -252,7 +231,7 @@ class _State extends State<PageLoginPage> {
                                   Navigator.push<void>(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => PageLoginPage(),
+                                      builder: (context) => const PageLoginPage(),
                                     ),
                                   );
                                 },
@@ -270,12 +249,7 @@ class _State extends State<PageLoginPage> {
                                   ),
                                 ),
                                 onPressed: () {
-                                  Navigator.push<void>(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => PageRegisterPage(),
-                                    ),
-                                  );
+                                  utentiModel.setStackIndex(1);
                                 },
                               );
 
@@ -316,27 +290,27 @@ class _State extends State<PageLoginPage> {
                                 },
                               );
                             }
-                          });
+                          });*/
                         },
                         child: Container(
                             width: double.maxFinite,
                             height: 40,
-                            padding: EdgeInsets.only(top: 7),
+                            padding: const EdgeInsets.only(top: 7),
                             decoration: BoxDecoration(
                                 color: Colors.black.withOpacity(0.05),
-                                borderRadius: BorderRadius.only(
+                                borderRadius: const BorderRadius.only(
                                   topLeft: Radius.circular(5),
                                   topRight: Radius.circular(5),
                                   bottomRight: Radius.circular(5),
                                   bottomLeft: Radius.circular(5),
                                 ),
                                 border:
-                                    Border.all(color: Colors.white, width: 2)),
+                                Border.all(color: Colors.white, width: 2)),
                             child: Text(
                               '''Login''',
                               style: GoogleFonts.adventPro(
-                                textStyle: TextStyle(
-                                  color: const Color(0xFFFFFFFF),
+                                textStyle: const TextStyle(
+                                  color: Color(0xFFFFFFFF),
                                   fontWeight: FontWeight.w500,
                                   fontSize: 16,
                                   fontStyle: FontStyle.normal,
@@ -353,71 +327,5 @@ class _State extends State<PageLoginPage> {
         ],
       ),
     );
-  }
-}
-
-class Utenti {
-  final String nomeUtente;
-  final String password;
-
-  Utenti({required this.nomeUtente, required this.password});
-
-  factory Utenti.fromMap(Map<String, dynamic> json) =>
-      new Utenti(nomeUtente: json['nomeUtente'], password: json['password']);
-
-  Map<String, dynamic> toMap() {
-    return {
-      'nomeUtente': nomeUtente,
-      'password': password,
-    };
-  }
-}
-
-class DatabaseHelper {
-  DatabaseHelper._privateConstructur();
-
-  static final DatabaseHelper istance = DatabaseHelper._privateConstructur();
-
-  static Database? _database;
-
-  Future<Database> get database async => _database ??= await _initDatabase();
-
-  Future<Database> _initDatabase() async {
-    Directory documentDirectory = await getApplicationDocumentsDirectory();
-    String path = join(documentDirectory.path, 'utenti.db');
-
-    return await openDatabase(
-      path,
-      version: 1,
-      onCreate: _onCreate,
-    );
-  }
-
-  Future _onCreate(Database db, int version) async {
-    await db.execute('''
-      CREATE TABLE utenti(
-        nomeUtente TEXT PRIMARY KEY,
-        password TEXT
-      ) 
-    ''');
-  }
-
-  Future<String> getPasswordVerified(String nomeUtente) async {
-    Database db = await istance.database;
-    var utenteConTutto = await db.query('utenti',
-        columns: ['password'],
-        where: 'nomeUtente = ?',
-        whereArgs: [nomeUtente]);
-    String pass = utenteConTutto
-        .toString()
-        .replaceAll("[{password: ", "")
-        .replaceAll("}]", "");
-    return pass;
-  }
-
-  Future<int> add(Utenti utente) async {
-    Database db = await istance.database;
-    print("Utente creato");
-    return await db.insert('utenti', utente.toMap());
   }
 }
