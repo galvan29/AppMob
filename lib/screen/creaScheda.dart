@@ -150,7 +150,7 @@ class CreaScheda extends StatelessWidget{
   }
 
   void _save(BuildContext context) async {
-
+    print(context);   //dopo vedo cosa contiene
     if(!_formKey.currentState!.validate()){
       return;
     }
