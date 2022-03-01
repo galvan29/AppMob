@@ -223,7 +223,7 @@ class CreaEsercizio extends StatelessWidget{
       const SnackBar(
         backgroundColor: Colors.green,
         duration: Duration(seconds: 2),
-        content: Text("Cards saved"),
+        content: Text("Esercizio saved"),
       ),
     );
 
