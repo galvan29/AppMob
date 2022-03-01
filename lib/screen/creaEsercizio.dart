@@ -214,10 +214,10 @@ class CreaEsercizio extends StatelessWidget{
       await EserciziDBworker.eserciziDBworker.update(eserciziModel.esercizioBeingEdited);
     }
 
-    schedeModel.loadData(SchedeDBworker.schedeDBworker);
     eserciziModel.loadData(EserciziDBworker.eserciziDBworker);
     print("Ricaricati entrambi i database");
-    schedeModel.setStackIndex(2);
+    eserciziModel.loadData(EserciziDBworker.eserciziDBworker);
+    schedeModel.setStackIndex(0);
 
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(

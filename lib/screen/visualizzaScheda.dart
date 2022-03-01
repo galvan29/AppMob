@@ -97,8 +97,8 @@ class VisualizzaScheda extends StatelessWidget {
           },
         ),
         body: ListView.builder(
-          itemCount: schedeModel.schedeList.length,
-          itemBuilder: (BuildContext inBuildContext, int inIndex){
+          itemCount: eserciziModel.eserciziList.length,
+          itemBuilder: (BuildContext inBuildContext, int inIndex) {
             Esercizio esercizio = eserciziModel.eserciziList[inIndex];
             Color color = Colors.white;
 
@@ -114,7 +114,7 @@ class VisualizzaScheda extends StatelessWidget {
                     color: Colors.red,
                     icon: Icons.delete,
                     onTap: (){
-                      //_deleteNote(context, note);
+                      _deleteEsercizio(context, esercizio);
                     },
                   ),
                 ],
@@ -160,6 +160,42 @@ class VisualizzaScheda extends StatelessWidget {
             ],
           )
       ));
+  }
+
+  Future _deleteEsercizio(BuildContext context, Esercizio esercizio) async {
+    return showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext inAlertContext){
+          return AlertDialog(
+            title: const Text("Delete note"),
+            content: Text("Are you sure you want to delete ${esercizio.noteEsercizio}"),
+            actions: [
+              FlatButton(
+                onPressed: (){
+                  Navigator.of(inAlertContext).pop();
+                },
+                child: const Text("Cancel"),
+              ),
+              FlatButton(
+                onPressed: () async {
+                  await EserciziDBworker.eserciziDBworker.delete(esercizio.id);
+                  Navigator.of(inAlertContext).pop();
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      backgroundColor: Colors.red,
+                      duration: Duration(seconds: 2),
+                      content: Text("Esercizio deleted"),
+                    ),
+                  );
+                  eserciziModel.loadData(EserciziDBworker.eserciziDBworker);
+                },
+                child: const Text("Delete"),
+              ),
+            ],
+          );
+        }
+    );
   }
 }
 
