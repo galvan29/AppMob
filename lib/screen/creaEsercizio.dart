@@ -6,6 +6,7 @@ import 'package:mytraining/db/schedeDBworker.dart';
 import 'package:mytraining/models/eserciziModel.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mytraining/models/schedeModel.dart';
+import 'package:mytraining/screen/schede.dart';
 
 class CreaEsercizio extends StatelessWidget{
 
@@ -209,15 +210,18 @@ class CreaEsercizio extends StatelessWidget{
     //_formKey.currentState.save();
 
     if(eserciziModel.esercizioBeingEdited.id==-1){
+      Schede().getValueScheda().then((val) async {
+        eserciziModel.esercizioBeingEdited.idScheda = val.toString();
+      });
       await EserciziDBworker.eserciziDBworker.create(eserciziModel.esercizioBeingEdited);
     } else {
       await EserciziDBworker.eserciziDBworker.update(eserciziModel.esercizioBeingEdited);
     }
 
-    eserciziModel.loadData(EserciziDBworker.eserciziDBworker);
-    print("Ricaricati entrambi i database");
-    eserciziModel.loadData(EserciziDBworker.eserciziDBworker);
-    schedeModel.setStackIndex(0);
+    Schede().getValueScheda().then((val) async {
+      eserciziModel.loadData(EserciziDBworker.eserciziDBworker, val);
+    });
+    schedeModel.setStackIndex(2);
 //dd
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(

@@ -5,6 +5,7 @@ import 'package:mytraining/db/schedeDBworker.dart';
 import 'package:mytraining/models/eserciziModel.dart';
 import 'package:mytraining/models/schedeModel.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mytraining/screen/schede.dart';
 
 class VisualizzaScheda extends StatelessWidget {
   final datasets = <String, dynamic>{};
@@ -150,13 +151,13 @@ class VisualizzaScheda extends StatelessWidget {
                 child: const Text("Indietro"),
               ),
               const Spacer(),
-              FlatButton(
+             /* FlatButton(
                 onPressed: (){
                   //_save(context);
                   schedeModel.setStackIndex(0);
                 },
                 child: const Text("Visionato"),
-              ),
+              ), */
             ],
           )
       ));
@@ -188,7 +189,9 @@ class VisualizzaScheda extends StatelessWidget {
                       content: Text("Esercizio deleted"),
                     ),
                   );
-                  eserciziModel.loadData(EserciziDBworker.eserciziDBworker);
+                  Schede().getValueScheda().then((val) async {
+                    eserciziModel.loadData(EserciziDBworker.eserciziDBworker, val);
+                  });
                   schedeModel.setStackIndex(0);
                 },
                 child: const Text("Delete"),
