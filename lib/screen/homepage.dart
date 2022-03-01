@@ -283,30 +283,15 @@ class HomePage extends StatelessWidget {
           },
           items: [
             BottomNavigationBarItem(
-              title: Text('Homepage',
-                  style: GoogleFonts.adventPro(
-                      textStyle: const TextStyle(
-                        fontStyle: FontStyle.normal,
-                        decoration: TextDecoration.none,
-                      ))),
+              label: 'Homepage',
               icon: const Icon(Icons.home),
             ),
             BottomNavigationBarItem(
-              title: Text('Schede',
-                  style: GoogleFonts.adventPro(
-                      textStyle: const TextStyle(
-                        fontStyle: FontStyle.normal,
-                        decoration: TextDecoration.none,
-                      ))),
+              label: 'Schede',
               icon: const Icon(Icons.article_outlined),
             ),
             BottomNavigationBarItem(
-              title: Text('Profilo',
-                  style: GoogleFonts.adventPro(
-                      textStyle: const TextStyle(
-                        fontStyle: FontStyle.normal,
-                        decoration: TextDecoration.none,
-                      ))),
+              label: 'Profilo',
               icon: const Icon(Icons.perm_identity_sharp),
             ),
           ],

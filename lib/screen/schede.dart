@@ -154,34 +154,19 @@ class Schede extends StatelessWidget {
             }
           },
           items: [
-            BottomNavigationBarItem(
-              title: Text('Homepage',
-                  style: GoogleFonts.adventPro(
-                      textStyle: const TextStyle(
-                        fontStyle: FontStyle.normal,
-                        decoration: TextDecoration.none,
-                      ))),
-              icon: const Icon(Icons.home),
-            ),
-            BottomNavigationBarItem(
-              title: Text('Schede',
-                  style: GoogleFonts.adventPro(
-                      textStyle: const TextStyle(
-                        fontStyle: FontStyle.normal,
-                        decoration: TextDecoration.none,
-                      ))),
-              icon: const Icon(Icons.article_outlined),
-            ),
-            BottomNavigationBarItem(
-              title: Text('Profilo',
-                  style: GoogleFonts.adventPro(
-                      textStyle: const TextStyle(
-                        fontStyle: FontStyle.normal,
-                        decoration: TextDecoration.none,
-                      ))),
-              icon: const Icon(Icons.perm_identity_sharp),
-            ),
-          ],
+          BottomNavigationBarItem(
+          label: 'Homepage',
+          icon: const Icon(Icons.home),
+        ),
+      BottomNavigationBarItem(
+        label: 'Schede',
+        icon: const Icon(Icons.article_outlined),
+      ),
+      BottomNavigationBarItem(
+        label: 'Profilo',
+        icon: const Icon(Icons.perm_identity_sharp),
+      ),
+    ],
         ));
   }
 }
