@@ -218,7 +218,7 @@ class CreaEsercizio extends StatelessWidget{
     print("Ricaricati entrambi i database");
     eserciziModel.loadData(EserciziDBworker.eserciziDBworker);
     schedeModel.setStackIndex(0);
-
+//dd
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
         backgroundColor: Colors.green,
