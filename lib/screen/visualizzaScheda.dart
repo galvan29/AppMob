@@ -189,6 +189,7 @@ class VisualizzaScheda extends StatelessWidget {
                     ),
                   );
                   eserciziModel.loadData(EserciziDBworker.eserciziDBworker);
+                  schedeModel.setStackIndex(0);
                 },
                 child: const Text("Delete"),
               ),
