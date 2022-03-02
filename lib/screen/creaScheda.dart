@@ -93,14 +93,14 @@ class CreaScheda extends StatelessWidget{
                 onPressed: (){
                   schedeModel.setStackIndex(0);
                 },
-                child: const Text("Cancel"),
+                child: const Text("Cancella"),
               ),
               const Spacer(),
               FlatButton(
                 onPressed: (){
                   _save(context);
                 },
-                child: const Text("Save"),
+                child: const Text("Salva"),
               ),
             ],
           )
