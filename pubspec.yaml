@@ -46,6 +46,8 @@ dependencies:
   shared_preferences: ^2.0.13
   syncfusion_flutter_calendar: ^19.4.53
   double_back_to_close_app: ^2.1.0
+  custom_timer: ^0.0.2
+  flutter_rating_bar: ^4.0.0
 
 
 dev_dependencies:
