@@ -4,7 +4,6 @@ import 'package:mytraining/models/schedeModel.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:mytraining/common/utils.dart' as utils;
 
 class SchedeDBworker {
 
@@ -22,6 +21,7 @@ class SchedeDBworker {
           onCreate: (Database inDB, int inVersion) async {
             await inDB.execute("CREATE TABLE IF NOT EXISTS schede ("
                 "id INTEGER PRIMARY KEY,"
+                "idUtente TEXT,"
                 "nomeScheda TEXT,"
                 "durataScheda TEXT)");
           });
@@ -32,6 +32,7 @@ class SchedeDBworker {
   Scheda schedaFromMap(Map inMap){
     Scheda scheda = Scheda();
     scheda.id = inMap["id"];
+    scheda.idUtente = inMap["idUtente"];
     scheda.nomeScheda = inMap["nomeScheda"];
     scheda.durataScheda = inMap["durataScheda"];
     return scheda;
@@ -40,6 +41,7 @@ class SchedeDBworker {
   Map<String, dynamic> schedaToMap(Scheda scheda) {
     Map<String, dynamic> map = Map<String, dynamic>();
     map["id"] = scheda.id;
+    map["idUtente"] = scheda.idUtente;
     map["nomeScheda"] = scheda.nomeScheda;
     map["durataScheda"] = scheda.durataScheda;
     return map;
@@ -50,9 +52,9 @@ class SchedeDBworker {
     var val = await db!.rawQuery("SELECT MAX(id) + 1 AS id FROM schede");
     int id = val.first["id"] == null ? 1 : val.first["id"] as int;
     return await db.rawInsert(
-        "INSERT INTO schede (id, nomeScheda, durataScheda) "
-            "VALUES (?, ?, ?)",
-        [id, scheda.nomeScheda, scheda.durataScheda]
+        "INSERT INTO schede (id, idUtente, nomeScheda, durataScheda) "
+            "VALUES (?, ?, ?, ?)",
+        [id, scheda.idUtente, scheda.nomeScheda, scheda.durataScheda]
     );
   }
 

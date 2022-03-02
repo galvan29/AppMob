@@ -1,16 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mytraining/models/utentiModel.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatelessWidget {
   final datasets = <String, dynamic>{};
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
 
-  /*saveValue() async {
+  saveValueLogin(int id) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString('nomeUtente', usernameController.text);
-  }*/
+    prefs.setInt('idUtente', id);
+  }
+
+  getValueLogin() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getInt('idUtente')!;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -204,6 +210,7 @@ class LoginPage extends StatelessWidget {
                       decoration: const BoxDecoration(),
                       child: GestureDetector(
                         onTap: () {
+                          //saveValueLogin(utente.id);
                           /*DatabaseHelper.istance.getPasswordVerified(usernameController.text).then((val) {
                             if (val == passwordController.text) {
                               saveValue();
