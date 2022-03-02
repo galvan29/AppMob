@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mytraining/db/schedeDBworker.dart';
 import 'package:mytraining/models/schedeModel.dart';
+import 'package:mytraining/screen/allenamento.dart';
 import 'package:mytraining/screen/creaEsercizio.dart';
 import 'package:mytraining/screen/creaScheda.dart';
 import 'package:mytraining/screen/fineAllenamento.dart';
@@ -26,7 +27,7 @@ class MainSchede extends StatelessWidget {
               CreaScheda(),
               VisualizzaScheda(),
               CreaEsercizio(),
-              FineAllenamento()
+              Allenamento()
             ],
           );
         },
