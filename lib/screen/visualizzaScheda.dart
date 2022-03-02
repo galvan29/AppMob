@@ -89,12 +89,19 @@ class VisualizzaScheda extends StatelessWidget {
             ],
           ),
         ),
-        floatingActionButton: FloatingActionButton(
+        /*floatingActionButton: FloatingActionButton(
           child: const Icon(Icons.add, color: Colors.white),
           onPressed: (){
             eserciziModel.esercizioBeingEdited = Esercizio();
             schedeModel.setStackIndex(3);
             print("Creazione Esercizio");
+          },
+        ), */
+        floatingActionButton: FloatingActionButton(
+          child: const Icon(Icons.play_arrow, color: Colors.white),
+          onPressed: (){
+            //eserciziModel.esercizioBeingEdited = Esercizio();
+            schedeModel.setStackIndex(4);
           },
         ),
         body: ListView.builder(
