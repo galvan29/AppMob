@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class Esercizio {
   int id = -1;
   String nomeEsercizio = "";
+  String idScheda = "";
   String ripEsercizio = "";
   String serieEsercizio = "";
   String pesoEsercizio = "";
@@ -13,6 +14,7 @@ class EserciziModel extends ChangeNotifier {
   List eserciziList = [];
   Esercizio esercizioBeingEdited = Esercizio();
   String nomeEsercizio = "";
+  String idScheda = "";
   String ripEsercizio = "";
   String serieEsercizio = "";
   String pesoEsercizio = "";
@@ -44,9 +46,10 @@ class EserciziModel extends ChangeNotifier {
   }
 
 
-  void loadData(dynamic inDatabaseWorker) async {
-    eserciziList = await inDatabaseWorker.getAll();
+  Future<int> loadData(dynamic inDatabaseWorker, int id) async {
+    eserciziList = await inDatabaseWorker.getAll(id);
     notifyListeners();
+    return 0;
   }
 
 }

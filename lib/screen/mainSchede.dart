@@ -20,7 +20,12 @@ class MainSchede extends StatelessWidget {
         builder: (context, schedeModel, child) {
           return IndexedStack(
             index: schedeModel.stackIndex,
-            children: [Schede(), CreaScheda(), VisualizzaScheda(), CreaEsercizio()],
+            children: [
+              Schede(),
+              CreaScheda(),
+              VisualizzaScheda(),
+              CreaEsercizio()
+            ],
           );
         },
       ),

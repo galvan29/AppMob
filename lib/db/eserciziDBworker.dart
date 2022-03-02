@@ -22,6 +22,7 @@ class EserciziDBworker {
           onCreate: (Database inDB, int inVersion) async {
             await inDB.execute("CREATE TABLE IF NOT EXISTS esercizi ("
                 "id INTEGER PRIMARY KEY,"
+                "idScheda TEXT,"
                 "nomeEsercizio TEXT,"
                 "ripEsercizio TEXT,"
                 "serieEsercizio TEXT,"
@@ -36,6 +37,7 @@ class EserciziDBworker {
     Esercizio esercizio = Esercizio();
     esercizio.id = inMap["id"];
     esercizio.nomeEsercizio = inMap["nomeEsercizio"];
+    esercizio.idScheda = inMap["idScheda"];
     esercizio.ripEsercizio = inMap["ripEsercizio"];
     esercizio.serieEsercizio = inMap["serieEsercizio"];
     esercizio.pesoEsercizio = inMap["pesoEsercizio"];
@@ -46,6 +48,7 @@ class EserciziDBworker {
   Map<String, dynamic> esercizioToMap(Esercizio esercizio) {
     Map<String, dynamic> map = Map<String, dynamic>();
     map["id"] = esercizio.id;
+    map["idScheda"] = esercizio.idScheda;
     map["nomeEsercizio"] = esercizio.nomeEsercizio;
     map["ripEsercizio"] = esercizio.ripEsercizio;
     map["serieEsercizio"] = esercizio.serieEsercizio;
@@ -59,9 +62,9 @@ class EserciziDBworker {
     var val = await db!.rawQuery("SELECT MAX(id) + 1 AS id FROM esercizi");
     int id = val.first["id"] == null ? 1 : val.first["id"] as int;
     return await db.rawInsert(
-        "INSERT INTO esercizi (id, nomeEsercizio, ripEsercizio, serieEsercizio, pesoEsercizio, noteEsercizio) "
-            "VALUES (?, ?, ?, ?, ?, ?)",
-        [id, esercizio.nomeEsercizio, esercizio.ripEsercizio, esercizio.serieEsercizio, esercizio.pesoEsercizio, esercizio.nomeEsercizio]
+        "INSERT INTO esercizi (id, idScheda, nomeEsercizio, ripEsercizio, serieEsercizio, pesoEsercizio, noteEsercizio) "
+            "VALUES (?, ?, ?, ?, ?, ?, ?)",
+        [id, esercizio.idScheda, esercizio.nomeEsercizio, esercizio.ripEsercizio, esercizio.serieEsercizio, esercizio.pesoEsercizio, esercizio.nomeEsercizio]
     );
   }
 
@@ -71,9 +74,9 @@ class EserciziDBworker {
     return esercizioFromMap(rec.first);
   }
 
-  Future<List> getAll() async {
+  Future<List> getAll(int id) async {
     Database? db = await _getDB();
-    var recs = await db!.query("esercizi");
+    var recs = await db!.query("esercizi", where: "idScheda = ?", whereArgs: [id]);
     var list = recs.isEmpty ? [] : recs.map((m) => esercizioFromMap(m)).toList();
     return list;
   }

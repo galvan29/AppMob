@@ -6,12 +6,20 @@ import 'package:mytraining/db/schedeDBworker.dart';
 import 'package:mytraining/models/eserciziModel.dart';
 import 'package:mytraining/models/schedeModel.dart';
 import 'package:mytraining/models/utentiModel.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Schede extends StatelessWidget {
   final datasets = <String, dynamic>{};
   ValueNotifier<bool> isDialOpen = ValueNotifier(false);
-  Schede({Key? key}) : super(key: key) {
-    eserciziModel.loadData(EserciziDBworker.eserciziDBworker);
+
+  saveValueScheda(int id) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setInt('idScheda', id);
+  }
+
+  getValueScheda() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getInt('idScheda')!;
   }
 
   @override
@@ -130,7 +138,10 @@ class Schede extends StatelessWidget {
                     schedeModel.schedaBeingEdited = await SchedeDBworker.schedeDBworker.get(scheda.id);
                     schedeModel.setStackIndex(1);
                   },
-                  onTap: () {
+                  onTap: () async {
+                    saveValueScheda(scheda.id);
+                    print("Ciao bro "+scheda.id.toString());
+                    await eserciziModel.loadData(EserciziDBworker.eserciziDBworker, scheda.id);
                     schedeModel.setStackIndex(2);
                   },
                 ),
