@@ -151,34 +151,6 @@ class Allenamento extends StatelessWidget {
               ],
             ),
           ),
-        bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          backgroundColor: const Color.fromARGB(255, 180, 212, 250),
-          selectedItemColor: Colors.white.withOpacity(0.5),
-          unselectedItemColor: colorScheme.onSurface.withOpacity(.60),
-          selectedFontSize: MediaQuery.of(context).size.height * 0.02,
-          unselectedFontSize: MediaQuery.of(context).size.height * 0.02,
-          onTap: (value) {
-            if (value == 1) {
-              utentiModel.setStackIndex(4);
-            } else if (value == 2) {
-              utentiModel.setStackIndex(5);
-            }
-          },
-          items: [
-            BottomNavigationBarItem(
-              label: 'Homepage',
-              icon: const Icon(Icons.home),
-            ),
-            BottomNavigationBarItem(
-              label: 'Schede',
-              icon: const Icon(Icons.article_outlined),
-            ),
-            BottomNavigationBarItem(
-              label: 'Profilo',
-              icon: const Icon(Icons.perm_identity_sharp),
-            ),
-          ],
-        ));
+    );
   }
 }
