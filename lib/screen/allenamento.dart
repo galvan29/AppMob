@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mytraining/models/schedeModel.dart';
 import 'package:mytraining/models/utentiModel.dart';
 import 'package:custom_timer/custom_timer.dart';
 
@@ -151,6 +152,19 @@ class Allenamento extends StatelessWidget {
               ],
             ),
           ),
+      bottomNavigationBar: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+          child: Row(
+            children: [
+              FlatButton(
+                onPressed: (){
+                  schedeModel.setStackIndex(0);
+                },
+                child: const Text("Cancel"),
+              ),
+            ],
+          )
+      ),
     );
   }
 }

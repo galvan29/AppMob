@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mytraining/db/schedeDBworker.dart';
 import 'package:mytraining/models/schedeModel.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mytraining/screen/login.dart';
 
 class CreaScheda extends StatelessWidget{
 
@@ -158,12 +159,17 @@ class CreaScheda extends StatelessWidget{
     //_formKey.currentState.save();
 
     if(schedeModel.schedaBeingEdited.id==-1){
+      LoginPage().getValueLogin().then((val) async {
+        schedeModel.schedaBeingEdited.idUtente = val.toString();
+      });
       await SchedeDBworker.schedeDBworker.create(schedeModel.schedaBeingEdited);
     } else {
       await SchedeDBworker.schedeDBworker.update(schedeModel.schedaBeingEdited);
     }
 
-    schedeModel.loadData(SchedeDBworker.schedeDBworker);
+    LoginPage().getValueLogin().then((val) async {
+      schedeModel.loadData(SchedeDBworker.schedeDBworker, val);
+    });
 
     schedeModel.setStackIndex(0);
 

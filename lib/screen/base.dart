@@ -12,7 +12,7 @@ import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 
 class Base extends StatelessWidget {
   Base({Key? key}) : super(key: key) {
-    utentiModel.loadData(UtentiDBworker.utentiDBworker);
+   // utentiModel.loadData(UtentiDBworker.utentiDBworker);
   }
 
   @override

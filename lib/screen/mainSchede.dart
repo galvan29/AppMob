@@ -5,13 +5,16 @@ import 'package:mytraining/screen/allenamento.dart';
 import 'package:mytraining/screen/creaEsercizio.dart';
 import 'package:mytraining/screen/creaScheda.dart';
 import 'package:mytraining/screen/fineAllenamento.dart';
+import 'package:mytraining/screen/login.dart';
 import 'package:mytraining/screen/schede.dart';
 import 'package:mytraining/screen/visualizzaScheda.dart';
 import 'package:provider/provider.dart';
 
 class MainSchede extends StatelessWidget {
   MainSchede({Key? key}) : super(key: key) {
-    schedeModel.loadData(SchedeDBworker.schedeDBworker);
+    LoginPage().getValueLogin().then((val) async {
+      schedeModel.loadData(SchedeDBworker.schedeDBworker, val);
+    });
   }
 
   @override

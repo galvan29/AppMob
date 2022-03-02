@@ -281,18 +281,18 @@ class HomePage extends StatelessWidget {
               utentiModel.setStackIndex(5);
             }
           },
-          items: [
+          items: const [
             BottomNavigationBarItem(
               label: 'Homepage',
-              icon: const Icon(Icons.home),
+              icon: Icon(Icons.home),
             ),
             BottomNavigationBarItem(
               label: 'Schede',
-              icon: const Icon(Icons.article_outlined),
+              icon: Icon(Icons.article_outlined),
             ),
             BottomNavigationBarItem(
               label: 'Profilo',
-              icon: const Icon(Icons.perm_identity_sharp),
+              icon: Icon(Icons.perm_identity_sharp),
             ),
           ],
         ));

@@ -60,6 +60,18 @@ class UtentiDBworker {
     return utenteFromMap(rec.first);
   }
 
+  Future<Utente> getPassword(String nomeUtente) async {
+    Database? db = await _getDB();
+    var rec = await db!.query("utenti", where: "nomeUtente = ?", whereArgs: [nomeUtente]);
+    return utenteFromMap(rec.first);
+  }
+
+  Future<Utente> getId(String nomeUtente) async {
+    Database? db = await _getDB();
+    var rec = await db!.query("utenti", where: "nomeUtente = ?", whereArgs: [nomeUtente]);
+    return utenteFromMap(rec.first);
+  }
+
   Future<List> getAll() async {
     Database? db = await _getDB();
     var recs = await db!.query("utenti");

@@ -112,7 +112,7 @@ class Profilo extends StatelessWidget {
             ],
           ),
         ),
-        bottomNavigationBar: BottomNavigationBar(
+        /*bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           backgroundColor: const Color.fromARGB(255, 180, 212, 250),
           selectedItemColor: Colors.white.withOpacity(0.5),
@@ -140,6 +140,20 @@ class Profilo extends StatelessWidget {
         icon: const Icon(Icons.perm_identity_sharp),
       ),
     ],
-        ));
+        ),*/
+      bottomNavigationBar: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+          child: Row(
+            children: [
+              FlatButton(
+                onPressed: (){
+                  utentiModel.setStackIndex(0);
+                },
+                child: const Text("Logout"),
+              ),
+            ],
+          )
+      ),
+    );
   }
 }

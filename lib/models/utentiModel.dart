@@ -12,13 +12,14 @@ class UtentiModel extends ChangeNotifier {
   Utente utenteBeingEdited = Utente();
   String nomeUtente = "";
   String password = "";
+  Utente up = Utente();
 
   void setStackIndex(int inStackIndex){
     stackIndex = inStackIndex;
     notifyListeners();
   }
 
-  void setnomeUtente(String nomeUtente2){
+  void setNomeUtente(String nomeUtente2){
     nomeUtente = nomeUtente2;
     notifyListeners();
   }
@@ -26,6 +27,18 @@ class UtentiModel extends ChangeNotifier {
   void setUtentePassword(String password2){
     password = password2;
     notifyListeners();
+  }
+
+  Future<int> getPassword(dynamic inDatabaseWorker, String nomeUtente) async {
+    up = await inDatabaseWorker.getPassword(nomeUtente);
+    notifyListeners();
+    return 1;
+  }
+
+  Future<int> getIdFromNomeUtente(dynamic inDatabaseWorker, String nomeUtente) async {
+    up = await inDatabaseWorker.getId(nomeUtente);
+    notifyListeners();
+    return 1;
   }
 
   void loadData(dynamic inDatabaseWorker) async {

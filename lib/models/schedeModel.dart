@@ -35,8 +35,8 @@ class SchedeModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void loadData(dynamic inDatabaseWorker) async {
-    schedeList = await inDatabaseWorker.getAll();
+  void loadData(dynamic inDatabaseWorker, int id) async {
+    schedeList = await inDatabaseWorker.getAll(id);
     notifyListeners();
   }
 

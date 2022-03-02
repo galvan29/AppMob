@@ -20,7 +20,7 @@ class RegisterPage extends StatelessWidget {
           utentiModel.setStackIndex(1);
         },
       ),
-      backgroundColor: const Color(0xFF000000),
+      backgroundColor: Colors.white,
       body: Form(
         key: _formKey,
         child: ListView(
@@ -28,7 +28,7 @@ class RegisterPage extends StatelessWidget {
             ListTile(
               leading: const Icon(Icons.title),
               title: TextFormField(
-                initialValue: "Nome Utente",
+                //initialValue: "Nome Utente",
                 validator: (String? inValue){
                   if(inValue!.isEmpty){
                     return "Please enter a nome utente";
@@ -45,7 +45,7 @@ class RegisterPage extends StatelessWidget {
               title: TextFormField(
                 keyboardType: TextInputType.number,
                 maxLines: 1,
-                initialValue: "Password",
+                //initialValue: "Password",
                 validator: (String? inValue){
                   if(inValue!.isEmpty){
                     return "Please enter duration";
@@ -162,6 +162,19 @@ class RegisterPage extends StatelessWidget {
                 ))
           ],
         ),
+      ),
+      bottomNavigationBar: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+          child: Row(
+            children: [
+              FlatButton(
+                onPressed: (){
+                  utentiModel.setStackIndex(0);
+                },
+                child: const Text("Cancel"),
+              ),
+            ],
+          )
       ),
       /* body: Stack(
         children: [
@@ -449,17 +462,23 @@ class RegisterPage extends StatelessWidget {
 
   void _save(BuildContext context) async {
     print(context);   //dopo vedo cosa contiene
-    //if(!_formKey.currentState!.validate()){
-    //  return;
-    //}
+    if(!_formKey.currentState!.validate()){
+      return;
+    }
 
     //_formKey.currentState.save();
 
+    //DEVO CONTROLLARE SE ESISTE O NO CON UN BEL GET
+
     if(utentiModel.utenteBeingEdited.id==-1){
+      print("CODDUE CREATO");
+      print(utentiModel.utenteBeingEdited.id);
+      print(utentiModel.utenteBeingEdited.nomeUtente);
+      print(utentiModel.utenteBeingEdited.password);
       await UtentiDBworker.utentiDBworker.create(utentiModel.utenteBeingEdited);
-    } else {
-      await UtentiDBworker.utentiDBworker.update(utentiModel.utenteBeingEdited);
-    }
+    } //else {
+     // await UtentiDBworker.utentiDBworker.update(utentiModel.utenteBeingEdited);
+    //}
 
     utentiModel.loadData(UtentiDBworker.utentiDBworker);
 

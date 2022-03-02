@@ -64,9 +64,9 @@ class SchedeDBworker {
     return schedaFromMap(rec.first);
   }
 
-  Future<List> getAll() async {
+  Future<List> getAll(int id) async {
     Database? db = await _getDB();
-    var recs = await db!.query("schede");
+    var recs = await db!.query("schede", where: "idUtente = ?", whereArgs: [id]);
     var list = recs.isEmpty ? [] : recs.map((m) => schedaFromMap(m)).toList();
     return list;
   }
