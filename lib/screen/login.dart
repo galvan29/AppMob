@@ -522,7 +522,7 @@ class LoginPage extends StatelessWidget {
 
     //CARICARE SOLO SCHEDE DEL TIPO CHE SI è LOGGATO
     getValueLogin().then((val) async {
-      schedeModel.loadData(SchedeDBworker.schedeDBworker, val);
+      await schedeModel.loadData(SchedeDBworker.schedeDBworker, val);
     });
 
     //utentiModel.loadData(UtentiDBworker.utentiDBworker);
