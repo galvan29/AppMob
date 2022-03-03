@@ -24,8 +24,8 @@ class EventiDBworker {
                 "id INTEGER PRIMARY KEY,"
                 "idUtente TEXT,"
                 "nomeScheda TEXT,"
-                "inizio TEXT,"
-                "fine TEXT)");
+                "inizio DATETIME,"
+                "fine DATETIME)");
           });
     }
     return _db;
@@ -36,8 +36,8 @@ class EventiDBworker {
     evento.id = inMap["id"];
     evento.idUtente = inMap["idUtente"];
     evento.nomeScheda = inMap["nomeScheda"];
-    evento.inizio = inMap["inizio"];
-    evento.fine = inMap["fine"];
+    evento.inizio = DateTime.parse(inMap["inizio"]);
+    evento.fine = DateTime.parse(inMap["fine"]);
     return evento;
   }
 
@@ -53,12 +53,13 @@ class EventiDBworker {
 
   Future create(Evento evento) async {
     Database? db = await _getDB();
+    print("dentro create eventi");
     var val = await db!.rawQuery("SELECT MAX(id) + 1 AS id FROM eventi");
     int id = val.first["id"] == null ? 1 : val.first["id"] as int;
     return await db.rawInsert(
         "INSERT INTO eventi (id, idUtente, nomeScheda, inizio, fine) "
             "VALUES (?, ?, ?, ?, ?)",
-        [id, evento.idUtente, evento.nomeScheda, evento.inizio, evento.fine]
+        [id, evento.idUtente, evento.nomeScheda, evento.inizio.toString(), evento.fine.toString()]
     );
   }
 

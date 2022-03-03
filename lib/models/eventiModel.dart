@@ -4,18 +4,17 @@ class Evento {
   int id = -1;
   String idUtente = "";
   String nomeScheda = "";
-  String inizio = "";
-  String fine = "";
+  DateTime inizio = DateTime.now();
+  DateTime fine = DateTime.now();
 }
 
 class EventiModel extends ChangeNotifier {
-  int stackIndex = 0;
   List eventiList = [];
   Evento eventoBeingEdited = Evento();
   String idUtente = "";
   String nomeScheda = "";
-  String inizio = "";
-  String fine = "";
+  DateTime inizio = DateTime.now();
+  DateTime fine = DateTime.now();
 
   void setIdScheda(String idUtente2){
     idUtente = idUtente2;
@@ -39,6 +38,10 @@ class EventiModel extends ChangeNotifier {
     return 0;
   }
 
+  @override
+  String toString() {
+    return 'EventiModel{eventiList: $eventiList, eventoBeingEdited: $eventoBeingEdited, idUtente: $idUtente, nomeScheda: $nomeScheda, inizio: $inizio, fine: $fine}';
+  }
 }
 
 EventiModel eventiModel = EventiModel();

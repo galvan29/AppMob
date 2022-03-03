@@ -219,7 +219,7 @@ class CreaEsercizio extends StatelessWidget{
     }
 
     Schede().getValueScheda().then((val) async {
-      eserciziModel.loadData(EserciziDBworker.eserciziDBworker, val);
+      await eserciziModel.loadData(EserciziDBworker.eserciziDBworker, val);
     });
     schedeModel.setStackIndex(2);
 //dd

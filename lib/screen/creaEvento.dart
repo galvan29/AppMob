@@ -1,25 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:mytraining/db/eserciziDBworker.dart';
-import 'package:mytraining/db/eserciziDBworker.dart';
-import 'package:mytraining/db/eserciziDBworker.dart';
 import 'package:mytraining/db/eventiDBworrker.dart';
-import 'package:mytraining/db/schedeDBworker.dart';
-import 'package:mytraining/models/eserciziModel.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mytraining/models/schedeModel.dart';
+import 'package:mytraining/models/utentiModel.dart';
 import 'package:mytraining/screen/login.dart';
-import 'package:mytraining/screen/schede.dart';
 import 'package:mytraining/models/eventiModel.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 
-class CreaEvento extends StatelessWidget{
-
+class CreaEvento extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  static DateTime inidata = DateTime.now();
+  static DateTime findata = DateTime.now();
+  var txt = TextEditingController(), txt1 = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(MediaQuery.of(context).size.height * 0.07),
+        preferredSize:
+            Size.fromHeight(MediaQuery.of(context).size.height * 0.07),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -80,7 +78,8 @@ class CreaEvento extends StatelessWidget{
                                   bottomRight: Radius.circular(5),
                                   bottomLeft: Radius.circular(5),
                                 ),
-                                border: Border.all(color: Colors.black, width: 1)),
+                                border:
+                                    Border.all(color: Colors.black, width: 1)),
                             child: Icon(
                               Icons.info,
                               size: MediaQuery.of(context).size.height * 0.02,
@@ -98,21 +97,20 @@ class CreaEvento extends StatelessWidget{
           child: Row(
             children: [
               FlatButton(
-                onPressed: (){
-                  schedeModel.setStackIndex(2);
+                onPressed: () {
+                  utentiModel.setStackIndex(3);
                 },
                 child: const Text("Cancel"),
               ),
               const Spacer(),
               FlatButton(
-                onPressed: (){
+                onPressed: () {
                   _save(context);
                 },
                 child: const Text("Save"),
               ),
             ],
-          )
-      ),
+          )),
       body: Form(
         key: _formKey,
         child: ListView(
@@ -121,14 +119,16 @@ class CreaEvento extends StatelessWidget{
               leading: const Icon(Icons.title),
               title: TextFormField(
                 decoration: const InputDecoration(hintText: "Nome Scheda"),
-                initialValue: eventiModel.nomeScheda == null ? null : eventiModel.eventoBeingEdited.nomeScheda,
-                validator: (String? inValue){
-                  if(inValue!.isEmpty){
+                initialValue: eventiModel.eventoBeingEdited == null
+                    ? null
+                    : eventiModel.eventoBeingEdited.nomeScheda,
+                validator: (String? inValue) {
+                  if (inValue!.isEmpty) {
                     return "Inserisci Nome";
                   }
                   return null;
                 },
-                onChanged: (String inValue){
+                onChanged: (String inValue) {
                   eventiModel.eventoBeingEdited.nomeScheda = inValue;
                 },
               ),
@@ -136,34 +136,39 @@ class CreaEvento extends StatelessWidget{
             ListTile(
               leading: const Icon(Icons.title),
               title: TextFormField(
+                controller: txt,
                 decoration: const InputDecoration(hintText: "Data inizio"),
-                initialValue: eventiModel.eventoBeingEdited == null ? null : eventiModel.eventoBeingEdited.inizio,
-                validator: (String? inValue){
-                  if(inValue!.isEmpty){
-                    return "Inserire data inizio";
-                  }
-                  return null;
+                onTap: () async {
+                  FocusScope.of(context).requestFocus(new FocusNode());
+                  DateTime? picked = await DatePicker.showDateTimePicker(context,
+                      showTitleActions: true,
+                      minTime: DateTime(2022, 1, 1), onConfirm: (date) {
+                    inidata = date;
+                    txt.text = inidata.toString();
+                    txt1.text = "0";
+                    eventiModel.eventoBeingEdited.inizio = inidata;
+                    eventiModel.eventoBeingEdited.fine = inidata;
+                  }, currentTime: DateTime.now(), locale: LocaleType.it);
                 },
-                onChanged: (String inValue){
-                  eventiModel.eventoBeingEdited.inizio = inValue;
+                onChanged: (String inValue) {
+                  eventiModel.eventoBeingEdited.inizio = inidata;
                 },
               ),
             ),
             ListTile(
               leading: const Icon(Icons.title),
               title: TextFormField(
-                decoration: const InputDecoration(hintText: "Data fine"),
-                initialValue: eventiModel.eventoBeingEdited == null ? null : eventiModel.eventoBeingEdited.fine,
-                validator: (String? inValue){
-                  if(inValue!.isEmpty){
-                    return "Inserire data fine";
-                  }
-                  return null;
-                },
-                onChanged: (String inValue){
-                  eventiModel.eventoBeingEdited.fine = inValue;
-                },
-              ),
+                  decoration: const InputDecoration(hintText: "Durata"),
+                  controller: txt1,
+                  onTap: () {
+                    //double click
+                    FocusScope.of(context).requestFocus(new FocusNode());
+                    DateTime a = eventiModel.eventoBeingEdited.fine
+                        .add(Duration(minutes: 15));
+                    eventiModel.eventoBeingEdited.fine = a;
+                    txt1.text = (a.subtract(Duration(milliseconds: eventiModel.eventoBeingEdited.inizio.millisecondsSinceEpoch)).millisecondsSinceEpoch/60000).toString().replaceAll(".0", "");
+                  }),
+              //creare due pulsanti
             ),
           ],
         ),
@@ -172,34 +177,36 @@ class CreaEvento extends StatelessWidget{
   }
 
   void _save(BuildContext context) async {
-
-    if(!_formKey.currentState!.validate()){
+    if (!_formKey.currentState!.validate()) {
       return;
     }
 
     //_formKey.currentState.save();
 
-    if(eventiModel.eventoBeingEdited.id==-1){
-      Schede().getValueScheda().then((val) async {
+    if (eventiModel.eventoBeingEdited.id == -1) {
+      LoginPage().getValueLogin().then((val) async {
         eventiModel.eventoBeingEdited.idUtente = val.toString();
       });
+      print(
+          "Creando nuovo evento: " + eventiModel.eventoBeingEdited.nomeScheda);
+
       await EventiDBworker.eventiDBworker.create(eventiModel.eventoBeingEdited);
     } else {
       await EventiDBworker.eventiDBworker.update(eventiModel.eventoBeingEdited);
     }
 
     LoginPage().getValueLogin().then((val) async {
-      eventiModel.loadData(EventiDBworker.eventiDBworker, val);
+      await eventiModel.loadData(EventiDBworker.eventiDBworker, val);
     });
-    schedeModel.setStackIndex(2);
-//dd
+
+    utentiModel.setStackIndex(3);
+
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
         backgroundColor: Colors.green,
         duration: Duration(seconds: 2),
-        content: Text("Esercizio saved"),
+        content: Text("Evento saved"),
       ),
     );
-
   }
 }

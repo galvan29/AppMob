@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mytraining/db/utentiDBworker.dart';
 import 'package:mytraining/models/utentiModel.dart';
+import 'package:mytraining/screen/creaEvento.dart';
 import 'package:mytraining/screen/firstPage.dart';
 import 'package:mytraining/screen/homepage.dart';
 import 'package:mytraining/screen/login.dart';
@@ -33,7 +34,8 @@ class Base extends StatelessWidget {
                   RegisterPage(),
                   HomePage(),
                   MainSchede(),
-                  Profilo()
+                  Profilo(),
+                  CreaEvento()
                 ],
               );
             },

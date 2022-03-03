@@ -19,7 +19,7 @@ class Schede extends StatelessWidget {
 
   getValueScheda() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getInt('idScheda')!;
+    return prefs.getInt('idScheda');
   }
 
   @override

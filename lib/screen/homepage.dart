@@ -209,6 +209,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 padding: EdgeInsets.zero,
                 width: double.maxFinite,
+                height: 700,
                 decoration: const BoxDecoration(
                   color: Color.fromARGB(255, 180, 212, 250),
                 ),
@@ -218,85 +219,26 @@ class _HomePageState extends State<HomePage> {
                   monthViewSettings: const MonthViewSettings(appointmentDisplayMode: MonthAppointmentDisplayMode.appointment),
                   onTap: (CalendarTapDetails details) async {
                       //DateTime date = details.date!;
-                      //dynamic appointments = details.appointments;
+                      dynamic appointments = details.appointments;
                       //CalendarElement view = details.targetElement;
-                    eventiModel.eventoBeingEdited.nomeScheda = "Scheda 1";
-                    eventiModel.eventoBeingEdited.inizio = DateTime(2022, 3, 8, 11, 0, 0).toString();
-                    eventiModel.eventoBeingEdited.fine = DateTime(2022, 3, 8, 12, 0, 0).toString();
-                      if(eventiModel.eventoBeingEdited.id==-1){
-                        LoginPage().getValueLogin().then((val) async {
-                          eventiModel.eventoBeingEdited.idUtente = val.toString();
-                        });
-                        await EventiDBworker.eventiDBworker.create(eventiModel.eventoBeingEdited);
-                      }
-
-                      eventiModel.eventoBeingEdited.nomeScheda = "Scheda 2";
-                      eventiModel.eventoBeingEdited.inizio = DateTime(2022, 3, 7, 11, 0, 0).toString();
-                      eventiModel.eventoBeingEdited.fine = DateTime(2022, 3, 7, 12, 0, 0).toString();
-
-                      if(eventiModel.eventoBeingEdited.id==-1){
-                        LoginPage().getValueLogin().then((val) async {
-                          eventiModel.eventoBeingEdited.idUtente = val.toString();
-                        });
-                        await EventiDBworker.eventiDBworker.create(eventiModel.eventoBeingEdited);
-                      }
-                      print("Creati i due eventi");
+                      //print("Creati i due eventi");
+                      //getMeetingData();
+                      //print(appointments[0]);
                       LoginPage().getValueLogin().then((val) async {
                         await eventiModel.loadData(EventiDBworker.eventiDBworker, val);
                       });
-                      print("Printiamo la lista di eventi");
-                      print(eventiModel.eventiList[0]);
-                      //print(date.toString());
-                      print(MeetingDataSource(getMeetingData()).getSubject(0));
                   }
                 ),
               ),
-              //calendario
-              /*Container(
-                margin: const EdgeInsets.only(
-                  left: 30,
-                  top: 20,
-                  right: 30,
+              GestureDetector(
+                child: Container(
+                  child: const Text("PremiCoddue per creare nuovo evento")
                 ),
-                padding: EdgeInsets.zero,
-                width: double.maxFinite,
-                decoration: const BoxDecoration(
-                  color: Color.fromARGB(255, 180, 212, 250),
-                ),
-                child: TableCalendar(
-                  firstDay: DateTime.utc(2010, 10, 16),
-                  lastDay: DateTime.utc(2030, 3, 14),
-                  focusedDay: _focusedDay,
-                  calendarFormat: _calendarFormat,
-                  selectedDayPredicate: (day) {
-                    // Use `selectedDayPredicate` to determine which day is currently selected.
-                    // If this returns true, then `day` will be marked as selected.
-
-                    // Using `isSameDay` is recommended to disregard
-                    // the time-part of compared DateTime objects.
-                    return isSameDay(_selectedDay, day);
-                  },
-                  onDaySelected: (selectedDay, focusedDay) {
-                    if (!isSameDay(_selectedDay, selectedDay)) {
-                      setState(() {
-                        _selectedDay = selectedDay;
-                        _focusedDay = focusedDay;
-                      });
-                    }
-                  },
-                  onFormatChanged: (format) {
-                    if (_calendarFormat != format) {
-                      setState(() {
-                        _calendarFormat = format;
-                      });
-                    }
-                  },
-                  onPageChanged: (focusedDay) {
-                    // No need to call `setState()` here
-                    _focusedDay = focusedDay;
-                  },
-                ),
-              ),*/
+                onTap: () async {
+                  eventiModel.eventoBeingEdited = Evento();
+                  utentiModel.setStackIndex(6);
+                },
+              ),
               //scritta suggerimento
               Container(
                 margin: EdgeInsets.only(
@@ -435,12 +377,15 @@ class _HomePageState extends State<HomePage> {
 
 List<Meeting> getMeetingData() {
   final List<Meeting> listMeetings = <Meeting>[];
-  final DateTime startDateTime1 = DateTime(2021, 9, 7, 11, 0, 0);
-  final DateTime endDateTime1 = startDateTime1.add(const Duration(hours: 2));
-  listMeetings.add(Meeting('Meeting 1', startDateTime1, endDateTime1, Colors.orangeAccent, false));
-  final DateTime startDateTime2 = DateTime(2021, 9, 8, 12, 0, 0);
-  final DateTime endDateTime2 = startDateTime1.add(const Duration(hours: 3));
-  listMeetings.add(Meeting('Meeting 2', startDateTime2, endDateTime2, Colors.tealAccent, false));
+  print("Ma entra qua");
+  for(Evento eve in eventiModel.eventiList){
+    listMeetings.add(Meeting(eve.nomeScheda, eve.inizio, eve.fine));
+  }
+  print(listMeetings.length);
+
+  //listMeetings.add(Meeting('Meeting 1', startDateTime1, endDateTime1));
+  //final DateTime startDateTime2 = DateTime(2021, 9, 8, 12, 0, 0);
+  //final DateTime endDateTime2 = startDateTime1.add(const Duration(hours: 3));
   return listMeetings;
 }
 
@@ -451,17 +396,30 @@ class MeetingDataSource extends CalendarDataSource {
 
   @override
   String getSubject(int index) {
-    return appointments![index].strEventName;
+    return appointments![index].eventName;
+  }
+
+  @override
+  DateTime getStartTime(int index) {
+    return appointments![index].from;
+  }
+
+  @override
+  DateTime getEndTime(int index) {
+    return appointments![index].to;
   }
 }
 
 class Meeting {
-  Meeting(this.strEventName, this.fromDateTime, this.toDateTime, this.bgColor, this.isAllDay);
+  Meeting(this.eventName, this.from, this.to);
 
-  String strEventName;
-  DateTime fromDateTime;
-  DateTime toDateTime;
-  Color bgColor;
-  bool isAllDay;
+  String eventName;
+  DateTime from;
+  DateTime to;
+
+  @override
+  String toString() {
+    return 'Meeting{eventName: $eventName, from: $from, to: $to}';
+  }
 }
 
