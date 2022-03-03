@@ -31,8 +31,6 @@ class _State extends State<CountUpTimerPage> {
     onChangeRawMinute: (value) => print('onChangeRawMinute $value'),
   );
 
-  final _scrollController = ScrollController();
-
   @override
   void initState() {
     super.initState();

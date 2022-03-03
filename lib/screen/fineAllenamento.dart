@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mytraining/models/utentiModel.dart';
-import 'package:custom_timer/custom_timer.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class FineAllenamento extends StatelessWidget {
