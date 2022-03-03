@@ -168,7 +168,7 @@ class CreaScheda extends StatelessWidget{
     }
 
     LoginPage().getValueLogin().then((val) async {
-      schedeModel.loadData(SchedeDBworker.schedeDBworker, val);
+      await schedeModel.loadData(SchedeDBworker.schedeDBworker, val);
     });
 
     schedeModel.setStackIndex(0);
