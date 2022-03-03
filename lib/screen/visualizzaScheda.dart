@@ -9,6 +9,7 @@ import 'package:mytraining/screen/allenamento.dart';
 import 'package:mytraining/screen/schede.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
 
+
 class VisualizzaScheda extends StatelessWidget {
   final datasets = <String, dynamic>{};
   ValueNotifier<bool> isDialOpen = ValueNotifier(false);
@@ -216,3 +217,4 @@ class VisualizzaScheda extends StatelessWidget {
         });
   }
 }
+

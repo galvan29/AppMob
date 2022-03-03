@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mytraining/models/utentiModel.dart';
-import 'package:mytraining/timer/countUpTimerPage.dart';
-import 'package:stop_watch_timer/stop_watch_timer.dart';
-import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -15,12 +13,6 @@ class _HomePageState extends State<HomePage> {
   final datasets = <String, dynamic>{};
 
   ValueNotifier<bool> isDialOpen = ValueNotifier(false);
-
-  CalendarFormat _calendarFormat = CalendarFormat.month;
-
-  DateTime _focusedDay = DateTime.now();
-
-  DateTime? _selectedDay;
 
   @override
   Widget build(BuildContext context) {
@@ -217,6 +209,31 @@ class _HomePageState extends State<HomePage> {
                 decoration: const BoxDecoration(
                   color: Color.fromARGB(255, 180, 212, 250),
                 ),
+                child: SfCalendar(
+                  view: CalendarView.month,
+                  dataSource: MeetingDataSource(getMeetingData()),
+                  monthViewSettings: const MonthViewSettings(appointmentDisplayMode: MonthAppointmentDisplayMode.appointment),
+                  onTap: (CalendarTapDetails details){
+                      //DateTime date = details.date!;
+                      //dynamic appointments = details.appointments;
+                      CalendarElement view = details.targetElement;
+                      //print(date.toString());
+                      print(MeetingDataSource(getMeetingData()).getSubject(0));
+                  }
+                ),
+              ),
+              //calendario
+              /*Container(
+                margin: const EdgeInsets.only(
+                  left: 30,
+                  top: 20,
+                  right: 30,
+                ),
+                padding: EdgeInsets.zero,
+                width: double.maxFinite,
+                decoration: const BoxDecoration(
+                  color: Color.fromARGB(255, 180, 212, 250),
+                ),
                 child: TableCalendar(
                   firstDay: DateTime.utc(2010, 10, 16),
                   lastDay: DateTime.utc(2030, 3, 14),
@@ -250,7 +267,7 @@ class _HomePageState extends State<HomePage> {
                     _focusedDay = focusedDay;
                   },
                 ),
-              ),
+              ),*/
               //scritta suggerimento
               Container(
                 margin: EdgeInsets.only(
@@ -386,3 +403,36 @@ class _HomePageState extends State<HomePage> {
         ));
   }
 }
+
+List<Meeting> getMeetingData() {
+  final List<Meeting> listMeetings = <Meeting>[];
+  final DateTime startDateTime1 = DateTime(2021, 9, 7, 11, 0, 0);
+  final DateTime endDateTime1 = startDateTime1.add(const Duration(hours: 2));
+  listMeetings.add(Meeting('Meeting 1', startDateTime1, endDateTime1, Colors.orangeAccent, false));
+  final DateTime startDateTime2 = DateTime(2021, 9, 8, 12, 0, 0);
+  final DateTime endDateTime2 = startDateTime1.add(const Duration(hours: 3));
+  listMeetings.add(Meeting('Meeting 2', startDateTime2, endDateTime2, Colors.tealAccent, false));
+  return listMeetings;
+}
+
+class MeetingDataSource extends CalendarDataSource {
+  MeetingDataSource(List<Meeting> listMeetings){
+    appointments = listMeetings;
+  }
+
+  @override
+  String getSubject(int index) {
+    return appointments![index].strEventName;
+  }
+}
+
+class Meeting {
+  Meeting(this.strEventName, this.fromDateTime, this.toDateTime, this.bgColor, this.isAllDay);
+
+  String strEventName;
+  DateTime fromDateTime;
+  DateTime toDateTime;
+  Color bgColor;
+  bool isAllDay;
+}
+
