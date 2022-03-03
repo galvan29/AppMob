@@ -24,7 +24,8 @@ class EventiDBworker {
                 "id INTEGER PRIMARY KEY,"
                 "idUtente TEXT,"
                 "nomeScheda TEXT,"
-                "durataScheda TEXT)");
+                "inizio TEXT,"
+                "fine TEXT)");
           });
     }
     return _db;
@@ -35,7 +36,8 @@ class EventiDBworker {
     evento.id = inMap["id"];
     evento.idUtente = inMap["idUtente"];
     evento.nomeScheda = inMap["nomeScheda"];
-    evento.durataScheda = inMap["durataScheda"];
+    evento.inizio = inMap["inizio"];
+    evento.fine = inMap["fine"];
     return evento;
   }
 
@@ -44,7 +46,8 @@ class EventiDBworker {
     map["id"] = evento.id;
     map["idUtente"] = evento.idUtente;
     map["nomeScheda"] = evento.nomeScheda;
-    map["durataScheda"] = evento.durataScheda;
+    map["inizio"] = evento.inizio;
+    map["fine"] = evento.fine;
     return map;
   }
 
@@ -53,9 +56,9 @@ class EventiDBworker {
     var val = await db!.rawQuery("SELECT MAX(id) + 1 AS id FROM eventi");
     int id = val.first["id"] == null ? 1 : val.first["id"] as int;
     return await db.rawInsert(
-        "INSERT INTO eventi (id, idUtente, nomeScheda, durataScheda) "
-            "VALUES (?, ?, ?, ?)",
-        [id, evento.idUtente, evento.nomeScheda, evento.durataScheda]
+        "INSERT INTO eventi (id, idUtente, nomeScheda, inizio, fine) "
+            "VALUES (?, ?, ?, ?, ?)",
+        [id, evento.idUtente, evento.nomeScheda, evento.inizio, evento.fine]
     );
   }
 

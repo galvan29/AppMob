@@ -220,8 +220,9 @@ class _HomePageState extends State<HomePage> {
                       //DateTime date = details.date!;
                       //dynamic appointments = details.appointments;
                       //CalendarElement view = details.targetElement;
-                      eventiModel.eventoBeingEdited.nomeScheda = "Scheda 1";
-                      eventiModel.eventoBeingEdited.durataScheda = "100";
+                    eventiModel.eventoBeingEdited.nomeScheda = "Scheda 1";
+                    eventiModel.eventoBeingEdited.inizio = DateTime(2022, 3, 8, 11, 0, 0).toString();
+                    eventiModel.eventoBeingEdited.fine = DateTime(2022, 3, 8, 12, 0, 0).toString();
                       if(eventiModel.eventoBeingEdited.id==-1){
                         LoginPage().getValueLogin().then((val) async {
                           eventiModel.eventoBeingEdited.idUtente = val.toString();
@@ -230,7 +231,8 @@ class _HomePageState extends State<HomePage> {
                       }
 
                       eventiModel.eventoBeingEdited.nomeScheda = "Scheda 2";
-                      eventiModel.eventoBeingEdited.durataScheda = "120";
+                      eventiModel.eventoBeingEdited.inizio = DateTime(2022, 3, 7, 11, 0, 0).toString();
+                      eventiModel.eventoBeingEdited.fine = DateTime(2022, 3, 7, 12, 0, 0).toString();
 
                       if(eventiModel.eventoBeingEdited.id==-1){
                         LoginPage().getValueLogin().then((val) async {
@@ -243,7 +245,7 @@ class _HomePageState extends State<HomePage> {
                         await eventiModel.loadData(EventiDBworker.eventiDBworker, val);
                       });
                       print("Printiamo la lista di eventi");
-                      print(eventiModel.eventiList);
+                      print(eventiModel.eventiList[0]);
                       //print(date.toString());
                       print(MeetingDataSource(getMeetingData()).getSubject(0));
                   }

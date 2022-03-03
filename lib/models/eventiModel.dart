@@ -4,7 +4,8 @@ class Evento {
   int id = -1;
   String idUtente = "";
   String nomeScheda = "";
-  String durataScheda = "";
+  String inizio = "";
+  String fine = "";
 }
 
 class EventiModel extends ChangeNotifier {
@@ -13,7 +14,8 @@ class EventiModel extends ChangeNotifier {
   Evento eventoBeingEdited = Evento();
   String idUtente = "";
   String nomeScheda = "";
-  String durataScheda = "";
+  String inizio = "";
+  String fine = "";
 
   void setIdScheda(String idUtente2){
     idUtente = idUtente2;
@@ -25,10 +27,11 @@ class EventiModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setDurataScheda(String durataScheda2){
-    durataScheda = durataScheda2;
+  /*Future<int> getNomeSchedaEvento(){
+    //get();
     notifyListeners();
-  }
+    return 1;
+  } */
 
   Future<int> loadData(dynamic inDatabaseWorker, int id) async {
     eventiList = await inDatabaseWorker.getAll(id);
