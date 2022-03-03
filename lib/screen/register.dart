@@ -1,165 +1,94 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:mytraining/db/eserciziDBworker.dart';
+import 'package:mytraining/db/eserciziDBworker.dart';
+import 'package:mytraining/db/eserciziDBworker.dart';
+import 'package:mytraining/db/schedeDBworker.dart';
 import 'package:mytraining/db/utentiDBworker.dart';
+import 'package:mytraining/models/eserciziModel.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:mytraining/models/utentiModel.dart';
+import 'package:mytraining/screen/login.dart';
 
-class RegisterPage extends StatelessWidget {
-  final datasets = <String, dynamic>{};
-  final usernameController = TextEditingController();
-  final passwordController = TextEditingController();
+
+class RegisterPage extends StatelessWidget{
+
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset:false,
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.add, color: Colors.white),
-        onPressed: (){
-          //utentiModel.utenteBeingEdited = Utente();
-          utentiModel.setStackIndex(1);
-        },
-      ),
-      backgroundColor: Colors.white,
-      body: Form(
-        key: _formKey,
-        child: ListView(
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(MediaQuery.of(context).size.height * 0.07),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ListTile(
-              leading: const Icon(Icons.title),
-              title: TextFormField(
-                //initialValue: "Nome Utente",
-                validator: (String? inValue){
-                  if(inValue!.isEmpty){
-                    return "Please enter a nome utente";
-                  }
-                  return null;
-                },
-                onChanged: (String inValue){
-                  utentiModel.utenteBeingEdited.nomeUtente = inValue;
-                },
-              ),
-            ),
-            ListTile(
-              leading: const Icon(Icons.content_paste),
-              title: TextFormField(
-                keyboardType: TextInputType.number,
-                maxLines: 1,
-                //initialValue: "Password",
-                validator: (String? inValue){
-                  if(inValue!.isEmpty){
-                    return "Please enter duration";
-                  }
-                  return null;
-                },
-                onChanged: (String inValue){
-                  utentiModel.utenteBeingEdited.password = inValue;
-                },
-              ),
-            ),
             Container(
-                margin: const EdgeInsets.only(
-                  left: 50,
-                  top: 20,
-                  right: 50,
-                ),
-                padding: EdgeInsets.zero,
-                decoration: const BoxDecoration(),
-                child: GestureDetector(
-                  onTap: () {
-                    _save(context);
-                    /*Utenti utente = new Utenti(nomeUtente: usernameController.text, password: passwordController.text);
-                          DatabaseHelper.istance.getPasswordVerified(usernameController.text).then((val) {
-                            if (val == '[]') {
-                              print("Utente inesistente, procedo a creare utente");
-                              DatabaseHelper.istance.add(utente);
-                              utentiModel.setStackIndex(0);
-                            } else {
-                              // set up the buttons
-                              Widget continueButton = TextButton(
-                                child: Text("Riprova",
-                                  style: GoogleFonts.adventPro(
-                                    textStyle: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: MediaQuery.of(context).size.height * 0.016,
-                                      fontStyle: FontStyle.normal,
-                                      decoration: TextDecoration.none,
-                                    ),
-                                  ),
-                                ),
-                                onPressed: () {
-                                  utentiModel.setStackIndex(1);
-                                },
-                              );
-
-                              // set up the AlertDialog
-                              AlertDialog alert = AlertDialog(
-                                title: Text("Attenzione",
-                                  style: GoogleFonts.adventPro(
-                                    textStyle: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: MediaQuery.of(context).size.height * 0.025,
-                                      fontStyle: FontStyle.normal,
-                                      decoration: TextDecoration.none,
-                                    ),
-                                  ),
-                                ),
-                                content: Text("Nome Utente già presente",
-                                  style: GoogleFonts.adventPro(
-                                    textStyle: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: MediaQuery.of(context).size.height * 0.016,
-                                      fontStyle: FontStyle.normal,
-                                      decoration: TextDecoration.none,
-                                    ),
-                                  ),
-                                ),
-                                actions: [
-                                  continueButton,
-                                ],
-                              );
-
-                              showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return alert;
-                                },
-                              );
-                            }
-                          }); */
-                  },
-                  child: Container(
-                      width: double.maxFinite,
-                      height: 40,
-                      padding: const EdgeInsets.only(top:7),
-                      decoration: BoxDecoration(
-                          color: Colors.black.withOpacity(0.05),
-                          borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(5),
-                            topRight: Radius.circular(5),
-                            bottomRight: Radius.circular(5),
-                            bottomLeft: Radius.circular(5),
-                          ),
-                          border: Border.all(color: Colors.white, width: 2)
-                      ),
-                      child: Text(
-                        '''Register''',
+              padding: EdgeInsets.zero,
+              width: double.maxFinite,
+              height: MediaQuery.of(context).size.height * 0.07,
+              decoration: const BoxDecoration(
+                  color: Color.fromARGB(255, 180, 212, 250),
+                  border: Border(
+                    bottom: BorderSide(
+                      color: Colors.black,
+                      width: 1.0,
+                    ),
+                  )),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    padding: EdgeInsets.zero,
+                    decoration: const BoxDecoration(),
+                    margin: EdgeInsets.only(
+                      left: MediaQuery.of(context).size.width * 0.01,
+                      top: MediaQuery.of(context).size.width * 0.05,
+                    ),
+                    child: Text('MyTraining',
                         style: GoogleFonts.adventPro(
-                          textStyle: const TextStyle(
-                            color: Color(0xFFFFFFFF),
-                            fontWeight: FontWeight.w500,
-                            fontSize: 16,
+                          textStyle: TextStyle(
+                            color: const Color(0xFF000000),
+                            fontWeight: FontWeight.w400,
+                            fontSize: MediaQuery.of(context).size.height * 0.03,
                             fontStyle: FontStyle.normal,
                             decoration: TextDecoration.none,
                           ),
                         ),
-                        textAlign: TextAlign.center,
-                      )
+                        textAlign: TextAlign.left,
+                        maxLines: 1),
                   ),
-                ))
+                  Container(
+                      padding: EdgeInsets.zero,
+                      decoration: const BoxDecoration(),
+                      margin: EdgeInsets.only(
+                        right: MediaQuery.of(context).size.width * 0.03,
+                        top: MediaQuery.of(context).size.width * 0.05,
+                      ),
+                      child: GestureDetector(
+                        onTap: () {
+                          //info
+                        },
+                        child: Container(
+                            height: MediaQuery.of(context).size.height * 0.02,
+                            width: MediaQuery.of(context).size.height * 0.02,
+                            decoration: BoxDecoration(
+                                color: Colors.black.withOpacity(0),
+                                borderRadius: const BorderRadius.only(
+                                  topLeft: Radius.circular(5),
+                                  topRight: Radius.circular(5),
+                                  bottomRight: Radius.circular(5),
+                                  bottomLeft: Radius.circular(5),
+                                ),
+                                border: Border.all(color: Colors.black, width: 1)),
+                            child: Icon(
+                              Icons.info,
+                              size: MediaQuery.of(context).size.height * 0.02,
+                              color: const Color(0xFF000000),
+                            )),
+                      ))
+                ],
+              ),
+            ),
           ],
         ),
       ),
@@ -169,296 +98,110 @@ class RegisterPage extends StatelessWidget {
             children: [
               FlatButton(
                 onPressed: (){
-                  utentiModel.setStackIndex(0);
+                  utentiModel.setStackIndex(2);
                 },
                 child: const Text("Cancel"),
+              ),
+              const Spacer(),
+              FlatButton(
+                onPressed: (){
+                  _save(context);
+                },
+                child: const Text("Save"),
               ),
             ],
           )
       ),
-      /* body: Stack(
-        children: [
-          Stack(
-            children: [
-              Image.asset(
-                "assets/image/sfondo2.png",
-                width: double.maxFinite,
-                height: double.maxFinite,
-                fit: BoxFit.cover,
+      body: Form(
+        key: _formKey,
+        child: ListView(
+          children: [
+            ListTile(
+              leading: const Icon(Icons.title),
+              title: TextFormField(
+                decoration: const InputDecoration(hintText: "Utente"),
+                initialValue: utentiModel.utenteBeingEdited == null ? null : utentiModel.utenteBeingEdited.nomeUtente,
+                validator: (String? inValue){
+                  if(inValue!.isEmpty){
+                    return "Inserire Utente";
+                  }
+                  return null;
+                },
+                onChanged: (String inValue){
+                  utentiModel.utenteBeingEdited.nomeUtente = inValue;
+                },
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    margin: EdgeInsets.only(
-                      top: MediaQuery.of(context).size.height * 0.48,
-                    ),
-                    padding: EdgeInsets.zero,
-                    width: double.maxFinite,
-                    decoration: const BoxDecoration(),
-                    child: Text(r'''MyTraining''',
-                        style: GoogleFonts.adventPro(
-                          textStyle: const TextStyle(
-                            color: Color(0xFFFFFFFF),
-                            fontWeight: FontWeight.w400,
-                            fontSize: 50,
-                            fontStyle: FontStyle.normal,
-                            decoration: TextDecoration.none,
-                          ),
-                        ),
-                        textAlign: TextAlign.center,
-                        maxLines: 1),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.only(
-                      top: 20,
-                    ),
-                    padding: EdgeInsets.zero,
-                    width: double.maxFinite,
-                    decoration: const BoxDecoration(),
-                    child: Text(r'''Register''',
-                        style: GoogleFonts.adventPro(
-                          textStyle: const TextStyle(
-                            color: Color(0xFFFFFFFF),
-                            fontWeight: FontWeight.w400,
-                            fontSize: 25,
-                            fontStyle: FontStyle.normal,
-                            decoration: TextDecoration.none,
-                          ),
-                        ),
-                        textAlign: TextAlign.center,
-                        maxLines: 1),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.only(
-                      left: 50,
-                      top: 70,
-                      right: 50,
-                    ),
-                    width: double.maxFinite,
-                    height: 40,
-                    padding: const EdgeInsets.only(top:8),
-                    decoration: BoxDecoration(
-                        borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(5),
-                          topRight: Radius.circular(5),
-                          bottomRight: Radius.circular(5),
-                          bottomLeft: Radius.circular(5),
-                        ),
-                        border: Border.all(color: Colors.white.withOpacity(0),)
-                    ),
-                    child: TextField(
-                      controller: usernameController,
-                      onChanged: (String value) async {},
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: Colors.white, width: 0.0
-                          ),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: Colors.white, width: 0.0
-                          ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: Colors.white, width: 0.0
-                          ),
-                        ),
-                        hintText: r'''Nome Utente''',
-                        hintStyle: TextStyle(fontSize: 16.0, color: Colors.white),
-                        contentPadding: EdgeInsets.only(left: 15),
-                      ),
-                      style: GoogleFonts.adventPro(
-                        textStyle: const TextStyle(
-                          color: Color(0xFFFFFFFF),
-                          fontWeight: FontWeight.w400,
-                          fontSize: 16,
-                          fontStyle: FontStyle.normal,
-                          decoration: TextDecoration.none,
-                        ),
-                      ),
-                      textAlign: TextAlign.left,
-                      maxLines: 1,
-                      minLines: 1,
-                      maxLength: null,
-                      obscureText: false,
-                      showCursor: true,
-                      autocorrect: false,
-                    ),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.only(
-                      left: 50,
-                      right: 50,
-                    ),
-                    width: double.maxFinite,
-                    height: 40,
-                    padding: const EdgeInsets.only(top:8),
-                    decoration: BoxDecoration(
-                        borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(5),
-                          topRight: Radius.circular(5),
-                          bottomRight: Radius.circular(5),
-                          bottomLeft: Radius.circular(5),
-                        ),
-                        border: Border.all(color: Colors.white.withOpacity(0),)
-                    ),
-                    child: TextField(
-                      controller: passwordController,
-                      onChanged: (String value) async {},
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: Colors.white, width: 0.0
-                          ),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: Colors.white, width: 0.0
-                          ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: Colors.white, width: 0.0
-                          ),
-                        ),
-                        hintText: r'''Password''',
-                        hintStyle: TextStyle(fontSize: 16.0, color: Colors.white),
-                        contentPadding: EdgeInsets.only(left: 15),
-                      ),
-                      style: GoogleFonts.adventPro(
-                        textStyle: const TextStyle(
-                          color: Color(0xFFFFFFFF),
-                          fontWeight: FontWeight.w400,
-                          fontSize: 16,
-                          fontStyle: FontStyle.normal,
-                          decoration: TextDecoration.none,
-                        ),
-                      ),
-                      textAlign: TextAlign.left,
-                      maxLines: 1,
-                      minLines: 1,
-                      maxLength: null,
-                      obscureText: true,
-                      showCursor: true,
-                      autocorrect: false,
-                    ),
-                  ),
-                  Container(
-                      margin: const EdgeInsets.only(
-                        left: 50,
-                        top: 20,
-                        right: 50,
-                      ),
-                      padding: EdgeInsets.zero,
-                      decoration: const BoxDecoration(),
-                      child: GestureDetector(
-                        onTap: () {
-                          _save(context);
-                          /*Utenti utente = new Utenti(nomeUtente: usernameController.text, password: passwordController.text);
-                          DatabaseHelper.istance.getPasswordVerified(usernameController.text).then((val) {
-                            if (val == '[]') {
-                              print("Utente inesistente, procedo a creare utente");
-                              DatabaseHelper.istance.add(utente);
-                              utentiModel.setStackIndex(0);
-                            } else {
-                              // set up the buttons
-                              Widget continueButton = TextButton(
-                                child: Text("Riprova",
-                                  style: GoogleFonts.adventPro(
-                                    textStyle: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: MediaQuery.of(context).size.height * 0.016,
-                                      fontStyle: FontStyle.normal,
-                                      decoration: TextDecoration.none,
-                                    ),
-                                  ),
-                                ),
-                                onPressed: () {
-                                  utentiModel.setStackIndex(1);
-                                },
-                              );
-
-                              // set up the AlertDialog
-                              AlertDialog alert = AlertDialog(
-                                title: Text("Attenzione",
-                                  style: GoogleFonts.adventPro(
-                                    textStyle: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: MediaQuery.of(context).size.height * 0.025,
-                                      fontStyle: FontStyle.normal,
-                                      decoration: TextDecoration.none,
-                                    ),
-                                  ),
-                                ),
-                                content: Text("Nome Utente già presente",
-                                  style: GoogleFonts.adventPro(
-                                    textStyle: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: MediaQuery.of(context).size.height * 0.016,
-                                      fontStyle: FontStyle.normal,
-                                      decoration: TextDecoration.none,
-                                    ),
-                                  ),
-                                ),
-                                actions: [
-                                  continueButton,
-                                ],
-                              );
-
-                              showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return alert;
-                                },
-                              );
-                            }
-                          }); */
-                        },
-                        child: Container(
-                            width: double.maxFinite,
-                            height: 40,
-                            padding: const EdgeInsets.only(top:7),
-                            decoration: BoxDecoration(
-                                color: Colors.black.withOpacity(0.05),
-                                borderRadius: const BorderRadius.only(
-                                  topLeft: Radius.circular(5),
-                                  topRight: Radius.circular(5),
-                                  bottomRight: Radius.circular(5),
-                                  bottomLeft: Radius.circular(5),
-                                ),
-                                border: Border.all(color: Colors.white, width: 2)
-                            ),
-                            child: Text(
-                              '''Register''',
-                              style: GoogleFonts.adventPro(
-                                textStyle: const TextStyle(
-                                  color: Color(0xFFFFFFFF),
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 16,
-                                  fontStyle: FontStyle.normal,
-                                  decoration: TextDecoration.none,
-                                ),
-                              ),
-                              textAlign: TextAlign.center,
-                            )
-                        ),
-                      )),
-                ],
+            ),
+            ListTile(
+              leading: const Icon(Icons.title),
+              title: TextFormField(
+                decoration: const InputDecoration(hintText: "Password"),
+                initialValue: utentiModel.utenteBeingEdited == null ? null : utentiModel.utenteBeingEdited.password,
+                validator: (String? inValue){
+                  if(inValue!.isEmpty){
+                    return "Inserire Password";
+                  }
+                  return null;
+                },
+                onChanged: (String inValue){
+                  utentiModel.utenteBeingEdited.password = inValue;
+                },
               ),
-            ],
-          ),
-        ],
-      ), */
+            ),
+            ListTile(
+              leading: const Icon(Icons.title),
+              title: TextFormField(
+                decoration: const InputDecoration(hintText: "Nome"),
+                initialValue: utentiModel.utenteBeingEdited == null ? null : utentiModel.utenteBeingEdited.Nome,
+                validator: (String? inValue){
+                  if(inValue!.isEmpty){
+                    return "Inserire nome";
+                  }
+                  return null;
+                },
+                onChanged: (String inValue){
+                  utentiModel.utenteBeingEdited.Nome = inValue;
+                },
+              ),
+            ),
+            ListTile(
+              leading: const Icon(Icons.title),
+              title: TextFormField(
+                decoration: const InputDecoration(hintText: "Cognome"),
+                initialValue: utentiModel.utenteBeingEdited == null ? null : utentiModel.utenteBeingEdited.Cognome,
+                validator: (String? inValue){
+                  if(inValue!.isEmpty){
+                    return "Inserire cognome";
+                  }
+                  return null;
+                },
+                onChanged: (String inValue){
+                  utentiModel.utenteBeingEdited.Cognome = inValue;
+                },
+              ),
+            ),
+            ListTile(
+              leading: const Icon(Icons.title),
+              title: TextFormField(
+                decoration: const InputDecoration(hintText: "Età"),
+                maxLines: 2,
+                initialValue: utentiModel.utenteBeingEdited == null ? null : utentiModel.utenteBeingEdited.Eta,
+                validator: (String? inValue){
+                  if(inValue!.isEmpty){
+                    return "Inserire Età";
+                  }
+                  return null;
+                },
+                onChanged: (String inValue){
+                  utentiModel.utenteBeingEdited.Eta = inValue;
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
-
-
 
   void _save(BuildContext context) async {
     print(context);   //dopo vedo cosa contiene
@@ -477,7 +220,7 @@ class RegisterPage extends StatelessWidget {
       print(utentiModel.utenteBeingEdited.password);
       await UtentiDBworker.utentiDBworker.create(utentiModel.utenteBeingEdited);
     } //else {
-     // await UtentiDBworker.utentiDBworker.update(utentiModel.utenteBeingEdited);
+    // await UtentiDBworker.utentiDBworker.update(utentiModel.utenteBeingEdited);
     //}
 
     utentiModel.loadData(UtentiDBworker.utentiDBworker);

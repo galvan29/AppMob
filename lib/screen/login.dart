@@ -361,7 +361,6 @@ class LoginPage extends StatelessWidget {
             ListTile(
               leading: const Icon(Icons.content_paste),
               title: TextFormField(
-                keyboardType: TextInputType.number,
                 maxLines: 1,
                // initialValue: "Password",
                 validator: (String? inValue) {
