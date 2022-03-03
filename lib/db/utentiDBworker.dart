@@ -3,7 +3,6 @@ import 'package:mytraining/models/utentiModel.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:mytraining/common/utils.dart' as utils;
 
 class UtentiDBworker {
 

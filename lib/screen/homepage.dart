@@ -2,21 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mytraining/models/utentiModel.dart';
 import 'package:mytraining/timer/countUpTimerPage.dart';
-import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
 import 'package:flutter/material.dart';
+import 'package:table_calendar/table_calendar.dart';
 
 class HomePage extends StatelessWidget {
   final datasets = <String, dynamic>{};
   ValueNotifier<bool> isDialOpen = ValueNotifier(false);
+  CalendarFormat _calendarFormat = CalendarFormat.month;
+  DateTime _focusedDay = DateTime.now();
+  DateTime? _selectedDay;
 
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
-    final textTheme = Theme.of(context).textTheme;
     return Scaffold(
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(MediaQuery.of(context).size.height * 0.07),
+          preferredSize:
+              Size.fromHeight(MediaQuery.of(context).size.height * 0.07),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -47,7 +50,8 @@ class HomePage extends StatelessWidget {
                             textStyle: TextStyle(
                               color: const Color(0xFF000000),
                               fontWeight: FontWeight.w400,
-                              fontSize: MediaQuery.of(context).size.height * 0.03,
+                              fontSize:
+                                  MediaQuery.of(context).size.height * 0.03,
                               fontStyle: FontStyle.normal,
                               decoration: TextDecoration.none,
                             ),
@@ -77,7 +81,8 @@ class HomePage extends StatelessWidget {
                                     bottomRight: Radius.circular(5),
                                     bottomLeft: Radius.circular(5),
                                   ),
-                                  border: Border.all(color: Colors.black, width: 1)),
+                                  border: Border.all(
+                                      color: Colors.black, width: 1)),
                               child: Icon(
                                 Icons.info,
                                 size: MediaQuery.of(context).size.height * 0.02,
@@ -122,7 +127,7 @@ class HomePage extends StatelessWidget {
                 decoration: const BoxDecoration(),
                 child: GestureDetector(
                     onTap: () {
-                       utentiModel.setStackIndex(4);
+                      utentiModel.setStackIndex(4);
                     },
                     child: Container(
                         width: 10,
@@ -200,21 +205,41 @@ class HomePage extends StatelessWidget {
                 padding: EdgeInsets.zero,
                 width: double.maxFinite,
                 decoration: const BoxDecoration(),
-                child: Container(
-                    padding: const EdgeInsets.only(top: 8),
-                    decoration: BoxDecoration(
-                      color: const Color.fromARGB(255, 180, 212, 250),
-                      border: Border.all(color: Colors.white),
-                      borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(5),
-                        topRight: Radius.circular(5),
-                        bottomRight: Radius.circular(5),
-                        bottomLeft: Radius.circular(5),
-                      ),
-                    ),
-                    child: SfCalendar(
-                      view: CalendarView.month,
-                    )),
+                child: TableCalendar(
+                  firstDay: kFirstDay,
+                  lastDay: kLastDay,
+                  focusedDay: _focusedDay,
+                  calendarFormat: _calendarFormat,
+                  selectedDayPredicate: (day) {
+                    // Use `selectedDayPredicate` to determine which day is currently selected.
+                    // If this returns true, then `day` will be marked as selected.
+
+                    // Using `isSameDay` is recommended to disregard
+                    // the time-part of compared DateTime objects.
+                    return isSameDay(_selectedDay, day);
+                  },
+                  onDaySelected: (selectedDay, focusedDay) {
+                    if (!isSameDay(_selectedDay, selectedDay)) {
+                      // Call `setState()` when updating the selected day
+                      setState(() {
+                        _selectedDay = selectedDay;
+                        _focusedDay = focusedDay;
+                      });
+                    }
+                  },
+                  onFormatChanged: (format) {
+                    if (_calendarFormat != format) {
+                      // Call `setState()` when updating calendar format
+                      setState(() {
+                        _calendarFormat = format;
+                      });
+                    }
+                  },
+                  onPageChanged: (focusedDay) {
+                    // No need to call `setState()` here
+                    _focusedDay = focusedDay;
+                  },
+                ),
               ),
               Container(
                 margin: EdgeInsets.only(
@@ -254,7 +279,8 @@ class HomePage extends StatelessWidget {
                     bottomLeft: Radius.circular(5),
                   ),
                 ),
-                child: Text(r'''Bere almeno due litri di acqua al giorno aiuta il corpo a rimanere idratato ed a mantenerlo in salute.''',
+                child: Text(
+                    r'''Bere almeno due litri di acqua al giorno aiuta il corpo a rimanere idratato ed a mantenerlo in salute.''',
                     style: GoogleFonts.adventPro(
                       textStyle: const TextStyle(
                         color: Colors.black,
@@ -291,7 +317,7 @@ class HomePage extends StatelessWidget {
                       ),
                     ),
                   ),
-                 /* Padding(
+                  /* Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 4),
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
@@ -312,7 +338,7 @@ class HomePage extends StatelessWidget {
                     ),
                   ), */
                 ],
-              )
+              ),
 
             ],
           ),
@@ -348,4 +374,3 @@ class HomePage extends StatelessWidget {
         ));
   }
 }
-
