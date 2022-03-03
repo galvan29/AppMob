@@ -206,8 +206,8 @@ class HomePage extends StatelessWidget {
                 width: double.maxFinite,
                 decoration: const BoxDecoration(),
                 child: TableCalendar(
-                  firstDay: kFirstDay,
-                  lastDay: kLastDay,
+                  firstDay: DateTime.utc(2010, 10, 16),
+                  lastDay: DateTime.utc(2030, 3, 14),
                   focusedDay: _focusedDay,
                   calendarFormat: _calendarFormat,
                   selectedDayPredicate: (day) {
@@ -218,7 +218,7 @@ class HomePage extends StatelessWidget {
                     // the time-part of compared DateTime objects.
                     return isSameDay(_selectedDay, day);
                   },
-                  onDaySelected: (selectedDay, focusedDay) {
+                  /*onDaySelected: (selectedDay, focusedDay) {
                     if (!isSameDay(_selectedDay, selectedDay)) {
                       // Call `setState()` when updating the selected day
                       setState(() {
@@ -226,15 +226,7 @@ class HomePage extends StatelessWidget {
                         _focusedDay = focusedDay;
                       });
                     }
-                  },
-                  onFormatChanged: (format) {
-                    if (_calendarFormat != format) {
-                      // Call `setState()` when updating calendar format
-                      setState(() {
-                        _calendarFormat = format;
-                      });
-                    }
-                  },
+                  }, */
                   onPageChanged: (focusedDay) {
                     // No need to call `setState()` here
                     _focusedDay = focusedDay;
