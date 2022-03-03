@@ -7,10 +7,9 @@ import 'package:mytraining/db/utentiDBworker.dart';
 import 'package:mytraining/models/eserciziModel.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mytraining/models/utentiModel.dart';
-import 'package:mytraining/screen/login.dart';
 
 
-class RegisterPage extends StatelessWidget{
+class CreaRegistrazione extends StatelessWidget{
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -204,34 +203,32 @@ class RegisterPage extends StatelessWidget{
   }
 
   void _save(BuildContext context) async {
-    print(context);   //dopo vedo cosa contiene
+
     if(!_formKey.currentState!.validate()){
       return;
     }
 
     //_formKey.currentState.save();
 
-    //DEVO CONTROLLARE SE ESISTE O NO CON UN BEL GET
-
     if(utentiModel.utenteBeingEdited.id==-1){
-      print("CODDUE CREATO");
-      print(utentiModel.utenteBeingEdited.id);
-      print(utentiModel.utenteBeingEdited.nomeUtente);
-      print(utentiModel.utenteBeingEdited.password);
-      await UtentiDBworker.utentiDBworker.create(utentiModel.utenteBeingEdited);
-    } //else {
-    // await UtentiDBworker.utentiDBworker.update(utentiModel.utenteBeingEdited);
-    //}
+      Utente().getValueScheda().then((val) async {
+        utentiModel.utenteBeingEdited.id = val.toString();
+      });
+      await UtentiDBworker.utentiDBworker.create(registrazioneModel.regBeingEdited);
+    } else {
+      await UtentiDBworker.utentiDBworker.update(registrazioneModel.regBeingEdited);
+    }
 
-    utentiModel.loadData(UtentiDBworker.utentiDBworker);
-
-    utentiModel.setStackIndex(1);
-
+    Utente().then((val) async {
+      utentiModel.loadData(UtentiDBworker.utentiDBworker, val);
+    });
+    utentiModel.setStackIndex(2);
+//dd
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
         backgroundColor: Colors.green,
         duration: Duration(seconds: 2),
-        content: Text("Utente creato"),
+        content: Text("Utente saved"),
       ),
     );
 
