@@ -5,7 +5,9 @@ import 'package:mytraining/db/schedeDBworker.dart';
 import 'package:mytraining/models/eserciziModel.dart';
 import 'package:mytraining/models/schedeModel.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mytraining/screen/allenamento.dart';
 import 'package:mytraining/screen/schede.dart';
+import 'package:stop_watch_timer/stop_watch_timer.dart';
 
 class VisualizzaScheda extends StatelessWidget {
   final datasets = <String, dynamic>{};
@@ -103,7 +105,6 @@ class VisualizzaScheda extends StatelessWidget {
         floatingActionButton: FloatingActionButton(
           child: const Icon(Icons.play_arrow, color: Colors.white),
           onPressed: () {
-            //eserciziModel.esercizioBeingEdited = Esercizio();
             schedeModel.setStackIndex(4);
           },
         ),

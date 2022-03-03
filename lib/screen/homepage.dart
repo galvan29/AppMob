@@ -306,7 +306,7 @@ class _HomePageState extends State<HomePage> {
                     maxLines: 3),
               ),
               //cronometro
-              Column(
+              /*Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
@@ -351,7 +351,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ), */
                 ],
-              ),
+              ),*/
             ],
           ),
         ),

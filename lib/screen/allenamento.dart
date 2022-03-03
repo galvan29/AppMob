@@ -14,7 +14,6 @@ class Allenamento extends StatefulWidget {
 
 class _AllenamentoState extends State<Allenamento> {
   final datasets = <String, dynamic>{};
-
   ValueNotifier<bool> isDialOpen = ValueNotifier(false);
   final _isHours = true;
 
@@ -46,8 +45,6 @@ class _AllenamentoState extends State<Allenamento> {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final textTheme = Theme.of(context).textTheme;
     return Scaffold(
       appBar: PreferredSize(
         preferredSize:
@@ -128,145 +125,146 @@ class _AllenamentoState extends State<Allenamento> {
       ),
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
-    child: Column(
-    children: <Widget>[
-      Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          /// Display stop watch time
-          Padding(
-            padding: const EdgeInsets.only(bottom: 0),
-            child: StreamBuilder<int>(
-              stream: _stopWatchTimer.rawTime,
-              initialData: _stopWatchTimer.rawTime.value,
-              builder: (context, snap) {
-                final value = snap.data!;
-                final displayTime =
-                StopWatchTimer.getDisplayTime(value, hours: _isHours);
-                return Column(
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.all(8),
-                      child: Text(
-                        displayTime,
-                        style: const TextStyle(
-                            fontSize: 40,
-                            fontFamily: 'Helvetica',
-                            fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                  ],
-                );
-              },
-            ),
-          ),
-          /// Button
-          Padding(
-            padding: const EdgeInsets.all(2),
-            child: Column(
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+          child: Column(children: <Widget>[
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            /// Display stop watch time
+            Padding(
+              padding: const EdgeInsets.only(bottom: 0),
+              child: StreamBuilder<int>(
+                stream: _stopWatchTimer.rawTime,
+                initialData: _stopWatchTimer.rawTime.value,
+                builder: (context, snap) {
+                  final value = snap.data!;
+                  final displayTime =
+                      StopWatchTimer.getDisplayTime(value, hours: _isHours);
+                  return Column(
                     children: <Widget>[
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 4),
-                        child: RaisedButton(
-                          padding: const EdgeInsets.all(4),
-                          color: Colors.lightBlue,
-                          shape: const StadiumBorder(),
-                          onPressed: () async {
-                            _stopWatchTimer.onExecute
-                                .add(StopWatchExecute.start);
-                          },
-                          child: const Text(
-                            'Start',
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 4),
-                        child: RaisedButton(
-                          padding: const EdgeInsets.all(4),
-                          color: Colors.green,
-                          shape: const StadiumBorder(),
-                          onPressed: () async {
-                            _stopWatchTimer.onExecute
-                                .add(StopWatchExecute.stop);
-                          },
-                          child: const Text(
-                            'Stop',
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 4),
-                        child: RaisedButton(
-                          padding: const EdgeInsets.all(4),
-                          color: Colors.red,
-                          shape: const StadiumBorder(),
-                          onPressed: () async {
-                            _stopWatchTimer.onExecute
-                                .add(StopWatchExecute.reset);
-                          },
-                          child: const Text(
-                            'Reset',
-                            style: TextStyle(color: Colors.white),
-                          ),
+                        padding: const EdgeInsets.all(8),
+                        child: Text(
+                          displayTime,
+                          style: const TextStyle(
+                              fontSize: 40,
+                              fontFamily: 'Helvetica',
+                              ),
                         ),
                       ),
                     ],
-                  ),
-                ),
-              ],
-            ),
-          )
-        ],
-      ),
-      ListView.builder(
-      shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(),
-        itemCount: eserciziModel.eserciziList.length,
-        itemBuilder: (BuildContext inBuildContext, int inIndex) {
-          Esercizio esercizio = eserciziModel.eserciziList[inIndex];
-          Color color = Colors.white;
-          return Card(
-            margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-            elevation: 8,
-            child: Slidable(
-              actionPane: const SlidableScrollActionPane(),
-              actionExtentRatio: .25,
-              secondaryActions: [
-                IconSlideAction(
-                  caption: "Delete",
-                  color: Colors.red,
-                  icon: Icons.delete,
-                  onTap: () {
-                    //_deleteEsercizio(context, esercizio);
-                  },
-                ),
-              ],
-              child: ListTile(
-                title: Text(esercizio.nomeEsercizio),
-                subtitle: Text("Rip: " +
-                    esercizio.ripEsercizio +
-                    "\n Serie: " +
-                    esercizio.serieEsercizio +
-                    "\n Peso: " +
-                    esercizio.pesoEsercizio +
-                    "\n Note: " +
-                    esercizio.noteEsercizio),
-                tileColor: color,
-                onTap: () {},
+                  );
+                },
               ),
             ),
-          );
-        },
-      )])),
+
+            /// Button
+            Padding(
+              padding: const EdgeInsets.all(2),
+              child: Column(
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 4),
+                          child: RaisedButton(
+                            padding: const EdgeInsets.all(4),
+                            color: Colors.lightBlue,
+                            shape: const StadiumBorder(),
+                            onPressed: () async {
+                              _stopWatchTimer.onExecute
+                                  .add(StopWatchExecute.start);
+                            },
+                            child: const Text(
+                              'Start',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 4),
+                          child: RaisedButton(
+                            padding: const EdgeInsets.all(4),
+                            color: Colors.green,
+                            shape: const StadiumBorder(),
+                            onPressed: () async {
+                              _stopWatchTimer.onExecute
+                                  .add(StopWatchExecute.stop);
+                            },
+                            child: const Text(
+                              'Stop',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 4),
+                          child: RaisedButton(
+                            padding: const EdgeInsets.all(4),
+                            color: Colors.red,
+                            shape: const StadiumBorder(),
+                            onPressed: () async {
+                              _stopWatchTimer.onExecute
+                                  .add(StopWatchExecute.reset);
+                            },
+                            child: const Text(
+                              'Reset',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
+        ListView.builder(
+          shrinkWrap: true,
+          physics: NeverScrollableScrollPhysics(),
+          itemCount: eserciziModel.eserciziList.length,
+          itemBuilder: (BuildContext inBuildContext, int inIndex) {
+            Esercizio esercizio = eserciziModel.eserciziList[inIndex];
+            Color color = Colors.white;
+            return Card(
+              margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+              elevation: 8,
+              child: Slidable(
+                actionPane: const SlidableScrollActionPane(),
+                actionExtentRatio: .25,
+                secondaryActions: [
+                  IconSlideAction(
+                    caption: "Delete",
+                    color: Colors.red,
+                    icon: Icons.delete,
+                    onTap: () {
+                      //_deleteEsercizio(context, esercizio);
+                    },
+                  ),
+                ],
+                child: ListTile(
+                  title: Text(esercizio.nomeEsercizio),
+                  subtitle: Text("Rip: " +
+                      esercizio.ripEsercizio +
+                      "\n Serie: " +
+                      esercizio.serieEsercizio +
+                      "\n Peso: " +
+                      esercizio.pesoEsercizio +
+                      "\n Note: " +
+                      esercizio.noteEsercizio),
+                  tileColor: color,
+                  onTap: () {},
+                ),
+              ),
+            );
+          },
+        )
+      ])),
       bottomNavigationBar: Padding(
           padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
           child: Row(
