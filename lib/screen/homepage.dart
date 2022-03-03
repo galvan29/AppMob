@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mytraining/db/eventiDBworrker.dart';
+import 'package:mytraining/models/eventiModel.dart';
 import 'package:mytraining/models/utentiModel.dart';
+import 'package:mytraining/screen/login.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
@@ -213,10 +216,34 @@ class _HomePageState extends State<HomePage> {
                   view: CalendarView.month,
                   dataSource: MeetingDataSource(getMeetingData()),
                   monthViewSettings: const MonthViewSettings(appointmentDisplayMode: MonthAppointmentDisplayMode.appointment),
-                  onTap: (CalendarTapDetails details){
+                  onTap: (CalendarTapDetails details) async {
                       //DateTime date = details.date!;
                       //dynamic appointments = details.appointments;
-                      CalendarElement view = details.targetElement;
+                      //CalendarElement view = details.targetElement;
+                      eventiModel.eventoBeingEdited.nomeScheda = "Scheda 1";
+                      eventiModel.eventoBeingEdited.durataScheda = "100";
+                      if(eventiModel.eventoBeingEdited.id==-1){
+                        LoginPage().getValueLogin().then((val) async {
+                          eventiModel.eventoBeingEdited.idUtente = val.toString();
+                        });
+                        await EventiDBworker.eventiDBworker.create(eventiModel.eventoBeingEdited);
+                      }
+
+                      eventiModel.eventoBeingEdited.nomeScheda = "Scheda 2";
+                      eventiModel.eventoBeingEdited.durataScheda = "120";
+
+                      if(eventiModel.eventoBeingEdited.id==-1){
+                        LoginPage().getValueLogin().then((val) async {
+                          eventiModel.eventoBeingEdited.idUtente = val.toString();
+                        });
+                        await EventiDBworker.eventiDBworker.create(eventiModel.eventoBeingEdited);
+                      }
+                      print("Creati i due eventi");
+                      LoginPage().getValueLogin().then((val) async {
+                        await eventiModel.loadData(EventiDBworker.eventiDBworker, val);
+                      });
+                      print("Printiamo la lista di eventi");
+                      print(eventiModel.eventiList);
                       //print(date.toString());
                       print(MeetingDataSource(getMeetingData()).getSubject(0));
                   }

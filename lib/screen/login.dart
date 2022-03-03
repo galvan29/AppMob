@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mytraining/db/eventiDBworrker.dart';
 import 'package:mytraining/db/schedeDBworker.dart';
 import 'package:mytraining/db/utentiDBworker.dart';
+import 'package:mytraining/models/eventiModel.dart';
 import 'package:mytraining/models/schedeModel.dart';
 import 'package:mytraining/models/utentiModel.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -523,6 +525,7 @@ class LoginPage extends StatelessWidget {
     //CARICARE SOLO SCHEDE DEL TIPO CHE SI è LOGGATO
     getValueLogin().then((val) async {
       await schedeModel.loadData(SchedeDBworker.schedeDBworker, val);
+      await eventiModel.loadData(EventiDBworker.eventiDBworker, val);
     });
 
     //utentiModel.loadData(UtentiDBworker.utentiDBworker);
