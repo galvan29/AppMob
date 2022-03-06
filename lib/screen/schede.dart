@@ -200,7 +200,6 @@ class _SchedeState extends State<Schede> {
               utentiModel.setStackIndex(5);
             }
           },
-<<<<<<< Updated upstream
           items: [
             BottomNavigationBarItem(
               label: 'Homepage',
@@ -215,22 +214,6 @@ class _SchedeState extends State<Schede> {
               icon: const Icon(Icons.perm_identity_sharp),
             ),
           ],
-=======
-          items: const [
-          BottomNavigationBarItem(
-          label: 'Homepage',
-          icon:  Icon(Icons.home),
-        ),
-      BottomNavigationBarItem(
-        label: 'Schede',
-        icon:  Icon(Icons.article_outlined),
-      ),
-      BottomNavigationBarItem(
-        label: 'Profilo',
-        icon:  Icon(Icons.perm_identity_sharp),
-      ),
-    ],
->>>>>>> Stashed changes
         ));
   }
 }
