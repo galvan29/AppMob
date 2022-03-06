@@ -191,6 +191,7 @@ class _BottomPart extends StatelessWidget {
               decoration: const BoxDecoration(),
               child: GestureDetector(
                   onTap: () {
+                    utentiModel.utenteBeingEdited = Utente();
                     utentiModel.setStackIndex(2);
                   },
                   child: Container(

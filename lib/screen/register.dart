@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mytraining/db/eserciziDBworker.dart';
-import 'package:mytraining/db/eserciziDBworker.dart';
-import 'package:mytraining/db/eserciziDBworker.dart';
-import 'package:mytraining/db/schedeDBworker.dart';
 import 'package:mytraining/db/utentiDBworker.dart';
 import 'package:mytraining/models/eserciziModel.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -214,7 +210,7 @@ class RegisterPage extends StatelessWidget{
     //DEVO CONTROLLARE SE ESISTE O NO CON UN BEL GET
 
     if(utentiModel.utenteBeingEdited.id==-1){
-      print("CODDUE CREATO");
+      print("Utente CODDUE CREATO");
       print(utentiModel.utenteBeingEdited.id);
       print(utentiModel.utenteBeingEdited.nomeUtente);
       print(utentiModel.utenteBeingEdited.password);

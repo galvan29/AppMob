@@ -108,8 +108,13 @@ class VisualizzaScheda extends StatelessWidget {
           onPressed: () {
             schedeModel.setStackIndex(4);
           },
+          
         ),
-        body: ListView.builder(
+        body: SingleChildScrollView(
+            child: Column(children: <Widget>[
+        ListView.builder(
+          shrinkWrap: true,
+          physics: NeverScrollableScrollPhysics(),
           itemCount: eserciziModel.eserciziList.length,
           itemBuilder: (BuildContext inBuildContext, int inIndex) {
             Esercizio esercizio = eserciziModel.eserciziList[inIndex];
@@ -154,6 +159,24 @@ class VisualizzaScheda extends StatelessWidget {
             );
           },
         ),
+        Container(
+            margin: EdgeInsets.only(
+              top: MediaQuery.of(context).size.width * 0.05,
+            ),
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.black, width: 1.5),
+              color: Colors.white,
+              shape: BoxShape.circle,
+            ),
+            child: IconButton(
+              icon: const Icon(Icons.add),
+              color: Colors.black,
+              onPressed: () {
+                schedeModel.schedaBeingEdited = Scheda();
+                schedeModel.setStackIndex(3);
+              },
+            )),
+        ])),
         //va in alto magari
         bottomNavigationBar: Padding(
             padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 10),

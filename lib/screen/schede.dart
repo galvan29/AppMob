@@ -27,7 +27,8 @@ class Schede extends StatelessWidget {
     final colorScheme = Theme.of(context).colorScheme;
     return Scaffold(
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(MediaQuery.of(context).size.height * 0.07),
+          preferredSize:
+              Size.fromHeight(MediaQuery.of(context).size.height * 0.07),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -58,7 +59,8 @@ class Schede extends StatelessWidget {
                             textStyle: TextStyle(
                               color: const Color(0xFF000000),
                               fontWeight: FontWeight.w400,
-                              fontSize: MediaQuery.of(context).size.height * 0.03,
+                              fontSize:
+                                  MediaQuery.of(context).size.height * 0.03,
                               fontStyle: FontStyle.normal,
                               decoration: TextDecoration.none,
                             ),
@@ -88,7 +90,8 @@ class Schede extends StatelessWidget {
                                     bottomRight: Radius.circular(5),
                                     bottomLeft: Radius.circular(5),
                                   ),
-                                  border: Border.all(color: Colors.black, width: 1)),
+                                  border: Border.all(
+                                      color: Colors.black, width: 1)),
                               child: Icon(
                                 Icons.info,
                                 size: MediaQuery.of(context).size.height * 0.02,
@@ -101,55 +104,78 @@ class Schede extends StatelessWidget {
             ],
           ),
         ),
-        floatingActionButton: FloatingActionButton(
+        /*floatingActionButton: FloatingActionButton(
           child: const Icon(Icons.add, color: Colors.white),
-          onPressed: (){
+          onPressed: () {
             schedeModel.schedaBeingEdited = Scheda();
             schedeModel.setStackIndex(1);
           },
-        ),
-        body: ListView.builder(
-          itemCount: schedeModel.schedeList.length,
-          itemBuilder: (BuildContext inBuildContext, int inIndex){
-            Scheda scheda = schedeModel.schedeList[inIndex];
-            Color color = Colors.white;
+        ), */
+        body: SingleChildScrollView(
+            child: Column(children: <Widget>[
+          ListView.builder(
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            itemCount: schedeModel.schedeList.length,
+            itemBuilder: (BuildContext inBuildContext, int inIndex) {
+              Scheda scheda = schedeModel.schedeList[inIndex];
+              Color color = Colors.white;
 
-            return Card(
-              margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-              elevation: 8,
-              child: Slidable(
-                actionPane: const SlidableScrollActionPane(),
-                actionExtentRatio: .25,
-                secondaryActions: [
-                  IconSlideAction(
-                    caption: "Delete",
-                    color: Colors.red,
-                    icon: Icons.delete,
-                    onTap: (){
-                      //_deleteNote(context, note);
+              return Card(
+                margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                elevation: 8,
+                child: Slidable(
+                  actionPane: const SlidableScrollActionPane(),
+                  actionExtentRatio: .25,
+                  secondaryActions: [
+                    IconSlideAction(
+                      caption: "Delete",
+                      color: Colors.red,
+                      icon: Icons.delete,
+                      onTap: () {
+                        //_deleteNote(context, note);
+                      },
+                    ),
+                  ],
+                  child: ListTile(
+                    title: Text(scheda.nomeScheda),
+                    subtitle: Text(scheda.durataScheda),
+                    tileColor: color,
+                    onLongPress: () async {
+                      schedeModel.schedaBeingEdited =
+                          await SchedeDBworker.schedeDBworker.get(scheda.id);
+                      schedeModel.setStackIndex(1);
+                    },
+                    onTap: () async {
+                      saveValueScheda(scheda.id);
+                      print("Ciao bro " + scheda.id.toString());
+                      await eserciziModel.loadData(
+                          EserciziDBworker.eserciziDBworker, scheda.id);
+                      schedeModel.setStackIndex(2);
                     },
                   ),
-                ],
-                child: ListTile(
-                  title: Text(scheda.nomeScheda),
-                  subtitle: Text(scheda.durataScheda),
-                  tileColor: color,
-                  onLongPress: () async {
-                    schedeModel.schedaBeingEdited = await SchedeDBworker.schedeDBworker.get(scheda.id);
-                    schedeModel.setStackIndex(1);
-                  },
-                  onTap: () async {
-                    saveValueScheda(scheda.id);
-                    print("Ciao bro "+scheda.id.toString());
-                    await eserciziModel.loadData(EserciziDBworker.eserciziDBworker, scheda.id);
-                    schedeModel.setStackIndex(2);
-                  },
                 ),
+              );
+            },
+          ),
+          Container(
+              margin: EdgeInsets.only(
+                top: MediaQuery.of(context).size.width * 0.05,
               ),
-            );
-
-          },
-        ),
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.black, width: 1.5),
+                color: Colors.white,
+                shape: BoxShape.circle,
+              ),
+              child: IconButton(
+                icon: const Icon(Icons.add),
+                color: Colors.black,
+                onPressed: () {
+                  schedeModel.schedaBeingEdited = Scheda();
+                  schedeModel.setStackIndex(1);
+                },
+              )),
+        ])),
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           backgroundColor: const Color.fromARGB(255, 180, 212, 250),
@@ -165,20 +191,19 @@ class Schede extends StatelessWidget {
             }
           },
           items: [
-          BottomNavigationBarItem(
-          label: 'Homepage',
-          icon: const Icon(Icons.home),
-        ),
-      BottomNavigationBarItem(
-        label: 'Schede',
-        icon: const Icon(Icons.article_outlined),
-      ),
-      BottomNavigationBarItem(
-        label: 'Profilo',
-        icon: const Icon(Icons.perm_identity_sharp),
-      ),
-    ],
+            BottomNavigationBarItem(
+              label: 'Homepage',
+              icon: const Icon(Icons.home),
+            ),
+            BottomNavigationBarItem(
+              label: 'Schede',
+              icon: const Icon(Icons.article_outlined),
+            ),
+            BottomNavigationBarItem(
+              label: 'Profilo',
+              icon: const Icon(Icons.perm_identity_sharp),
+            ),
+          ],
         ));
   }
 }
-

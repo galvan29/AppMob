@@ -15,6 +15,7 @@ import 'package:provider/provider.dart';
 class MainSchede extends StatelessWidget {
   MainSchede({Key? key}) : super(key: key) {
     LoginPage().getValueLogin().then((val) async {
+      print("Carico schede dell'utente");
       await schedeModel.loadData(SchedeDBworker.schedeDBworker, val);
     });
     LoginPage().getValueLogin().then((val) async {

@@ -14,6 +14,7 @@ class UtentiDBworker {
   Future<Database?> _getDB() async {
     Directory docsDir = await getApplicationDocumentsDirectory();
     if(_db==null){
+      print("creo database utenti");
       String path = join(docsDir.path, "utenti.db");
       _db = await openDatabase(path, version: 1,
           onCreate: (Database inDB, int inVersion) async {

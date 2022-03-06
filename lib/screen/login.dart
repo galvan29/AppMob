@@ -520,7 +520,7 @@ class LoginPage extends StatelessWidget {
       print("Password diversa");
       return;
     }
-
+    print("LOGGGGATO E CARICO SCHEDE");
     //CARICARE SOLO SCHEDE DEL TIPO CHE SI è LOGGATO
     getValueLogin().then((val) async {
       await schedeModel.loadData(SchedeDBworker.schedeDBworker, val);
