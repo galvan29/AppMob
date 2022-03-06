@@ -19,7 +19,7 @@ class VisualizzaScheda extends StatelessWidget {
     }
     return false;
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -179,7 +179,7 @@ class VisualizzaScheda extends StatelessWidget {
                 icon: const Icon(Icons.add),
                 color: Colors.black,
                 onPressed: () {
-                  schedeModel.schedaBeingEdited = Scheda();
+                  eserciziModel.esercizioBeingEdited = Esercizio();
                   schedeModel.setStackIndex(3);
                 },
               )),
