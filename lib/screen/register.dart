@@ -98,7 +98,7 @@ class RegisterPage extends StatelessWidget{
             children: [
               FlatButton(
                 onPressed: (){
-                  utentiModel.setStackIndex(2);
+                  utentiModel.setStackIndex(0);
                 },
                 child: const Text("Cancel"),
               ),

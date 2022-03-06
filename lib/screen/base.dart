@@ -3,6 +3,7 @@ import 'package:mytraining/db/utentiDBworker.dart';
 import 'package:mytraining/models/utentiModel.dart';
 import 'package:mytraining/screen/creaEvento.dart';
 import 'package:mytraining/screen/firstPage.dart';
+import 'package:mytraining/screen/firstPage2.dart';
 import 'package:mytraining/screen/homepage.dart';
 import 'package:mytraining/screen/login.dart';
 import 'package:mytraining/screen/mainSchede.dart';
@@ -29,7 +30,7 @@ class Base extends StatelessWidget {
               return IndexedStack(
                 index: utentiModel.stackIndex,
                 children: [
-                  FirstPage(),
+                  FirstPage2(),
                   LoginPage(),
                   RegisterPage(),
                   HomePage(),
