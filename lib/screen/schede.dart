@@ -8,18 +8,26 @@ import 'package:mytraining/models/schedeModel.dart';
 import 'package:mytraining/models/utentiModel.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class Schede extends StatelessWidget {
-  final datasets = <String, dynamic>{};
-  ValueNotifier<bool> isDialOpen = ValueNotifier(false);
-
-  saveValueScheda(int id) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setInt('idScheda', id);
-  }
+class Schede extends StatefulWidget {
+  @override
+  State<Schede> createState() => _SchedeState();
 
   getValueScheda() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getInt('idScheda');
+  }
+}
+
+class _SchedeState extends State<Schede> {
+  final datasets = <String, dynamic>{};
+
+  ValueNotifier<bool> isDialOpen = ValueNotifier(false);
+
+  int _currentIndex = 1;
+
+  saveValueScheda(int id) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setInt('idScheda', id);
   }
 
   @override
@@ -178,18 +186,21 @@ class Schede extends StatelessWidget {
         ])),
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
+          currentIndex: _currentIndex,
           backgroundColor: const Color.fromARGB(255, 180, 212, 250),
           selectedItemColor: Colors.white.withOpacity(0.5),
           unselectedItemColor: colorScheme.onSurface.withOpacity(.60),
           selectedFontSize: MediaQuery.of(context).size.height * 0.02,
           unselectedFontSize: MediaQuery.of(context).size.height * 0.02,
           onTap: (value) {
+            setState(() => _currentIndex = value);
             if (value == 0) {
               utentiModel.setStackIndex(3);
             } else if (value == 2) {
               utentiModel.setStackIndex(5);
             }
           },
+<<<<<<< Updated upstream
           items: [
             BottomNavigationBarItem(
               label: 'Homepage',
@@ -204,6 +215,22 @@ class Schede extends StatelessWidget {
               icon: const Icon(Icons.perm_identity_sharp),
             ),
           ],
+=======
+          items: const [
+          BottomNavigationBarItem(
+          label: 'Homepage',
+          icon:  Icon(Icons.home),
+        ),
+      BottomNavigationBarItem(
+        label: 'Schede',
+        icon:  Icon(Icons.article_outlined),
+      ),
+      BottomNavigationBarItem(
+        label: 'Profilo',
+        icon:  Icon(Icons.perm_identity_sharp),
+      ),
+    ],
+>>>>>>> Stashed changes
         ));
   }
 }

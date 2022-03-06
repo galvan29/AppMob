@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mytraining/db/eventiDBworrker.dart';
@@ -6,6 +7,8 @@ import 'package:mytraining/models/utentiModel.dart';
 import 'package:mytraining/screen/login.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:mytraining/screen/notification_api.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -16,6 +19,8 @@ class _HomePageState extends State<HomePage> {
   final datasets = <String, dynamic>{};
 
   ValueNotifier<bool> isDialOpen = ValueNotifier(false);
+  //Homepage
+  int _currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +28,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
         appBar: PreferredSize(
           preferredSize:
-              Size.fromHeight(MediaQuery.of(context).size.height * 0.07),
+          Size.fromHeight(MediaQuery.of(context).size.height * 0.07),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -55,7 +60,7 @@ class _HomePageState extends State<HomePage> {
                               color: const Color(0xFF000000),
                               fontWeight: FontWeight.w400,
                               fontSize:
-                                  MediaQuery.of(context).size.height * 0.03,
+                              MediaQuery.of(context).size.height * 0.03,
                               fontStyle: FontStyle.normal,
                               decoration: TextDecoration.none,
                             ),
@@ -214,10 +219,10 @@ class _HomePageState extends State<HomePage> {
                   color: Color.fromARGB(255, 180, 212, 250),
                 ),
                 child: SfCalendar(
-                  view: CalendarView.month,
-                  dataSource: MeetingDataSource(getMeetingData()),
-                  monthViewSettings: const MonthViewSettings(appointmentDisplayMode: MonthAppointmentDisplayMode.appointment),
-                  onTap: (CalendarTapDetails details) async {
+                    view: CalendarView.month,
+                    dataSource: MeetingDataSource(getMeetingData()),
+                    monthViewSettings: const MonthViewSettings(appointmentDisplayMode: MonthAppointmentDisplayMode.appointment),
+                    onTap: (CalendarTapDetails details) async {
                       //DateTime date = details.date!;
                       dynamic appointments = details.appointments;
                       //CalendarElement view = details.targetElement;
@@ -227,12 +232,12 @@ class _HomePageState extends State<HomePage> {
                       LoginPage().getValueLogin().then((val) async {
                         await eventiModel.loadData(EventiDBworker.eventiDBworker, val);
                       });
-                  }
+                    }
                 ),
               ),
               GestureDetector(
                 child: Container(
-                  child: const Text("PremiCoddue per creare nuovo evento")
+                    child: const Text("PremiCoddue per creare nuovo evento")
                 ),
                 onTap: () async {
                   eventiModel.eventoBeingEdited = Evento();
@@ -293,6 +298,50 @@ class _HomePageState extends State<HomePage> {
                     textAlign: TextAlign.center,
                     maxLines: 3),
               ),
+              Container(
+                margin: const EdgeInsets.only(
+                  left: 30,
+                  top: 20,
+                  right: 30,
+                ),
+                padding: EdgeInsets.zero,
+                width: double.maxFinite,
+                decoration: const BoxDecoration(),
+                child: GestureDetector(
+                    onTap: () => NotificationApi.showNotification(
+                      title: 'Notifica',
+                      body: 'Schifo',
+                      payload: 'notifica',
+                  ),
+                    child: Container(
+                        width: 10,
+                        height: 50,
+                        padding: const EdgeInsets.only(top: 8),
+                        decoration: BoxDecoration(
+                            color: const Color.fromARGB(255, 180, 212, 250),
+                            borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(5),
+                              topRight: Radius.circular(5),
+                              bottomRight: Radius.circular(5),
+                              bottomLeft: Radius.circular(5),
+                            ),
+                            border: Border.all(color: Colors.white)),
+                        child: Text(
+                          '''Notifica''',
+                          style: GoogleFonts.adventPro(
+                            textStyle: const TextStyle(
+                              color: Color(0xFF000000),
+                              fontWeight: FontWeight.w500,
+                              fontSize: 20,
+                              fontStyle: FontStyle.normal,
+                              decoration: TextDecoration.none,
+                            ),
+                          ),
+                          textAlign: TextAlign.center,
+                        ))),
+              ),
+
+
               //cronometro
               /*Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -345,12 +394,14 @@ class _HomePageState extends State<HomePage> {
         ),
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
+          currentIndex: _currentIndex,
           backgroundColor: const Color.fromARGB(255, 180, 212, 250),
           selectedItemColor: Colors.white.withOpacity(0.5),
           unselectedItemColor: colorScheme.onSurface.withOpacity(.60),
           selectedFontSize: MediaQuery.of(context).size.height * 0.02,
           unselectedFontSize: MediaQuery.of(context).size.height * 0.02,
           onTap: (value) {
+            setState(() => _currentIndex = value);
             if (value == 1) {
               utentiModel.setStackIndex(4);
             } else if (value == 2) {

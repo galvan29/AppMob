@@ -3,9 +3,20 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:mytraining/models/utentiModel.dart';
 
 
-class Profilo extends StatelessWidget {
+
+class Profilo extends StatefulWidget {
+  @override
+  State<Profilo> createState() => _ProfiloState();
+}
+
+class _ProfiloState extends State<Profilo> {
   final datasets = <String, dynamic>{};
+
   ValueNotifier<bool> isDialOpen = ValueNotifier(false);
+
+  //Profilo
+  int _currentIndex = 2;
+
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
@@ -109,39 +120,87 @@ class Profilo extends StatelessWidget {
                   },
                 ),
               ),
+              Container(
+                margin: const EdgeInsets.only(
+                  left: 40,
+                  top: 20,
+                  right: 40,
+                ),
+                padding: EdgeInsets.zero,
+                width: double.maxFinite,
+                decoration: const BoxDecoration(),
+                child: GestureDetector(
+                    onTap: () {
+                      utentiModel.setStackIndex(0);
+                    },
+                    child: Container(
+                        width: 10,
+                        height: 45,
+                        padding: const EdgeInsets.only(top: 7),
+                        decoration: BoxDecoration(
+                            color:  Colors.red,
+                            borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(5),
+                              topRight: Radius.circular(5),
+                              bottomRight: Radius.circular(5),
+                              bottomLeft: Radius.circular(5),
+                            ),
+                            border: Border.all(color: Colors.white)),
+                        child: Text(
+                          '''Logout''',
+                          style: GoogleFonts.adventPro(
+                            textStyle: const TextStyle(
+                              color: Color(0xFFFFFFFF),
+                              fontWeight: FontWeight.w500,
+                              fontSize: 20,
+                              fontStyle: FontStyle.normal,
+                              decoration: TextDecoration.none,
+                            ),
+                          ),
+                          textAlign: TextAlign.center,
+                        ))),
+              ),
             ],
           ),
         ),
-        /*bottomNavigationBar: BottomNavigationBar(
+        bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
+          currentIndex: _currentIndex,
           backgroundColor: const Color.fromARGB(255, 180, 212, 250),
           selectedItemColor: Colors.white.withOpacity(0.5),
           unselectedItemColor: colorScheme.onSurface.withOpacity(.60),
           selectedFontSize: MediaQuery.of(context).size.height * 0.02,
           unselectedFontSize: MediaQuery.of(context).size.height * 0.02,
           onTap: (value) {
+            //            setState(() => _currentIndex = value);
             if (value == 0) {
               utentiModel.setStackIndex(3);
             } else if (value == 1) {
               utentiModel.setStackIndex(4);
             }
           },
-          items: [
+          items: const[
           BottomNavigationBarItem(
           label: 'Homepage',
-          icon: const Icon(Icons.home),
+          icon:  Icon(Icons.home),
         ),
       BottomNavigationBarItem(
         label: 'Schede',
-        icon: const Icon(Icons.article_outlined),
+        icon:  Icon(Icons.article_outlined),
       ),
       BottomNavigationBarItem(
         label: 'Profilo',
-        icon: const Icon(Icons.perm_identity_sharp),
+        icon:  Icon(Icons.perm_identity_sharp),
       ),
     ],
-        ),*/
-      bottomNavigationBar: Padding(
+        ),
+
+    );
+  }
+}
+
+/*
+bottomNavigationBar: Padding(
           padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
           child: Row(
             children: [
@@ -154,6 +213,4 @@ class Profilo extends StatelessWidget {
             ],
           )
       ),
-    );
-  }
-}
+ */
