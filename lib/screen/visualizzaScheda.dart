@@ -9,11 +9,17 @@ import 'package:mytraining/screen/allenamento.dart';
 import 'package:mytraining/screen/schede.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
 
-
 class VisualizzaScheda extends StatelessWidget {
   final datasets = <String, dynamic>{};
   ValueNotifier<bool> isDialOpen = ValueNotifier(false);
 
+  bool checkNumber(){
+    if(eserciziModel.eserciziList.isNotEmpty){
+      return true;
+    }
+    return false;
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -103,79 +109,80 @@ class VisualizzaScheda extends StatelessWidget {
             print("Creazione Esercizio");
           },
         ),*/
-        floatingActionButton: FloatingActionButton(
-          child: const Icon(Icons.play_arrow, color: Colors.white),
-          onPressed: () {
-            schedeModel.setStackIndex(4);
-          },
-          
-        ),
-        body: SingleChildScrollView(
-            child: Column(children: <Widget>[
-        ListView.builder(
-          shrinkWrap: true,
-          physics: NeverScrollableScrollPhysics(),
-          itemCount: eserciziModel.eserciziList.length,
-          itemBuilder: (BuildContext inBuildContext, int inIndex) {
-            Esercizio esercizio = eserciziModel.eserciziList[inIndex];
-            Color color = Colors.white;
-
-            return Card(
-              margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-              elevation: 8,
-              child: Slidable(
-                actionPane: const SlidableScrollActionPane(),
-                actionExtentRatio: .25,
-                secondaryActions: [
-                  IconSlideAction(
-                    caption: "Delete",
-                    color: Colors.red,
-                    icon: Icons.delete,
-                    onTap: () {
-                      _deleteEsercizio(context, esercizio);
-                    },
-                  ),
-                ],
-                child: ListTile(
-                  title: Text(esercizio.nomeEsercizio),
-                  subtitle: Text("Rip: " +
-                      esercizio.ripEsercizio +
-                      "\n Serie: " +
-                      esercizio.serieEsercizio +
-                      "\n Peso: " +
-                      esercizio.pesoEsercizio +
-                      "\n Note: " +
-                      esercizio.noteEsercizio),
-                  tileColor: color,
-                  onLongPress: () async {
-                    eserciziModel.esercizioBeingEdited = await EserciziDBworker
-                        .eserciziDBworker
-                        .get(esercizio.id);
-                    schedeModel.setStackIndex(3);
-                  },
-                  onTap: () {},
-                ),
-              ),
-            );
-          },
-        ),
-        Container(
-            margin: EdgeInsets.only(
-              top: MediaQuery.of(context).size.width * 0.05,
-            ),
-            decoration: BoxDecoration(
-              border: Border.all(color: Colors.black, width: 1.5),
-              color: Colors.white,
-              shape: BoxShape.circle,
-            ),
-            child: IconButton(
-              icon: const Icon(Icons.add),
-              color: Colors.black,
+        floatingActionButton: Visibility(
+            visible: checkNumber(), // Set it to false
+            child: FloatingActionButton(
+              child: const Icon(Icons.play_arrow, color: Colors.white),
               onPressed: () {
-                schedeModel.schedaBeingEdited = Scheda();
-                schedeModel.setStackIndex(3);
+                schedeModel.setStackIndex(4);
               },
             )),
+        body: SingleChildScrollView(
+            child: Column(children: <Widget>[
+          ListView.builder(
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            itemCount: eserciziModel.eserciziList.length,
+            itemBuilder: (BuildContext inBuildContext, int inIndex) {
+              Esercizio esercizio = eserciziModel.eserciziList[inIndex];
+              Color color = Colors.white;
+
+              return Card(
+                margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                elevation: 8,
+                child: Slidable(
+                  actionPane: const SlidableScrollActionPane(),
+                  actionExtentRatio: .25,
+                  secondaryActions: [
+                    IconSlideAction(
+                      caption: "Delete",
+                      color: Colors.red,
+                      icon: Icons.delete,
+                      onTap: () {
+                        _deleteEsercizio(context, esercizio);
+                      },
+                    ),
+                  ],
+                  child: ListTile(
+                    title: Text(esercizio.nomeEsercizio),
+                    subtitle: Text("Rip: " +
+                        esercizio.ripEsercizio +
+                        "\n Serie: " +
+                        esercizio.serieEsercizio +
+                        "\n Peso: " +
+                        esercizio.pesoEsercizio +
+                        "\n Note: " +
+                        esercizio.noteEsercizio),
+                    tileColor: color,
+                    onLongPress: () async {
+                      eserciziModel.esercizioBeingEdited =
+                          await EserciziDBworker.eserciziDBworker
+                              .get(esercizio.id);
+                      schedeModel.setStackIndex(3);
+                    },
+                    onTap: () {},
+                  ),
+                ),
+              );
+            },
+          ),
+          Container(
+              margin: EdgeInsets.only(
+                top: MediaQuery.of(context).size.width * 0.05,
+              ),
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.black, width: 1.5),
+                color: Colors.white,
+                shape: BoxShape.circle,
+              ),
+              child: IconButton(
+                icon: const Icon(Icons.add),
+                color: Colors.black,
+                onPressed: () {
+                  schedeModel.schedaBeingEdited = Scheda();
+                  schedeModel.setStackIndex(3);
+                },
+              )),
         ])),
         //va in alto magari
         bottomNavigationBar: Padding(
@@ -240,4 +247,3 @@ class VisualizzaScheda extends StatelessWidget {
         });
   }
 }
-
