@@ -35,11 +35,11 @@ class DisplayImage extends StatelessWidget {
         : FileImage(File(imagePath));
 
     return CircleAvatar(
-      radius: 75,
+      radius: 100,
       backgroundColor: color,
       child: CircleAvatar(
         backgroundImage: image as ImageProvider,
-        radius: 70,
+        radius: 95,
       ),
     );
   }
@@ -48,7 +48,7 @@ class DisplayImage extends StatelessWidget {
   /*Widget buildEditIcon(Color color) => buildCircle(
       all: 8,
       child: Icon(
-        Icons. ,
+        Icons.edit ,
         color: color,
         size: 20,
       )); */

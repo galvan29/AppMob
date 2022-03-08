@@ -1,14 +1,16 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mytraining/editProfile/EditNameFormPage.dart';
 import 'package:mytraining/models/utentiModel.dart';
 import 'package:mytraining/screen/display_image_widget.dart';
-
-
 
 class Profilo2 extends StatefulWidget {
   @override
   State<Profilo2> createState() => _ProfiloState();
 }
+
 class _ProfiloState extends State<Profilo2> {
   final datasets = <String, dynamic>{};
 
@@ -16,12 +18,14 @@ class _ProfiloState extends State<Profilo2> {
 
   //Profilo
   int _currentIndex = 2;
+
   @override
   Widget build(BuildContext context) {
     final colorScheme = Colors.white;
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(MediaQuery.of(context).size.height * 0.07),
+        preferredSize:
+            Size.fromHeight(MediaQuery.of(context).size.height * 0.07),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -69,7 +73,8 @@ class _ProfiloState extends State<Profilo2> {
                       ),
                       child: GestureDetector(
                         onTap: () {
-                          print("Mio nome utente: "+utentiModel.utenteBeingEdited.nomeUtente);
+                          print("Mio nome utente: " +
+                              utentiModel.utenteBeingEdited.nomeUtente);
                         },
                         child: Container(
                             height: MediaQuery.of(context).size.height * 0.02,
@@ -82,7 +87,8 @@ class _ProfiloState extends State<Profilo2> {
                                   bottomRight: Radius.circular(5),
                                   bottomLeft: Radius.circular(5),
                                 ),
-                                border: Border.all(color: Colors.black, width: 1)),
+                                border:
+                                    Border.all(color: Colors.black, width: 1)),
                             child: Icon(
                               Icons.info,
                               size: MediaQuery.of(context).size.height * 0.02,
@@ -114,18 +120,17 @@ class _ProfiloState extends State<Profilo2> {
                       color: Color.fromRGBO(64, 105, 225, 1),
                     ),
                   ))),
-          InkWell(
-              onTap: () {
-                //navigateSecondPage(EditImagePage());
-              },
-              child: DisplayImage(
-                imagePath: "https://upload.wikimedia.org/wikipedia/en/0/0b/Darth_Vader_in_The_Empire_Strikes_Back.jpg",
-                onPressed: () {},
-              )),
-          buildUserInfoDisplay(utentiModel.utenteBeingEdited.nomeUtente, 'Username'),
-          buildUserInfoDisplay(utentiModel.utenteBeingEdited.nome, 'Nome'),
-          buildUserInfoDisplay(utentiModel.utenteBeingEdited.cognome, 'Cognome'),
-          buildUserInfoDisplay(utentiModel.utenteBeingEdited.eta, 'Eta'),
+          DisplayImage(
+            imagePath:
+                "https://upload.wikimedia.org/wikipedia/en/0/0b/Darth_Vader_in_The_Empire_Strikes_Back.jpg",
+            onPressed: () {},
+          ),
+          buildUserInfoDisplay(
+              utentiModel.utenteBeingEdited.nomeUtente, 'Username', EditNameFormPage()),
+          buildUserInfoDisplay(utentiModel.utenteBeingEdited.nome, 'Nome', EditNameFormPage()),
+          buildUserInfoDisplay(
+              utentiModel.utenteBeingEdited.cognome, 'Cognome', EditNameFormPage()),
+          buildUserInfoDisplay(utentiModel.utenteBeingEdited.eta, 'Eta', EditNameFormPage()),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -144,18 +149,18 @@ class _ProfiloState extends State<Profilo2> {
             utentiModel.setStackIndex(4);
           }
         },
-        items: const[
+        items: const [
           BottomNavigationBarItem(
             label: 'Homepage',
-            icon:  Icon(Icons.home),
+            icon: Icon(Icons.home),
           ),
           BottomNavigationBarItem(
             label: 'Schede',
-            icon:  Icon(Icons.article_outlined),
+            icon: Icon(Icons.article_outlined),
           ),
           BottomNavigationBarItem(
             label: 'Profilo',
-            icon:  Icon(Icons.perm_identity_sharp),
+            icon: Icon(Icons.perm_identity_sharp),
           ),
         ],
       ),
@@ -163,49 +168,63 @@ class _ProfiloState extends State<Profilo2> {
   }
 
   // Widget builds the display item with the proper formatting to display the user's info
-  Widget buildUserInfoDisplay(String getValue, String title) =>
-      Padding(
-          padding: EdgeInsets.only(bottom: 10),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                title,
-                style: const TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.grey,
-                ),
-              ),
-              const SizedBox(
-                height: 1,
-              ),
-              Container(
-                  width: 350,
-                  height: 40,
-                  decoration: BoxDecoration(
-                      border: Border(
-                          bottom: BorderSide(
-                            color: Colors.grey,
-                            width: 1,
-                          ))),
-                  child: Row(children: [
-                    Expanded(
+  Widget buildUserInfoDisplay(String getValue, String title, Widget editPage) => Padding(
+      padding: EdgeInsets.only(bottom: 10),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: const TextStyle(
+              fontSize: 15,
+              fontWeight: FontWeight.w500,
+              color: Colors.grey,
+            ),
+          ),
+          const SizedBox(
+            height: 1,
+          ),
+          Container(
+              width: 350,
+              height: 40,
+              decoration: const BoxDecoration(
+                  border: Border(
+                      bottom: BorderSide(
+                        color: Colors.grey,
+                        width: 1,
+                      ))),
+              child: Row(children: [
+                Expanded(
+                    child: TextButton(
+                        onPressed: () {
+                          navigateSecondPage(editPage);
+                        },
                         child: Text(
-                              "   "+getValue,
-                              style: TextStyle(fontSize: 16, height: 1.4),
-                            )),
-                   /* Icon(
-                      Icons.keyboard_arrow_right,
-                      color: Colors.grey,
-                      size: 40.0,
-                    )*/
-                  ]))
-            ],
-          ));
+                          getValue,
+                          style: TextStyle(fontSize: 16, height: 1.4),
+                        ))),
+                const Icon(
+                  Icons.keyboard_arrow_right,
+                  color: Colors.grey,
+                  size: 40.0,
+                )
+              ]))
+        ],
+      ));
 
-  // Widget builds the About Me Section
+// Widget builds the About Me Section
+  FutureOr onGoBack(dynamic value) {
+    setState(() {});
+  }
+
+  // Handles navigation and prompts refresh.
+  void navigateSecondPage(Widget editForm) {
+    Route route = MaterialPageRoute(builder: (context) => editForm);
+    Navigator.push(context, route).then(onGoBack);
+  }
 }
+
+
 /*class _ProfiloState extends State<Profilo2> {
   final datasets = <String, dynamic>{};
 
