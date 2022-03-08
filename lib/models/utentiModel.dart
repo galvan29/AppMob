@@ -7,6 +7,8 @@ class Utente {
   String nome = "";
   String cognome = "";
   String eta = "";
+  String height = "";
+  String weight = "";
 }
 
 class UtentiModel extends ChangeNotifier {
@@ -18,6 +20,8 @@ class UtentiModel extends ChangeNotifier {
   String nome = "";
   String cognome = "";
   String eta = "";
+  String height = "";
+  String weight = "";
   Utente up = Utente();
 
   void setStackIndex(int inStackIndex){
