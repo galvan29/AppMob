@@ -72,7 +72,7 @@ class _ProfiloState extends State<Profilo> {
                         ),
                         child: GestureDetector(
                           onTap: () {
-                            //info
+                            print("Mio nome utente: "+utentiModel.utenteBeingEdited.nomeUtente);
                           },
                           child: Container(
                               height: MediaQuery.of(context).size.height * 0.02,
@@ -99,32 +99,150 @@ class _ProfiloState extends State<Profilo> {
           ),
         ),
         backgroundColor: const Color.fromARGB(255, 228, 229, 224),
-        body: Form(
-          key: _formKey,
+        body: Container(
           child: ListView(
             children: [
-              Text("Da fixare",),
-              ListTile(
-                leading: const Icon(Icons.title),
-                title: TextFormField(
-                  decoration: const InputDecoration(hintText: "Nome Utente"),
-                  initialValue: utentiModel.utenteBeingEdited == null ? null : utentiModel.utenteBeingEdited.nomeUtente,
-                  validator: (String? inValue){
-                    if(inValue!.isEmpty){
-                      return "Please enter a name";
-                    }
-                    return null;
-                  },
-                  onChanged: (String inValue){
-                    utentiModel.utenteBeingEdited.nomeUtente = inValue;
-                  },
-                ),
-              ),
               Container(
-                margin: const EdgeInsets.only(
-                  left: 40,
+                margin: EdgeInsets.only(
+                  left: MediaQuery.of(context).size.width * 0.06,  //20
                   top: 20,
-                  right: 40,
+                  right: MediaQuery.of(context).size.width * 0.60,
+                ),
+                padding: EdgeInsets.zero,
+                width: double.maxFinite,
+                decoration: const BoxDecoration(),
+                child: Container(
+                        width: 10,
+                        height: 45,
+                        padding: const EdgeInsets.only(top: 7),
+                        decoration: BoxDecoration(
+                            color:  Colors.white,
+                            borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(5),
+                              topRight: Radius.circular(5),
+                              bottomRight: Radius.circular(5),
+                              bottomLeft: Radius.circular(5),
+                            ),
+                            border: Border.all(color: Colors.white)),
+                        child: Text("  Nome Utente: "+
+                          utentiModel.utenteBeingEdited.nomeUtente,
+                          style: GoogleFonts.adventPro(
+                            textStyle: const TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 20,
+                              fontStyle: FontStyle.normal,
+                              decoration: TextDecoration.none,
+                            ),
+                          ),
+                        ))),
+              Container(
+                  margin: EdgeInsets.only(
+                    left: MediaQuery.of(context).size.width * 0.06,  //20
+                    top: 20,
+                    right: MediaQuery.of(context).size.width * 0.60,
+                  ),
+                  padding: EdgeInsets.zero,
+                  width: double.maxFinite,
+                  decoration: const BoxDecoration(),
+                  child: Container(
+                      width: 10,
+                      height: 45,
+                      padding: const EdgeInsets.only(top: 7),
+                      decoration: BoxDecoration(
+                          color:  Colors.white,
+                          borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(5),
+                            topRight: Radius.circular(5),
+                            bottomRight: Radius.circular(5),
+                            bottomLeft: Radius.circular(5),
+                          ),
+                          border: Border.all(color: Colors.white)),
+                      child: Text("  Nome: "+
+                          utentiModel.utenteBeingEdited.nome,
+                        style: GoogleFonts.adventPro(
+                          textStyle: const TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 20,
+                            fontStyle: FontStyle.normal,
+                            decoration: TextDecoration.none,
+                          ),
+                        ),
+                      ))),
+              Container(
+                  margin: EdgeInsets.only(
+                    left: MediaQuery.of(context).size.width * 0.06,  //20
+                    top: 20,
+                    right: MediaQuery.of(context).size.width * 0.60,
+                  ),
+                  padding: EdgeInsets.zero,
+                  width: double.maxFinite,
+                  decoration: const BoxDecoration(),
+                  child: Container(
+                      width: 10,
+                      height: 45,
+                      padding: const EdgeInsets.only(top: 7),
+                      decoration: BoxDecoration(
+                          color:  Colors.white,
+                          borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(5),
+                            topRight: Radius.circular(5),
+                            bottomRight: Radius.circular(5),
+                            bottomLeft: Radius.circular(5),
+                          ),
+                          border: Border.all(color: Colors.white)),
+                      child: Text("  Cognome: "+
+                          utentiModel.utenteBeingEdited.cognome,
+                        style: GoogleFonts.adventPro(
+                          textStyle: const TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 20,
+                            fontStyle: FontStyle.normal,
+                            decoration: TextDecoration.none,
+                          ),
+                        ),
+                      ))),
+              Container(
+                  margin: EdgeInsets.only(
+                    left: MediaQuery.of(context).size.width * 0.06,  //20
+                    top: 20,
+                    right: MediaQuery.of(context).size.width * 0.60,
+                  ),
+                  padding: EdgeInsets.zero,
+                  width: double.maxFinite,
+                  decoration: const BoxDecoration(),
+                  child: Container(
+                      width: 10,
+                      height: 45,
+                      padding: const EdgeInsets.only(top: 7),
+                      decoration: BoxDecoration(
+                          color:  Colors.white,
+                          borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(5),
+                            topRight: Radius.circular(5),
+                            bottomRight: Radius.circular(5),
+                            bottomLeft: Radius.circular(5),
+                          ),
+                          border: Border.all(color: Colors.white)),
+                      child: Text("  Età: "+
+                          utentiModel.utenteBeingEdited.eta,
+                        style: GoogleFonts.adventPro(
+                          textStyle: const TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 20,
+                            fontStyle: FontStyle.normal,
+                            decoration: TextDecoration.none,
+                          ),
+                        ),
+                      ))),
+              Container(
+                margin: EdgeInsets.only(
+                  left: MediaQuery.of(context).size.width * 0.06,  //20
+                  top: 20,
+                  right: MediaQuery.of(context).size.width * 0.06, //20
                 ),
                 padding: EdgeInsets.zero,
                 width: double.maxFinite,

@@ -21,7 +21,10 @@ class UtentiDBworker {
             await inDB.execute("CREATE TABLE IF NOT EXISTS utenti ("
                 "id INTEGER PRIMARY KEY,"
                 "nomeUtente TEXT,"
-                "password TEXT)");
+                "password TEXT,"
+                "nome TEXT,"
+                "cognome TEXT,"
+                "eta TEXT)");
           });
     }
     return _db;
@@ -32,6 +35,9 @@ class UtentiDBworker {
     utente.id = inMap["id"];
     utente.nomeUtente = inMap["nomeUtente"];
     utente.password = inMap["password"];
+    utente.nome = inMap["nome"];
+    utente.cognome = inMap["cognome"];
+    utente.eta = inMap["eta"];
     return utente;
   }
 
@@ -40,6 +46,9 @@ class UtentiDBworker {
     map["id"] = utente.id;
     map["nomeUtente"] = utente.nomeUtente;
     map["password"] = utente.password;
+    map["nome"] = utente.nome;
+    map["cognome"] = utente.cognome;
+    map["eta"] = utente.eta;
     return map;
   }
 
@@ -48,9 +57,9 @@ class UtentiDBworker {
     var val = await db!.rawQuery("SELECT MAX(id) + 1 AS id FROM utenti");
     int id = val.first["id"] == null ? 1 : val.first["id"] as int;
     return await db.rawInsert(
-        "INSERT INTO utenti (id, nomeUtente, password) "
-            "VALUES (?, ?, ?)",
-        [id, utenti.nomeUtente, utenti.password]
+        "INSERT INTO utenti (id, nomeUtente, password, nome, cognome, eta) "
+            "VALUES (?, ?, ?, ?, ?, ?)",
+        [id, utenti.nomeUtente, utenti.password, utenti.nome, utenti.cognome, utenti.eta]
     );
   }
 

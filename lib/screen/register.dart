@@ -148,7 +148,7 @@ class RegisterPage extends StatelessWidget{
               leading: const Icon(Icons.title),
               title: TextFormField(
                 decoration: const InputDecoration(hintText: "Nome"),
-                initialValue: utentiModel.utenteBeingEdited == null ? null : utentiModel.utenteBeingEdited.Nome,
+                initialValue: utentiModel.utenteBeingEdited == null ? null : utentiModel.utenteBeingEdited.nome,
                 validator: (String? inValue){
                   if(inValue!.isEmpty){
                     return "Inserire nome";
@@ -156,7 +156,7 @@ class RegisterPage extends StatelessWidget{
                   return null;
                 },
                 onChanged: (String inValue){
-                  utentiModel.utenteBeingEdited.Nome = inValue;
+                  utentiModel.utenteBeingEdited.nome = inValue;
                 },
               ),
             ),
@@ -164,7 +164,7 @@ class RegisterPage extends StatelessWidget{
               leading: const Icon(Icons.title),
               title: TextFormField(
                 decoration: const InputDecoration(hintText: "Cognome"),
-                initialValue: utentiModel.utenteBeingEdited == null ? null : utentiModel.utenteBeingEdited.Cognome,
+                initialValue: utentiModel.utenteBeingEdited == null ? null : utentiModel.utenteBeingEdited.cognome,
                 validator: (String? inValue){
                   if(inValue!.isEmpty){
                     return "Inserire cognome";
@@ -172,7 +172,7 @@ class RegisterPage extends StatelessWidget{
                   return null;
                 },
                 onChanged: (String inValue){
-                  utentiModel.utenteBeingEdited.Cognome = inValue;
+                  utentiModel.utenteBeingEdited.cognome = inValue;
                 },
               ),
             ),
@@ -180,8 +180,9 @@ class RegisterPage extends StatelessWidget{
               leading: const Icon(Icons.title),
               title: TextFormField(
                 decoration: const InputDecoration(hintText: "Età"),
-                maxLines: 2,
-                initialValue: utentiModel.utenteBeingEdited == null ? null : utentiModel.utenteBeingEdited.Eta,
+                maxLines: 1,
+                keyboardType: TextInputType.number,
+                initialValue: utentiModel.utenteBeingEdited == null ? null : utentiModel.utenteBeingEdited.eta,
                 validator: (String? inValue){
                   if(inValue!.isEmpty){
                     return "Inserire Età";
@@ -189,7 +190,7 @@ class RegisterPage extends StatelessWidget{
                   return null;
                 },
                 onChanged: (String inValue){
-                  utentiModel.utenteBeingEdited.Eta = inValue;
+                  utentiModel.utenteBeingEdited.eta = inValue;
                 },
               ),
             ),

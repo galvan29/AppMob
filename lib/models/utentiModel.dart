@@ -4,9 +4,9 @@ class Utente {
   int id = -1;
   String nomeUtente = "";
   String password = "";
-  String Nome = "";
-  String Cognome = "";
-  String Eta = "";
+  String nome = "";
+  String cognome = "";
+  String eta = "";
 }
 
 class UtentiModel extends ChangeNotifier {
@@ -15,9 +15,9 @@ class UtentiModel extends ChangeNotifier {
   Utente utenteBeingEdited = Utente();
   String nomeUtente = "";
   String password = "";
-  String Nome = "";
-  String Cognome = "";
-  String Eta = "";
+  String nome = "";
+  String cognome = "";
+  String eta = "";
   Utente up = Utente();
 
   void setStackIndex(int inStackIndex){

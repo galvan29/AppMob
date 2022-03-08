@@ -29,13 +29,13 @@ class LoginPage extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
-      floatingActionButton: FloatingActionButton(
+      /*floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add, color: Colors.white),
         onPressed: () {
           //utentiModel.utenteBeingEdited = Utente();
           utentiModel.setStackIndex(3);
         },
-      ),
+      ),*/
       /*body: Stack(
         children: [
           Stack(
@@ -496,12 +496,11 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  void _save(BuildContext context) async {
-    print(context); //dopo vedo cosa contiene
+  void _save(BuildContext context) async {//dopo vedo cosa contiene
     if (!_formKey.currentState!.validate()) {
       return;
     }
-
+    print("BROOOOOOOOOOOOOOOO");
     //_formKey.currentState.save();
     // FACCIO UN GET NOMEUTENTE DATO L'ID E VEDO COSA RITORNA
     //await per password

@@ -3,9 +3,11 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mytraining/db/eserciziDBworker.dart';
 import 'package:mytraining/db/schedeDBworker.dart';
+import 'package:mytraining/db/utentiDBworker.dart';
 import 'package:mytraining/models/eserciziModel.dart';
 import 'package:mytraining/models/schedeModel.dart';
 import 'package:mytraining/models/utentiModel.dart';
+import 'package:mytraining/screen/login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Schede extends StatefulWidget {
@@ -141,7 +143,7 @@ class _SchedeState extends State<Schede> {
                       color: Colors.red,
                       icon: Icons.delete,
                       onTap: () {
-                        //_deleteNote(context, note);
+                        _deleteScheda(context, scheda);
                       },
                     ),
                   ],
@@ -197,23 +199,66 @@ class _SchedeState extends State<Schede> {
             if (value == 0) {
               utentiModel.setStackIndex(3);
             } else if (value == 2) {
+              LoginPage().getValueLogin().then((val) async {
+                utentiModel.utenteBeingEdited =
+                await UtentiDBworker.utentiDBworker.get(val);
+              });
               utentiModel.setStackIndex(5);
             }
           },
-          items: [
+          items: const [
             BottomNavigationBarItem(
               label: 'Homepage',
-              icon: const Icon(Icons.home),
+              icon: Icon(Icons.home),
             ),
             BottomNavigationBarItem(
               label: 'Schede',
-              icon: const Icon(Icons.article_outlined),
+              icon: Icon(Icons.article_outlined),
             ),
             BottomNavigationBarItem(
               label: 'Profilo',
-              icon: const Icon(Icons.perm_identity_sharp),
+              icon: Icon(Icons.perm_identity_sharp),
             ),
           ],
         ));
+  }
+
+  Future _deleteScheda(BuildContext context, Scheda scheda) async {
+    return showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext inAlertContext) {
+          return AlertDialog(
+            title: const Text("Delete Scheda"),
+            content: Text(
+                "Are you sure you want to delete ${scheda.nomeScheda}"),
+            actions: [
+              FlatButton(
+                onPressed: () {
+                  Navigator.of(inAlertContext).pop();
+                },
+                child: const Text("Cancel"),
+              ),
+              FlatButton(
+                onPressed: () async {
+                  await SchedeDBworker.schedeDBworker.delete(scheda.id);
+                  Navigator.of(inAlertContext).pop();
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      backgroundColor: Colors.red,
+                      duration: Duration(seconds: 2),
+                      content: Text("Esercizio deleted"),
+                    ),
+                  );
+                  LoginPage().getValueLogin().then((val) async {
+                    await schedeModel.loadData(SchedeDBworker.schedeDBworker, val);
+                  });
+                  schedeModel.setStackIndex(0);
+                },
+                child: const Text("Delete"),
+              ),
+            ],
+          );
+        });
   }
 }

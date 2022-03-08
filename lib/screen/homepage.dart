@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mytraining/db/eventiDBworrker.dart';
+import 'package:mytraining/db/utentiDBworker.dart';
 import 'package:mytraining/models/eventiModel.dart';
 import 'package:mytraining/models/utentiModel.dart';
 import 'package:mytraining/screen/login.dart';
@@ -214,7 +215,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 padding: EdgeInsets.zero,
                 width: double.maxFinite,
-                height: 700,
+                height: 400,
                 decoration: const BoxDecoration(
                   color: Color.fromARGB(255, 180, 212, 250),
                 ),
@@ -405,6 +406,11 @@ class _HomePageState extends State<HomePage> {
             if (value == 1) {
               utentiModel.setStackIndex(4);
             } else if (value == 2) {
+              LoginPage().getValueLogin().then((val) async {
+                utentiModel.utenteBeingEdited =
+                await UtentiDBworker.utentiDBworker.get(val);
+                print("Mio nome utente: "+utentiModel.utenteBeingEdited.nomeUtente);
+              });
               utentiModel.setStackIndex(5);
             }
           },
