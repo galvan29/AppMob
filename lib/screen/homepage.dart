@@ -8,8 +8,8 @@ import 'package:mytraining/models/utentiModel.dart';
 import 'package:mytraining/screen/login.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:mytraining/screen/notification_api.dart';
+//import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+//import 'package:mytraining/screen/notification_api.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -38,7 +38,7 @@ class _HomePageState extends State<HomePage> {
                 width: double.maxFinite,
                 height: MediaQuery.of(context).size.height * 0.07,
                 decoration: const BoxDecoration(
-                    color: Color.fromARGB(255, 180, 212, 250),
+                    color: Color.fromARGB(255, 226, 213, 254),
                     border: Border(
                       bottom: BorderSide(
                         color: Colors.black,
@@ -95,7 +95,7 @@ class _HomePageState extends State<HomePage> {
                                       color: Colors.black, width: 1)),
                               child: Icon(
                                 Icons.info,
-                                size: MediaQuery.of(context).size.height * 0.02,
+                                size: MediaQuery.of(context).size.height * 0.01,
                                 color: const Color(0xFF000000),
                               )),
                         ))
@@ -127,6 +127,23 @@ class _HomePageState extends State<HomePage> {
                     maxLines: 1),
               ),
               Container(
+                padding: EdgeInsets.zero,
+                width: double.maxFinite,
+                decoration: const BoxDecoration(),
+                child: Text(r'''E' ora di fare un po' di esercizi''',
+                    style: GoogleFonts.adventPro(
+                      textStyle: const TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 25,
+                        fontStyle: FontStyle.normal,
+                        decoration: TextDecoration.none,
+                      ),
+                    ),
+                    textAlign: TextAlign.center,
+                    maxLines: 1),
+              ),
+              Container(
                 margin: const EdgeInsets.only(
                   left: 30,
                   top: 20,
@@ -144,7 +161,7 @@ class _HomePageState extends State<HomePage> {
                         height: 50,
                         padding: const EdgeInsets.only(top: 8),
                         decoration: BoxDecoration(
-                            color: const Color.fromARGB(255, 180, 212, 250),
+                            color: const Color.fromARGB(255, 253, 237, 210),
                             borderRadius: const BorderRadius.only(
                               topLeft: Radius.circular(5),
                               topRight: Radius.circular(5),
@@ -167,6 +184,27 @@ class _HomePageState extends State<HomePage> {
                         ))),
               ),
               Container(
+                margin: EdgeInsets.only(
+                  top: MediaQuery.of(context).size.width * 0.05,
+                ),
+                padding: EdgeInsets.zero,
+                width: double.maxFinite,
+                decoration: const BoxDecoration(),
+                child: Text(r'''Calendario''',
+                    style: GoogleFonts.adventPro(
+                      textStyle: const TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 18,
+                        fontStyle: FontStyle.normal,
+                        decoration: TextDecoration.none,
+                      ),
+                    ),
+                    textAlign: TextAlign.center,
+                    maxLines: 1),
+              ),
+              //calendario
+              Container(
                 margin: const EdgeInsets.only(
                   left: 30,
                   top: 10,
@@ -174,50 +212,9 @@ class _HomePageState extends State<HomePage> {
                 ),
                 padding: EdgeInsets.zero,
                 width: double.maxFinite,
-                decoration: const BoxDecoration(),
-                child: GestureDetector(
-                    onTap: () {
-                      utentiModel.setStackIndex(4);
-                    },
-                    child: Container(
-                        width: 10,
-                        height: 50,
-                        padding: const EdgeInsets.only(top: 8),
-                        decoration: BoxDecoration(
-                            color: const Color.fromARGB(255, 180, 212, 250),
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(5),
-                              topRight: Radius.circular(5),
-                              bottomRight: Radius.circular(5),
-                              bottomLeft: Radius.circular(5),
-                            ),
-                            border: Border.all(color: Colors.white)),
-                        child: Text(
-                          '''Inizia Allenamento''',
-                          style: GoogleFonts.adventPro(
-                            textStyle: const TextStyle(
-                              color: Color(0xFF000000),
-                              fontWeight: FontWeight.w500,
-                              fontSize: 20,
-                              fontStyle: FontStyle.normal,
-                              decoration: TextDecoration.none,
-                            ),
-                          ),
-                          textAlign: TextAlign.center,
-                        ))),
-              ),
-              //calendario
-              Container(
-                margin: const EdgeInsets.only(
-                  left: 30,
-                  top: 20,
-                  right: 30,
-                ),
-                padding: EdgeInsets.zero,
-                width: double.maxFinite,
                 height: 400,
                 decoration: const BoxDecoration(
-                  color: Color.fromARGB(255, 180, 212, 250),
+                  color: const Color.fromARGB(255, 209, 251, 234),
                 ),
                 child: SfCalendar(
                     view: CalendarView.month,
@@ -236,16 +233,191 @@ class _HomePageState extends State<HomePage> {
                     }
                 ),
               ),
-              GestureDetector(
-                child: Container(
-                    child: const Text("PremiCoddue per creare nuovo evento")
+              Container(
+                margin: const EdgeInsets.only(
+                  left: 30,
+                  top: 20,
+                  right: 30,
                 ),
-                onTap: () async {
-                  eventiModel.eventoBeingEdited = Evento();
-                  utentiModel.setStackIndex(6);
-                },
+                padding: EdgeInsets.zero,
+                width: double.maxFinite,
+                decoration: const BoxDecoration(),
+                child: GestureDetector(
+                    onTap: () async {
+                      eventiModel.eventoBeingEdited = Evento();
+                      utentiModel.setStackIndex(6);
+                    },
+                    child: Container(
+                        width: 10,
+                        height: 50,
+                        padding: const EdgeInsets.only(top: 8),
+                        decoration: BoxDecoration(
+                            color: const Color.fromARGB(255, 209, 251, 234),
+                            borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(5),
+                              topRight: Radius.circular(5),
+                              bottomRight: Radius.circular(5),
+                              bottomLeft: Radius.circular(5),
+                            ),
+                            border: Border.all(color: Colors.white)),
+                        child: Text(
+                          '''Programma Allenamento''',
+                          style: GoogleFonts.adventPro(
+                            textStyle: const TextStyle(
+                              color: Color(0xFF000000),
+                              fontWeight: FontWeight.w500,
+                              fontSize: 20,
+                              fontStyle: FontStyle.normal,
+                              decoration: TextDecoration.none,
+                            ),
+                          ),
+                          textAlign: TextAlign.center,
+                        ))),
               ),
               //scritta suggerimento
+              Container(
+                margin: EdgeInsets.only(
+                  top: MediaQuery.of(context).size.width * 0.05,
+                ),
+                padding: EdgeInsets.zero,
+                width: double.maxFinite,
+                decoration: const BoxDecoration(),
+                child: Text(r'''Parametri''',
+                    style: GoogleFonts.adventPro(
+                      textStyle: const TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 18,
+                        fontStyle: FontStyle.normal,
+                        decoration: TextDecoration.none,
+                      ),
+                    ),
+                    textAlign: TextAlign.center,
+                    maxLines: 1),
+              ),
+              Container(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                       Container(
+                           margin: EdgeInsets.only(
+                             left: MediaQuery.of(context).size.width * 0.07,
+                             top: MediaQuery.of(context).size.width * 0.05,
+                           ),
+                           width: MediaQuery.of(context).size.width * 0.20,
+                           height: 100,
+                              padding: const EdgeInsets.only(top: 8),
+                              decoration: BoxDecoration(
+                                  color: const Color.fromARGB(255, 253, 237, 210),
+                                  borderRadius: const BorderRadius.only(
+                                    topLeft: Radius.circular(5),
+                                    topRight: Radius.circular(5),
+                                    bottomRight: Radius.circular(5),
+                                    bottomLeft: Radius.circular(5),
+                                  ),
+                                  border: Border.all(color: Colors.white)),
+                              child: Column(
+                                children: [
+                                  Icon(
+                                    Icons.info,
+                                    size: MediaQuery.of(context).size.height * 0.07,
+                                    color: const Color(0xFF000000),
+                                  ),
+                                  Text(
+                                    '''70cm''',
+                                    style: GoogleFonts.adventPro(
+                                      textStyle: const TextStyle(
+                                        color: Color(0xFF000000),
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 20,
+                                        fontStyle: FontStyle.normal,
+                                        decoration: TextDecoration.none,
+                                      ),
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ],
+                              )),
+                    Container(
+                        margin: EdgeInsets.only(
+                          top: MediaQuery.of(context).size.width * 0.05,
+                        ),
+                        width: MediaQuery.of(context).size.width * 0.20,
+                        height: 100,
+                        padding: const EdgeInsets.only(top: 8),
+                        decoration: BoxDecoration(
+                            color: const Color.fromARGB(255, 253, 237, 210),
+                            borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(5),
+                              topRight: Radius.circular(5),
+                              bottomRight: Radius.circular(5),
+                              bottomLeft: Radius.circular(5),
+                            ),
+                            border: Border.all(color: Colors.white)),
+                        child: Column(
+                          children: [
+                            Icon(
+                              Icons.info,
+                              size: MediaQuery.of(context).size.height * 0.07,
+                              color: const Color(0xFF000000),
+                            ),
+                            Text(
+                              '''10cm''',
+                              style: GoogleFonts.adventPro(
+                                textStyle: const TextStyle(
+                                  color: Color(0xFF000000),
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 20,
+                                  fontStyle: FontStyle.normal,
+                                  decoration: TextDecoration.none,
+                                ),
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
+                        )),
+                    Container(
+                        margin: EdgeInsets.only(
+                          right: MediaQuery.of(context).size.width * 0.07,
+                          top: MediaQuery.of(context).size.width * 0.05,
+                        ),
+                        width: MediaQuery.of(context).size.width * 0.20,
+                        height: 100,
+                        padding: const EdgeInsets.only(top: 8),
+                        decoration: BoxDecoration(
+                            color: const Color.fromARGB(255, 253, 237, 210),
+                            borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(5),
+                              topRight: Radius.circular(5),
+                              bottomRight: Radius.circular(5),
+                              bottomLeft: Radius.circular(5),
+                            ),
+                            border: Border.all(color: Colors.white)),
+                        child: Column(
+                          children: [
+                            Icon(
+                              Icons.info,
+                              size: MediaQuery.of(context).size.height * 0.07,
+                              color: const Color(0xFF000000),
+                            ),
+                            Text(
+                              '''20cm''',
+                              style: GoogleFonts.adventPro(
+                                textStyle: const TextStyle(
+                                  color: Color(0xFF000000),
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 20,
+                                  fontStyle: FontStyle.normal,
+                                  decoration: TextDecoration.none,
+                                ),
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
+                        )),
+                  ],
+                ),
+              ),
               Container(
                 margin: EdgeInsets.only(
                   top: MediaQuery.of(context).size.height * 0.02,
@@ -397,7 +569,7 @@ class _HomePageState extends State<HomePage> {
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           currentIndex: _currentIndex,
-          backgroundColor: const Color.fromARGB(255, 180, 212, 250),
+          backgroundColor: const Color.fromARGB(255, 226, 213, 254),
           selectedItemColor: Colors.white.withOpacity(0.5),
           unselectedItemColor: Colors.black,
           selectedFontSize: MediaQuery.of(context).size.height * 0.02,
