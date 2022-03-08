@@ -2,9 +2,11 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mytraining/editProfile/EditNameFormPage.dart';
+import 'package:mytraining/db/utentiDBworker.dart';
+import 'package:mytraining/editProfile/EditFormPage.dart';
 import 'package:mytraining/models/utentiModel.dart';
 import 'package:mytraining/screen/display_image_widget.dart';
+import 'package:mytraining/screen/login.dart';
 
 class Profilo2 extends StatefulWidget {
   @override
@@ -169,7 +171,7 @@ class _ProfiloState extends State<Profilo2> {
 
   // Widget builds the display item with the proper formatting to display the user's info
   Widget buildUserInfoDisplay(String getValue, String title, Widget editPage) => Padding(
-      padding: EdgeInsets.only(bottom: 10),
+      padding: const EdgeInsets.only(bottom: 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -185,7 +187,7 @@ class _ProfiloState extends State<Profilo2> {
             height: 1,
           ),
           Container(
-              width: 350,
+              width: MediaQuery.of(context).size.width * 0.9,
               height: 40,
               decoration: const BoxDecoration(
                   border: Border(
@@ -197,11 +199,18 @@ class _ProfiloState extends State<Profilo2> {
                 Expanded(
                     child: TextButton(
                         onPressed: () {
+                          LoginPage().getValueLogin().then((val) async {
+                            utentiModel.utenteBeingEdited =
+                            await UtentiDBworker.utentiDBworker.get(val);
+                          });
                           navigateSecondPage(editPage);
                         },
-                        child: Text(
-                          getValue,
-                          style: TextStyle(fontSize: 16, height: 1.4),
+                        child: Align(
+                            child: Text(
+                              getValue,
+                              style: TextStyle(fontSize: 16, height: 1.4),
+                            ),
+                          alignment: Alignment.centerLeft,
                         ))),
                 const Icon(
                   Icons.keyboard_arrow_right,

@@ -24,7 +24,9 @@ class UtentiDBworker {
                 "password TEXT,"
                 "nome TEXT,"
                 "cognome TEXT,"
-                "eta TEXT)");
+                "eta TEXT,"
+                "height TEXT,"
+                "weight TEXT)");
           });
     }
     return _db;
@@ -38,6 +40,8 @@ class UtentiDBworker {
     utente.nome = inMap["nome"];
     utente.cognome = inMap["cognome"];
     utente.eta = inMap["eta"];
+    utente.height = inMap["height"];
+    utente.weight = inMap["weight"];
     return utente;
   }
 
@@ -49,6 +53,8 @@ class UtentiDBworker {
     map["nome"] = utente.nome;
     map["cognome"] = utente.cognome;
     map["eta"] = utente.eta;
+    map["height"] = utente.height;
+    map["weight"] = utente.weight;
     return map;
   }
 
@@ -57,9 +63,9 @@ class UtentiDBworker {
     var val = await db!.rawQuery("SELECT MAX(id) + 1 AS id FROM utenti");
     int id = val.first["id"] == null ? 1 : val.first["id"] as int;
     return await db.rawInsert(
-        "INSERT INTO utenti (id, nomeUtente, password, nome, cognome, eta) "
-            "VALUES (?, ?, ?, ?, ?, ?)",
-        [id, utenti.nomeUtente, utenti.password, utenti.nome, utenti.cognome, utenti.eta]
+        "INSERT INTO utenti (id, nomeUtente, password, nome, cognome, eta, height, weight) "
+            "VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+        [id, utenti.nomeUtente, utenti.password, utenti.nome, utenti.cognome, utenti.eta, utenti.height, utenti.weight]
     );
   }
 
