@@ -299,6 +299,7 @@ class _HomePageState extends State<HomePage> {
                     textAlign: TextAlign.center,
                     maxLines: 3),
               ),
+              /*
               Container(
                 margin: const EdgeInsets.only(
                   left: 30,
@@ -341,7 +342,7 @@ class _HomePageState extends State<HomePage> {
                           textAlign: TextAlign.center,
                         ))),
               ),
-
+              */
 
               //cronometro
               /*Column(
