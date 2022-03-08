@@ -8,6 +8,7 @@ import 'package:mytraining/screen/homepage.dart';
 import 'package:mytraining/screen/login.dart';
 import 'package:mytraining/screen/mainSchede.dart';
 import 'package:mytraining/screen/profilo.dart';
+import 'package:mytraining/screen/profilo2.dart';
 import 'package:mytraining/screen/register.dart';
 import 'package:provider/provider.dart';
 import 'package:double_back_to_close_app/double_back_to_close_app.dart';
@@ -35,7 +36,7 @@ class Base extends StatelessWidget {
                   RegisterPage(),
                   HomePage(),
                   MainSchede(),
-                  Profilo(),
+                  Profilo2(),
                   CreaEvento()
                 ],
               );

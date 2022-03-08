@@ -191,7 +191,7 @@ class _SchedeState extends State<Schede> {
           currentIndex: _currentIndex,
           backgroundColor: const Color.fromARGB(255, 180, 212, 250),
           selectedItemColor: Colors.white.withOpacity(0.5),
-          unselectedItemColor: colorScheme.onSurface.withOpacity(.60),
+          unselectedItemColor: Colors.black,
           selectedFontSize: MediaQuery.of(context).size.height * 0.02,
           unselectedFontSize: MediaQuery.of(context).size.height * 0.02,
           onTap: (value) {
