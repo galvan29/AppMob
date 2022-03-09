@@ -25,6 +25,7 @@ class _ProfiloState extends State<Profilo2> {
   Widget build(BuildContext context) {
     final colorScheme = Colors.white;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: PreferredSize(
         preferredSize:
             Size.fromHeight(MediaQuery.of(context).size.height * 0.07),
@@ -104,7 +105,8 @@ class _ProfiloState extends State<Profilo2> {
         ),
       ),
       backgroundColor: Colors.white,
-      body: Column(
+      body: SingleChildScrollView(
+        child: Column(
         children: [
           AppBar(
             backgroundColor: Colors.transparent,
@@ -133,11 +135,11 @@ class _ProfiloState extends State<Profilo2> {
           buildUserInfoDisplay(
               utentiModel.utenteBeingEdited.cognome, 'Cognome'),
           buildUserInfoDisplay(utentiModel.utenteBeingEdited.eta, 'Eta'),
-          buildUserInfoDisplay(utentiModel.utenteBeingEdited.weight, 'Peso'),
           buildUserInfoDisplay(utentiModel.utenteBeingEdited.height, 'Altezza'),
+          buildUserInfoDisplay(utentiModel.utenteBeingEdited.weight, 'Peso'),
           Container(
               decoration: BoxDecoration(
-                  color: Colors.black,
+                  color: const Color.fromARGB(255, 180, 212, 250),
                   borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(5),
                     topRight: Radius.circular(5),
@@ -145,25 +147,36 @@ class _ProfiloState extends State<Profilo2> {
                     bottomLeft: Radius.circular(5),
                   ),
                   border: Border.all(color: Colors.white)),
-            margin: EdgeInsets.only(right: MediaQuery.of(context).size.width * 0.05, left: MediaQuery.of(context).size.width * 0.84),
-            child: Align(
-              child: TextButton(
-                child: Text("Modifica"),
-                onPressed: () {
-                  LoginPage().getValueLogin().then((val) async {
-                    utentiModel.utenteBeingEdited =
-                    await UtentiDBworker.utentiDBworker.get(val);
-                  });
-                  navigateSecondPage(EditNameFormPage());
-                },
-              ),
-              alignment: Alignment.centerRight,
-            )
-
-
-          )
+              margin: EdgeInsets.only(
+                  right: MediaQuery.of(context).size.width * 0.05,
+                  left: MediaQuery.of(context).size.width * 0.675),
+              child: Align(
+                child: TextButton(
+                  child: Text(
+                    "Modifica",
+                    style: GoogleFonts.adventPro(
+                      textStyle: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 20,
+                        fontStyle: FontStyle.normal,
+                        decoration: TextDecoration.none,
+                      ),
+                    ),
+                  ),
+                  onPressed: () {
+                    LoginPage().getValueLogin().then((val) async {
+                      utentiModel.utenteBeingEdited =
+                          await UtentiDBworker.utentiDBworker.get(val);
+                    });
+                    navigateSecondPage(const EditNameFormPage());
+                  },
+                ),
+                alignment: Alignment.center,
+              ))
         ],
       ),
+    ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         currentIndex: _currentIndex,
@@ -200,7 +213,7 @@ class _ProfiloState extends State<Profilo2> {
 
   // Widget builds the display item with the proper formatting to display the user's info
   Widget buildUserInfoDisplay(String getValue, String title) => Padding(
-      padding: const EdgeInsets.only(bottom: 10),
+      padding: const EdgeInsets.only(bottom: 20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -221,19 +234,18 @@ class _ProfiloState extends State<Profilo2> {
               decoration: const BoxDecoration(
                   border: Border(
                       bottom: BorderSide(
-                        color: Colors.grey,
-                        width: 1,
-                      ))),
+                color: Colors.grey,
+                width: 1,
+              ))),
               child: Row(children: [
                 Expanded(
                     child: TextButton(
-                        onPressed: () {
-                        },
+                        onPressed: () {},
                         child: Align(
-                            child: Text(
-                              getValue,
-                              style: TextStyle(fontSize: 16, height: 1.4),
-                            ),
+                          child: Text(
+                            getValue,
+                            style: TextStyle(fontSize: 16, height: 1.4),
+                          ),
                           alignment: Alignment.centerLeft,
                         ))),
               ]))
@@ -251,7 +263,6 @@ class _ProfiloState extends State<Profilo2> {
     Navigator.push(context, route).then(onGoBack);
   }
 }
-
 
 /*class _ProfiloState extends State<Profilo2> {
   final datasets = <String, dynamic>{};

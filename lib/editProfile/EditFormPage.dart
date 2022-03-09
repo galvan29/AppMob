@@ -52,7 +52,7 @@ class EditNameFormPageState extends State<EditNameFormPage> {
     }
 
     return Scaffold(
-        resizeToAvoidBottomInset: false,
+        resizeToAvoidBottomInset: true,
         //appBar: buildAppBar(context),
         appBar: PreferredSize(
           preferredSize:
@@ -65,7 +65,7 @@ class EditNameFormPageState extends State<EditNameFormPage> {
                 width: double.maxFinite,
                 height: MediaQuery.of(context).size.height * 0.07,
                 decoration: const BoxDecoration(
-                    color: Color.fromARGB(255, 180, 212, 250),
+                    color: Color.fromARGB(255, 170, 212, 250),
                     border: Border(
                       bottom: BorderSide(
                         color: Colors.black,
@@ -150,14 +150,14 @@ class EditNameFormPageState extends State<EditNameFormPage> {
                   child: Text(
                     "Want to change something?",
                     style: TextStyle(
-                      fontSize: 25,
+                      fontSize: 22,
                       fontWeight: FontWeight.bold,
                     ),
                   )),
               Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 40, 16, 0),
+                  padding: const EdgeInsets.fromLTRB(0, 40, 0, 0),
                   child: SizedBox(
-                      height: 100,
+                      height: 70,
                       width: MediaQuery.of(context).size.width * 0.9,
                       child: TextFormField(
                         // Handles Form Validation for First Name
@@ -172,9 +172,9 @@ class EditNameFormPageState extends State<EditNameFormPage> {
                         controller: userNameController,
                       ))),
               Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 0, 16, 0),
+                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                   child: SizedBox(
-                      height: 100,
+                      height: 70,
                       width: MediaQuery.of(context).size.width * 0.9,
                       child: TextFormField(
                         validator: (value) {
@@ -188,9 +188,9 @@ class EditNameFormPageState extends State<EditNameFormPage> {
                         controller: firstNameController,
                       ))),
               Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 0, 16, 0),
+                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                   child: SizedBox(
-                      height: 100,
+                      height: 70,
                       width: MediaQuery.of(context).size.width * 0.9,
                       child: TextFormField(
                         // Handles Form Validation for First Name
@@ -205,9 +205,9 @@ class EditNameFormPageState extends State<EditNameFormPage> {
                         controller: secondNameController,
                       ))),
               Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 0, 16, 0),
+                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                   child: SizedBox(
-                      height: 100,
+                      height: 70,
                       width: MediaQuery.of(context).size.width * 0.9,
                       child: TextFormField(
                         keyboardType: TextInputType.number,
@@ -222,9 +222,9 @@ class EditNameFormPageState extends State<EditNameFormPage> {
                         controller: ageController,
                       ))),
               Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 0, 16, 0),
+                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                   child: SizedBox(
-                      height: 100,
+                      height: 70,
                       width: MediaQuery.of(context).size.width * 0.9,
                       child: TextFormField (
                         keyboardType: TextInputType.number,
@@ -239,9 +239,9 @@ class EditNameFormPageState extends State<EditNameFormPage> {
                         controller: heightController,
                       ))),
               Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 0, 16, 0),
+                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                   child: SizedBox(
-                      height: 100,
+                      height: 70,
                       width: MediaQuery.of(context).size.width * 0.9,
                       child: TextFormField(
                         keyboardType: TextInputType.number,
