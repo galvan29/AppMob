@@ -128,11 +128,40 @@ class _ProfiloState extends State<Profilo2> {
             onPressed: () {},
           ),
           buildUserInfoDisplay(
-              utentiModel.utenteBeingEdited.nomeUtente, 'Username', EditNameFormPage()),
-          buildUserInfoDisplay(utentiModel.utenteBeingEdited.nome, 'Nome', EditNameFormPage()),
+              utentiModel.utenteBeingEdited.nomeUtente, 'Username'),
+          buildUserInfoDisplay(utentiModel.utenteBeingEdited.nome, 'Nome'),
           buildUserInfoDisplay(
-              utentiModel.utenteBeingEdited.cognome, 'Cognome', EditNameFormPage()),
-          buildUserInfoDisplay(utentiModel.utenteBeingEdited.eta, 'Eta', EditNameFormPage()),
+              utentiModel.utenteBeingEdited.cognome, 'Cognome'),
+          buildUserInfoDisplay(utentiModel.utenteBeingEdited.eta, 'Eta'),
+          buildUserInfoDisplay(utentiModel.utenteBeingEdited.weight, 'Peso'),
+          buildUserInfoDisplay(utentiModel.utenteBeingEdited.height, 'Altezza'),
+          Container(
+              decoration: BoxDecoration(
+                  color: Colors.black,
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(5),
+                    topRight: Radius.circular(5),
+                    bottomRight: Radius.circular(5),
+                    bottomLeft: Radius.circular(5),
+                  ),
+                  border: Border.all(color: Colors.white)),
+            margin: EdgeInsets.only(right: MediaQuery.of(context).size.width * 0.05, left: MediaQuery.of(context).size.width * 0.84),
+            child: Align(
+              child: TextButton(
+                child: Text("Modifica"),
+                onPressed: () {
+                  LoginPage().getValueLogin().then((val) async {
+                    utentiModel.utenteBeingEdited =
+                    await UtentiDBworker.utentiDBworker.get(val);
+                  });
+                  navigateSecondPage(EditNameFormPage());
+                },
+              ),
+              alignment: Alignment.centerRight,
+            )
+
+
+          )
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -170,7 +199,7 @@ class _ProfiloState extends State<Profilo2> {
   }
 
   // Widget builds the display item with the proper formatting to display the user's info
-  Widget buildUserInfoDisplay(String getValue, String title, Widget editPage) => Padding(
+  Widget buildUserInfoDisplay(String getValue, String title) => Padding(
       padding: const EdgeInsets.only(bottom: 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -199,11 +228,6 @@ class _ProfiloState extends State<Profilo2> {
                 Expanded(
                     child: TextButton(
                         onPressed: () {
-                          LoginPage().getValueLogin().then((val) async {
-                            utentiModel.utenteBeingEdited =
-                            await UtentiDBworker.utentiDBworker.get(val);
-                          });
-                          navigateSecondPage(editPage);
                         },
                         child: Align(
                             child: Text(
@@ -212,11 +236,6 @@ class _ProfiloState extends State<Profilo2> {
                             ),
                           alignment: Alignment.centerLeft,
                         ))),
-                const Icon(
-                  Icons.keyboard_arrow_right,
-                  color: Colors.grey,
-                  size: 40.0,
-                )
               ]))
         ],
       ));

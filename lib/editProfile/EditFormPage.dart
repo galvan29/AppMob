@@ -33,18 +33,23 @@ class EditNameFormPageState extends State<EditNameFormPage> {
     utentiModel.utenteBeingEdited.nome = firstNameController.text;
     utentiModel.utenteBeingEdited.cognome = secondNameController.text;
     utentiModel.utenteBeingEdited.eta = ageController.text;
-    //utentiModel.utenteBeingEdited.peso = heightController.text;
-    //utentiModel.utenteBeingEdited.altezza = weightController.text;
+    utentiModel.utenteBeingEdited.height = heightController.text;
+    utentiModel.utenteBeingEdited.weight = weightController.text;
   }
+
+  var ciao = true;
 
   @override
   Widget build(BuildContext context) {
-    userNameController.text = utentiModel.utenteBeingEdited.nomeUtente;
-    firstNameController.text = utentiModel.utenteBeingEdited.nome;
-    secondNameController.text = utentiModel.utenteBeingEdited.cognome;
-    ageController.text = utentiModel.utenteBeingEdited.eta;
-    //heightController.text = utentiModel.utenteBeingEdited.height;
-    //weightController.text = utentiModel.utenteBeingEdited.weight;
+    if(ciao){
+      userNameController.text = utentiModel.utenteBeingEdited.nomeUtente;
+      firstNameController.text = utentiModel.utenteBeingEdited.nome;
+      secondNameController.text = utentiModel.utenteBeingEdited.cognome;
+      ageController.text = utentiModel.utenteBeingEdited.eta;
+      heightController.text = utentiModel.utenteBeingEdited.height;
+      weightController.text = utentiModel.utenteBeingEdited.weight;
+      ciao = false;
+    }
 
     return Scaffold(
         resizeToAvoidBottomInset: false,
@@ -221,7 +226,7 @@ class EditNameFormPageState extends State<EditNameFormPage> {
                   child: SizedBox(
                       height: 100,
                       width: MediaQuery.of(context).size.width * 0.9,
-                      child: TextFormField(
+                      child: TextFormField (
                         keyboardType: TextInputType.number,
                         // Handles Form Validation for First Name
                         /* validator: (value) {
