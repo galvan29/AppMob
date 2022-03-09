@@ -17,6 +17,7 @@ class _FirstPage2State extends State<FirstPage2>
   bool isAnimFinis = false;
   bool isTextReady = false;
 
+
   @override
   void initState() {
     super.initState();

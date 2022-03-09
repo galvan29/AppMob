@@ -8,6 +8,7 @@ import 'package:mytraining/models/utentiModel.dart';
 import 'package:mytraining/screen/login.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
+
 //import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 //import 'package:mytraining/screen/notification_api.dart';
 
@@ -20,6 +21,7 @@ class _HomePageState extends State<HomePage> {
   final datasets = <String, dynamic>{};
 
   ValueNotifier<bool> isDialOpen = ValueNotifier(false);
+
   //Homepage
   int _currentIndex = 0;
 
@@ -29,7 +31,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
         appBar: PreferredSize(
           preferredSize:
-          Size.fromHeight(MediaQuery.of(context).size.height * 0.07),
+              Size.fromHeight(MediaQuery.of(context).size.height * 0.07),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -61,7 +63,7 @@ class _HomePageState extends State<HomePage> {
                               color: const Color(0xFF000000),
                               fontWeight: FontWeight.w400,
                               fontSize:
-                              MediaQuery.of(context).size.height * 0.03,
+                                  MediaQuery.of(context).size.height * 0.03,
                               fontStyle: FontStyle.normal,
                               decoration: TextDecoration.none,
                             ),
@@ -219,7 +221,9 @@ class _HomePageState extends State<HomePage> {
                 child: SfCalendar(
                     view: CalendarView.month,
                     dataSource: MeetingDataSource(getMeetingData()),
-                    monthViewSettings: const MonthViewSettings(appointmentDisplayMode: MonthAppointmentDisplayMode.appointment),
+                    monthViewSettings: const MonthViewSettings(
+                        appointmentDisplayMode:
+                            MonthAppointmentDisplayMode.appointment),
                     onTap: (CalendarTapDetails details) async {
                       //DateTime date = details.date!;
                       dynamic appointments = details.appointments;
@@ -228,10 +232,10 @@ class _HomePageState extends State<HomePage> {
                       //getMeetingData();
                       //print(appointments[0]);
                       LoginPage().getValueLogin().then((val) async {
-                        await eventiModel.loadData(EventiDBworker.eventiDBworker, val);
+                        await eventiModel.loadData(
+                            EventiDBworker.eventiDBworker, val);
                       });
-                    }
-                ),
+                    }),
               ),
               Container(
                 margin: const EdgeInsets.only(
@@ -299,45 +303,45 @@ class _HomePageState extends State<HomePage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                       Container(
-                           margin: EdgeInsets.only(
-                             left: MediaQuery.of(context).size.width * 0.07,
-                             top: MediaQuery.of(context).size.width * 0.05,
-                           ),
-                           width: MediaQuery.of(context).size.width * 0.20,
-                           height: 100,
-                              padding: const EdgeInsets.only(top: 8),
-                              decoration: BoxDecoration(
-                                  color: const Color.fromARGB(255, 253, 237, 210),
-                                  borderRadius: const BorderRadius.only(
-                                    topLeft: Radius.circular(5),
-                                    topRight: Radius.circular(5),
-                                    bottomRight: Radius.circular(5),
-                                    bottomLeft: Radius.circular(5),
-                                  ),
-                                  border: Border.all(color: Colors.white)),
-                              child: Column(
-                                children: [
-                                  Icon(
-                                    Icons.info,
-                                    size: MediaQuery.of(context).size.height * 0.07,
-                                    color: const Color(0xFF000000),
-                                  ),
-                                  Text(
-                                    '''70cm''',
-                                    style: GoogleFonts.adventPro(
-                                      textStyle: const TextStyle(
-                                        color: Color(0xFF000000),
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 20,
-                                        fontStyle: FontStyle.normal,
-                                        decoration: TextDecoration.none,
-                                      ),
-                                    ),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ],
-                              )),
+                    Container(
+                        margin: EdgeInsets.only(
+                          left: MediaQuery.of(context).size.width * 0.07,
+                          top: MediaQuery.of(context).size.width * 0.05,
+                        ),
+                        width: MediaQuery.of(context).size.width * 0.20,
+                        height: 100,
+                        padding: const EdgeInsets.only(top: 8),
+                        decoration: BoxDecoration(
+                            color: const Color.fromARGB(255, 253, 237, 210),
+                            borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(5),
+                              topRight: Radius.circular(5),
+                              bottomRight: Radius.circular(5),
+                              bottomLeft: Radius.circular(5),
+                            ),
+                            border: Border.all(color: Colors.white)),
+                        child: Column(
+                          children: [
+                            Icon(
+                              Icons.info,
+                              size: MediaQuery.of(context).size.height * 0.07,
+                              color: const Color(0xFF000000),
+                            ),
+                            Text(
+                              '''70cm''',
+                              style: GoogleFonts.adventPro(
+                                textStyle: const TextStyle(
+                                  color: Color(0xFF000000),
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 20,
+                                  fontStyle: FontStyle.normal,
+                                  decoration: TextDecoration.none,
+                                ),
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
+                        )),
                     Container(
                         margin: EdgeInsets.only(
                           top: MediaQuery.of(context).size.width * 0.05,
@@ -581,8 +585,9 @@ class _HomePageState extends State<HomePage> {
             } else if (value == 2) {
               LoginPage().getValueLogin().then((val) async {
                 utentiModel.utenteBeingEdited =
-                await UtentiDBworker.utentiDBworker.get(val);
-                print("Mio nome utente: "+utentiModel.utenteBeingEdited.nomeUtente);
+                    await UtentiDBworker.utentiDBworker.get(val);
+                print("Mio nome utente: " +
+                    utentiModel.utenteBeingEdited.nomeUtente);
               });
               utentiModel.setStackIndex(5);
             }
@@ -608,7 +613,7 @@ class _HomePageState extends State<HomePage> {
 List<Meeting> getMeetingData() {
   final List<Meeting> listMeetings = <Meeting>[];
   print("Ma entra qua");
-  for(Evento eve in eventiModel.eventiList){
+  for (Evento eve in eventiModel.eventiList) {
     listMeetings.add(Meeting(eve.nomeScheda, eve.inizio, eve.fine));
   }
   print(listMeetings.length);
@@ -620,7 +625,7 @@ List<Meeting> getMeetingData() {
 }
 
 class MeetingDataSource extends CalendarDataSource {
-  MeetingDataSource(List<Meeting> listMeetings){
+  MeetingDataSource(List<Meeting> listMeetings) {
     appointments = listMeetings;
   }
 
@@ -652,4 +657,3 @@ class Meeting {
     return 'Meeting{eventName: $eventName, from: $from, to: $to}';
   }
 }
-

@@ -144,7 +144,7 @@ class RegisterPage extends StatelessWidget{
                 },
               ),
             ),
-            ListTile(
+            /*ListTile(
               leading: const Icon(Icons.title),
               title: TextFormField(
                 decoration: const InputDecoration(hintText: "Nome"),
@@ -193,7 +193,7 @@ class RegisterPage extends StatelessWidget{
                   utentiModel.utenteBeingEdited.eta = inValue;
                 },
               ),
-            ),
+            ), */
           ],
         ),
       ),
