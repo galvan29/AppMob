@@ -13,81 +13,8 @@ class RegisterPage extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(MediaQuery.of(context).size.height * 0.07),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              padding: EdgeInsets.zero,
-              width: double.maxFinite,
-              height: MediaQuery.of(context).size.height * 0.07,
-              decoration: const BoxDecoration(
-                  color: Color.fromARGB(255, 180, 212, 250),
-                  border: Border(
-                    bottom: BorderSide(
-                      color: Colors.black,
-                      width: 1.0,
-                    ),
-                  )),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    padding: EdgeInsets.zero,
-                    decoration: const BoxDecoration(),
-                    margin: EdgeInsets.only(
-                      left: MediaQuery.of(context).size.width * 0.01,
-                      top: MediaQuery.of(context).size.width * 0.05,
-                    ),
-                    child: Text('MyTraining',
-                        style: GoogleFonts.adventPro(
-                          textStyle: TextStyle(
-                            color: const Color(0xFF000000),
-                            fontWeight: FontWeight.w400,
-                            fontSize: MediaQuery.of(context).size.height * 0.03,
-                            fontStyle: FontStyle.normal,
-                            decoration: TextDecoration.none,
-                          ),
-                        ),
-                        textAlign: TextAlign.left,
-                        maxLines: 1),
-                  ),
-                  Container(
-                      padding: EdgeInsets.zero,
-                      decoration: const BoxDecoration(),
-                      margin: EdgeInsets.only(
-                        right: MediaQuery.of(context).size.width * 0.03,
-                        top: MediaQuery.of(context).size.width * 0.05,
-                      ),
-                      child: GestureDetector(
-                        onTap: () {
-                          //info
-                        },
-                        child: Container(
-                            height: MediaQuery.of(context).size.height * 0.02,
-                            width: MediaQuery.of(context).size.height * 0.02,
-                            decoration: BoxDecoration(
-                                color: Colors.black.withOpacity(0),
-                                borderRadius: const BorderRadius.only(
-                                  topLeft: Radius.circular(5),
-                                  topRight: Radius.circular(5),
-                                  bottomRight: Radius.circular(5),
-                                  bottomLeft: Radius.circular(5),
-                                ),
-                                border: Border.all(color: Colors.black, width: 1)),
-                            child: Icon(
-                              Icons.info,
-                              size: MediaQuery.of(context).size.height * 0.02,
-                              color: const Color(0xFF000000),
-                            )),
-                      ))
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
+      resizeToAvoidBottomInset: false,
+      backgroundColor: Colors.black,
       bottomNavigationBar: Padding(
           padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
           child: Row(
@@ -96,106 +23,217 @@ class RegisterPage extends StatelessWidget{
                 onPressed: (){
                   utentiModel.setStackIndex(0);
                 },
-                child: const Text("Cancel"),
-              ),
-              const Spacer(),
-              FlatButton(
-                onPressed: (){
-                  _save(context);
-                },
-                child: const Text("Save"),
+                child: Text("Indietro",
+                  style: GoogleFonts.adventPro(
+                    textStyle: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 20,
+                      fontStyle: FontStyle.normal,
+                      decoration: TextDecoration.none,
+                    ),
+                  ),
+                ),
               ),
             ],
           )
       ),
       body: Form(
         key: _formKey,
-        child: ListView(
-          children: [
-            ListTile(
-              leading: const Icon(Icons.title),
-              title: TextFormField(
-                decoration: const InputDecoration(hintText: "Utente"),
-                initialValue: utentiModel.utenteBeingEdited == null ? null : utentiModel.utenteBeingEdited.nomeUtente,
-                validator: (String? inValue){
-                  if(inValue!.isEmpty){
-                    return "Inserire Utente";
-                  }
-                  return null;
-                },
-                onChanged: (String inValue){
-                  utentiModel.utenteBeingEdited.nomeUtente = inValue;
-                },
+        child: Stack(children: [
+          Container(
+            margin: EdgeInsets.only(
+                bottom: MediaQuery.of(context).size.height * 0.325),
+            decoration: const BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.only(
+                bottomRight: Radius.circular(40),
+                bottomLeft: Radius.circular(40),
               ),
             ),
-            ListTile(
-              leading: const Icon(Icons.title),
-              title: TextFormField(
-                decoration: const InputDecoration(hintText: "Password"),
-                initialValue: utentiModel.utenteBeingEdited == null ? null : utentiModel.utenteBeingEdited.password,
-                validator: (String? inValue){
-                  if(inValue!.isEmpty){
-                    return "Inserire Password";
-                  }
-                  return null;
-                },
-                onChanged: (String inValue){
-                  utentiModel.utenteBeingEdited.password = inValue;
-                },
-              ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Image.asset(
+                  'assets/image/logoGym.png',
+                  height: MediaQuery.of(context).size.height * 0.2,
+                  width: MediaQuery.of(context).size.width * 0.2,
+                ),
+                Center(
+                  child: Column(
+                    children: [
+                      Text(
+                        'MyTraining',
+                        style: GoogleFonts.adventPro(
+                          textStyle: const TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w400,
+                            fontSize: 60,
+                            fontStyle: FontStyle.normal,
+                            decoration: TextDecoration.none,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 15.0),
+                      Text(
+                        'Schedule your training',
+                        style: GoogleFonts.adventPro(
+                          textStyle: const TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w400,
+                            fontSize: 30,
+                            fontStyle: FontStyle.normal,
+                            decoration: TextDecoration.none,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
-            /*ListTile(
-              leading: const Icon(Icons.title),
-              title: TextFormField(
-                decoration: const InputDecoration(hintText: "Nome"),
-                initialValue: utentiModel.utenteBeingEdited == null ? null : utentiModel.utenteBeingEdited.nome,
-                validator: (String? inValue){
-                  if(inValue!.isEmpty){
-                    return "Inserire nome";
-                  }
-                  return null;
-                },
-                onChanged: (String inValue){
-                  utentiModel.utenteBeingEdited.nome = inValue;
-                },
-              ),
-            ),
-            ListTile(
-              leading: const Icon(Icons.title),
-              title: TextFormField(
-                decoration: const InputDecoration(hintText: "Cognome"),
-                initialValue: utentiModel.utenteBeingEdited == null ? null : utentiModel.utenteBeingEdited.cognome,
-                validator: (String? inValue){
-                  if(inValue!.isEmpty){
-                    return "Inserire cognome";
-                  }
-                  return null;
-                },
-                onChanged: (String inValue){
-                  utentiModel.utenteBeingEdited.cognome = inValue;
-                },
-              ),
-            ),
-            ListTile(
-              leading: const Icon(Icons.title),
-              title: TextFormField(
-                decoration: const InputDecoration(hintText: "Età"),
-                maxLines: 1,
-                keyboardType: TextInputType.number,
-                initialValue: utentiModel.utenteBeingEdited == null ? null : utentiModel.utenteBeingEdited.eta,
-                validator: (String? inValue){
-                  if(inValue!.isEmpty){
-                    return "Inserire Età";
-                  }
-                  return null;
-                },
-                onChanged: (String inValue){
-                  utentiModel.utenteBeingEdited.eta = inValue;
-                },
-              ),
-            ), */
-          ],
-        ),
+          ),
+          Container(
+              margin: EdgeInsets.only(
+                  top: MediaQuery.of(context).size.height * 0.72),
+              child: Column(
+                children: [
+                  Container(
+                    margin: const EdgeInsets.only(
+                      left: 50,
+                      top: 20,
+                      right: 50,
+                    ),
+                    padding: EdgeInsets.zero,
+                    decoration: const BoxDecoration(),
+                    child: Container(
+                      width: double.maxFinite,
+                      height: 40,
+                      padding: const EdgeInsets.only(top: 7),
+                      decoration: BoxDecoration(
+                          color: Colors.black.withOpacity(0.05),
+                          borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(5),
+                            topRight: Radius.circular(5),
+                            bottomRight: Radius.circular(5),
+                            bottomLeft: Radius.circular(5),
+                          ),
+                          border: Border.all(color: Colors.white, width: 2)),
+                      child: TextFormField(
+                        //initialValue: "Nome Utente",
+                        style: GoogleFonts.adventPro(
+                          textStyle: const TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 25,
+                            fontStyle: FontStyle.normal,
+                            decoration: TextDecoration.none,
+                          ),
+                        ),
+                        validator: (String? inValue) {
+                          if (inValue!.isEmpty) {
+                            return "Please enter a nome utente";
+                          }
+                          return null;
+                        },
+                        onChanged: (String inValue) {
+                          utentiModel.utenteBeingEdited.nomeUtente = inValue;
+                        },
+                      ),
+                    ),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(
+                      left: 50,
+                      top: 10,
+                      right: 50,
+                    ),
+                    padding: EdgeInsets.zero,
+                    decoration: const BoxDecoration(),
+                    child: Container(
+                      width: double.maxFinite,
+                      height: 40,
+                      padding: const EdgeInsets.only(top: 7),
+                      decoration: BoxDecoration(
+                          color: Colors.black.withOpacity(0.05),
+                          borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(5),
+                            topRight: Radius.circular(5),
+                            bottomRight: Radius.circular(5),
+                            bottomLeft: Radius.circular(5),
+                          ),
+                          border: Border.all(color: Colors.white, width: 2)),
+                      child: TextFormField(
+                        /*decoration: InputDecoration(
+                          labelText: "Password",
+                        ),*/
+                        obscureText: true,
+                        style: GoogleFonts.adventPro(
+                          textStyle: const TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 25,
+                            fontStyle: FontStyle.normal,
+                            decoration: TextDecoration.none,
+                          ),
+                        ),
+                        validator: (String? inValue) {
+                          if (inValue!.isEmpty) {
+                            return "Please enter a password";
+                          }
+                          return null;
+                        },
+                        onChanged: (String inValue) {
+                          utentiModel.utenteBeingEdited.password = inValue;
+                        },
+                      ),
+                    ),
+                  ),
+                  Container(
+                      margin: const EdgeInsets.only(
+                        left: 50,
+                        top: 20,
+                        right: 50,
+                      ),
+                      padding: EdgeInsets.zero,
+                      decoration: const BoxDecoration(),
+                      child: GestureDetector(
+                        onTap: () {
+                          print("CiaOOASFAF");
+                          _save(context);
+                        },
+                        child: Container(
+                            width: double.maxFinite,
+                            height: 40,
+                            padding: const EdgeInsets.only(top: 7),
+                            decoration: BoxDecoration(
+                                color: Colors.black.withOpacity(0.05),
+                                borderRadius: const BorderRadius.only(
+                                  topLeft: Radius.circular(5),
+                                  topRight: Radius.circular(5),
+                                  bottomRight: Radius.circular(5),
+                                  bottomLeft: Radius.circular(5),
+                                ),
+                                border:
+                                Border.all(color: Colors.white, width: 2)),
+                            child: Text(
+                              '''Register''',
+                              style: GoogleFonts.adventPro(
+                                textStyle: const TextStyle(
+                                  color: Color(0xFFFFFFFF),
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 16,
+                                  fontStyle: FontStyle.normal,
+                                  decoration: TextDecoration.none,
+                                ),
+                              ),
+                              textAlign: TextAlign.center,
+                            )),
+                      ))
+                ],
+              ))
+        ]),
       ),
     );
   }

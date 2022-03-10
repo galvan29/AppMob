@@ -55,7 +55,10 @@ class _FirstPage2State extends State<FirstPage2>
             height: isAnimFinis ? screenHeight / 1.4 : screenHeight,
             decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.circular(isAnimFinis ? 40.0 : 0.0),
+              borderRadius: const BorderRadius.only(
+                bottomRight: Radius.circular(40),
+                bottomLeft: Radius.circular(40),
+              ),
             ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -161,8 +164,6 @@ class _BottomPart extends StatelessWidget {
                       decoration: BoxDecoration(
                           color: Colors.black.withOpacity(0.05),
                           borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(5),
-                            topRight: Radius.circular(5),
                             bottomRight: Radius.circular(5),
                             bottomLeft: Radius.circular(5),
                           ),

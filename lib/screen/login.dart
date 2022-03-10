@@ -29,12 +29,54 @@ class LoginPage extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.black,
+      bottomNavigationBar: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+          child: Row(
+            children: [
+              FlatButton(
+                onPressed: (){
+                  utentiModel.setStackIndex(0);
+                },
+                child: Text("Indietro",
+                  style: GoogleFonts.adventPro(
+                    textStyle: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 20,
+                      fontStyle: FontStyle.normal,
+                      decoration: TextDecoration.none,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          )
+      ),
       body: Form(
         key: _formKey,
         child: Stack(children: [
+          /*Container(
+            margin: EdgeInsets.only(
+                top: 200
+            ),
+            width: 100,
+            height: 100,
+            child: GestureDetector(
+                onTap: () async {
+                  utentiModel.setStackIndex(0);
+                },
+                child: SizedBox(
+                  width: 100,
+                  height: 100,
+                  child: Icon(
+                      Icons.info,
+                      size: 100,
+                      color: Colors.green),
+                )),
+          ),*/
           Container(
             margin: EdgeInsets.only(
-                bottom: MediaQuery.of(context).size.height * 0.325),
+                bottom: MediaQuery.of(context).size.height * 0.285),
             decoration: const BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.only(
@@ -79,6 +121,21 @@ class LoginPage extends StatelessWidget {
                           ),
                         ),
                       ),
+                      /*Container(
+                        margin: EdgeInsets.only(top: 0),
+                        child: Text(
+                          'Login',
+                          style: GoogleFonts.adventPro(
+                            textStyle: const TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 30,
+                              fontStyle: FontStyle.normal,
+                              decoration: TextDecoration.none,
+                            ),
+                          ),
+                        ),
+                      ), */
                     ],
                   ),
                 ),
@@ -87,13 +144,13 @@ class LoginPage extends StatelessWidget {
           ),
           Container(
               margin: EdgeInsets.only(
-                  top: MediaQuery.of(context).size.height * 0.72),
+                  top: MediaQuery.of(context).size.height * 0.75),
               child: Column(
                 children: [
                   Container(
                     margin: const EdgeInsets.only(
                       left: 50,
-                      top: 20,
+                      top: 10,
                       right: 50,
                     ),
                     padding: EdgeInsets.zero,
@@ -113,7 +170,15 @@ class LoginPage extends StatelessWidget {
                           border: Border.all(color: Colors.white, width: 2)),
                       child: TextFormField(
                         //initialValue: "Nome Utente",
-                        style: TextStyle(color: Colors.white),
+                        style: GoogleFonts.adventPro(
+                          textStyle: const TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 25,
+                            fontStyle: FontStyle.normal,
+                            decoration: TextDecoration.none,
+                          ),
+                        ),
                         validator: (String? inValue) {
                           if (inValue!.isEmpty) {
                             return "Please enter a nome utente";
@@ -148,11 +213,20 @@ class LoginPage extends StatelessWidget {
                           ),
                           border: Border.all(color: Colors.white, width: 2)),
                       child: TextFormField(
-                        //initialValue: "Nome Utente",
-                        style: TextStyle(color: Colors.white),
+                        //initialValue: "Password",
+                        obscureText: true,
+                        style: GoogleFonts.adventPro(
+                          textStyle: const TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 25,
+                            fontStyle: FontStyle.normal,
+                            decoration: TextDecoration.none,
+                          ),
+                        ),
                         validator: (String? inValue) {
                           if (inValue!.isEmpty) {
-                            return "Please enter a nome utente";
+                            return "Please enter a password";
                           }
                           return null;
                         },
@@ -252,5 +326,9 @@ class LoginPage extends StatelessWidget {
         content: Text("Login Effettuato"),
       ),
     );
+  }
+
+  BackBro() {
+    utentiModel.setStackIndex(0);
   }
 }
