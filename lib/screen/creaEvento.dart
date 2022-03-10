@@ -113,63 +113,84 @@ class CreaEvento extends StatelessWidget {
           )),
       body: Form(
         key: _formKey,
-        child: ListView(
-          children: [
-            ListTile(
-              leading: const Icon(Icons.title),
-              title: TextFormField(
-                decoration: const InputDecoration(hintText: "Nome Scheda"),
-                initialValue: eventiModel.eventoBeingEdited == null
-                    ? null
-                    : eventiModel.eventoBeingEdited.nomeScheda,
-                validator: (String? inValue) {
-                  if (inValue!.isEmpty) {
-                    return "Inserisci Nome";
-                  }
-                  return null;
-                },
-                onChanged: (String inValue) {
-                  eventiModel.eventoBeingEdited.nomeScheda = inValue;
-                },
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            Container(
+              margin: EdgeInsets.only(
+                top: MediaQuery.of(context).size.width * 0.05,
               ),
             ),
-            ListTile(
-              leading: const Icon(Icons.title),
-              title: TextFormField(
-                controller: txt,
-                decoration: const InputDecoration(hintText: "Data inizio"),
-                onTap: () async {
-                  FocusScope.of(context).requestFocus(new FocusNode());
-                  DateTime? picked = await DatePicker.showDateTimePicker(context,
-                      showTitleActions: true,
-                      minTime: DateTime(2022, 1, 1), onConfirm: (date) {
-                    inidata = date;
-                    txt.text = inidata.toString();
-                    txt1.text = "0";
-                    eventiModel.eventoBeingEdited.inizio = inidata;
-                    eventiModel.eventoBeingEdited.fine = inidata;
-                  }, currentTime: DateTime.now(), locale: LocaleType.it);
-                },
-                onChanged: (String inValue) {
-                  eventiModel.eventoBeingEdited.inizio = inidata;
-                },
-              ),
-            ),
-            ListTile(
-              leading: const Icon(Icons.title),
-              title: TextFormField(
-                  decoration: const InputDecoration(hintText: "Durata"),
-                  controller: txt1,
-                  onTap: () {
-                    //double click
-                    FocusScope.of(context).requestFocus(new FocusNode());
-                    DateTime a = eventiModel.eventoBeingEdited.fine
-                        .add(Duration(minutes: 15));
-                    eventiModel.eventoBeingEdited.fine = a;
-                    txt1.text = (a.subtract(Duration(milliseconds: eventiModel.eventoBeingEdited.inizio.millisecondsSinceEpoch)).millisecondsSinceEpoch/60000).toString().replaceAll(".0", "");
-                  }),
-              //creare due pulsanti
-            ),
+            const SizedBox(
+                width: 330,
+                child: Text(
+                  "Programma un allenamento!",
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                  ),
+                )),
+            Padding(
+                padding: const EdgeInsets.fromLTRB(0, 40, 0, 0),
+                child: SizedBox(
+                  height: 70,
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  child: TextFormField(
+                    decoration: const InputDecoration(labelText: "Nome Scheda"),
+                    initialValue: eventiModel.eventoBeingEdited == null
+                        ? null
+                        : eventiModel.eventoBeingEdited.nomeScheda,
+                    validator: (String? inValue) {
+                      if (inValue!.isEmpty) {
+                        return "Inserisci Nome";
+                      }
+                      return null;
+                    },
+                    onChanged: (String inValue) {
+                      eventiModel.eventoBeingEdited.nomeScheda = inValue;
+                    },
+                  ),)),
+            Padding(
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                child: SizedBox(
+                  height: 70,
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  child: TextFormField(
+                    controller: txt,
+                    decoration: const InputDecoration(labelText: "Data inizio"),
+                    onTap: () async {
+                      FocusScope.of(context).requestFocus(new FocusNode());
+                      DateTime? picked = await DatePicker.showDateTimePicker(context,
+                          showTitleActions: true,
+                          minTime: DateTime(2022, 1, 1), onConfirm: (date) {
+                            inidata = date;
+                            txt.text = inidata.toString();
+                            txt1.text = "0";
+                            eventiModel.eventoBeingEdited.inizio = inidata;
+                            eventiModel.eventoBeingEdited.fine = inidata;
+                          }, currentTime: DateTime.now(), locale: LocaleType.it);
+                    },
+                    onChanged: (String inValue) {
+                      eventiModel.eventoBeingEdited.inizio = inidata;
+                    },
+                  ),)),
+            Padding(
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                child: SizedBox(
+                  height: 70,
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  child: TextFormField(
+                      decoration: const InputDecoration(labelText: "Durata"),
+                      controller: txt1,
+                      onTap: () {
+                        //double click
+                        FocusScope.of(context).requestFocus(new FocusNode());
+                        DateTime a = eventiModel.eventoBeingEdited.fine
+                            .add(Duration(minutes: 15));
+                        eventiModel.eventoBeingEdited.fine = a;
+                        txt1.text = (a.subtract(Duration(milliseconds: eventiModel.eventoBeingEdited.inizio.millisecondsSinceEpoch)).millisecondsSinceEpoch/60000).toString().replaceAll(".0", "");
+                      }),)),
           ],
         ),
       ),

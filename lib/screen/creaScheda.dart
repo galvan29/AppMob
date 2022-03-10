@@ -95,13 +95,26 @@ class CreaScheda extends StatelessWidget{
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
+            Container(
+              margin: EdgeInsets.only(
+                top: MediaQuery.of(context).size.width * 0.05,
+              ),
+            ),
+            const SizedBox(
+                width: 330,
+                child: Text(
+                  "Crea la tua Scheda!",
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                  ),
+                )),
             Padding(
                 padding: const EdgeInsets.fromLTRB(0, 40, 0, 0),
                 child: SizedBox(
                     height: 70,
                     width: MediaQuery.of(context).size.width * 0.9,
                     child: TextFormField(
-                      decoration: const InputDecoration(hintText: "Nome Scheda"),
                       initialValue: schedeModel.schedaBeingEdited == null ? null : schedeModel.schedaBeingEdited.nomeScheda,
                       validator: (String? inValue){
                         if(inValue!.isEmpty){
@@ -112,39 +125,26 @@ class CreaScheda extends StatelessWidget{
                       onChanged: (String inValue){
                         schedeModel.schedaBeingEdited.nomeScheda = inValue;
                       },
+                      decoration: const InputDecoration(labelText: "Nome Scheda"),
                     ),)),
-            ListTile(
-              title: TextFormField(
-                decoration: const InputDecoration(hintText: "Nome Scheda"),
-                initialValue: schedeModel.schedaBeingEdited == null ? null : schedeModel.schedaBeingEdited.nomeScheda,
-                validator: (String? inValue){
-                  if(inValue!.isEmpty){
-                    return "Please enter a name";
-                  }
-                  return null;
-                },
-                onChanged: (String inValue){
-                  schedeModel.schedaBeingEdited.nomeScheda = inValue;
-                },
-              ),
-            ),
-            ListTile(
-              title: TextFormField(
-                decoration: const InputDecoration(hintText: "Duration"),
-                keyboardType: TextInputType.number,
-                maxLines: 1,
-                initialValue: schedeModel.schedaBeingEdited == null ? null : schedeModel.schedaBeingEdited.durataScheda,
-                validator: (String? inValue){
-                  if(inValue!.isEmpty){
-                    return "Please enter duration";
-                  }
-                  return null;
-                },
-                onChanged: (String inValue){
-                  schedeModel.schedaBeingEdited.durataScheda = inValue;
-                },
-              ),
-            ),
+            Padding(
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                child: SizedBox(
+                  height: 70,
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  child: TextFormField(
+                    initialValue: schedeModel.schedaBeingEdited == null ? null : schedeModel.schedaBeingEdited.durataScheda,
+                    validator: (String? inValue){
+                      if(inValue!.isEmpty){
+                        return "Please enter a durata";
+                      }
+                      return null;
+                    },
+                    onChanged: (String inValue){
+                      schedeModel.schedaBeingEdited.durataScheda = inValue;
+                    },
+                    decoration: const InputDecoration(labelText: "Durata Scheda"),
+                  ),)),
             Padding(
                 padding: EdgeInsets.only(
                     top: MediaQuery.of(context).size.height * 0.03),

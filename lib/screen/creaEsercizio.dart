@@ -15,6 +15,7 @@ class CreaEsercizio extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(MediaQuery.of(context).size.height * 0.07),
         child: Column(
@@ -92,84 +93,115 @@ class CreaEsercizio extends StatelessWidget{
       ),
       body: Form(
         key: _formKey,
-        child: ListView(
-          children: [
-            ListTile(
-              title: TextFormField(
-                decoration: const InputDecoration(hintText: "Nome Scheda"),
-                initialValue: eserciziModel.esercizioBeingEdited == null ? null : eserciziModel.esercizioBeingEdited.nomeEsercizio,
-                validator: (String? inValue){
-                  if(inValue!.isEmpty){
-                    return "Please enter a name";
-                  }
-                  return null;
-                },
-                onChanged: (String inValue){
-                  eserciziModel.esercizioBeingEdited.nomeEsercizio = inValue;
-                },
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            Container(
+              margin: EdgeInsets.only(
+                top: MediaQuery.of(context).size.width * 0.05,
               ),
             ),
-            ListTile(
-              title: TextFormField(
-                decoration: const InputDecoration(hintText: "Nome Scheda"),
-                initialValue: eserciziModel.esercizioBeingEdited == null ? null : eserciziModel.esercizioBeingEdited.ripEsercizio,
-                validator: (String? inValue){
-                  if(inValue!.isEmpty){
-                    return "Please enter a rip";
-                  }
-                  return null;
-                },
-                onChanged: (String inValue){
-                  eserciziModel.esercizioBeingEdited.ripEsercizio = inValue;
-                },
-              ),
-            ),
-            ListTile(
-              title: TextFormField(
-                decoration: const InputDecoration(hintText: "Nome Scheda"),
-                initialValue: eserciziModel.esercizioBeingEdited == null ? null : eserciziModel.esercizioBeingEdited.serieEsercizio,
-                validator: (String? inValue){
-                  if(inValue!.isEmpty){
-                    return "Please enter a serie";
-                  }
-                  return null;
-                },
-                onChanged: (String inValue){
-                  eserciziModel.esercizioBeingEdited.serieEsercizio = inValue;
-                },
-              ),
-            ),
-            ListTile(
-              title: TextFormField(
-                decoration: const InputDecoration(hintText: "Nome Scheda"),
-                initialValue: eserciziModel.esercizioBeingEdited == null ? null : eserciziModel.esercizioBeingEdited.pesoEsercizio,
-                validator: (String? inValue){
-                  if(inValue!.isEmpty){
-                    return "Please enter a peso";
-                  }
-                  return null;
-                },
-                onChanged: (String inValue){
-                  eserciziModel.esercizioBeingEdited.pesoEsercizio = inValue;
-                },
-              ),
-            ),
-            ListTile(
-              title: TextFormField(
-                decoration: const InputDecoration(hintText: "Nome Scheda"),
-                maxLines: 2,
-                initialValue: eserciziModel.esercizioBeingEdited == null ? null : eserciziModel.esercizioBeingEdited.noteEsercizio,
-                validator: (String? inValue){
-                  if(inValue!.isEmpty){
-                    return "Please enter a note";
-                  }
-                  return null;
-                },
-                onChanged: (String inValue){
-                  eserciziModel.esercizioBeingEdited.noteEsercizio = inValue;
-                },
-              ),
-            ),
+            const SizedBox(
+                width: 330,
+                child: Text(
+                  "Crea un esercizio!",
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                  ),
+                )),
+            Padding(
+                padding: const EdgeInsets.fromLTRB(0, 40, 0, 0),
+                child: SizedBox(
+                  height: 70,
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  child: TextFormField(
+                    decoration: const InputDecoration(labelText: "Nome Esercizio"),
+                    initialValue: eserciziModel.esercizioBeingEdited == null ? null : eserciziModel.esercizioBeingEdited.nomeEsercizio,
+                    validator: (String? inValue){
+                      if(inValue!.isEmpty){
+                        return "Please enter a name";
+                      }
+                      return null;
+                    },
+                    onChanged: (String inValue){
+                      eserciziModel.esercizioBeingEdited.nomeEsercizio = inValue;
+                    },
+                  ),)),
+            Padding(
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                child: SizedBox(
+                  height: 70,
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  child:  TextFormField(
+                    decoration: const InputDecoration(labelText: "Serie"),
+                    initialValue: eserciziModel.esercizioBeingEdited == null ? null : eserciziModel.esercizioBeingEdited.serieEsercizio,
+                    validator: (String? inValue){
+                      if(inValue!.isEmpty){
+                        return "Please enter a serie";
+                      }
+                      return null;
+                    },
+                    onChanged: (String inValue){
+                      eserciziModel.esercizioBeingEdited.serieEsercizio = inValue;
+                    },
+                  ),)),
+            Padding(
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                child: SizedBox(
+                  height: 70,
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  child: TextFormField(
+                    decoration: const InputDecoration(labelText: "Rip"),
+                    initialValue: eserciziModel.esercizioBeingEdited == null ? null : eserciziModel.esercizioBeingEdited.ripEsercizio,
+                    validator: (String? inValue){
+                      if(inValue!.isEmpty){
+                        return "Please enter a serie";
+                      }
+                      return null;
+                    },
+                    onChanged: (String inValue){
+                      eserciziModel.esercizioBeingEdited.ripEsercizio = inValue;
+                    },
+                  ),)),
+            Padding(
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                child: SizedBox(
+                  height: 70,
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  child: TextFormField(
+                    decoration: const InputDecoration(labelText: "Peso"),
+                    initialValue: eserciziModel.esercizioBeingEdited == null ? null : eserciziModel.esercizioBeingEdited.pesoEsercizio,
+                    validator: (String? inValue){
+                      if(inValue!.isEmpty){
+                        return "Please enter a peso";
+                      }
+                      return null;
+                    },
+                    onChanged: (String inValue){
+                      eserciziModel.esercizioBeingEdited.pesoEsercizio = inValue;
+                    },
+                  ),)),
+            Padding(
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                child: SizedBox(
+                  height: 70,
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  child: TextFormField(
+                    decoration: const InputDecoration(labelText: "Note"),
+                    maxLines: 2,
+                    initialValue: eserciziModel.esercizioBeingEdited == null ? null : eserciziModel.esercizioBeingEdited.noteEsercizio,
+                    validator: (String? inValue){
+                      if(inValue!.isEmpty){
+                        return "Please enter a note";
+                      }
+                      return null;
+                    },
+                    onChanged: (String inValue){
+                      eserciziModel.esercizioBeingEdited.noteEsercizio = inValue;
+                    },
+                  ),)),
             Padding(
                 padding: EdgeInsets.only(
                     top: MediaQuery.of(context).size.height * 0.03),

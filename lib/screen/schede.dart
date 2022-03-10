@@ -123,7 +123,29 @@ class _SchedeState extends State<Schede> {
           },
         ), */
         body: SingleChildScrollView(
-            child: Column(children: <Widget>[
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+              Container(
+                margin: EdgeInsets.only(
+                  top: MediaQuery.of(context).size.width * 0.05,
+                ),
+              ),
+              const SizedBox(
+                  width: 330,
+                  child: Text(
+                    "Scegli la tua Scheda",
+                    style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  )),
+                  Container(
+                    margin: EdgeInsets.only(
+                      top: MediaQuery.of(context).size.width * 0.05,
+                    ),
+                  ),
           ListView.builder(
             shrinkWrap: true,
             physics: NeverScrollableScrollPhysics(),
