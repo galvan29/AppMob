@@ -43,7 +43,7 @@ class RegisterPage extends StatelessWidget{
         child: Stack(children: [
           Container(
             margin: EdgeInsets.only(
-                bottom: MediaQuery.of(context).size.height * 0.325),
+                bottom: MediaQuery.of(context).size.height * 0.24),
             decoration: const BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.only(
