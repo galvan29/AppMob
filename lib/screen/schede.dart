@@ -7,6 +7,7 @@ import 'package:mytraining/db/utentiDBworker.dart';
 import 'package:mytraining/models/eserciziModel.dart';
 import 'package:mytraining/models/schedeModel.dart';
 import 'package:mytraining/models/utentiModel.dart';
+import 'package:mytraining/screen/creaScheda.dart';
 import 'package:mytraining/screen/login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -154,6 +155,7 @@ class _SchedeState extends State<Schede> {
                     onLongPress: () async {
                       schedeModel.schedaBeingEdited =
                           await SchedeDBworker.schedeDBworker.get(scheda.id);
+                      print(schedeModel.schedaBeingEdited.nomeScheda);
                       schedeModel.setStackIndex(1);
                     },
                     onTap: () async {
@@ -182,6 +184,7 @@ class _SchedeState extends State<Schede> {
                 color: Colors.black,
                 onPressed: () {
                   schedeModel.schedaBeingEdited = Scheda();
+                  print(schedeModel.schedaBeingEdited.nomeScheda);
                   schedeModel.setStackIndex(1);
                 },
               )),

@@ -90,32 +90,11 @@ class CreaEsercizio extends StatelessWidget{
           ],
         ),
       ),
-      bottomNavigationBar: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-          child: Row(
-            children: [
-              FlatButton(
-                onPressed: (){
-                  schedeModel.setStackIndex(2);
-                },
-                child: const Text("Cancel"),
-              ),
-              const Spacer(),
-              FlatButton(
-                onPressed: (){
-                  _save(context);
-                },
-                child: const Text("Save"),
-              ),
-            ],
-          )
-      ),
       body: Form(
         key: _formKey,
         child: ListView(
           children: [
             ListTile(
-              leading: const Icon(Icons.title),
               title: TextFormField(
                 decoration: const InputDecoration(hintText: "Nome Scheda"),
                 initialValue: eserciziModel.esercizioBeingEdited == null ? null : eserciziModel.esercizioBeingEdited.nomeEsercizio,
@@ -131,7 +110,6 @@ class CreaEsercizio extends StatelessWidget{
               ),
             ),
             ListTile(
-              leading: const Icon(Icons.title),
               title: TextFormField(
                 decoration: const InputDecoration(hintText: "Nome Scheda"),
                 initialValue: eserciziModel.esercizioBeingEdited == null ? null : eserciziModel.esercizioBeingEdited.ripEsercizio,
@@ -147,7 +125,6 @@ class CreaEsercizio extends StatelessWidget{
               ),
             ),
             ListTile(
-              leading: const Icon(Icons.title),
               title: TextFormField(
                 decoration: const InputDecoration(hintText: "Nome Scheda"),
                 initialValue: eserciziModel.esercizioBeingEdited == null ? null : eserciziModel.esercizioBeingEdited.serieEsercizio,
@@ -163,7 +140,6 @@ class CreaEsercizio extends StatelessWidget{
               ),
             ),
             ListTile(
-              leading: const Icon(Icons.title),
               title: TextFormField(
                 decoration: const InputDecoration(hintText: "Nome Scheda"),
                 initialValue: eserciziModel.esercizioBeingEdited == null ? null : eserciziModel.esercizioBeingEdited.pesoEsercizio,
@@ -179,7 +155,6 @@ class CreaEsercizio extends StatelessWidget{
               ),
             ),
             ListTile(
-              leading: const Icon(Icons.title),
               title: TextFormField(
                 decoration: const InputDecoration(hintText: "Nome Scheda"),
                 maxLines: 2,
@@ -195,8 +170,52 @@ class CreaEsercizio extends StatelessWidget{
                 },
               ),
             ),
+            Padding(
+                padding: EdgeInsets.only(
+                    top: MediaQuery.of(context).size.height * 0.03),
+                child: Align(
+                    alignment: Alignment.bottomCenter,
+                    child: SizedBox(
+                      width: 330,
+                      height: 50,
+                      child: ElevatedButton(
+                        onPressed: () async {
+                          // Validate returns true if the form is valid, or false otherwise.
+                          if (_formKey.currentState!.validate()) {
+                            _save(context);
+                          }
+                        },
+                        child: const Text(
+                          'Add',
+                          style: TextStyle(fontSize: 15),
+                        ),
+                      ),
+                    )))
           ],
         ),
+      ),
+      bottomNavigationBar: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+          child: Row(
+            children: [
+              FlatButton(
+                onPressed: (){
+                  schedeModel.setStackIndex(2);
+                },
+                child: Text("Indietro",
+                  style: GoogleFonts.adventPro(
+                    textStyle: const TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 20,
+                      fontStyle: FontStyle.normal,
+                      decoration: TextDecoration.none,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          )
       ),
     );
   }

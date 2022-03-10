@@ -107,76 +107,118 @@ class _ProfiloState extends State<Profilo2> {
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Column(
-        children: [
-          AppBar(
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-            toolbarHeight: 10,
-          ),
-          const Center(
-              child: Padding(
-                  padding: EdgeInsets.only(bottom: 20),
-                  child: Text(
-                    'Profile',
-                    style: TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.w700,
-                      color: Color.fromRGBO(64, 105, 225, 1),
+          children: [
+            AppBar(
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              toolbarHeight: 10,
+            ),
+            const Center(
+                child: Padding(
+                    padding: EdgeInsets.only(bottom: 20),
+                    child: Text(
+                      'Profile',
+                      style: TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.w700,
+                        color: Color.fromRGBO(64, 105, 225, 1),
+                      ),
+                    ))),
+            DisplayImage(
+              imagePath:
+                  "https://upload.wikimedia.org/wikipedia/en/0/0b/Darth_Vader_in_The_Empire_Strikes_Back.jpg",
+              onPressed: () {},
+            ),
+            buildUserInfoDisplay(
+                utentiModel.utenteBeingEdited.nomeUtente, 'Username'),
+            buildUserInfoDisplay(utentiModel.utenteBeingEdited.nome, 'Nome'),
+            buildUserInfoDisplay(
+                utentiModel.utenteBeingEdited.cognome, 'Cognome'),
+            buildUserInfoDisplay(utentiModel.utenteBeingEdited.eta, 'Eta'),
+            buildUserInfoDisplay(
+                utentiModel.utenteBeingEdited.height, 'Altezza'),
+            buildUserInfoDisplay(utentiModel.utenteBeingEdited.weight, 'Peso'),
+            Container(
+                decoration: BoxDecoration(
+                    color: const Color.fromARGB(255, 180, 212, 250),
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(5),
+                      topRight: Radius.circular(5),
+                      bottomRight: Radius.circular(5),
+                      bottomLeft: Radius.circular(5),
                     ),
-                  ))),
-          DisplayImage(
-            imagePath:
-                "https://upload.wikimedia.org/wikipedia/en/0/0b/Darth_Vader_in_The_Empire_Strikes_Back.jpg",
-            onPressed: () {},
-          ),
-          buildUserInfoDisplay(
-              utentiModel.utenteBeingEdited.nomeUtente, 'Username'),
-          buildUserInfoDisplay(utentiModel.utenteBeingEdited.nome, 'Nome'),
-          buildUserInfoDisplay(
-              utentiModel.utenteBeingEdited.cognome, 'Cognome'),
-          buildUserInfoDisplay(utentiModel.utenteBeingEdited.eta, 'Eta'),
-          buildUserInfoDisplay(utentiModel.utenteBeingEdited.height, 'Altezza'),
-          buildUserInfoDisplay(utentiModel.utenteBeingEdited.weight, 'Peso'),
-          Container(
-              decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 180, 212, 250),
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(5),
-                    topRight: Radius.circular(5),
-                    bottomRight: Radius.circular(5),
-                    bottomLeft: Radius.circular(5),
-                  ),
-                  border: Border.all(color: Colors.white)),
-              margin: EdgeInsets.only(
-                  right: MediaQuery.of(context).size.width * 0.05,
-                  left: MediaQuery.of(context).size.width * 0.675),
-              child: Align(
-                child: TextButton(
-                  child: Text(
-                    "Modifica",
-                    style: GoogleFonts.adventPro(
-                      textStyle: const TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w400,
-                        fontSize: 20,
-                        fontStyle: FontStyle.normal,
-                        decoration: TextDecoration.none,
+                    border: Border.all(color: Colors.white)),
+                margin: EdgeInsets.only(
+                    right: MediaQuery.of(context).size.width * 0.05,
+                    left: MediaQuery.of(context).size.width * 0.675),
+                child: Align(
+                  child: TextButton(
+                    child: Text(
+                      "Modifica",
+                      style: GoogleFonts.adventPro(
+                        textStyle: const TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w400,
+                          fontSize: 20,
+                          fontStyle: FontStyle.normal,
+                          decoration: TextDecoration.none,
+                        ),
                       ),
                     ),
+                    onPressed: () {
+                      LoginPage().getValueLogin().then((val) async {
+                        utentiModel.utenteBeingEdited =
+                            await UtentiDBworker.utentiDBworker.get(val);
+                      });
+                      //navigateSecondPage(const EditNameFormPage());
+                      utentiModel.setStackIndex(7);
+                    },
                   ),
-                  onPressed: () {
-                    LoginPage().getValueLogin().then((val) async {
-                      utentiModel.utenteBeingEdited =
-                          await UtentiDBworker.utentiDBworker.get(val);
-                    });
-                    navigateSecondPage(const EditNameFormPage());
+                  alignment: Alignment.center,
+                )),
+            Container(
+              margin: EdgeInsets.only(
+                left: MediaQuery.of(context).size.width * 0.06,
+                right: MediaQuery.of(context).size.width * 0.06, //20
+                top: 20, //20
+              ),
+              padding: EdgeInsets.zero,
+              width: double.maxFinite,
+              decoration: const BoxDecoration(),
+              child: GestureDetector(
+                  onTap: () {
+                    utentiModel.setStackIndex(0);
                   },
-                ),
-                alignment: Alignment.center,
-              ))
-        ],
+                  child: Container(
+                      width: 10,
+                      height: 45,
+                      padding: const EdgeInsets.only(top: 7),
+                      decoration: BoxDecoration(
+                          color: Colors.red,
+                          borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(5),
+                            topRight: Radius.circular(5),
+                            bottomRight: Radius.circular(5),
+                            bottomLeft: Radius.circular(5),
+                          ),
+                          border: Border.all(color: Colors.white)),
+                      child: Text(
+                        '''Logout''',
+                        style: GoogleFonts.adventPro(
+                          textStyle: const TextStyle(
+                            color: Color(0xFFFFFFFF),
+                            fontWeight: FontWeight.w500,
+                            fontSize: 20,
+                            fontStyle: FontStyle.normal,
+                            decoration: TextDecoration.none,
+                          ),
+                        ),
+                        textAlign: TextAlign.center,
+                      ))),
+            ),
+          ],
+        ),
       ),
-    ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         currentIndex: _currentIndex,

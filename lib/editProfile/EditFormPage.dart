@@ -281,6 +281,30 @@ class EditNameFormPageState extends State<EditNameFormPage> {
                       )))
             ],
           ),
-        )));
+        )),
+      bottomNavigationBar: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+          child: Row(
+            children: [
+              FlatButton(
+                onPressed: (){
+                  utentiModel.setStackIndex(5);
+                },
+                child: Text("Indietro",
+                  style: GoogleFonts.adventPro(
+                    textStyle: const TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 20,
+                      fontStyle: FontStyle.normal,
+                      decoration: TextDecoration.none,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          )
+      ),
+    );
   }
 }

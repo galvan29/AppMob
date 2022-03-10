@@ -12,7 +12,8 @@ class CreaScheda extends StatelessWidget{
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(MediaQuery.of(context).size.height * 0.07),
+        preferredSize:
+        Size.fromHeight(MediaQuery.of(context).size.height * 0.07),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -21,7 +22,7 @@ class CreaScheda extends StatelessWidget{
               width: double.maxFinite,
               height: MediaQuery.of(context).size.height * 0.07,
               decoration: const BoxDecoration(
-                  color: Color.fromARGB(255, 180, 212, 250),
+                  color: Color.fromARGB(255, 226, 213, 254),
                   border: Border(
                     bottom: BorderSide(
                       color: Colors.black,
@@ -43,7 +44,8 @@ class CreaScheda extends StatelessWidget{
                           textStyle: TextStyle(
                             color: const Color(0xFF000000),
                             fontWeight: FontWeight.w400,
-                            fontSize: MediaQuery.of(context).size.height * 0.03,
+                            fontSize:
+                            MediaQuery.of(context).size.height * 0.03,
                             fontStyle: FontStyle.normal,
                             decoration: TextDecoration.none,
                           ),
@@ -73,10 +75,11 @@ class CreaScheda extends StatelessWidget{
                                   bottomRight: Radius.circular(5),
                                   bottomLeft: Radius.circular(5),
                                 ),
-                                border: Border.all(color: Colors.black, width: 1)),
+                                border: Border.all(
+                                    color: Colors.black, width: 1)),
                             child: Icon(
                               Icons.info,
-                              size: MediaQuery.of(context).size.height * 0.02,
+                              size: MediaQuery.of(context).size.height * 0.01,
                               color: const Color(0xFF000000),
                             )),
                       ))
@@ -86,32 +89,31 @@ class CreaScheda extends StatelessWidget{
           ],
         ),
       ),
-      bottomNavigationBar: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-          child: Row(
-            children: [
-              FlatButton(
-                onPressed: (){
-                  schedeModel.setStackIndex(0);
-                },
-                child: const Text("Cancella"),
-              ),
-              const Spacer(),
-              FlatButton(
-                onPressed: (){
-                  _save(context);
-                },
-                child: const Text("Salva"),
-              ),
-            ],
-          )
-      ),
       body: Form(
         key: _formKey,
-        child: ListView(
-          children: [
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            Padding(
+                padding: const EdgeInsets.fromLTRB(0, 40, 0, 0),
+                child: SizedBox(
+                    height: 70,
+                    width: MediaQuery.of(context).size.width * 0.9,
+                    child: TextFormField(
+                      decoration: const InputDecoration(hintText: "Nome Scheda"),
+                      initialValue: schedeModel.schedaBeingEdited == null ? null : schedeModel.schedaBeingEdited.nomeScheda,
+                      validator: (String? inValue){
+                        if(inValue!.isEmpty){
+                          return "Please enter a name";
+                        }
+                        return null;
+                      },
+                      onChanged: (String inValue){
+                        schedeModel.schedaBeingEdited.nomeScheda = inValue;
+                      },
+                    ),)),
             ListTile(
-              leading: const Icon(Icons.title),
               title: TextFormField(
                 decoration: const InputDecoration(hintText: "Nome Scheda"),
                 initialValue: schedeModel.schedaBeingEdited == null ? null : schedeModel.schedaBeingEdited.nomeScheda,
@@ -127,7 +129,6 @@ class CreaScheda extends StatelessWidget{
               ),
             ),
             ListTile(
-              leading: const Icon(Icons.content_paste),
               title: TextFormField(
                 decoration: const InputDecoration(hintText: "Duration"),
                 keyboardType: TextInputType.number,
@@ -144,8 +145,52 @@ class CreaScheda extends StatelessWidget{
                 },
               ),
             ),
+            Padding(
+                padding: EdgeInsets.only(
+                    top: MediaQuery.of(context).size.height * 0.03),
+                child: Align(
+                    alignment: Alignment.bottomCenter,
+                    child: SizedBox(
+                      width: 330,
+                      height: 50,
+                      child: ElevatedButton(
+                        onPressed: () async {
+                          // Validate returns true if the form is valid, or false otherwise.
+                          if (_formKey.currentState!.validate()) {
+                            _save(context);
+                          }
+                        },
+                        child: const Text(
+                          'Add',
+                          style: TextStyle(fontSize: 15),
+                        ),
+                      ),
+                    )))
           ],
         ),
+      ),
+      bottomNavigationBar: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+          child: Row(
+            children: [
+              FlatButton(
+                onPressed: (){
+                  schedeModel.setStackIndex(0);
+                },
+                child: Text("Indietro",
+                  style: GoogleFonts.adventPro(
+                    textStyle: const TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 20,
+                      fontStyle: FontStyle.normal,
+                      decoration: TextDecoration.none,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          )
       ),
     );
   }
