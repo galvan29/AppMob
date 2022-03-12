@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mytraining/common/appbar.dart';
 import 'package:mytraining/db/eventiDBworrker.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mytraining/models/schedeModel.dart';
 import 'package:mytraining/models/utentiModel.dart';
 import 'package:mytraining/screen/login.dart';
 import 'package:mytraining/models/eventiModel.dart';
@@ -12,7 +13,8 @@ class CreaEvento extends StatelessWidget {
   static DateTime inidata = DateTime.now();
   static DateTime findata = DateTime.now();
   var txt = TextEditingController(), txt1 = TextEditingController();
-
+  int selectedRadio = 0;
+  var nomeScheda = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,20 +24,24 @@ class CreaEvento extends StatelessWidget {
           child: Row(
             children: [
               FlatButton(
-                onPressed: () {
-                  utentiModel.setStackIndex(3);
+                onPressed: (){
+                  schedeModel.setStackIndex(0);
                 },
-                child: const Text("Cancel"),
-              ),
-              const Spacer(),
-              FlatButton(
-                onPressed: () {
-                  _save(context);
-                },
-                child: const Text("Save"),
+                child: Text("Indietro",
+                  style: GoogleFonts.adventPro(
+                    textStyle: const TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 20,
+                      fontStyle: FontStyle.normal,
+                      decoration: TextDecoration.none,
+                    ),
+                  ),
+                ),
               ),
             ],
-          )),
+          )
+      ),
       body: Form(
         key: _formKey,
         child: Column(
@@ -62,10 +68,11 @@ class CreaEvento extends StatelessWidget {
                   height: 70,
                   width: MediaQuery.of(context).size.width * 0.9,
                   child: TextFormField(
+                    onTap: (){
+                      _showDialog(context);
+                    },
+                    readOnly: true,
                     decoration: const InputDecoration(labelText: "Nome Scheda"),
-                    initialValue: eventiModel.eventoBeingEdited == null
-                        ? null
-                        : eventiModel.eventoBeingEdited.nomeScheda,
                     validator: (String? inValue) {
                       if (inValue!.isEmpty) {
                         return "Inserisci Nome";
@@ -75,6 +82,7 @@ class CreaEvento extends StatelessWidget {
                     onChanged: (String inValue) {
                       eventiModel.eventoBeingEdited.nomeScheda = inValue;
                     },
+                    controller: nomeScheda,
                   ),)),
             Padding(
                 padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
@@ -116,9 +124,61 @@ class CreaEvento extends StatelessWidget {
                         eventiModel.eventoBeingEdited.fine = a;
                         txt1.text = (a.subtract(Duration(milliseconds: eventiModel.eventoBeingEdited.inizio.millisecondsSinceEpoch)).millisecondsSinceEpoch/60000).toString().replaceAll(".0", "");
                       }),)),
+            Padding(
+                padding: EdgeInsets.only(
+                    top: MediaQuery.of(context).size.height * 0.03),
+                child: Align(
+                    alignment: Alignment.bottomCenter,
+                    child: SizedBox(
+                      width: 330,
+                      height: 50,
+                      child: ElevatedButton(
+                        onPressed: () async {
+                          // Validate returns true if the form is valid, or false otherwise.
+                          if (_formKey.currentState!.validate()) {
+                            _save(context);
+                          }
+                        },
+                        child: const Text(
+                          'Add',
+                          style: TextStyle(fontSize: 15),
+                        ),
+                      ),
+                    )))
           ],
         ),
       ),
+    );
+  }
+
+  void _showDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: StatefulBuilder(
+            builder: (BuildContext context, StateSetter setState) {
+              return Column(
+                mainAxisSize: MainAxisSize.min,
+                children: List<Widget>.generate(schedeModel.schedeList.length, (int index) {
+                  return
+                    ListTile(
+                        title: Text(schedeModel.schedeList[index].nomeScheda),
+                        leading: Radio<int>(
+                    value: index,
+                    groupValue: selectedRadio,
+                    onChanged: (int? value) {
+                      nomeScheda.text = schedeModel.schedeList[index].nomeScheda;
+                      setState(() => selectedRadio = value!);
+                      Navigator.of(context).pop();
+                    },
+                  ));
+                }),
+              );
+            },
+          ),
+        );
+      },
     );
   }
 
