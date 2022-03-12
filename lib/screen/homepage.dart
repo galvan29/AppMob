@@ -31,7 +31,6 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     setState(() {
     });
-    final colorScheme = Theme.of(context).colorScheme;
     return Scaffold(
         appBar: buildAppBar(context),
         backgroundColor: Colors.white,

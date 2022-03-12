@@ -120,7 +120,7 @@ class CreaEvento extends StatelessWidget {
                         //double click
                         FocusScope.of(context).requestFocus(new FocusNode());
                         DateTime a = eventiModel.eventoBeingEdited.fine
-                            .add(Duration(minutes: 15));
+                            .add(Duration(minutes: 30));
                         eventiModel.eventoBeingEdited.fine = a;
                         txt1.text = (a.subtract(Duration(milliseconds: eventiModel.eventoBeingEdited.inizio.millisecondsSinceEpoch)).millisecondsSinceEpoch/60000).toString().replaceAll(".0", "");
                       }),)),
@@ -170,6 +170,7 @@ class CreaEvento extends StatelessWidget {
                     onChanged: (int? value) {
                       nomeScheda.text = schedeModel.schedeList[index].nomeScheda;
                       setState(() => selectedRadio = value!);
+                      eventiModel.eventoBeingEdited.nomeScheda=schedeModel.schedeList[index].nomeScheda;
                       Navigator.of(context).pop();
                     },
                   ));
