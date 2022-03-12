@@ -25,7 +25,7 @@ class CreaEvento extends StatelessWidget {
             children: [
               FlatButton(
                 onPressed: (){
-                  schedeModel.setStackIndex(0);
+                  utentiModel.setStackIndex(3);
                 },
                 child: Text("Indietro",
                   style: GoogleFonts.adventPro(

@@ -10,6 +10,7 @@ import 'package:mytraining/models/schedeModel.dart';
 import 'package:mytraining/models/utentiModel.dart';
 import 'package:mytraining/screen/creaScheda.dart';
 import 'package:mytraining/screen/login.dart';
+import 'package:mytraining/screen/visualizzaScheda.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Schede extends StatefulWidget {
@@ -34,114 +35,141 @@ class _SchedeState extends State<Schede> {
     prefs.setInt('idScheda', id);
   }
 
+  var a = true;
+
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
+    VisualizzaScheda().getValueSchedaRun().then((val) async {
+      a = val;
+    });
+    final colorScheme = Theme
+        .of(context)
+        .colorScheme;
     return Scaffold(
         appBar: buildAppBar(context),
-        floatingActionButton: FloatingActionButton(
-          child: const Icon(Icons.play_arrow, color: Colors.white),
-          onPressed: () {
-            schedeModel.setStackIndex(4);
-          },
+        floatingActionButton: Visibility(
+          visible: a == false ? false : true,
+          child: FloatingActionButton(
+            onPressed: () {
+              print(VisualizzaScheda().getValueSchedaRun());
+              schedeModel.setStackIndex(4);
+            },
+            child: const Icon(Icons.play_arrow, color: Colors.white),
+          ),
         ),
         body: SingleChildScrollView(
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
-              Container(
-                margin: EdgeInsets.only(
-                  top: MediaQuery.of(context).size.width * 0.05,
-                ),
-              ),
-              const SizedBox(
-                  width: 330,
-                  child: Text(
-                    "Scegli la tua Scheda",
-                    style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  )),
                   Container(
                     margin: EdgeInsets.only(
-                      top: MediaQuery.of(context).size.width * 0.05,
+                      top: MediaQuery
+                          .of(context)
+                          .size
+                          .width * 0.05,
                     ),
                   ),
-          ListView.builder(
-            shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            itemCount: schedeModel.schedeList.length,
-            itemBuilder: (BuildContext inBuildContext, int inIndex) {
-              Scheda scheda = schedeModel.schedeList[inIndex];
-              Color color = Colors.white;
+                  const SizedBox(
+                      width: 330,
+                      child: Text(
+                        "Scegli la tua Scheda",
+                        style: TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      )),
+                  Container(
+                    margin: EdgeInsets.only(
+                      top: MediaQuery
+                          .of(context)
+                          .size
+                          .width * 0.05,
+                    ),
+                  ),
+                  ListView.builder(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemCount: schedeModel.schedeList.length,
+                    itemBuilder: (BuildContext inBuildContext, int inIndex) {
+                      Scheda scheda = schedeModel.schedeList[inIndex];
+                      Color color = Colors.white;
 
-              return Card(
-                margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                elevation: 8,
-                child: Slidable(
-                  actionPane: const SlidableScrollActionPane(),
-                  actionExtentRatio: .25,
-                  secondaryActions: [
-                    IconSlideAction(
-                      caption: "Delete",
-                      color: Colors.red,
-                      icon: Icons.delete,
-                      onTap: () {
-                        _deleteScheda(context, scheda);
-                      },
-                    ),
-                  ],
-                  child: ListTile(
-                    title: Text(scheda.nomeScheda),
-                    subtitle: Text(scheda.durataScheda),
-                    tileColor: color,
-                    onLongPress: () async {
-                      schedeModel.schedaBeingEdited =
-                          await SchedeDBworker.schedeDBworker.get(scheda.id);
-                      print(schedeModel.schedaBeingEdited.nomeScheda);
-                      schedeModel.setStackIndex(1);
-                    },
-                    onTap: () async {
-                      saveValueScheda(scheda.id);
-                      print("Ciao bro " + scheda.id.toString());
-                      await eserciziModel.loadData(
-                          EserciziDBworker.eserciziDBworker, scheda.id);
-                      schedeModel.setStackIndex(2);
+                      return Card(
+                        margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                        elevation: 8,
+                        child: Slidable(
+                          actionPane: const SlidableScrollActionPane(),
+                          actionExtentRatio: .25,
+                          secondaryActions: [
+                            IconSlideAction(
+                              caption: "Delete",
+                              color: Colors.red,
+                              icon: Icons.delete,
+                              onTap: () {
+                                _deleteScheda(context, scheda);
+                              },
+                            ),
+                          ],
+                          child: ListTile(
+                            title: Text(scheda.nomeScheda),
+                            subtitle: Text(scheda.durataScheda),
+                            tileColor: color,
+                            onLongPress: () async {
+                              schedeModel.schedaBeingEdited =
+                              await SchedeDBworker.schedeDBworker.get(
+                                  scheda.id);
+                              print(schedeModel.schedaBeingEdited.nomeScheda);
+                              schedeModel.setStackIndex(1);
+                            },
+                            onTap: () async {
+                              saveValueScheda(scheda.id);
+                              print("Ciao bro " + scheda.id.toString());
+                              await eserciziModel.loadData(
+                                  EserciziDBworker.eserciziDBworker, scheda.id);
+                              schedeModel.setStackIndex(2);
+                            },
+                          ),
+                        ),
+                      );
                     },
                   ),
-                ),
-              );
-            },
-          ),
-          Container(
-              margin: EdgeInsets.only(
-                top: MediaQuery.of(context).size.width * 0.05,
-              ),
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.black, width: 1.5),
-                color: Colors.white,
-                shape: BoxShape.circle,
-              ),
-              child: IconButton(
-                icon: const Icon(Icons.add),
-                color: Colors.black,
-                onPressed: () {
-                  schedeModel.schedaBeingEdited = Scheda();
-                  print(schedeModel.schedaBeingEdited.nomeScheda);
-                  schedeModel.setStackIndex(1);
-                },
-              )),
-        ])),
+                  Container(
+                      margin: EdgeInsets.only(
+                        top: MediaQuery
+                            .of(context)
+                            .size
+                            .width * 0.05,
+                      ),
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.black, width: 1.5),
+                        color: Colors.white,
+                        shape: BoxShape.circle,
+                      ),
+                      child: IconButton(
+                        icon: const Icon(Icons.add),
+                        color: Colors.black,
+                        onPressed: () {
+                          schedeModel.schedaBeingEdited = Scheda();
+                          print(schedeModel.schedaBeingEdited.nomeScheda);
+                          schedeModel.setStackIndex(1);
+                        },
+                      )),
+                ])),
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           currentIndex: _currentIndex,
           backgroundColor: const Color.fromARGB(255, 180, 212, 250),
           selectedItemColor: Colors.white.withOpacity(0.5),
           unselectedItemColor: Colors.black,
-          selectedFontSize: MediaQuery.of(context).size.height * 0.02,
-          unselectedFontSize: MediaQuery.of(context).size.height * 0.02,
+          selectedFontSize: MediaQuery
+              .of(context)
+              .size
+              .height * 0.02,
+          unselectedFontSize: MediaQuery
+              .of(context)
+              .size
+              .height * 0.02,
           onTap: (value) {
             setState(() => _currentIndex = value);
             if (value == 0) {
@@ -199,7 +227,8 @@ class _SchedeState extends State<Schede> {
                     ),
                   );
                   LoginPage().getValueLogin().then((val) async {
-                    await schedeModel.loadData(SchedeDBworker.schedeDBworker, val);
+                    await schedeModel.loadData(
+                        SchedeDBworker.schedeDBworker, val);
                   });
                   schedeModel.setStackIndex(0);
                 },

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mytraining/common/appbar.dart';
+import 'package:mytraining/models/schedeModel.dart';
 import 'package:mytraining/models/utentiModel.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
@@ -133,34 +134,28 @@ class FineAllenamento extends StatelessWidget {
             ],
           ),
         ),
-        bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          backgroundColor: const Color.fromARGB(255, 180, 212, 250),
-          selectedItemColor: Colors.white.withOpacity(0.5),
-          unselectedItemColor: colorScheme.onSurface.withOpacity(.60),
-          selectedFontSize: MediaQuery.of(context).size.height * 0.02,
-          unselectedFontSize: MediaQuery.of(context).size.height * 0.02,
-          onTap: (value) {
-            if (value == 1) {
-              utentiModel.setStackIndex(4);
-            } else if (value == 2) {
-              utentiModel.setStackIndex(5);
-            }
-          },
-          items: [
-            BottomNavigationBarItem(
-              label: 'Homepage',
-              icon: const Icon(Icons.home),
-            ),
-            BottomNavigationBarItem(
-              label: 'Schede',
-              icon: const Icon(Icons.article_outlined),
-            ),
-            BottomNavigationBarItem(
-              label: 'Profilo',
-              icon: const Icon(Icons.perm_identity_sharp),
-            ),
-          ],
-        ));
+      bottomNavigationBar: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+          child: Row(
+            children: [
+              FlatButton(
+                onPressed: (){
+                  schedeModel.setStackIndex(0);
+                },
+                child: Text("Indietro",
+                  style: GoogleFonts.adventPro(
+                    textStyle: const TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 20,
+                      fontStyle: FontStyle.normal,
+                      decoration: TextDecoration.none,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          )
+      ));
   }
 }

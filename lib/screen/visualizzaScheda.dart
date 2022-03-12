@@ -8,6 +8,7 @@ import 'package:mytraining/models/schedeModel.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mytraining/screen/allenamento.dart';
 import 'package:mytraining/screen/schede.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
 
 class VisualizzaScheda extends StatelessWidget {
@@ -19,6 +20,16 @@ class VisualizzaScheda extends StatelessWidget {
       return true;
     }
     return false;
+  }
+
+  saveValueSchedaRun(bool val) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool('going', val);
+  }
+
+  getValueSchedaRun() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getBool('going')!;
   }
 
   @override
@@ -38,6 +49,7 @@ class VisualizzaScheda extends StatelessWidget {
             child: FloatingActionButton(
               child: const Icon(Icons.play_arrow, color: Colors.white),
               onPressed: () {
+                saveValueSchedaRun(true);
                 schedeModel.setStackIndex(4);
               },
             )),

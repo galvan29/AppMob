@@ -36,7 +36,8 @@ class MainSchede extends StatelessWidget {
               CreaScheda(),
               VisualizzaScheda(),
               CreaEsercizio(),
-              Allenamento()
+              Allenamento(),
+              FineAllenamento()
             ],
           );
         },

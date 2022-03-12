@@ -6,6 +6,7 @@ import 'package:mytraining/db/utentiDBworker.dart';
 import 'package:mytraining/models/eventiModel.dart';
 import 'package:mytraining/models/schedeModel.dart';
 import 'package:mytraining/models/utentiModel.dart';
+import 'package:mytraining/screen/visualizzaScheda.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatelessWidget {
@@ -26,6 +27,7 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    VisualizzaScheda().saveValueSchedaRun(false);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.black,

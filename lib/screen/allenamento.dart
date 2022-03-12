@@ -6,6 +6,7 @@ import 'package:mytraining/db/eserciziDBworker.dart';
 import 'package:mytraining/models/eserciziModel.dart';
 import 'package:mytraining/models/schedeModel.dart';
 import 'package:mytraining/models/utentiModel.dart';
+import 'package:mytraining/screen/visualizzaScheda.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
 
 class Allenamento extends StatefulWidget {
@@ -134,6 +135,9 @@ class _AllenamentoState extends State<Allenamento> {
                             onPressed: () async {
                               _stopWatchTimer.onExecute
                                   .add(StopWatchExecute.reset);
+                              VisualizzaScheda().saveValueSchedaRun(false);
+                              print("Messo pulsante del ritorna ad allenamento in pausa, torno alla home");
+                              schedeModel.setStackIndex(5);
                             },
                             child: const Text(
                               'Reset',
