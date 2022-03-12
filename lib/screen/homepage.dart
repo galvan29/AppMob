@@ -21,6 +21,11 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final datasets = <String, dynamic>{};
 
+  void initState() {
+    utentiModel.setStackIndex(2);
+  }
+
+
   ValueNotifier<bool> isDialOpen = ValueNotifier(false);
 
   //Homepage

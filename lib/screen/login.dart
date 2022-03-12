@@ -27,7 +27,6 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    VisualizzaScheda().saveValueSchedaRun(false);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.black,

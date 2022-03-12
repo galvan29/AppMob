@@ -111,6 +111,7 @@ class _ProfiloState extends State<Profilo2> {
               decoration: const BoxDecoration(),
               child: GestureDetector(
                   onTap: () {
+
                     utentiModel.setStackIndex(0);
                   },
                   child: Container(

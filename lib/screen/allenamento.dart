@@ -6,7 +6,9 @@ import 'package:mytraining/db/eserciziDBworker.dart';
 import 'package:mytraining/models/eserciziModel.dart';
 import 'package:mytraining/models/schedeModel.dart';
 import 'package:mytraining/models/utentiModel.dart';
+import 'package:mytraining/screen/schede.dart';
 import 'package:mytraining/screen/visualizzaScheda.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
 
 class Allenamento extends StatefulWidget {
@@ -34,7 +36,6 @@ class _AllenamentoState extends State<Allenamento> {
     _stopWatchTimer.minuteTime.listen((value) => print('minuteTime $value'));
     _stopWatchTimer.secondTime.listen((value) => print('secondTime $value'));
     _stopWatchTimer.records.listen((value) => print('records $value'));
-
     /// Can be set preset time. This case is "00:01.23".
     // _stopWatchTimer.setPresetTime(mSec: 1234);
   }
@@ -135,7 +136,7 @@ class _AllenamentoState extends State<Allenamento> {
                             onPressed: () async {
                               _stopWatchTimer.onExecute
                                   .add(StopWatchExecute.reset);
-                              VisualizzaScheda().saveValueSchedaRun(false);
+                              Schede.valoreOrologio = false;
                               print("Messo pulsante del ritorna ad allenamento in pausa, torno alla home");
                               schedeModel.setStackIndex(5);
                             },

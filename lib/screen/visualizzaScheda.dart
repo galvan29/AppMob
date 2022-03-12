@@ -22,16 +22,6 @@ class VisualizzaScheda extends StatelessWidget {
     return false;
   }
 
-  saveValueSchedaRun(bool val) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setBool('going', val);
-  }
-
-  getValueSchedaRun() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getBool('going')!;
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,8 +38,8 @@ class VisualizzaScheda extends StatelessWidget {
             visible: checkNumber(), // Set it to false
             child: FloatingActionButton(
               child: const Icon(Icons.play_arrow, color: Colors.white),
-              onPressed: () {
-                saveValueSchedaRun(true);
+              onPressed: () async {
+                Schede.valoreOrologio = true;
                 schedeModel.setStackIndex(4);
               },
             )),

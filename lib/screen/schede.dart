@@ -14,6 +14,9 @@ import 'package:mytraining/screen/visualizzaScheda.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Schede extends StatefulWidget {
+
+  static bool valoreOrologio = false;
+
   @override
   State<Schede> createState() => _SchedeState();
 
@@ -35,23 +38,14 @@ class _SchedeState extends State<Schede> {
     prefs.setInt('idScheda', id);
   }
 
-  var a = true;
-
   @override
   Widget build(BuildContext context) {
-    VisualizzaScheda().getValueSchedaRun().then((val) async {
-      a = val;
-    });
-    final colorScheme = Theme
-        .of(context)
-        .colorScheme;
     return Scaffold(
         appBar: buildAppBar(context),
         floatingActionButton: Visibility(
-          visible: a == false ? false : true,
+          visible: Schede.valoreOrologio,
           child: FloatingActionButton(
             onPressed: () {
-              print(VisualizzaScheda().getValueSchedaRun());
               schedeModel.setStackIndex(4);
             },
             child: const Icon(Icons.play_arrow, color: Colors.white),
