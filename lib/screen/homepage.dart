@@ -7,8 +7,8 @@ import 'package:mytraining/db/utentiDBworker.dart';
 import 'package:mytraining/models/eventiModel.dart';
 import 'package:mytraining/models/utentiModel.dart';
 import 'package:mytraining/screen/login.dart';
-import 'package:table_calendar/table_calendar.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
+import 'package:intl/intl.dart';
 
 //import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 //import 'package:mytraining/screen/notification_api.dart';
@@ -26,8 +26,11 @@ class _HomePageState extends State<HomePage> {
   //Homepage
   int _currentIndex = 0;
 
+
   @override
   Widget build(BuildContext context) {
+    setState(() {
+    });
     final colorScheme = Theme.of(context).colorScheme;
     return Scaffold(
         appBar: buildAppBar(context),
@@ -149,12 +152,16 @@ class _HomePageState extends State<HomePage> {
                         appointmentDisplayMode:
                             MonthAppointmentDisplayMode.appointment),
                     onTap: (CalendarTapDetails details) async {
-                      //DateTime date = details.date!;
+                      DateTime date = details.date!;
                       dynamic appointments = details.appointments;
-                      //CalendarElement view = details.targetElement;
-                      //print("Creati i due eventi");
-                      //getMeetingData();
-                      //print(appointments[0]);
+                      String alle = "";
+                      String giorno = DateFormat('dd-MM-yy').format(date);
+                      if(appointments.length != 0){
+                        for(var app in appointments){
+                          alle += app.eventName+"  "+ DateFormat('HH.mm').format(app.from) + "\n";
+                        }
+                       _showDialog(context, alle, giorno);
+                      }
                       LoginPage().getValueLogin().then((val) async {
                         await eventiModel.loadData(
                             EventiDBworker.eventiDBworker, val);
@@ -399,98 +406,6 @@ class _HomePageState extends State<HomePage> {
                     textAlign: TextAlign.center,
                     maxLines: 3),
               ),
-              /*
-              Container(
-                margin: const EdgeInsets.only(
-                  left: 30,
-                  top: 20,
-                  right: 30,
-                ),
-                padding: EdgeInsets.zero,
-                width: double.maxFinite,
-                decoration: const BoxDecoration(),
-                child: GestureDetector(
-                    onTap: () => NotificationApi.showNotification(
-                      title: 'Notifica',
-                      body: 'Schifo',
-                      payload: 'notifica',
-                  ),
-                    child: Container(
-                        width: 10,
-                        height: 50,
-                        padding: const EdgeInsets.only(top: 8),
-                        decoration: BoxDecoration(
-                            color: const Color.fromARGB(255, 180, 212, 250),
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(5),
-                              topRight: Radius.circular(5),
-                              bottomRight: Radius.circular(5),
-                              bottomLeft: Radius.circular(5),
-                            ),
-                            border: Border.all(color: Colors.white)),
-                        child: Text(
-                          '''Notifica''',
-                          style: GoogleFonts.adventPro(
-                            textStyle: const TextStyle(
-                              color: Color(0xFF000000),
-                              fontWeight: FontWeight.w500,
-                              fontSize: 20,
-                              fontStyle: FontStyle.normal,
-                              decoration: TextDecoration.none,
-                            ),
-                          ),
-                          textAlign: TextAlign.center,
-                        ))),
-              ),
-              */
-
-              //cronometro
-              /*Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 4),
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.pinkAccent,
-                        padding: const EdgeInsets.all(4),
-                        shape: const StadiumBorder(),
-                      ),
-                      onPressed: () {
-                        CountUpTimerPage.navigatorPush(context);
-                      },
-                      child: const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 16),
-                        child: Text(
-                          'Go To CountUpTimer',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ),
-                    ),
-                  ),
-                  /* Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 4),
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.pinkAccent,
-                        padding: const EdgeInsets.all(4),
-                        shape: const StadiumBorder(),
-                      ),
-                      onPressed: () {
-                        CountDownTimerPage.navigatorPush(context);
-                      },
-                      child: const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 16),
-                        child: Text(
-                          'Go To CountDownTimer',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ),
-                    ),
-                  ), */
-                ],
-              ),*/
             ],
           ),
         ),
@@ -531,6 +446,26 @@ class _HomePageState extends State<HomePage> {
             ),
           ],
         ));
+  }
+
+  void _showDialog(BuildContext context, String nomeApp, String giorno) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Allenamenti del "+giorno),
+          content: Text(nomeApp),
+          actions: <Widget>[
+            FlatButton(
+              child: const Text("OK"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 }
 
