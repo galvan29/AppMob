@@ -99,7 +99,7 @@ class _AllenamentoState extends State<Allenamento> {
                           padding: const EdgeInsets.symmetric(horizontal: 4),
                           child: RaisedButton(
                             padding: const EdgeInsets.all(4),
-                            color: Colors.lightBlue,
+                            color: Colors.black,
                             shape: const StadiumBorder(),
                             onPressed: () async {
                               _stopWatchTimer.onExecute
@@ -115,7 +115,7 @@ class _AllenamentoState extends State<Allenamento> {
                           padding: const EdgeInsets.symmetric(horizontal: 4),
                           child: RaisedButton(
                             padding: const EdgeInsets.all(4),
-                            color: Colors.green,
+                            color: Colors.black,
                             shape: const StadiumBorder(),
                             onPressed: () async {
                               _stopWatchTimer.onExecute
@@ -131,7 +131,7 @@ class _AllenamentoState extends State<Allenamento> {
                           padding: const EdgeInsets.symmetric(horizontal: 4),
                           child: RaisedButton(
                             padding: const EdgeInsets.all(4),
-                            color: Colors.red,
+                            color: Colors.black,
                             shape: const StadiumBorder(),
                             onPressed: () async {
                               _stopWatchTimer.onExecute
@@ -167,16 +167,6 @@ class _AllenamentoState extends State<Allenamento> {
               child: Slidable(
                 actionPane: const SlidableScrollActionPane(),
                 actionExtentRatio: .25,
-                secondaryActions: [
-                  IconSlideAction(
-                    caption: "Delete",
-                    color: Colors.red,
-                    icon: Icons.delete,
-                    onTap: () {
-                      //_deleteEsercizio(context, esercizio);
-                    },
-                  ),
-                ],
                 child: ListTile(
                   title: Text(esercizio.nomeEsercizio),
                   subtitle: Text("Rip: " +
