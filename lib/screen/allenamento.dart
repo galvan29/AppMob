@@ -59,7 +59,7 @@ class _AllenamentoState extends State<Allenamento> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Container(
-              margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.24),
+              margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.25),
               child: Padding(
                 padding: const EdgeInsets.only(bottom: 0),
                 child: StreamBuilder<int>(
