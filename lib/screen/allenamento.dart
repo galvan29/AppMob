@@ -36,6 +36,7 @@ class _AllenamentoState extends State<Allenamento> {
     _stopWatchTimer.minuteTime.listen((value) => print('minuteTime $value'));
     _stopWatchTimer.secondTime.listen((value) => print('secondTime $value'));
     _stopWatchTimer.records.listen((value) => print('records $value'));
+
     /// Can be set preset time. This case is "00:01.23".
     // _stopWatchTimer.setPresetTime(mSec: 1234);
   }
@@ -54,36 +55,43 @@ class _AllenamentoState extends State<Allenamento> {
       body: SingleChildScrollView(
           child: Column(children: <Widget>[
         Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            /// Display stop watch time
-            Padding(
-              padding: const EdgeInsets.only(bottom: 0),
-              child: StreamBuilder<int>(
-                stream: _stopWatchTimer.rawTime,
-                initialData: _stopWatchTimer.rawTime.value,
-                builder: (context, snap) {
-                  final value = snap.data!;
-                  final displayTime =
-                      StopWatchTimer.getDisplayTime(value, hours: _isHours);
-                  return Column(
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.all(8),
-                        child: Text(
-                          displayTime,
-                          style: const TextStyle(
-                              fontSize: 40,
-                              fontFamily: 'Helvetica',
-                              ),
+            Container(
+              margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.24),
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 0),
+                child: StreamBuilder<int>(
+                  stream: _stopWatchTimer.rawTime,
+                  initialData: _stopWatchTimer.rawTime.value,
+                  builder: (context, snap) {
+                    final value = snap.data!;
+                    final displayTime =
+                        StopWatchTimer.getDisplayTime(value, hours: _isHours);
+                    return Column(
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.all(8),
+                          child: Text(displayTime,
+                              style: GoogleFonts.adventPro(
+                                textStyle: const TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 40,
+                                  fontStyle: FontStyle.normal,
+                                  decoration: TextDecoration.none,
+                                ),
+                              )),
                         ),
-                      ),
-                    ],
-                  );
-                },
+                      ],
+                    );
+                  },
+                ),
               ),
             ),
+
+            /// Display stop watch time
 
             /// Button
             Padding(
@@ -137,7 +145,8 @@ class _AllenamentoState extends State<Allenamento> {
                               _stopWatchTimer.onExecute
                                   .add(StopWatchExecute.reset);
                               Schede.valoreOrologio = false;
-                              print("Messo pulsante del ritorna ad allenamento in pausa, torno alla home");
+                              print(
+                                  "Messo pulsante del ritorna ad allenamento in pausa, torno alla home");
                               schedeModel.setStackIndex(5);
                             },
                             child: const Text(
