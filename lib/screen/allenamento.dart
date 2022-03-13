@@ -59,7 +59,8 @@ class _AllenamentoState extends State<Allenamento> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Container(
-              margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.25),
+              margin: EdgeInsets.only(
+                  left: MediaQuery.of(context).size.width * 0.25),
               child: Padding(
                 padding: const EdgeInsets.only(bottom: 0),
                 child: StreamBuilder<int>(
@@ -105,42 +106,65 @@ class _AllenamentoState extends State<Allenamento> {
                       children: <Widget>[
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 4),
-                          child: RaisedButton(
-                            padding: const EdgeInsets.all(4),
-                            color: Colors.black,
-                            shape: const StadiumBorder(),
+                          child: ElevatedButton(
                             onPressed: () async {
                               _stopWatchTimer.onExecute
                                   .add(StopWatchExecute.start);
                             },
                             child: const Text(
                               'Start',
-                              style: TextStyle(color: Colors.white),
+                              style: TextStyle(color: Colors.black),
                             ),
+                            style: ElevatedButton.styleFrom(
+                                primary: Colors.white,
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 20, vertical: 10),
+                                textStyle: GoogleFonts.adventPro(
+                                  textStyle: const TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 20,
+                                    fontStyle: FontStyle.normal,
+                                    decoration: TextDecoration.none,
+                                  ),
+                                ),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(50),
+                                )),
                           ),
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 4),
-                          child: RaisedButton(
-                            padding: const EdgeInsets.all(4),
-                            color: Colors.black,
-                            shape: const StadiumBorder(),
+                          child: ElevatedButton(
                             onPressed: () async {
                               _stopWatchTimer.onExecute
                                   .add(StopWatchExecute.stop);
                             },
                             child: const Text(
-                              'Stop',
-                              style: TextStyle(color: Colors.white),
+                              'Pause',
+                              style: TextStyle(color: Colors.black),
                             ),
+                            style: ElevatedButton.styleFrom(
+                                primary: Colors.white,
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 20, vertical: 10),
+                                textStyle: GoogleFonts.adventPro(
+                                  textStyle: const TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 20,
+                                    fontStyle: FontStyle.normal,
+                                    decoration: TextDecoration.none,
+                                  ),
+                                ),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(50),
+                                )),
                           ),
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 4),
-                          child: RaisedButton(
-                            padding: const EdgeInsets.all(4),
-                            color: Colors.black,
-                            shape: const StadiumBorder(),
+                          child: ElevatedButton(
                             onPressed: () async {
                               _stopWatchTimer.onExecute
                                   .add(StopWatchExecute.reset);
@@ -150,9 +174,25 @@ class _AllenamentoState extends State<Allenamento> {
                               schedeModel.setStackIndex(5);
                             },
                             child: const Text(
-                              'Reset',
-                              style: TextStyle(color: Colors.white),
+                              'Finish',
+                              style: TextStyle(color: Colors.black),
                             ),
+                            style: ElevatedButton.styleFrom(
+                                primary: Colors.white,
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 20, vertical: 10),
+                                textStyle: GoogleFonts.adventPro(
+                                  textStyle: const TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 20,
+                                    fontStyle: FontStyle.normal,
+                                    decoration: TextDecoration.none,
+                                  ),
+                                ),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(50),
+                                )),
                           ),
                         ),
                       ],
