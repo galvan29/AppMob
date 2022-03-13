@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mytraining/common/appbar.dart';
 import 'package:mytraining/db/eventiDBworrker.dart';
@@ -21,16 +22,10 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final datasets = <String, dynamic>{};
 
-  void initState() {
-    utentiModel.setStackIndex(2);
-  }
-
-
   ValueNotifier<bool> isDialOpen = ValueNotifier(false);
 
   //Homepage
   int _currentIndex = 0;
-
 
   @override
   Widget build(BuildContext context) {
@@ -159,12 +154,18 @@ class _HomePageState extends State<HomePage> {
                       DateTime date = details.date!;
                       dynamic appointments = details.appointments;
                       String alle = "";
+                      List<String> text = [];
+                      List<int> idEve = [];
                       String giorno = DateFormat('dd-MM-yy').format(date);
                       if(appointments.length != 0){
                         for(var app in appointments){
-                          alle += app.eventName+"  "+ DateFormat('HH.mm').format(app.from) + "\n";
+                          alle += app.eventName+" alle "+ DateFormat('HH.mm').format(app.from);
+                          idEve.add(app.id);
+                          text.add(alle);
+                          print("Dario "+alle);
+                          alle = "";
                         }
-                       _showDialog(context, alle, giorno);
+                       _showDialog(context, text, idEve, giorno);
                       }
                       LoginPage().getValueLogin().then((val) async {
                         await eventiModel.loadData(
@@ -452,13 +453,13 @@ class _HomePageState extends State<HomePage> {
         ));
   }
 
-  void _showDialog(BuildContext context, String nomeApp, String giorno) {
+  void _showDialog(BuildContext context, List<String> text, List<int> idEve, String giorno) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
           title: Text("Allenamenti del "+giorno),
-          content: Text(nomeApp),
+          content: setupAlertDialoadContainer(text, idEve),
           actions: <Widget>[
             FlatButton(
               child: const Text("OK"),
@@ -471,13 +472,103 @@ class _HomePageState extends State<HomePage> {
       },
     );
   }
+
+  Widget setupAlertDialoadContainer(List<String> text, List<int> idEve) {
+    return Container(
+     // height: 300.0, // Change as per your requirement
+      width: 300.0, // Change as per your requirement
+        child: ListView.builder(
+          shrinkWrap: true,
+          physics: NeverScrollableScrollPhysics(),
+          itemCount: text.length,
+          itemBuilder: (BuildContext inBuildContext, int inIndex) {
+            String str = text[inIndex];
+            int id = idEve[inIndex];
+            Color color = Colors.white;
+
+            return Card(
+              margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+              elevation: 8,
+              child: Slidable(
+                actionPane: const SlidableScrollActionPane(),
+                actionExtentRatio: .25,
+                secondaryActions: [
+                  IconSlideAction(
+                    caption: "Delete",
+                    color: Colors.red,
+                    icon: Icons.delete,
+                    onTap: () async {
+                      Evento ev = await EventiDBworker.eventiDBworker.get(id);
+                      _deleteEvento(context, ev);
+                    },
+                  ),
+                ],
+                child: ListTile(
+                  title: Text(str),
+                  //subtitle: Text(scheda.durataScheda),
+                  tileColor: color,
+                  onLongPress: () async {
+                  },
+                  onTap: () async {
+                  },
+                ),
+              ),
+            );
+          },
+        )
+    );
+  }
+
+  Future _deleteEvento(BuildContext context, Evento ev) async {
+    return showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext inAlertContext) {
+          return AlertDialog(
+            title: const Text("Delete Scheda"),
+            content:
+            Text("Are you sure you want to delete ${ev.nomeScheda}"),
+            actions: [
+              FlatButton(
+                onPressed: () {
+                  Navigator.of(inAlertContext).pop();
+                },
+                child: const Text("Cancel"),
+              ),
+              FlatButton(
+                onPressed: () async {
+                  await EventiDBworker.eventiDBworker.delete(ev.id);
+                  Navigator.of(inAlertContext).pop();
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      backgroundColor: Colors.red,
+                      duration: Duration(seconds: 2),
+                      content: Text("Evento deleted"),
+                    ),
+                  );
+                  LoginPage().getValueLogin().then((val) async {
+                    await eventiModel.loadData(
+                        EventiDBworker.eventiDBworker, val);
+                  });
+                  setState(() {
+
+                  });
+                  Navigator.of(context).pop();
+                },
+                child: const Text("Delete"),
+              ),
+            ],
+          );
+        });
+  }
+
 }
 
 List<Meeting> getMeetingData() {
   final List<Meeting> listMeetings = <Meeting>[];
   print("Ma entra qua");
   for (Evento eve in eventiModel.eventiList) {
-    listMeetings.add(Meeting(eve.nomeScheda, eve.inizio, eve.fine));
+    listMeetings.add(Meeting(eve.nomeScheda, eve.inizio, eve.fine, eve.id));
   }
   print(listMeetings.length);
 
@@ -506,17 +597,23 @@ class MeetingDataSource extends CalendarDataSource {
   DateTime getEndTime(int index) {
     return appointments![index].to;
   }
+
+  @override
+  int getId(int index) {
+    return appointments![index].id;
+  }
 }
 
 class Meeting {
-  Meeting(this.eventName, this.from, this.to);
+  Meeting(this.eventName, this.from, this.to, this.id);
 
   String eventName;
   DateTime from;
   DateTime to;
+  int id;
 
   @override
   String toString() {
-    return 'Meeting{eventName: $eventName, from: $from, to: $to}';
+    return 'Meeting{eventName: $eventName, from: $from, to: $to, id: $id}';
   }
 }
