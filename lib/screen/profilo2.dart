@@ -24,7 +24,6 @@ class _ProfiloState extends State<Profilo2> {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Colors.white;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: buildAppBar(context),
@@ -94,8 +93,8 @@ class _ProfiloState extends State<Profilo2> {
                         utentiModel.utenteBeingEdited =
                             await UtentiDBworker.utentiDBworker.get(val);
                       });
-                      //navigateSecondPage(const EditNameFormPage());
-                      utentiModel.setStackIndex(7);
+                      navigateSecondPage(const EditNameFormPage());
+                      //utentiModel.setStackIndex(7);
                     },
                   ),
                   alignment: Alignment.center,
