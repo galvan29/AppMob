@@ -171,7 +171,9 @@ class _AllenamentoState extends State<Allenamento> {
                               Schede.valoreOrologio = false;
                               print(
                                   "Messo pulsante del ritorna ad allenamento in pausa, torno alla home");
-                              schedeModel.setStackIndex(5);
+                              schedeModel.setStackIndex(3);
+                              print("Allenamento finito, semmai dialog");
+                              //schedeModel.setStackIndex(5);
                             },
                             child: const Text(
                               'Finish',
