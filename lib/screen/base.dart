@@ -39,7 +39,6 @@ class Base extends StatelessWidget {
                   MainSchede(),
                   Profilo2(),
                   CreaEvento(),
-                  EditNameFormPage()
                 ],
               );
             },
