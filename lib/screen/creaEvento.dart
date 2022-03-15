@@ -4,6 +4,7 @@ import 'package:mytraining/db/eventiDBworrker.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mytraining/models/schedeModel.dart';
 import 'package:mytraining/models/utentiModel.dart';
+import 'package:mytraining/screen/base.dart';
 import 'package:mytraining/screen/login.dart';
 import 'package:mytraining/models/eventiModel.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
@@ -206,7 +207,9 @@ class CreaEvento extends StatelessWidget {
       await eventiModel.loadData(EventiDBworker.eventiDBworker, val);
     });
 
-    utentiModel.setStackIndex(3);
+    Base.pageIndexForWidget = 3;
+    utentiModel.setStackIndex(7);
+
 
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(

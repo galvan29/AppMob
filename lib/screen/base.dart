@@ -1,23 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:mytraining/db/utentiDBworker.dart';
-import 'package:mytraining/editProfile/EditFormPage.dart';
 import 'package:mytraining/models/utentiModel.dart';
 import 'package:mytraining/screen/creaEvento.dart';
-import 'package:mytraining/screen/firstPage.dart';
 import 'package:mytraining/screen/firstPage2.dart';
 import 'package:mytraining/screen/homepage.dart';
 import 'package:mytraining/screen/login.dart';
 import 'package:mytraining/screen/mainSchede.dart';
-import 'package:mytraining/screen/profilo.dart';
 import 'package:mytraining/screen/profilo2.dart';
 import 'package:mytraining/screen/register.dart';
+import 'package:mytraining/widget/Widget.dart';
 import 'package:provider/provider.dart';
 import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 
 class Base extends StatelessWidget {
-  Base({Key? key}) : super(key: key) {
-   // utentiModel.loadData(UtentiDBworker.utentiDBworker);
-  }
+  Base({Key? key}) : super(key: key);
+  static int pageIndexForWidget = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -32,13 +28,14 @@ class Base extends StatelessWidget {
               return IndexedStack(
                 index: utentiModel.stackIndex,
                 children: [
-                  FirstPage2(),
+                  const FirstPage2(),
                   LoginPage(),
                   RegisterPage(),
                   HomePage(),
                   MainSchede(),
                   Profilo2(),
                   CreaEvento(),
+                  WidgetClass()
                 ],
               );
             },

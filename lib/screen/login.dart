@@ -6,6 +6,7 @@ import 'package:mytraining/db/utentiDBworker.dart';
 import 'package:mytraining/models/eventiModel.dart';
 import 'package:mytraining/models/schedeModel.dart';
 import 'package:mytraining/models/utentiModel.dart';
+import 'package:mytraining/screen/base.dart';
 import 'package:mytraining/screen/visualizzaScheda.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -90,7 +91,7 @@ class LoginPage extends StatelessWidget {
                           ),
                         ),
                       ),
-                      const SizedBox(height: 15.0),
+                      const SizedBox(height: 6.0),
                       Text(
                         'Schedule your training',
                         style: GoogleFonts.adventPro(
@@ -267,7 +268,6 @@ class LoginPage extends StatelessWidget {
                           decoration: const BoxDecoration(),
                           child: GestureDetector(
                             onTap: () {
-                              print("CiaOOASFAF");
                               _save(context);
                             },
                             child: Container(
@@ -339,7 +339,8 @@ class LoginPage extends StatelessWidget {
 
     //utentiModel.loadData(UtentiDBworker.utentiDBworker);
 
-    utentiModel.setStackIndex(3);
+    Base.pageIndexForWidget = 3;
+    utentiModel.setStackIndex(7);
 
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(

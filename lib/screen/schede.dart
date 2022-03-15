@@ -28,8 +28,6 @@ class Schede extends StatefulWidget {
 class _SchedeState extends State<Schede> {
   final datasets = <String, dynamic>{};
 
-  ValueNotifier<bool> isDialOpen = ValueNotifier(false);
-
   int _currentIndex = 1;
 
   saveValueScheda(int id) async {

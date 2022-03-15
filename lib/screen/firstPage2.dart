@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mytraining/models/utentiModel.dart';
 import 'package:lottie/lottie.dart';
+import 'package:mytraining/screen/base.dart';
 
 class FirstPage2 extends StatefulWidget {
   const FirstPage2({Key? key}) : super(key: key);
@@ -68,7 +69,7 @@ class _FirstPage2State extends State<FirstPage2>
                   visible: !isAnimFinis,
                   child: Lottie.asset(
                     'assets/json/a.json',
-                    height: screenHeight * 0.85,
+                    height: screenHeight * 0.80,
                     controller: _animController,
                     onLoaded: (composition) {
                       _animController!
@@ -103,7 +104,7 @@ class _FirstPage2State extends State<FirstPage2>
                               ),
                             ),
                           ),
-                          const SizedBox(height: 15.0),
+                          const SizedBox(height: 6.0),
                           Text(
                             'Schedule your training',
                             style: GoogleFonts.adventPro(
@@ -155,6 +156,7 @@ class _BottomPart extends StatelessWidget {
                 decoration: const BoxDecoration(),
                 child: GestureDetector(
                   onTap: () {
+                   // Base.pageIndexForWidget = 1;
                     utentiModel.setStackIndex(1);
                   },
                   child: Container(
