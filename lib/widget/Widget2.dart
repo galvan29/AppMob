@@ -14,14 +14,14 @@ import 'package:mytraining/screen/base.dart';
 import 'package:mytraining/screen/login.dart';
 import 'package:mytraining/screen/schede.dart';
 
-class WidgetClass extends StatefulWidget {
-  const WidgetClass({Key? key}) : super(key: key);
+class WidgetClass2 extends StatefulWidget {
+  const WidgetClass2({Key? key}) : super(key: key);
 
   @override
-  State<WidgetClass> createState() => _Generated3WidgetState();
+  State<WidgetClass2> createState() => _Generated3WidgetState();
 }
 
-class _Generated3WidgetState extends State<WidgetClass>
+class _Generated3WidgetState extends State<WidgetClass2>
     with TickerProviderStateMixin {
   late GifController controller;
 
@@ -57,19 +57,30 @@ class _Generated3WidgetState extends State<WidgetClass>
   }
 
   functionGif() {
-    if (utentiModel.stackIndex == 7) {
+    if (schedeModel.stackIndex == 6) {
       controller.animateTo(110, duration: const Duration(milliseconds: 2000));
-      LoginPage().getValueLogin().then((val) async {
-        await eventiModel.loadData(EventiDBworker.eventiDBworker, val);
-      });
+      switch (Base.pageIndexForWidget) {
+        case 0:
+          LoginPage().getValueLogin().then((val) async {
+            await schedeModel.loadData(
+                SchedeDBworker.schedeDBworker, val);
+          });
+          break;
+        case 12:
+          Schede().getValueScheda().then((val) async {
+            eserciziModel.loadData(
+                EserciziDBworker.eserciziDBworker, val);
+          });
+          Base.pageIndexForWidget-=10;
+          break;
+      }
 
-      print("SECONDO TIMER");
       Timer(
           const Duration(milliseconds: 2000),
-          () => {
-                utentiModel.setStackIndex(Base.pageIndexForWidget),
-                controller.reset()
-              });
+              () => {
+              schedeModel.setStackIndex(Base.pageIndexForWidget),
+              controller.reset()
+            });
     }
     return GifImage(
       controller: controller,

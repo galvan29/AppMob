@@ -10,6 +10,7 @@ import 'package:mytraining/screen/fineAllenamento.dart';
 import 'package:mytraining/screen/login.dart';
 import 'package:mytraining/screen/schede.dart';
 import 'package:mytraining/screen/visualizzaScheda.dart';
+import 'package:mytraining/widget/Widget2.dart';
 import 'package:provider/provider.dart';
 
 class MainSchede extends StatelessWidget {
@@ -32,12 +33,13 @@ class MainSchede extends StatelessWidget {
           return IndexedStack(
             index: schedeModel.stackIndex,
             children: [
-              Schede(),
+              Schede(),  //0
               CreaScheda(),
-              VisualizzaScheda(),
+              VisualizzaScheda(), //2
               CreaEsercizio(),
-              Allenamento(),
-              FineAllenamento()
+              Allenamento(),   //4
+              FineAllenamento(),
+              WidgetClass2()  //6
             ],
           );
         },

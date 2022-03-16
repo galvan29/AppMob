@@ -7,6 +7,8 @@ import 'package:mytraining/db/schedeDBworker.dart';
 import 'package:mytraining/models/eserciziModel.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mytraining/models/schedeModel.dart';
+import 'package:mytraining/models/utentiModel.dart';
+import 'package:mytraining/screen/base.dart';
 import 'package:mytraining/screen/schede.dart';
 
 class CreaEsercizio extends StatelessWidget{
@@ -199,7 +201,9 @@ class CreaEsercizio extends StatelessWidget{
     Schede().getValueScheda().then((val) async {
       await eserciziModel.loadData(EserciziDBworker.eserciziDBworker, val);
     });
-    schedeModel.setStackIndex(2);
+
+    Base.pageIndexForWidget=12;
+    schedeModel.setStackIndex(6);
 //dd
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(

@@ -142,7 +142,7 @@ class _HomePageState extends State<HomePage> {
                 width: double.maxFinite,
                 height: 400,
                 decoration: const BoxDecoration(
-                  color: const Color.fromARGB(255, 209, 251, 234),
+                  color: Color.fromARGB(255, 209, 251, 234),
                 ),
                 child: SfCalendar(
                     view: CalendarView.month,
@@ -430,8 +430,6 @@ class _HomePageState extends State<HomePage> {
               LoginPage().getValueLogin().then((val) async {
                 utentiModel.utenteBeingEdited =
                     await UtentiDBworker.utentiDBworker.get(val);
-                print("Mio nome utente: " +
-                    utentiModel.utenteBeingEdited.nomeUtente);
               });
               utentiModel.setStackIndex(5);
             }

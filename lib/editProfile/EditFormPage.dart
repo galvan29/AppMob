@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mytraining/db/utentiDBworker.dart';
 import 'package:mytraining/models/utentiModel.dart';
+import 'package:mytraining/screen/base.dart';
 
 // This class handles the Page to edit the Name Section of the User Profile.
 class EditNameFormPage extends StatefulWidget {

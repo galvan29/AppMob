@@ -3,6 +3,8 @@ import 'package:mytraining/common/appbar.dart';
 import 'package:mytraining/db/schedeDBworker.dart';
 import 'package:mytraining/models/schedeModel.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mytraining/models/utentiModel.dart';
+import 'package:mytraining/screen/base.dart';
 import 'package:mytraining/screen/login.dart';
 
 class CreaScheda extends StatelessWidget{
@@ -140,7 +142,8 @@ class CreaScheda extends StatelessWidget{
       await schedeModel.loadData(SchedeDBworker.schedeDBworker, val);
     });
 
-    schedeModel.setStackIndex(0);
+    Base.pageIndexForWidget=0;
+    schedeModel.setStackIndex(6);
 
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
