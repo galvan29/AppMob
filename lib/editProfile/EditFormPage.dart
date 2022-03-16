@@ -287,7 +287,7 @@ class EditNameFormPageState extends State<EditNameFormPage> {
             children: [
               FlatButton(
                 onPressed: () {
-                  utentiModel.setStackIndex(5);
+                  Navigator.pop(context);
                 },
                 child: Text(
                   "Indietro",
