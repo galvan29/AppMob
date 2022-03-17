@@ -165,6 +165,7 @@ class _HomePageState extends State<HomePage> {
 
                 child: SfCalendar(
                     view: CalendarView.month,
+                    cellBorderColor: Colors.blue.withOpacity(0),
                     dataSource: MeetingDataSource(getMeetingData()),
                     monthViewSettings: const MonthViewSettings(
                         appointmentDisplayMode:
