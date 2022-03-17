@@ -16,8 +16,8 @@ class VisualizzaScheda extends StatelessWidget {
   final datasets = <String, dynamic>{};
   ValueNotifier<bool> isDialOpen = ValueNotifier(false);
 
-  bool checkNumber(){
-    if(eserciziModel.eserciziList.isNotEmpty){
+  bool checkNumber() {
+    if (eserciziModel.eserciziList.isNotEmpty) {
       return true;
     }
     return false;
@@ -49,114 +49,128 @@ class VisualizzaScheda extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
-                  Container(
-                    margin: EdgeInsets.only(
-                      top: MediaQuery.of(context).size.width * 0.05,
+              Container(
+                margin: EdgeInsets.only(
+                  top: MediaQuery.of(context).size.width * 0.05,
+                ),
+              ),
+              const SizedBox(
+                  width: 330,
+                  child: Text(
+                    "Ecco la tua Scheda!",
+                    style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
                     ),
-                  ),
-                  const SizedBox(
-                      width: 330,
-                      child: Text(
-                        "Ecco la tua Scheda!",
-                        style: TextStyle(
-                          fontSize: 22,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      )),
-                  Container(
-                    margin: EdgeInsets.only(
-                      top: MediaQuery.of(context).size.width * 0.05,
-                    ),
-                  ),
-          ListView.builder(
-            shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            itemCount: eserciziModel.eserciziList.length,
-            itemBuilder: (BuildContext inBuildContext, int inIndex) {
-              Esercizio esercizio = eserciziModel.eserciziList[inIndex];
-              Color color = Colors.white;
+                  )),
+              Container(
+                margin: EdgeInsets.only(
+                  top: MediaQuery.of(context).size.width * 0.05,
+                ),
+              ),
+              ListView.builder(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                itemCount: eserciziModel.eserciziList.length,
+                itemBuilder: (BuildContext inBuildContext, int inIndex) {
+                  Esercizio esercizio = eserciziModel.eserciziList[inIndex];
+                  Color color = Colors.white;
 
-              return Card(
-                margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                elevation: 8,
-                child: Slidable(
-                  actionPane: const SlidableScrollActionPane(),
-                  actionExtentRatio: .25,
-                  secondaryActions: [
-                    IconSlideAction(
-                      caption: "Delete",
-                      color: Colors.red,
-                      icon: Icons.delete,
-                      onTap: () {
-                        _deleteEsercizio(context, esercizio);
-                      },
+                  return Card(
+                    margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                    elevation: 8,
+                    child: Slidable(
+                      actionPane: const SlidableScrollActionPane(),
+                      actionExtentRatio: .25,
+                      secondaryActions: [
+                        IconSlideAction(
+                          caption: "Delete",
+                          color: Colors.red,
+                          icon: Icons.delete,
+                          onTap: () {
+                            _deleteEsercizio(context, esercizio);
+                          },
+                        ),
+                      ],
+                      child: ListTile(
+                        title: Text(esercizio.nomeEsercizio),
+                        subtitle: Text("Rip: " +
+                            esercizio.ripEsercizio +
+                            "\n Serie: " +
+                            esercizio.serieEsercizio +
+                            "\n Peso: " +
+                            esercizio.pesoEsercizio +
+                            "\n Note: " +
+                            esercizio.noteEsercizio),
+                        tileColor: color,
+                        onLongPress: () async {
+                          eserciziModel.esercizioBeingEdited =
+                              await EserciziDBworker.eserciziDBworker
+                                  .get(esercizio.id);
+                          schedeModel.setStackIndex(3);
+                        },
+                        onTap: () {},
+                      ),
                     ),
-                  ],
-                  child: ListTile(
-                    title: Text(esercizio.nomeEsercizio),
-                    subtitle: Text("Rip: " +
-                        esercizio.ripEsercizio +
-                        "\n Serie: " +
-                        esercizio.serieEsercizio +
-                        "\n Peso: " +
-                        esercizio.pesoEsercizio +
-                        "\n Note: " +
-                        esercizio.noteEsercizio),
-                    tileColor: color,
-                    onLongPress: () async {
-                      eserciziModel.esercizioBeingEdited =
-                          await EserciziDBworker.eserciziDBworker
-                              .get(esercizio.id);
+                  );
+                },
+              ),
+              Container(
+                  margin: EdgeInsets.only(
+                    top: MediaQuery.of(context).size.width * 0.05,
+                  ),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.black, width: 1.5),
+                    color: Colors.white,
+                    shape: BoxShape.circle,
+                  ),
+                  child: IconButton(
+                    icon: const Icon(Icons.add),
+                    color: Colors.black,
+                    onPressed: () {
+                      eserciziModel.esercizioBeingEdited = Esercizio();
                       schedeModel.setStackIndex(3);
                     },
-                    onTap: () {},
-                  ),
-                ),
-              );
-            },
-          ),
-          Container(
-              margin: EdgeInsets.only(
-                top: MediaQuery.of(context).size.width * 0.05,
-              ),
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.black, width: 1.5),
-                color: Colors.white,
-                shape: BoxShape.circle,
-              ),
-              child: IconButton(
-                icon: const Icon(Icons.add),
-                color: Colors.black,
-                onPressed: () {
-                  eserciziModel.esercizioBeingEdited = Esercizio();
-                  schedeModel.setStackIndex(3);
-                },
-              )),
-          ListView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: registriModel.registriList.length,
-                    itemBuilder: (BuildContext inBuildContext, int inIndex) {
-                      Registro registro = registriModel.registriList[inIndex];
-                      Color color = Colors.white;
+                  )),
+              Container(
+                margin: EdgeInsets.only(top: 30, left: 30, right: 30),
+                  height: 400,
+                  padding: const EdgeInsets.only(top: 8),
+                  decoration: BoxDecoration(
+                      color: const Color.fromARGB(255, 230, 245, 252),
+                      borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(20),
+                        topRight: Radius.circular(20),
+                        bottomRight: Radius.circular(20),
+                        bottomLeft: Radius.circular(20),
+                      ),
+                      border: Border.all(color: Colors.white)),
+                  child: SingleChildScrollView(
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: registriModel.registriList.length,
+                      itemBuilder: (BuildContext inBuildContext, int inIndex) {
+                        Registro registro = registriModel.registriList[inIndex];
+                        Color color = Colors.white;
 
-                      return Card(
-                        margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                        elevation: 8,
-                        child: Slidable(
-                          actionPane: const SlidableScrollActionPane(),
-                          actionExtentRatio: .25,
-                          child: ListTile(
-                            title: Text(registro.durataFinale),
-                            subtitle: Text("Voto: " +
-                                registro.voto),
-                            tileColor: color,
+                        return Card(
+                          margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                          elevation: 8,
+                          child: Slidable(
+                            actionPane: const SlidableScrollActionPane(),
+                            actionExtentRatio: .25,
+                            child: ListTile(
+                              title: Text(registro.durataFinale),
+                              subtitle: Text("Voto: " + registro.voto),
+                              tileColor: color,
+                            ),
                           ),
-                        ),
-                      );
-                    },
-                  ),
-        ])),
+                        );
+                      },
+                    ),
+                  )),
+            ])),
         //va in alto magari
         bottomNavigationBar: Padding(
             padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
