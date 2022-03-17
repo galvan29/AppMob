@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mytraining/common/appbar.dart';
+import 'package:mytraining/db/registriDBworker.dart';
+import 'package:mytraining/models/registriModel.dart';
 import 'package:mytraining/models/schedeModel.dart';
 import 'package:mytraining/models/utentiModel.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:mytraining/screen/schede.dart';
 
 class FineAllenamento extends StatelessWidget {
   final datasets = <String, dynamic>{};
   ValueNotifier<bool> isDialOpen = ValueNotifier(false);
-
+  static int idTempRegistro = 0;
 
   @override
   Widget build(BuildContext context) {
+    double rat = 0;
     return Scaffold(
         appBar: buildAppBar(context),
         backgroundColor: Colors.white,
@@ -86,6 +90,7 @@ class FineAllenamento extends StatelessWidget {
                   ),
                   onRatingUpdate: (rating) {
                     print(rating);
+                    rat = rating;
                   },
                 ),
               ),
@@ -99,8 +104,15 @@ class FineAllenamento extends StatelessWidget {
                 width: double.maxFinite,
                 decoration: const BoxDecoration(),
                 child: GestureDetector(
-                    onTap: () {
-                      utentiModel.setStackIndex(4);
+                    onTap: () async {
+                      print("OOOOOOOOOOOOOOOO "+rat.toString());
+                      registriModel.registroBeingEdited = await RegistriDBworker.registriDBworker.get(FineAllenamento.idTempRegistro);
+                      registriModel.registroBeingEdited.voto = rat.toString();
+                      await RegistriDBworker.registriDBworker.update(registriModel.registroBeingEdited);
+                      Schede().getValueScheda().then((val) async {
+                        await registriModel.loadData(RegistriDBworker.registriDBworker, val);
+                      });
+                      schedeModel.setStackIndex(0);
                     },
                     child: Container(
                         width: 10,

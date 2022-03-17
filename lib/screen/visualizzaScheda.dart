@@ -4,6 +4,7 @@ import 'package:mytraining/common/appbar.dart';
 import 'package:mytraining/db/eserciziDBworker.dart';
 import 'package:mytraining/db/schedeDBworker.dart';
 import 'package:mytraining/models/eserciziModel.dart';
+import 'package:mytraining/models/registriModel.dart';
 import 'package:mytraining/models/schedeModel.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mytraining/screen/allenamento.dart';
@@ -131,6 +132,30 @@ class VisualizzaScheda extends StatelessWidget {
                   schedeModel.setStackIndex(3);
                 },
               )),
+          ListView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: registriModel.registriList.length,
+                    itemBuilder: (BuildContext inBuildContext, int inIndex) {
+                      Registro registro = registriModel.registriList[inIndex];
+                      Color color = Colors.white;
+
+                      return Card(
+                        margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                        elevation: 8,
+                        child: Slidable(
+                          actionPane: const SlidableScrollActionPane(),
+                          actionExtentRatio: .25,
+                          child: ListTile(
+                            title: Text(registro.durataFinale),
+                            subtitle: Text("Voto: " +
+                                registro.voto),
+                            tileColor: color,
+                          ),
+                        ),
+                      );
+                    },
+                  ),
         ])),
         //va in alto magari
         bottomNavigationBar: Padding(

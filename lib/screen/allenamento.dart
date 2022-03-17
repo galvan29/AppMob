@@ -9,6 +9,7 @@ import 'package:mytraining/models/registriModel.dart';
 import 'package:mytraining/models/schedeModel.dart';
 import 'package:mytraining/models/utentiModel.dart';
 import 'package:mytraining/screen/base.dart';
+import 'package:mytraining/screen/fineAllenamento.dart';
 import 'package:mytraining/screen/schede.dart';
 import 'package:mytraining/screen/visualizzaScheda.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -173,7 +174,7 @@ class _AllenamentoState extends State<Allenamento> {
                                   .add(StopWatchExecute.reset);
                               Schede.valoreOrologio = false;
                               registriModel.registroBeingEdited = Registro();
-                              registriModel.registroBeingEdited.durataFinale = "1.1.1";
+                              registriModel.registroBeingEdited.durataFinale = "dura 1";
                               _save(context);
                               //schedeModel.setStackIndex(5);
                             },
@@ -258,7 +259,8 @@ class _AllenamentoState extends State<Allenamento> {
       Schede().getValueScheda().then((val) async {
         registriModel.registroBeingEdited.idScheda = val.toString();
       });
-      await RegistriDBworker.registriDBworker.create(registriModel.registroBeingEdited);
+      FineAllenamento.idTempRegistro = await RegistriDBworker.registriDBworker.create(registriModel.registroBeingEdited);
+      print("Creato una nuova registro con id "+FineAllenamento.idTempRegistro.toString());
    // } else {
      // await RegistriDBworker.registriDBworker.update(registriModel.registroBeingEdited);
    // }
