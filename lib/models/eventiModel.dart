@@ -16,16 +16,6 @@ class EventiModel extends ChangeNotifier {
   DateTime inizio = DateTime.now();
   DateTime fine = DateTime.now();
 
-  void setIdScheda(String idUtente2){
-    idUtente = idUtente2;
-    notifyListeners();
-  }
-
-  void setNomeScheda(String nomeScheda2){
-    nomeScheda = nomeScheda2;
-    notifyListeners();
-  }
-
   /*Future<int> getNomeSchedaEvento(){
     //get();
     notifyListeners();
