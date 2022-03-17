@@ -3,9 +3,11 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mytraining/common/appbar.dart';
 import 'package:mytraining/db/eserciziDBworker.dart';
+import 'package:mytraining/db/registriDBworker.dart';
 import 'package:mytraining/db/schedeDBworker.dart';
 import 'package:mytraining/db/utentiDBworker.dart';
 import 'package:mytraining/models/eserciziModel.dart';
+import 'package:mytraining/models/registriModel.dart';
 import 'package:mytraining/models/schedeModel.dart';
 import 'package:mytraining/models/utentiModel.dart';
 import 'package:mytraining/screen/creaScheda.dart';
@@ -122,6 +124,8 @@ class _SchedeState extends State<Schede> {
                             print("Ciao bro " + scheda.id.toString());
                             await eserciziModel.loadData(
                                 EserciziDBworker.eserciziDBworker, scheda.id);
+                            await registriModel.loadData(
+                                RegistriDBworker.registriDBworker, scheda.id);
                             schedeModel.setStackIndex(2);
                           } else {
                             print("C'E UN ALLENAMENTO IN CORSO");
