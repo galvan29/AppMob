@@ -83,6 +83,7 @@ class _SchedeState extends State<Schede> {
                   return Card(
                     margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                     elevation: 8,
+                    color: Colors.blue,
                     child: Slidable(
                       actionPane: const SlidableScrollActionPane(),
                       actionExtentRatio: .25,

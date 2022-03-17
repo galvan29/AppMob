@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -13,6 +15,16 @@ import 'package:intl/intl.dart';
 
 //import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 //import 'package:mytraining/screen/notification_api.dart';
+
+
+//SCELTA RANDOM FRASE, DA RENDERE GIORNALIERA
+var list = ['La salute ci consente di godere la vita, la malattia di comprenderne meglio il significato.',
+  'Una mela al giorno toglie il medico di torno. Basta avere una buona mira.',
+  'Ho deciso di esserefelice perché fa bene alla mia salute.',
+  'Mi sveglio sempre in forma e mi deformo attraverso gli altri.',
+  'Mangiare nel modo giusto non solo previene la malattia, ma genera anche la salute e un senso di benessere fisico e mentale.'];
+final _random = new Random();
+var element = list[_random.nextInt(list.length)];
 
 class HomePage extends StatefulWidget {
   @override
@@ -33,7 +45,7 @@ class _HomePageState extends State<HomePage> {
     });
     return Scaffold(
         appBar: buildAppBar(context),
-        backgroundColor: Colors.white,
+        backgroundColor: const Color.fromARGB(255, 42, 42, 42),
         body: SingleChildScrollView(
           child: Column(
             children: [
@@ -44,7 +56,7 @@ class _HomePageState extends State<HomePage> {
                 child: Text(r'''BENVENUTO!''',
                     style: GoogleFonts.adventPro(
                       textStyle: const TextStyle(
-                        color: Colors.black,
+                        color: Colors.white,
                         fontWeight: FontWeight.w400,
                         fontSize: 50,
                         fontStyle: FontStyle.normal,
@@ -61,7 +73,7 @@ class _HomePageState extends State<HomePage> {
                 child: Text(r'''E' ora di fare un po' di esercizi''',
                     style: GoogleFonts.adventPro(
                       textStyle: const TextStyle(
-                        color: Colors.black,
+                        color: Colors.white,
                         fontWeight: FontWeight.w400,
                         fontSize: 25,
                         fontStyle: FontStyle.normal,
@@ -89,19 +101,19 @@ class _HomePageState extends State<HomePage> {
                         height: 50,
                         padding: const EdgeInsets.only(top: 8),
                         decoration: BoxDecoration(
-                            color: const Color.fromARGB(255, 253, 237, 210),
+                            color: const Color.fromARGB(255, 230, 245, 252),
                             borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(5),
-                              topRight: Radius.circular(5),
-                              bottomRight: Radius.circular(5),
-                              bottomLeft: Radius.circular(5),
+                              topLeft: Radius.circular(20),
+                              topRight: Radius.circular(20),
+                              bottomRight: Radius.circular(20),
+                              bottomLeft: Radius.circular(20),
                             ),
                             border: Border.all(color: Colors.white)),
                         child: Text(
                           '''Scheda''',
                           style: GoogleFonts.adventPro(
                             textStyle: const TextStyle(
-                              color: Color(0xFF000000),
+                              color: const Color.fromARGB(255, 42, 42, 42),
                               fontWeight: FontWeight.w500,
                               fontSize: 20,
                               fontStyle: FontStyle.normal,
@@ -121,7 +133,7 @@ class _HomePageState extends State<HomePage> {
                 child: Text(r'''Calendario''',
                     style: GoogleFonts.adventPro(
                       textStyle: const TextStyle(
-                        color: Colors.black,
+                        color: Colors.white,
                         fontWeight: FontWeight.w400,
                         fontSize: 18,
                         fontStyle: FontStyle.normal,
@@ -142,8 +154,15 @@ class _HomePageState extends State<HomePage> {
                 width: double.maxFinite,
                 height: 400,
                 decoration: const BoxDecoration(
-                  color: Color.fromARGB(255, 209, 251, 234),
+                  color: Color.fromARGB(255, 230, 220, 245),
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20),
+                    bottomRight: Radius.circular(20),
+                    bottomLeft: Radius.circular(20),
+                  ),
                 ),
+
                 child: SfCalendar(
                     view: CalendarView.month,
                     dataSource: MeetingDataSource(getMeetingData()),
@@ -192,19 +211,19 @@ class _HomePageState extends State<HomePage> {
                         height: 50,
                         padding: const EdgeInsets.only(top: 8),
                         decoration: BoxDecoration(
-                            color: const Color.fromARGB(255, 209, 251, 234),
+                            color: const Color.fromARGB(255, 230, 245, 252),
                             borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(5),
-                              topRight: Radius.circular(5),
-                              bottomRight: Radius.circular(5),
-                              bottomLeft: Radius.circular(5),
+                              topLeft: Radius.circular(20),
+                              topRight: Radius.circular(20),
+                              bottomRight: Radius.circular(20),
+                              bottomLeft: Radius.circular(20),
                             ),
                             border: Border.all(color: Colors.white)),
                         child: Text(
                           '''Programma Allenamento''',
                           style: GoogleFonts.adventPro(
                             textStyle: const TextStyle(
-                              color: Color(0xFF000000),
+                              color: const Color.fromARGB(255, 42, 42, 42),
                               fontWeight: FontWeight.w500,
                               fontSize: 20,
                               fontStyle: FontStyle.normal,
@@ -215,26 +234,6 @@ class _HomePageState extends State<HomePage> {
                         ))),
               ),
               //scritta suggerimento
-              Container(
-                margin: EdgeInsets.only(
-                  top: MediaQuery.of(context).size.width * 0.05,
-                ),
-                padding: EdgeInsets.zero,
-                width: double.maxFinite,
-                decoration: const BoxDecoration(),
-                child: Text(r'''Parametri''',
-                    style: GoogleFonts.adventPro(
-                      textStyle: const TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.w400,
-                        fontSize: 18,
-                        fontStyle: FontStyle.normal,
-                        decoration: TextDecoration.none,
-                      ),
-                    ),
-                    textAlign: TextAlign.center,
-                    maxLines: 1),
-              ),
               /*Container(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -368,7 +367,7 @@ class _HomePageState extends State<HomePage> {
                 child: Text(r'''Suggerimento del Giorno''',
                     style: GoogleFonts.adventPro(
                       textStyle: const TextStyle(
-                        color: Colors.black,
+                        color: Colors.white,
                         fontWeight: FontWeight.w400,
                         fontSize: 30,
                         fontStyle: FontStyle.normal,
@@ -388,17 +387,17 @@ class _HomePageState extends State<HomePage> {
                 ),
                 padding: const EdgeInsets.only(top: 8),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: const Color.fromARGB(255, 230, 245, 252),
                   border: Border.all(color: Colors.black),
                   borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(5),
-                    topRight: Radius.circular(5),
-                    bottomRight: Radius.circular(5),
-                    bottomLeft: Radius.circular(5),
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20),
+                    bottomRight: Radius.circular(20),
+                    bottomLeft: Radius.circular(20),
                   ),
                 ),
                 child: Text(
-                    r'''Bere almeno due litri di acqua al giorno aiuta il corpo a rimanere idratato ed a mantenerlo in salute.''',
+                    element,
                     style: GoogleFonts.adventPro(
                       textStyle: const TextStyle(
                         color: Colors.black,
@@ -409,7 +408,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     textAlign: TextAlign.center,
-                    maxLines: 3),
+                    maxLines: 10),
               ),
             ],
           ),
@@ -417,11 +416,11 @@ class _HomePageState extends State<HomePage> {
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           currentIndex: _currentIndex,
-          backgroundColor: const Color.fromARGB(255, 226, 213, 254),
-          selectedItemColor: Colors.white.withOpacity(0.5),
+          backgroundColor: const Color.fromARGB(255, 42, 42, 42),
+          selectedItemColor: Colors.white,
           unselectedItemColor: Colors.black,
-          selectedFontSize: MediaQuery.of(context).size.height * 0.02,
-          unselectedFontSize: MediaQuery.of(context).size.height * 0.02,
+          selectedFontSize: MediaQuery.of(context).size.height * 0.01,
+          unselectedFontSize: MediaQuery.of(context).size.height * 0.01,
           onTap: (value) {
             setState(() => _currentIndex = value);
             if (value == 1) {
@@ -436,16 +435,16 @@ class _HomePageState extends State<HomePage> {
           },
           items: const [
             BottomNavigationBarItem(
-              label: 'Homepage',
-              icon: Icon(Icons.home),
+              label: '',
+              icon: Icon(Icons.home, size: 35),
             ),
             BottomNavigationBarItem(
-              label: 'Schede',
-              icon: Icon(Icons.article_outlined),
+              label: '',
+              icon: Icon(Icons.article_outlined, size: 35),
             ),
             BottomNavigationBarItem(
-              label: 'Profilo',
-              icon: Icon(Icons.perm_identity_sharp),
+              label: '',
+              icon: Icon(Icons.perm_identity_sharp, size: 35),
             ),
           ],
         ));
