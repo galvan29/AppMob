@@ -18,7 +18,7 @@ class FineAllenamento extends StatelessWidget {
     double rat = 0;
     return Scaffold(
         appBar: buildAppBar(context),
-        backgroundColor: Colors.white,
+        backgroundColor: const Color.fromARGB(255, 42, 42, 42),
         body: SingleChildScrollView(
           child: Column(
             children: [
@@ -29,9 +29,9 @@ class FineAllenamento extends StatelessWidget {
                 child: Text(r'''Allenamento finito in:''',
                     style: GoogleFonts.adventPro(
                       textStyle: const TextStyle(
-                        color: Colors.black,
+                        color: Colors.white,
                         fontWeight: FontWeight.w400,
-                        fontSize: 30,
+                        fontSize: 35,
                         fontStyle: FontStyle.normal,
                         decoration: TextDecoration.none,
                       ),
@@ -43,12 +43,15 @@ class FineAllenamento extends StatelessWidget {
                 padding: EdgeInsets.zero,
                 width: double.maxFinite,
                 decoration: const BoxDecoration(),
+                margin: EdgeInsets.only(
+                  top: MediaQuery.of(context).size.width * 0.05,
+                ),
                 child: Text(durataStringa,
                     style: GoogleFonts.adventPro(
                       textStyle: const TextStyle(
-                        color: Colors.black,
+                        color: Colors.white,
                         fontWeight: FontWeight.w400,
-                        fontSize: 25,
+                        fontSize: 40,
                         fontStyle: FontStyle.normal,
                         decoration: TextDecoration.none,
                       ),
@@ -60,26 +63,33 @@ class FineAllenamento extends StatelessWidget {
                 padding: EdgeInsets.zero,
                 width: double.maxFinite,
                 decoration: const BoxDecoration(),
+                margin: EdgeInsets.only(
+                  top: MediaQuery.of(context).size.width * 0.05,
+                ),
                 child: Text(r'''Come valuti il tuo allenamento?''',
                     style: GoogleFonts.adventPro(
                       textStyle: const TextStyle(
-                        color: Colors.black,
+                        color: Colors.white,
                         fontWeight: FontWeight.w400,
-                        fontSize: 30,
+                        fontSize: 35,
                         fontStyle: FontStyle.normal,
                         decoration: TextDecoration.none,
                       ),
                     ),
                     textAlign: TextAlign.center,
-                    maxLines: 1),
+                    maxLines: 2),
               ),
               Container(
                 padding: EdgeInsets.zero,
                 width: double.maxFinite,
                 decoration: const BoxDecoration(),
+                margin: EdgeInsets.only(
+                  top: MediaQuery.of(context).size.width * 0.10,
+                ),
+                alignment: Alignment.center,
                 child:  RatingBar.builder(
                   initialRating: 3,
-                  minRating: 1,
+                  minRating: 0,
                   direction: Axis.horizontal,
                   allowHalfRating: true,
                   itemCount: 5,
@@ -97,7 +107,7 @@ class FineAllenamento extends StatelessWidget {
               Container(
                 margin: const EdgeInsets.only(
                   left: 30,
-                  top: 20,
+                  top: 50,
                   right: 30,
                 ),
                 padding: EdgeInsets.zero,
@@ -131,7 +141,7 @@ class FineAllenamento extends StatelessWidget {
                           '''Registra Risposta''',
                           style: GoogleFonts.adventPro(
                             textStyle: const TextStyle(
-                              color: Color(0xFF000000),
+                              color:  Color.fromARGB(255, 230, 245, 252),
                               fontWeight: FontWeight.w500,
                               fontSize: 20,
                               fontStyle: FontStyle.normal,
@@ -155,7 +165,7 @@ class FineAllenamento extends StatelessWidget {
                 child: Text("Indietro",
                   style: GoogleFonts.adventPro(
                     textStyle: const TextStyle(
-                      color: Colors.black,
+                      color: Colors.white,
                       fontWeight: FontWeight.w400,
                       fontSize: 20,
                       fontStyle: FontStyle.normal,
