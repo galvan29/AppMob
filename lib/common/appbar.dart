@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mytraining/models/schedeModel.dart';
-import 'package:mytraining/models/utentiModel.dart';
 
 PreferredSize buildAppBar(BuildContext context) {
   return PreferredSize(
