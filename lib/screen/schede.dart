@@ -13,6 +13,8 @@ import 'package:mytraining/screen/login.dart';
 import 'package:mytraining/screen/visualizzaScheda.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../common/bottomNavigationBar.dart';
+
 class Schede extends StatefulWidget {
   static bool valoreOrologio = false;
 
@@ -147,41 +149,7 @@ class _SchedeState extends State<Schede> {
                     },
                   )),
             ])),
-        bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          currentIndex: _currentIndex,
-          backgroundColor: const Color.fromARGB(255, 180, 212, 250),
-          selectedItemColor: Colors.white.withOpacity(0.5),
-          unselectedItemColor: Colors.black,
-          selectedFontSize: MediaQuery.of(context).size.height * 0.02,
-          unselectedFontSize: MediaQuery.of(context).size.height * 0.02,
-          onTap: (value) {
-            setState(() => _currentIndex = value);
-            if (value == 0) {
-              utentiModel.setStackIndex(3);
-            } else if (value == 2) {
-              LoginPage().getValueLogin().then((val) async {
-                utentiModel.utenteBeingEdited =
-                    await UtentiDBworker.utentiDBworker.get(val);
-              });
-              utentiModel.setStackIndex(5);
-            }
-          },
-          items: const [
-            BottomNavigationBarItem(
-              label: 'Homepage',
-              icon: Icon(Icons.home),
-            ),
-            BottomNavigationBarItem(
-              label: 'Schede',
-              icon: Icon(Icons.article_outlined),
-            ),
-            BottomNavigationBarItem(
-              label: 'Profilo',
-              icon: Icon(Icons.perm_identity_sharp),
-            ),
-          ],
-        ));
+        bottomNavigationBar: buildBottomNavigationBar(context, _currentIndex));
   }
 
   Future _deleteScheda(BuildContext context, Scheda scheda) async {
