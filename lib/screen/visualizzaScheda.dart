@@ -162,7 +162,7 @@ class VisualizzaScheda extends StatelessWidget {
                             actionExtentRatio: .25,
                             child: ListTile(
                               title: Text(registro.durataFinale),
-                              subtitle: Text("Voto: " + registro.voto),
+                              subtitle: Text("Voto: " + registro.voto + " in data "+registro.giorno),
                               tileColor: color,
                             ),
                           ),

@@ -7,7 +7,7 @@ import 'package:mytraining/models/schedeModel.dart';
 import 'package:mytraining/models/utentiModel.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:mytraining/screen/schede.dart';
-
+import 'package:intl/intl.dart';
 class FineAllenamento extends StatelessWidget {
   final datasets = <String, dynamic>{};
   ValueNotifier<bool> isDialOpen = ValueNotifier(false);
@@ -118,6 +118,7 @@ class FineAllenamento extends StatelessWidget {
                       print("OOOOOOOOOOOOOOOO "+rat.toString());
                       registriModel.registroBeingEdited = await RegistriDBworker.registriDBworker.get(FineAllenamento.idTempRegistro);
                       registriModel.registroBeingEdited.voto = rat.toString();
+                      registriModel.registroBeingEdited.giorno = DateFormat('dd-MM-yy').format(DateTime.now());
                       await RegistriDBworker.registriDBworker.update(registriModel.registroBeingEdited);
                       Schede().getValueScheda().then((val) async {
                         await registriModel.loadData(RegistriDBworker.registriDBworker, val);
