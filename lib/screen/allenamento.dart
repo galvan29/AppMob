@@ -3,9 +3,12 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mytraining/common/appbar.dart';
 import 'package:mytraining/db/eserciziDBworker.dart';
+import 'package:mytraining/db/registriDBworker.dart';
 import 'package:mytraining/models/eserciziModel.dart';
+import 'package:mytraining/models/registriModel.dart';
 import 'package:mytraining/models/schedeModel.dart';
 import 'package:mytraining/models/utentiModel.dart';
+import 'package:mytraining/screen/base.dart';
 import 'package:mytraining/screen/schede.dart';
 import 'package:mytraining/screen/visualizzaScheda.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -169,10 +172,9 @@ class _AllenamentoState extends State<Allenamento> {
                               _stopWatchTimer.onExecute
                                   .add(StopWatchExecute.reset);
                               Schede.valoreOrologio = false;
-                              print(
-                                  "Messo pulsante del ritorna ad allenamento in pausa, torno alla home");
-                              schedeModel.setStackIndex(3);
-                              print("Allenamento finito, semmai dialog");
+                              registriModel.registroBeingEdited = Registro();
+                              registriModel.registroBeingEdited.durataFinale = "1.1.1";
+                              _save(context);
                               //schedeModel.setStackIndex(5);
                             },
                             child: const Text(
@@ -249,5 +251,32 @@ class _AllenamentoState extends State<Allenamento> {
             ],
           )),
     );
+  }
+
+  void _save(BuildContext context) async {
+   // if(registriModel.registroBeingEdited.id==-1){
+      Schede().getValueScheda().then((val) async {
+        registriModel.registroBeingEdited.idScheda = val.toString();
+      });
+      await RegistriDBworker.registriDBworker.create(registriModel.registroBeingEdited);
+   // } else {
+     // await RegistriDBworker.registriDBworker.update(registriModel.registroBeingEdited);
+   // }
+
+    Schede().getValueScheda().then((val) async {
+      await registriModel.loadData(RegistriDBworker.registriDBworker, val);
+    });
+
+    //Base.pageIndexForWidget=12;
+    schedeModel.setStackIndex(5);
+//dd
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        backgroundColor: Colors.green,
+        duration: Duration(seconds: 2),
+        content: Text("Scheda completata, ho salvato i dati della sessione"),
+      ),
+    );
+
   }
 }

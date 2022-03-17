@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 class Registro {
   int id = -1;
-  String nomeScheda = "";
   String idScheda = "";
   String durataFinale = "";
   String voto = "";
@@ -11,7 +10,6 @@ class Registro {
 class RegistriModel extends ChangeNotifier {
   List registriList = [];
   Registro registroBeingEdited = Registro();
-  String nomeScheda = "";
   String idScheda = "";
   String durataFinale = "";
   String voto = "";

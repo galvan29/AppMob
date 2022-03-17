@@ -22,7 +22,6 @@ class RegistriDBworker {
             await inDB.execute("CREATE TABLE IF NOT EXISTS registri ("
                 "id INTEGER PRIMARY KEY,"
                 "idScheda TEXT,"
-                "nomeScheda TEXT,"
                 "durataFinale TEXT,"
                 "voto TEXT)");
           });
@@ -34,7 +33,6 @@ class RegistriDBworker {
     Registro registro = Registro();
     registro.id = inMap["id"];
     registro.idScheda = inMap["idScheda"];
-    registro.nomeScheda = inMap["nomeScheda"];
     registro.durataFinale = inMap["durataFinale"];
     registro.voto = inMap["voto"];
     return registro;
@@ -44,7 +42,6 @@ class RegistriDBworker {
     Map<String, dynamic> map = Map<String, dynamic>();
     map["id"] = registro.id;
     map["idScheda"] = registro.idScheda;
-    map["nomeScheda"] = registro.nomeScheda;
     map["durataFinale"] = registro.durataFinale;
     map["voto"] = registro.voto;
     return map;
@@ -55,9 +52,9 @@ class RegistriDBworker {
     var val = await db!.rawQuery("SELECT MAX(id) + 1 AS id FROM registri");
     int id = val.first["id"] == null ? 1 : val.first["id"] as int;
     return await db.rawInsert(
-        "INSERT INTO registri (id, idScheda, nomeScheda, durataFinale, voto)"
-            "VALUES (?, ?, ?, ?, ?)",
-        [id, registro.idScheda, registro.nomeScheda, registro.durataFinale, registro.voto]
+        "INSERT INTO registri (id, idScheda, durataFinale, voto)"
+            "VALUES (?, ?, ?, ?)",
+        [id, registro.idScheda, registro.durataFinale, registro.voto]
     );
   }
 
