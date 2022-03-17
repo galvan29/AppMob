@@ -207,7 +207,6 @@ class _HomePageState extends State<HomePage> {
                       utentiModel.setStackIndex(6);
                     },
                     child: Container(
-                        width: 10,
                         height: 50,
                         padding: const EdgeInsets.only(top: 8),
                         decoration: BoxDecoration(
