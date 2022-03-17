@@ -9,6 +9,8 @@ import 'package:mytraining/models/utentiModel.dart';
 import 'package:mytraining/screen/display_image_widget.dart';
 import 'package:mytraining/screen/login.dart';
 
+import '../common/bottomNavigationBar.dart';
+
 class Profilo2 extends StatefulWidget {
   @override
   State<Profilo2> createState() => _ProfiloState();
@@ -27,7 +29,7 @@ class _ProfiloState extends State<Profilo2> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: buildAppBar(context),
-      backgroundColor: Colors.white,
+      backgroundColor: const Color.fromARGB(255, 42, 42, 42),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -143,37 +145,7 @@ class _ProfiloState extends State<Profilo2> {
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        currentIndex: _currentIndex,
-        backgroundColor: const Color.fromARGB(255, 180, 212, 250),
-        selectedItemColor: Colors.white.withOpacity(0.5),
-        unselectedItemColor: Colors.black,
-        selectedFontSize: MediaQuery.of(context).size.height * 0.02,
-        unselectedFontSize: MediaQuery.of(context).size.height * 0.02,
-        onTap: (value) {
-          //            setState(() => _currentIndex = value);
-          if (value == 0) {
-            utentiModel.setStackIndex(3);
-          } else if (value == 1) {
-            utentiModel.setStackIndex(4);
-          }
-        },
-        items: const [
-          BottomNavigationBarItem(
-            label: 'Homepage',
-            icon: Icon(Icons.home),
-          ),
-          BottomNavigationBarItem(
-            label: 'Schede',
-            icon: Icon(Icons.article_outlined),
-          ),
-          BottomNavigationBarItem(
-            label: 'Profilo',
-            icon: Icon(Icons.perm_identity_sharp),
-          ),
-        ],
-      ),
+        bottomNavigationBar: buildBottomNavigationBar(context, _currentIndex),
     );
   }
 

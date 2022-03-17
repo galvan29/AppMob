@@ -41,6 +41,7 @@ class _SchedeState extends State<Schede> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: buildAppBar(context),
+        backgroundColor: const Color.fromARGB(255, 42, 42, 42),
         floatingActionButton: Visibility(
           visible: Schede.valoreOrologio,
           child: FloatingActionButton(
@@ -66,6 +67,7 @@ class _SchedeState extends State<Schede> {
                     "Scegli la tua Scheda",
                     style: TextStyle(
                       fontSize: 22,
+                      color: Colors.white,
                       fontWeight: FontWeight.bold,
                     ),
                   )),
