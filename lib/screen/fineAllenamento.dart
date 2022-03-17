@@ -43,7 +43,7 @@ class FineAllenamento extends StatelessWidget {
                 padding: EdgeInsets.zero,
                 width: double.maxFinite,
                 decoration: const BoxDecoration(),
-                child: Text(r'''01:54:23''',
+                child: Text(,
                     style: GoogleFonts.adventPro(
                       textStyle: const TextStyle(
                         color: Colors.black,

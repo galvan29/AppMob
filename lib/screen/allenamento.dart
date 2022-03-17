@@ -53,6 +53,7 @@ class _AllenamentoState extends State<Allenamento> {
 
   @override
   Widget build(BuildContext context) {
+    String displayTime2 = "";
     return Scaffold(
       appBar: buildAppBar(context),
       backgroundColor: Colors.white,
@@ -74,6 +75,7 @@ class _AllenamentoState extends State<Allenamento> {
                     final value = snap.data!;
                     final displayTime =
                         StopWatchTimer.getDisplayTime(value, hours: _isHours);
+                    displayTime2 = displayTime;
                     return Column(
                       children: <Widget>[
                         Padding(
@@ -174,7 +176,8 @@ class _AllenamentoState extends State<Allenamento> {
                                   .add(StopWatchExecute.reset);
                               Schede.valoreOrologio = false;
                               registriModel.registroBeingEdited = Registro();
-                              registriModel.registroBeingEdited.durataFinale = "dura 1";
+                              registriModel.registroBeingEdited.durataFinale =
+                                  displayTime2;
                               _save(context);
                               //schedeModel.setStackIndex(5);
                             },
@@ -255,15 +258,17 @@ class _AllenamentoState extends State<Allenamento> {
   }
 
   void _save(BuildContext context) async {
-   // if(registriModel.registroBeingEdited.id==-1){
-      Schede().getValueScheda().then((val) async {
-        registriModel.registroBeingEdited.idScheda = val.toString();
-      });
-      FineAllenamento.idTempRegistro = await RegistriDBworker.registriDBworker.create(registriModel.registroBeingEdited);
-      print("Creato una nuova registro con id "+FineAllenamento.idTempRegistro.toString());
-   // } else {
-     // await RegistriDBworker.registriDBworker.update(registriModel.registroBeingEdited);
-   // }
+    // if(registriModel.registroBeingEdited.id==-1){
+    Schede().getValueScheda().then((val) async {
+      registriModel.registroBeingEdited.idScheda = val.toString();
+    });
+    FineAllenamento.idTempRegistro = await RegistriDBworker.registriDBworker
+        .create(registriModel.registroBeingEdited);
+    print("Creato una nuova registro con id " +
+        FineAllenamento.idTempRegistro.toString());
+    // } else {
+    // await RegistriDBworker.registriDBworker.update(registriModel.registroBeingEdited);
+    // }
 
     Schede().getValueScheda().then((val) async {
       await registriModel.loadData(RegistriDBworker.registriDBworker, val);
@@ -279,6 +284,5 @@ class _AllenamentoState extends State<Allenamento> {
         content: Text("Scheda completata, ho salvato i dati della sessione"),
       ),
     );
-
   }
 }
