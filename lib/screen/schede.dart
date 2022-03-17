@@ -149,10 +149,14 @@ class _SchedeState extends State<Schede> {
                     icon: const Icon(Icons.add),
                     color: Colors.black,
                     onPressed: () {
-                      schedeModel.schedaBeingEdited = Scheda();
-                      print(schedeModel.schedaBeingEdited.nomeScheda);
-                      schedeModel.setStackIndex(1);
-                    },
+                      if (!Schede.valoreOrologio) {
+                        schedeModel.schedaBeingEdited = Scheda();
+                        print(schedeModel.schedaBeingEdited.nomeScheda);
+                        schedeModel.setStackIndex(1);
+                      }else{
+                        print("Non puoi perchè c0è un allenamento in corso");
+                      }
+                    }
                   )),
             ])),
         bottomNavigationBar: buildBottomNavigationBar(context, _currentIndex));
