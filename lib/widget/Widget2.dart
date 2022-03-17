@@ -35,7 +35,9 @@ class _Generated3WidgetState extends State<WidgetClass2>
   @override
   Widget build(BuildContext context) {
     return Material(
-      child: SizedBox(
+      child: Align(
+        alignment: Alignment.center,
+        child: SizedBox(
           height: MediaQuery.of(context).size.height,
           child: Stack(children: [
             Stack(fit: StackFit.expand, alignment: Alignment.center, children: [
@@ -46,19 +48,19 @@ class _Generated3WidgetState extends State<WidgetClass2>
                 ),
               ),
               Positioned(
-                  left: MediaQuery.of(context).size.width * 0.37,
-                  top: MediaQuery.of(context).size.height * 0.45,
-                  width: MediaQuery.of(context).size.height * 0.10,
-                  height: MediaQuery.of(context).size.height * 0.10,
+                  width: MediaQuery.of(context).size.height * 0.15,
+                  height: MediaQuery.of(context).size.height * 0.15,
                   child: functionGif()),
             ])
           ])),
+      )
     );
   }
 
   functionGif() {
     if (schedeModel.stackIndex == 6) {
-      controller.animateTo(110, duration: const Duration(milliseconds: 2000));
+      //controller.animateTo(29, duration: const Duration(milliseconds: 1000));
+      controller.repeat(min: 0, max: 29, period: const Duration(milliseconds: 1000));
       switch (Base.pageIndexForWidget) {
         case 0:
           LoginPage().getValueLogin().then((val) async {
@@ -76,7 +78,7 @@ class _Generated3WidgetState extends State<WidgetClass2>
       }
 
       Timer(
-          const Duration(milliseconds: 2000),
+          const Duration(milliseconds: 1000),
               () => {
               schedeModel.setStackIndex(Base.pageIndexForWidget),
               controller.reset()
@@ -85,7 +87,7 @@ class _Generated3WidgetState extends State<WidgetClass2>
     return GifImage(
       controller: controller,
       image: const AssetImage(
-          "assets/image/9b61a1215a12665056f1ac4fc2b110319a660ef2.gif"),
+          "assets/image/we.gif"),
     );
   }
 }
