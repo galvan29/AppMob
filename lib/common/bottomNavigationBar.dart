@@ -34,6 +34,8 @@ BottomNavigationBar buildBottomNavigationBar(BuildContext context, var _currentI
   await UtentiDBworker.utentiDBworker.get(val);
   });
   utentiModel.setStackIndex(5);
+  } else if (value == 0) {
+    utentiModel.setStackIndex(3);
   }
   },
   items: const [

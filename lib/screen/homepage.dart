@@ -151,7 +151,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 padding: EdgeInsets.zero,
                 width: double.maxFinite,
-                height: 400,
+                height: 350,
                 decoration: const BoxDecoration(
                   color: Color.fromARGB(255, 230, 220, 245),
                   borderRadius: const BorderRadius.only(
