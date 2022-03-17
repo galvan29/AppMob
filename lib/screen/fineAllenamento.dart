@@ -12,7 +12,7 @@ class FineAllenamento extends StatelessWidget {
   final datasets = <String, dynamic>{};
   ValueNotifier<bool> isDialOpen = ValueNotifier(false);
   static int idTempRegistro = 0;
-
+  static String durataStringa = "";
   @override
   Widget build(BuildContext context) {
     double rat = 0;
@@ -43,7 +43,7 @@ class FineAllenamento extends StatelessWidget {
                 padding: EdgeInsets.zero,
                 width: double.maxFinite,
                 decoration: const BoxDecoration(),
-                child: Text(,
+                child: Text(durataStringa,
                     style: GoogleFonts.adventPro(
                       textStyle: const TextStyle(
                         color: Colors.black,

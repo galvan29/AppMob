@@ -178,6 +178,7 @@ class _AllenamentoState extends State<Allenamento> {
                               registriModel.registroBeingEdited = Registro();
                               registriModel.registroBeingEdited.durataFinale =
                                   displayTime2;
+                              FineAllenamento.durataStringa = displayTime2;
                               _save(context);
                               //schedeModel.setStackIndex(5);
                             },
