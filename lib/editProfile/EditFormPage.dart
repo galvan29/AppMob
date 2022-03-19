@@ -4,6 +4,8 @@ import 'package:mytraining/db/utentiDBworker.dart';
 import 'package:mytraining/models/utentiModel.dart';
 import 'package:mytraining/screen/base.dart';
 
+import '../common/appbar.dart';
+
 // This class handles the Page to edit the Name Section of the User Profile.
 class EditNameFormPage extends StatefulWidget {
   const EditNameFormPage({Key? key}) : super(key: key);
@@ -55,84 +57,8 @@ class EditNameFormPageState extends State<EditNameFormPage> {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       //appBar: buildAppBar(context),
-      appBar: PreferredSize(
-        preferredSize:
-            Size.fromHeight(MediaQuery.of(context).size.height * 0.07),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              padding: EdgeInsets.zero,
-              width: double.maxFinite,
-              height: MediaQuery.of(context).size.height * 0.07,
-              decoration: const BoxDecoration(
-                  color: Color.fromARGB(255, 170, 212, 250),
-                  border: Border(
-                    bottom: BorderSide(
-                      color: Colors.black,
-                      width: 1.0,
-                    ),
-                  )),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    padding: EdgeInsets.zero,
-                    decoration: const BoxDecoration(),
-                    margin: EdgeInsets.only(
-                      left: MediaQuery.of(context).size.width * 0.01,
-                      top: MediaQuery.of(context).size.width * 0.05,
-                    ),
-                    child: Text('MyTraining',
-                        style: GoogleFonts.adventPro(
-                          textStyle: TextStyle(
-                            color: const Color(0xFF000000),
-                            fontWeight: FontWeight.w400,
-                            fontSize: MediaQuery.of(context).size.height * 0.03,
-                            fontStyle: FontStyle.normal,
-                            decoration: TextDecoration.none,
-                          ),
-                        ),
-                        textAlign: TextAlign.left,
-                        maxLines: 1),
-                  ),
-                  Container(
-                      padding: EdgeInsets.zero,
-                      decoration: const BoxDecoration(),
-                      margin: EdgeInsets.only(
-                        right: MediaQuery.of(context).size.width * 0.03,
-                        top: MediaQuery.of(context).size.width * 0.05,
-                      ),
-                      child: GestureDetector(
-                        onTap: () {
-                          print("Mio nome utente: " +
-                              utentiModel.utenteBeingEdited.nomeUtente);
-                        },
-                        child: Container(
-                            height: MediaQuery.of(context).size.height * 0.02,
-                            width: MediaQuery.of(context).size.height * 0.02,
-                            decoration: BoxDecoration(
-                                color: Colors.black.withOpacity(0),
-                                borderRadius: const BorderRadius.only(
-                                  topLeft: Radius.circular(5),
-                                  topRight: Radius.circular(5),
-                                  bottomRight: Radius.circular(5),
-                                  bottomLeft: Radius.circular(5),
-                                ),
-                                border:
-                                    Border.all(color: Colors.black, width: 1)),
-                            child: Icon(
-                              Icons.info,
-                              size: MediaQuery.of(context).size.height * 0.02,
-                              color: const Color(0xFF000000),
-                            )),
-                      ))
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
+      appBar: buildAppBar(context),
+      backgroundColor: const Color.fromARGB(255, 42, 42, 42),
       body: SingleChildScrollView(
           child: Form(
         key: _formKey,
@@ -145,13 +71,19 @@ class EditNameFormPageState extends State<EditNameFormPage> {
                 top: MediaQuery.of(context).size.width * 0.05,
               ),
             ),
-            const SizedBox(
+            SizedBox(
                 width: 330,
                 child: Text(
-                  "Want to change something?",
-                  style: TextStyle(
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
+                  "Vuoi Cambiare qualcosa?",
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.adventPro(
+                    textStyle: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 30,
+                      fontStyle: FontStyle.normal,
+                      decoration: TextDecoration.none,
+                    ),
                   ),
                 )),
             Padding(
@@ -160,6 +92,7 @@ class EditNameFormPageState extends State<EditNameFormPage> {
                     height: 70,
                     width: MediaQuery.of(context).size.width * 0.9,
                     child: TextFormField(
+                      style: TextStyle(color: Colors.white),
                       enabled: false,
                       // Handles Form Validation for First Name
                       validator: (String? inValue) {
@@ -168,7 +101,10 @@ class EditNameFormPageState extends State<EditNameFormPage> {
                         }
                         return null;
                       },
-                      decoration: const InputDecoration(labelText: 'Username'),
+                      decoration: const InputDecoration(labelText: 'Username',
+                          labelStyle: TextStyle(
+                            color: Colors.white,
+                          )),
                       controller: userNameController,
                     ))),
             Padding(
@@ -177,6 +113,7 @@ class EditNameFormPageState extends State<EditNameFormPage> {
                     height: 70,
                     width: MediaQuery.of(context).size.width * 0.9,
                     child: TextFormField(
+                      style: TextStyle(color: Colors.white),
                      /* validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'Please enter your first name';
@@ -184,7 +121,10 @@ class EditNameFormPageState extends State<EditNameFormPage> {
                         return null;
                       }, */
                       decoration:
-                          const InputDecoration(labelText: 'First  Name'),
+                          const InputDecoration(labelText: 'Nome',
+                              labelStyle: TextStyle(
+                                color: Colors.white,
+                              )),
                       controller: firstNameController,
                     ))),
             Padding(
@@ -193,6 +133,7 @@ class EditNameFormPageState extends State<EditNameFormPage> {
                     height: 70,
                     width: MediaQuery.of(context).size.width * 0.9,
                     child: TextFormField(
+                      style: TextStyle(color: Colors.white),
                       // Handles Form Validation for First Name
                       /* validator: (value) {
                           if (value == null || value.isEmpty) {
@@ -201,7 +142,10 @@ class EditNameFormPageState extends State<EditNameFormPage> {
                           return null;
                         }, */
                       decoration:
-                          const InputDecoration(labelText: 'Second Name'),
+                          const InputDecoration(labelText: 'Cognome',
+                              labelStyle: TextStyle(
+                                color: Colors.white,
+                              )),
                       controller: secondNameController,
                     ))),
             Padding(
@@ -210,6 +154,7 @@ class EditNameFormPageState extends State<EditNameFormPage> {
                     height: 70,
                     width: MediaQuery.of(context).size.width * 0.9,
                     child: TextFormField(
+                      style: TextStyle(color: Colors.white),
                       keyboardType: TextInputType.number,
                       // Handles Form Validation for First Name
                       /* validator: (value) {
@@ -218,7 +163,10 @@ class EditNameFormPageState extends State<EditNameFormPage> {
                           }
                           return null;
                         }, */
-                      decoration: const InputDecoration(labelText: 'Age'),
+                      decoration: const InputDecoration(labelText: 'Età',
+                          labelStyle: TextStyle(
+                            color: Colors.white,
+                          )),
                       controller: ageController,
                     ))),
             Padding(
@@ -227,6 +175,7 @@ class EditNameFormPageState extends State<EditNameFormPage> {
                     height: 70,
                     width: MediaQuery.of(context).size.width * 0.9,
                     child: TextFormField(
+                      style: TextStyle(color: Colors.white),
                       keyboardType: TextInputType.number,
                       // Handles Form Validation for First Name
                       /* validator: (value) {
@@ -235,7 +184,10 @@ class EditNameFormPageState extends State<EditNameFormPage> {
                           }
                           return null;
                         }, */
-                      decoration: const InputDecoration(labelText: 'Height'),
+                      decoration: const InputDecoration(labelText: 'Altezza',
+                          labelStyle: TextStyle(
+                            color: Colors.white,
+                          )),
                       controller: heightController,
                     ))),
             Padding(
@@ -245,6 +197,7 @@ class EditNameFormPageState extends State<EditNameFormPage> {
                     width: MediaQuery.of(context).size.width * 0.9,
                     child: TextFormField(
                       keyboardType: TextInputType.number,
+                      style: TextStyle(color: Colors.white),
                       // Handles Form Validation for First Name
                       /* validator: (value) {
                           if (value == null || value.isEmpty) {
@@ -252,33 +205,58 @@ class EditNameFormPageState extends State<EditNameFormPage> {
                           }
                           return null;
                         }, */
-                      decoration: const InputDecoration(labelText: 'Weight'),
+                      decoration: const InputDecoration(labelText: 'Peso',
+                          labelStyle: TextStyle(
+                            color: Colors.white,
+                          )),
                       controller: weightController,
                     ))),
-            Padding(
-                padding: EdgeInsets.only(
-                    top: MediaQuery.of(context).size.height * 0.03),
-                child: Align(
-                    alignment: Alignment.bottomCenter,
-                    child: SizedBox(
-                      width: 330,
+            Container(
+              margin: const EdgeInsets.only(
+                left: 30,
+                top: 20,
+                right: 30,
+              ),
+              padding: EdgeInsets.zero,
+              width: double.maxFinite,
+              decoration: const BoxDecoration(),
+              child: GestureDetector(
+                  onTap: () async {
+                    // Validate returns true if the form is valid, or false otherwise.
+                    if (_formKey.currentState!.validate()) {
+                      updateUserValue();
+                      await UtentiDBworker.utentiDBworker
+                          .update(utentiModel.utenteBeingEdited);
+                      Navigator.pop(context);
+                    }
+                  },
+                  child: Container(
+                      width: 10,
                       height: 50,
-                      child: ElevatedButton(
-                        onPressed: () async {
-                          // Validate returns true if the form is valid, or false otherwise.
-                          if (_formKey.currentState!.validate()) {
-                            updateUserValue();
-                            await UtentiDBworker.utentiDBworker
-                                .update(utentiModel.utenteBeingEdited);
-                            Navigator.pop(context);
-                          }
-                        },
-                        child: const Text(
-                          'Update',
-                          style: TextStyle(fontSize: 15),
+                      padding: const EdgeInsets.only(top: 8),
+                      decoration: BoxDecoration(
+                          color: const Color.fromARGB(255, 230, 245, 252),
+                          borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(20),
+                            topRight: Radius.circular(20),
+                            bottomRight: Radius.circular(20),
+                            bottomLeft: Radius.circular(20),
+                          ),
+                          border: Border.all(color: Colors.white)),
+                      child: Text(
+                        '''Aggiorna''',
+                        style: GoogleFonts.adventPro(
+                          textStyle: const TextStyle(
+                            color: const Color.fromARGB(255, 42, 42, 42),
+                            fontWeight: FontWeight.w500,
+                            fontSize: 20,
+                            fontStyle: FontStyle.normal,
+                            decoration: TextDecoration.none,
+                          ),
                         ),
-                      ),
-                    )))
+                        textAlign: TextAlign.center,
+                      ))),
+            ),
           ],
         ),
       )),
@@ -294,7 +272,7 @@ class EditNameFormPageState extends State<EditNameFormPage> {
                   "Indietro",
                   style: GoogleFonts.adventPro(
                     textStyle: const TextStyle(
-                      color: Colors.black,
+                      color: Colors.white,
                       fontWeight: FontWeight.w400,
                       fontSize: 20,
                       fontStyle: FontStyle.normal,
