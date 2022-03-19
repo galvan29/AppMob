@@ -160,6 +160,7 @@ class EditNameFormPageState extends State<EditNameFormPage> {
                     height: 70,
                     width: MediaQuery.of(context).size.width * 0.9,
                     child: TextFormField(
+                      enabled: false,
                       // Handles Form Validation for First Name
                       validator: (String? inValue) {
                         if (inValue!.isEmpty) {
@@ -176,12 +177,12 @@ class EditNameFormPageState extends State<EditNameFormPage> {
                     height: 70,
                     width: MediaQuery.of(context).size.width * 0.9,
                     child: TextFormField(
-                      validator: (value) {
+                     /* validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'Please enter your first name';
                         }
                         return null;
-                      },
+                      }, */
                       decoration:
                           const InputDecoration(labelText: 'First  Name'),
                       controller: firstNameController,
