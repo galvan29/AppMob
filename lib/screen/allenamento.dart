@@ -260,9 +260,7 @@ class _AllenamentoState extends State<Allenamento> {
 
   void _save(BuildContext context) async {
     // if(registriModel.registroBeingEdited.id==-1){
-    Schede().getValueScheda().then((val) async {
-      registriModel.registroBeingEdited.idScheda = val.toString();
-    });
+      registriModel.registroBeingEdited.idScheda = Schede.schedaAllenamento.toString();
     FineAllenamento.idTempRegistro = await RegistriDBworker.registriDBworker
         .create(registriModel.registroBeingEdited);
     print("Creato una nuova registro con id " +
@@ -270,10 +268,7 @@ class _AllenamentoState extends State<Allenamento> {
     // } else {
     // await RegistriDBworker.registriDBworker.update(registriModel.registroBeingEdited);
     // }
-
-    Schede().getValueScheda().then((val) async {
-      await registriModel.loadData(RegistriDBworker.registriDBworker, val);
-    });
+      await registriModel.loadData(RegistriDBworker.registriDBworker, Schede.schedaAllenamento);
 
     //Base.pageIndexForWidget=12;
     schedeModel.setStackIndex(5);

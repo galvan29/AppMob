@@ -120,9 +120,7 @@ class FineAllenamento extends StatelessWidget {
                       registriModel.registroBeingEdited.voto = rat.toString();
                       registriModel.registroBeingEdited.giorno = DateFormat('dd-MM-yy').format(DateTime.now());
                       await RegistriDBworker.registriDBworker.update(registriModel.registroBeingEdited);
-                      Schede().getValueScheda().then((val) async {
-                        await registriModel.loadData(RegistriDBworker.registriDBworker, val);
-                      });
+                      await registriModel.loadData(RegistriDBworker.registriDBworker, Schede.schedaAllenamento);
                       schedeModel.setStackIndex(0);
                     },
                     child: Container(

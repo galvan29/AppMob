@@ -14,7 +14,7 @@ class CreaEvento extends StatelessWidget {
   static DateTime inidata = DateTime.now();
   static DateTime findata = DateTime.now();
   var txt = TextEditingController(), txt1 = TextEditingController();
-  int selectedRadio = 0;
+  int selectedRadio = -1;
   var nomeScheda = TextEditingController();
   @override
   Widget build(BuildContext context) {

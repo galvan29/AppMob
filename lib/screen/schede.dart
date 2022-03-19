@@ -19,7 +19,7 @@ import '../common/bottomNavigationBar.dart';
 
 class Schede extends StatefulWidget {
   static bool valoreOrologio = false;
-
+  static int schedaAllenamento = -2;
   @override
   State<Schede> createState() => _SchedeState();
 
@@ -108,28 +108,29 @@ class _SchedeState extends State<Schede> {
                         subtitle: Text(scheda.durataScheda),
                         tileColor: color,
                         onLongPress: () async {
-                          if (!Schede.valoreOrologio) {
+                          //if (!Schede.valoreOrologio) {
                             schedeModel.schedaBeingEdited = await SchedeDBworker
                                 .schedeDBworker
                                 .get(scheda.id);
                             print(schedeModel.schedaBeingEdited.nomeScheda);
                             schedeModel.setStackIndex(1);
-                          } else {
-                            print("C'E UN ALLENAMENTO IN CORSO");
-                          }
+                        //  } else {
+                         //   print("C'E UN ALLENAMENTO IN CORSO");
+                        //  }
                         },
                         onTap: () async {
-                          if (!Schede.valoreOrologio) {
+                          //if (!Schede.valoreOrologio) {
                             saveValueScheda(scheda.id);
+                            Schede.schedaAllenamento = scheda.id;
                             print("Ciao bro " + scheda.id.toString());
                             await eserciziModel.loadData(
                                 EserciziDBworker.eserciziDBworker, scheda.id);
                             await registriModel.loadData(
                                 RegistriDBworker.registriDBworker, scheda.id);
                             schedeModel.setStackIndex(2);
-                          } else {
-                            print("C'E UN ALLENAMENTO IN CORSO");
-                          }
+                         // } else {
+                         //   print("C'E UN ALLENAMENTO IN CORSO");
+                          //}
                         },
                       ),
                     ),
@@ -149,13 +150,13 @@ class _SchedeState extends State<Schede> {
                     icon: const Icon(Icons.add),
                     color: Colors.black,
                     onPressed: () {
-                      if (!Schede.valoreOrologio) {
+                     // if (!Schede.valoreOrologio) {
                         schedeModel.schedaBeingEdited = Scheda();
                         print(schedeModel.schedaBeingEdited.nomeScheda);
                         schedeModel.setStackIndex(1);
-                      }else{
-                        print("Non puoi perchè c0è un allenamento in corso");
-                      }
+                    //  }else{
+                      //  print("Non puoi perchè c0è un allenamento in corso");
+                      //}
                     }
                   )),
             ])),

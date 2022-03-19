@@ -36,14 +36,15 @@ class VisualizzaScheda extends StatelessWidget {
           },
         ),*/
         floatingActionButton: Visibility(
-            visible: checkNumber(), // Set it to false
-            child: FloatingActionButton(
-              child: const Icon(Icons.play_arrow, color: Colors.white),
-              onPressed: () async {
-                Schede.valoreOrologio = true;
-                schedeModel.setStackIndex(4);
-              },
-            )),
+          visible: checkNumber() && !Schede.valoreOrologio, // Set it to false
+          child: FloatingActionButton(
+            child: const Icon(Icons.play_arrow, color: Colors.white),
+            onPressed: () async {
+              Schede.valoreOrologio = true;
+              schedeModel.setStackIndex(4);
+            },
+          ),
+        ),
         body: SingleChildScrollView(
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -133,7 +134,7 @@ class VisualizzaScheda extends StatelessWidget {
                     },
                   )),
               Container(
-                margin: EdgeInsets.only(top: 30, left: 30, right: 30),
+                  margin: EdgeInsets.only(top: 30, left: 30, right: 30),
                   height: 400,
                   padding: const EdgeInsets.only(top: 8),
                   decoration: BoxDecoration(
@@ -162,7 +163,10 @@ class VisualizzaScheda extends StatelessWidget {
                             actionExtentRatio: .25,
                             child: ListTile(
                               title: Text(registro.durataFinale),
-                              subtitle: Text("Voto: " + registro.voto + " in data "+registro.giorno),
+                              subtitle: Text("Voto: " +
+                                  registro.voto +
+                                  " in data " +
+                                  registro.giorno),
                               tileColor: color,
                             ),
                           ),
