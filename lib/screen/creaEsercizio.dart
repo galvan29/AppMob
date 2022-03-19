@@ -36,9 +36,11 @@ class CreaEsercizio extends StatelessWidget{
                 width: 330,
                 child: Text(
                   "Crea un esercizio!",
+                  textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
+                    color: Colors.white,
                   ),
                 )),
             Padding(
@@ -47,11 +49,15 @@ class CreaEsercizio extends StatelessWidget{
                   height: 70,
                   width: MediaQuery.of(context).size.width * 0.9,
                   child: TextFormField(
-                    decoration: const InputDecoration(labelText: "Nome Esercizio"),
+                    style: TextStyle(color: Colors.white),
+                    decoration: const InputDecoration(labelText: "Nome Esercizio",
+                        labelStyle: TextStyle(
+                          color: Colors.white,
+                        )),
                     initialValue: eserciziModel.esercizioBeingEdited == null ? null : eserciziModel.esercizioBeingEdited.nomeEsercizio,
                     validator: (String? inValue){
                       if(inValue!.isEmpty){
-                        return "Please enter a name";
+                        return "Inserisci Nome";
                       }
                       return null;
                     },
@@ -65,11 +71,15 @@ class CreaEsercizio extends StatelessWidget{
                   height: 70,
                   width: MediaQuery.of(context).size.width * 0.9,
                   child:  TextFormField(
-                    decoration: const InputDecoration(labelText: "Serie"),
+                    style: TextStyle(color: Colors.white),
+                    decoration: const InputDecoration(labelText: "Serie",
+                        labelStyle: TextStyle(
+                          color: Colors.white,
+                        )),
                     initialValue: eserciziModel.esercizioBeingEdited == null ? null : eserciziModel.esercizioBeingEdited.serieEsercizio,
                     validator: (String? inValue){
                       if(inValue!.isEmpty){
-                        return "Please enter a serie";
+                        return "Inserisci Serie";
                       }
                       return null;
                     },
@@ -83,11 +93,15 @@ class CreaEsercizio extends StatelessWidget{
                   height: 70,
                   width: MediaQuery.of(context).size.width * 0.9,
                   child: TextFormField(
-                    decoration: const InputDecoration(labelText: "Rip"),
+                    style: TextStyle(color: Colors.white),
+                    decoration: const InputDecoration(labelText: "Ripetizioni",
+                        labelStyle: TextStyle(
+                          color: Colors.white,
+                        )),
                     initialValue: eserciziModel.esercizioBeingEdited == null ? null : eserciziModel.esercizioBeingEdited.ripEsercizio,
                     validator: (String? inValue){
                       if(inValue!.isEmpty){
-                        return "Please enter a serie";
+                        return "Inserisci Ripetizioni";
                       }
                       return null;
                     },
@@ -101,11 +115,15 @@ class CreaEsercizio extends StatelessWidget{
                   height: 70,
                   width: MediaQuery.of(context).size.width * 0.9,
                   child: TextFormField(
-                    decoration: const InputDecoration(labelText: "Peso"),
+                    style: TextStyle(color: Colors.white),
+                    decoration: const InputDecoration(labelText: "Peso",
+                        labelStyle: TextStyle(
+                          color: Colors.white,
+                        )),
                     initialValue: eserciziModel.esercizioBeingEdited == null ? null : eserciziModel.esercizioBeingEdited.pesoEsercizio,
                     validator: (String? inValue){
                       if(inValue!.isEmpty){
-                        return "Please enter a peso";
+                        return "Inserisci Peso";
                       }
                       return null;
                     },
@@ -119,12 +137,16 @@ class CreaEsercizio extends StatelessWidget{
                   height: 70,
                   width: MediaQuery.of(context).size.width * 0.9,
                   child: TextFormField(
-                    decoration: const InputDecoration(labelText: "Note"),
+                    style: TextStyle(color: Colors.white),
+                    decoration: const InputDecoration(labelText: "Note",
+                        labelStyle: TextStyle(
+                          color: Colors.white,
+                        )),
                     maxLines: 2,
                     initialValue: eserciziModel.esercizioBeingEdited == null ? null : eserciziModel.esercizioBeingEdited.noteEsercizio,
                     validator: (String? inValue){
                       if(inValue!.isEmpty){
-                        return "Please enter a note";
+                        return "Inserisci Note";
                       }
                       return null;
                     },
@@ -132,27 +154,49 @@ class CreaEsercizio extends StatelessWidget{
                       eserciziModel.esercizioBeingEdited.noteEsercizio = inValue;
                     },
                   ),)),
-            Padding(
-                padding: EdgeInsets.only(
-                    top: MediaQuery.of(context).size.height * 0.03),
-                child: Align(
-                    alignment: Alignment.bottomCenter,
-                    child: SizedBox(
-                      width: 330,
+            Container(
+              margin: const EdgeInsets.only(
+                left: 30,
+                top: 20,
+                right: 30,
+              ),
+              padding: EdgeInsets.zero,
+              width: double.maxFinite,
+              decoration: const BoxDecoration(),
+              child: GestureDetector(
+                  onTap: () async {
+                    // Validate returns true if the form is valid, or false otherwise.
+                    if (_formKey.currentState!.validate()) {
+                      _save(context);
+                    }
+                  },
+                  child: Container(
+                      width: 10,
                       height: 50,
-                      child: ElevatedButton(
-                        onPressed: () async {
-                          // Validate returns true if the form is valid, or false otherwise.
-                          if (_formKey.currentState!.validate()) {
-                            _save(context);
-                          }
-                        },
-                        child: const Text(
-                          'Add',
-                          style: TextStyle(fontSize: 15),
+                      padding: const EdgeInsets.only(top: 8),
+                      decoration: BoxDecoration(
+                          color: const Color.fromARGB(255, 230, 245, 252),
+                          borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(20),
+                            topRight: Radius.circular(20),
+                            bottomRight: Radius.circular(20),
+                            bottomLeft: Radius.circular(20),
+                          ),
+                          border: Border.all(color: Colors.white)),
+                      child: Text(
+                        '''Aggiungi''',
+                        style: GoogleFonts.adventPro(
+                          textStyle: const TextStyle(
+                            color: const Color.fromARGB(255, 42, 42, 42),
+                            fontWeight: FontWeight.w500,
+                            fontSize: 20,
+                            fontStyle: FontStyle.normal,
+                            decoration: TextDecoration.none,
+                          ),
                         ),
-                      ),
-                    )))
+                        textAlign: TextAlign.center,
+                      ))),
+            ),
           ],
         ),
       ),
@@ -167,7 +211,7 @@ class CreaEsercizio extends StatelessWidget{
                 child: Text("Indietro",
                   style: GoogleFonts.adventPro(
                     textStyle: const TextStyle(
-                      color: Colors.black,
+                      color: Colors.white,
                       fontWeight: FontWeight.w400,
                       fontSize: 20,
                       fontStyle: FontStyle.normal,
@@ -208,9 +252,9 @@ class CreaEsercizio extends StatelessWidget{
 //dd
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
-        backgroundColor: Colors.green,
+        backgroundColor:  Color.fromARGB(255, 230, 220, 245),
         duration: Duration(seconds: 2),
-        content: Text("Esercizio saved"),
+        content: Text("Esercizio Aggiunto alla Scheda!"),
       ),
     );
 
