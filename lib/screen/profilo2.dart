@@ -38,17 +38,23 @@ class _ProfiloState extends State<Profilo2> {
               elevation: 0,
               toolbarHeight: 10,
             ),
-            const Center(
-                child: Padding(
-                    padding: EdgeInsets.only(bottom: 20),
-                    child: Text(
-                      'Profile',
-                      style: TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.w700,
-                        color: Color.fromRGBO(64, 105, 225, 1),
-                      ),
-                    ))),
+            Container(
+              padding: EdgeInsets.zero,
+              width: double.maxFinite,
+              decoration: const BoxDecoration(),
+              child: Text(r'''Profilo''',
+                  style: GoogleFonts.adventPro(
+                    textStyle: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 40,
+                      fontStyle: FontStyle.normal,
+                      decoration: TextDecoration.none,
+                    ),
+                  ),
+                  textAlign: TextAlign.center,
+                  maxLines: 1),
+            ),
             DisplayImage(
               imagePath:
                   "https://upload.wikimedia.org/wikipedia/en/0/0b/Darth_Vader_in_The_Empire_Strikes_Back.jpg",
@@ -64,84 +70,90 @@ class _ProfiloState extends State<Profilo2> {
                 utentiModel.utenteBeingEdited.height, 'Altezza'),
             buildUserInfoDisplay(utentiModel.utenteBeingEdited.weight, 'Peso'),
             Container(
-                decoration: BoxDecoration(
-                    color: const Color.fromARGB(255, 180, 212, 250),
-                    borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(5),
-                      topRight: Radius.circular(5),
-                      bottomRight: Radius.circular(5),
-                      bottomLeft: Radius.circular(5),
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                      padding: EdgeInsets.zero,
+                      width: 100,
+                      decoration: const BoxDecoration(),
+                      child: GestureDetector(
+                          onTap: () {
+                            LoginPage().getValueLogin().then((val) async {
+                              utentiModel.utenteBeingEdited =
+                              await UtentiDBworker.utentiDBworker.get(val);
+                            });
+                            navigateSecondPage(const EditNameFormPage());
+                            //utentiModel.setStackIndex(7);
+                          },
+                          child: Container(
+                              width: 10,
+                              height: 50,
+                              padding: const EdgeInsets.only(top: 8),
+                              decoration: BoxDecoration(
+                                  color: const Color.fromARGB(255, 230, 245, 252),
+                                  borderRadius: const BorderRadius.only(
+                                    topLeft: Radius.circular(20),
+                                    topRight: Radius.circular(20),
+                                    bottomRight: Radius.circular(20),
+                                    bottomLeft: Radius.circular(20),
+                                  ),
+                                  border: Border.all(color: Colors.white)),
+                              child: Text(
+                                '''Modifica''',
+                                style: GoogleFonts.adventPro(
+                                  textStyle: const TextStyle(
+                                    color: const Color.fromARGB(255, 42, 42, 42),
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 20,
+                                    fontStyle: FontStyle.normal,
+                                    decoration: TextDecoration.none,
+                                  ),
+                                ),
+                                textAlign: TextAlign.center,
+                              ))),
                     ),
-                    border: Border.all(color: Colors.white)),
-                margin: EdgeInsets.only(
-                    right: MediaQuery.of(context).size.width * 0.05,
-                    left: MediaQuery.of(context).size.width * 0.675),
-                child: Align(
-                  child: TextButton(
-                    child: Text(
-                      "Modifica",
-                      style: GoogleFonts.adventPro(
-                        textStyle: const TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w400,
-                          fontSize: 20,
-                          fontStyle: FontStyle.normal,
-                          decoration: TextDecoration.none,
-                        ),
+                    Container(
+                      margin: const EdgeInsets.only(
+                        left: 30,
+                        top: 20,
+                        right: 30,
                       ),
+                      padding: EdgeInsets.zero,
+                      width: 100,
+                      decoration: const BoxDecoration(),
+                      child: GestureDetector(
+                          onTap: () {
+                            utentiModel.setStackIndex(0);
+                          },
+                          child: Container(
+                              width: 10,
+                              height: 50,
+                              padding: const EdgeInsets.only(top: 8),
+                              decoration: BoxDecoration(
+                                  color: Color.fromARGB(255, 230, 220, 245),
+                                  borderRadius: const BorderRadius.only(
+                                    topLeft: Radius.circular(20),
+                                    topRight: Radius.circular(20),
+                                    bottomRight: Radius.circular(20),
+                                    bottomLeft: Radius.circular(20),
+                                  ),
+                                  border: Border.all(color: Colors.white)),
+                              child: Text(
+                                '''Logout''',
+                                style: GoogleFonts.adventPro(
+                                  textStyle: const TextStyle(
+                                    color: const Color.fromARGB(255, 42, 42, 42),
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 20,
+                                    fontStyle: FontStyle.normal,
+                                    decoration: TextDecoration.none,
+                                  ),
+                                ),
+                                textAlign: TextAlign.center,
+                              ))),
                     ),
-                    onPressed: () {
-                      LoginPage().getValueLogin().then((val) async {
-                        utentiModel.utenteBeingEdited =
-                            await UtentiDBworker.utentiDBworker.get(val);
-                      });
-                      navigateSecondPage(const EditNameFormPage());
-                      //utentiModel.setStackIndex(7);
-                    },
-                  ),
-                  alignment: Alignment.center,
+                  ],
                 )),
-            Container(
-              margin: EdgeInsets.only(
-                left: MediaQuery.of(context).size.width * 0.06,
-                right: MediaQuery.of(context).size.width * 0.06, //20
-                top: 20, //20
-              ),
-              padding: EdgeInsets.zero,
-              width: double.maxFinite,
-              decoration: const BoxDecoration(),
-              child: GestureDetector(
-                  onTap: () {
-
-                    utentiModel.setStackIndex(0);
-                  },
-                  child: Container(
-                      width: 10,
-                      height: 45,
-                      padding: const EdgeInsets.only(top: 7),
-                      decoration: BoxDecoration(
-                          color: Colors.red,
-                          borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(5),
-                            topRight: Radius.circular(5),
-                            bottomRight: Radius.circular(5),
-                            bottomLeft: Radius.circular(5),
-                          ),
-                          border: Border.all(color: Colors.white)),
-                      child: Text(
-                        '''Logout''',
-                        style: GoogleFonts.adventPro(
-                          textStyle: const TextStyle(
-                            color: Color(0xFFFFFFFF),
-                            fontWeight: FontWeight.w500,
-                            fontSize: 20,
-                            fontStyle: FontStyle.normal,
-                            decoration: TextDecoration.none,
-                          ),
-                        ),
-                        textAlign: TextAlign.center,
-                      ))),
-            ),
           ],
         ),
       ),
@@ -160,7 +172,7 @@ class _ProfiloState extends State<Profilo2> {
             style: const TextStyle(
               fontSize: 15,
               fontWeight: FontWeight.w500,
-              color: Colors.grey,
+              color: Colors.white,
             ),
           ),
           const SizedBox(
@@ -172,7 +184,7 @@ class _ProfiloState extends State<Profilo2> {
               decoration: const BoxDecoration(
                   border: Border(
                       bottom: BorderSide(
-                color: Colors.grey,
+                color: Colors.white,
                 width: 1,
               ))),
               child: Row(children: [
@@ -182,7 +194,8 @@ class _ProfiloState extends State<Profilo2> {
                         child: Align(
                           child: Text(
                             getValue,
-                            style: TextStyle(fontSize: 16, height: 1.4),
+
+                            style: TextStyle(fontSize: 16, height: 1.4, color: Color.fromARGB(255, 230, 220, 245)),
                           ),
                           alignment: Alignment.centerLeft,
                         ))),

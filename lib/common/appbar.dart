@@ -25,7 +25,8 @@ PreferredSize buildAppBar(BuildContext context) {
                   left: MediaQuery.of(context).size.width * 0.01,
                   top: MediaQuery.of(context).size.width * 0.08,
                 ),
-                child: Text('MyTraining',
+                child: Text(
+                    'MyTraining',
                     style: GoogleFonts.adventPro(
                       textStyle: TextStyle(
                         color: Colors.white,
