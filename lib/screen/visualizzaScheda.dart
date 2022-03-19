@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:mytraining/chart/chartStr.dart';
 import 'package:mytraining/common/appbar.dart';
 import 'package:mytraining/db/eserciziDBworker.dart';
-import 'package:mytraining/db/schedeDBworker.dart';
 import 'package:mytraining/models/eserciziModel.dart';
 import 'package:mytraining/models/registriModel.dart';
 import 'package:mytraining/models/schedeModel.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:mytraining/screen/allenamento.dart';
 import 'package:mytraining/screen/schede.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:stop_watch_timer/stop_watch_timer.dart';
+import 'package:charts_flutter/flutter.dart' as charts;
+import 'package:intl/intl.dart';
 
 class VisualizzaScheda extends StatelessWidget {
   final datasets = <String, dynamic>{};
@@ -25,16 +24,25 @@ class VisualizzaScheda extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final List<ChartRegistri> dataR = [];
+    for (Registro a in registriModel.registriList) {
+      dataR.add(ChartRegistri(
+          giorno: DateTime.parse(a.giorno),
+          durata: fromDateToMinute(a.durataFinale)));
+    }
+
+    List<charts.Series<ChartRegistri, DateTime>> series = [
+      charts.Series(
+        id: 'Sales',
+        data: dataR,
+        domainFn: (ChartRegistri sales, _) => sales.giorno,
+        measureFn: (ChartRegistri sales, _) => sales.durata,
+      )
+    ];
+
     return Scaffold(
         appBar: buildAppBar(context),
-        /*floatingActionButton: FloatingActionButton(
-          child: const Icon(Icons.add, color: Colors.white),
-          onPressed: (){
-            eserciziModel.esercizioBeingEdited = Esercizio();
-            schedeModel.setStackIndex(3);
-            print("Creazione Esercizio");
-          },
-        ),*/
+        backgroundColor: const Color.fromARGB(255, 42, 42, 42),
         floatingActionButton: Visibility(
           visible: checkNumber() && !Schede.valoreOrologio, // Set it to false
           child: FloatingActionButton(
@@ -133,9 +141,29 @@ class VisualizzaScheda extends StatelessWidget {
                       schedeModel.setStackIndex(3);
                     },
                   )),
+                  Container(
+                    margin: EdgeInsets.only(
+                      top: MediaQuery.of(context).size.width * 0.05,
+                    ),
+                    padding: EdgeInsets.zero,
+                    width: double.maxFinite,
+                    decoration: const BoxDecoration(),
+                    child: Text('Registro Allenamenti',
+                        style: GoogleFonts.adventPro(
+                          textStyle: const TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w400,
+                            fontSize: 18,
+                            fontStyle: FontStyle.normal,
+                            decoration: TextDecoration.none,
+                          ),
+                        ),
+                        textAlign: TextAlign.center,
+                        maxLines: 1),
+                  ),
               Container(
-                  margin: EdgeInsets.only(top: 30, left: 30, right: 30),
-                  height: 400,
+                  margin: EdgeInsets.only(top: 10, left: 30, right: 30),
+                  height: 330,
                   padding: const EdgeInsets.only(top: 8),
                   decoration: BoxDecoration(
                       color: const Color.fromARGB(255, 230, 245, 252),
@@ -150,11 +178,14 @@ class VisualizzaScheda extends StatelessWidget {
                     //child: Row(
                     //children: [
                     child: Container(
-                      margin: EdgeInsets.only(top: 30, left: 30, right: 30),
-                      height: 400,
-                      width: MediaQuery.of(context).size.width * 0.90,
-                      child: Text("qui ci va il grafico"),
-                    ),
+                        margin: EdgeInsets.only(top: 10, left: 30, right: 30),
+                        height: 300,
+                        width: MediaQuery.of(context).size.width * 0.90,
+                        child: charts.TimeSeriesChart(
+                          series,
+                          animate: true,
+                          dateTimeFactory: const charts.LocalDateTimeFactory(),
+                        )),
                     /* ListView.builder(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
@@ -248,5 +279,10 @@ class VisualizzaScheda extends StatelessWidget {
             ],
           );
         });
+  }
+
+  int fromDateToMinute(String durataFinale) {
+    var parsedDate = DateTime.parse('2022-03-20 ' + durataFinale);
+    return parsedDate.minute + parsedDate.hour * 60;
   }
 }

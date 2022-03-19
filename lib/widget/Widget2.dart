@@ -35,9 +35,9 @@ class _Generated3WidgetState extends State<WidgetClass2>
   @override
   Widget build(BuildContext context) {
     return Material(
-      child: Align(
-        alignment: Alignment.center,
-        child: SizedBox(
+        child: Align(
+      alignment: Alignment.center,
+      child: SizedBox(
           height: MediaQuery.of(context).size.height,
           child: Stack(children: [
             Stack(fit: StackFit.expand, alignment: Alignment.center, children: [
@@ -53,41 +53,38 @@ class _Generated3WidgetState extends State<WidgetClass2>
                   child: functionGif()),
             ])
           ])),
-      )
-    );
+    ));
   }
 
   functionGif() {
     if (schedeModel.stackIndex == 6) {
       //controller.animateTo(29, duration: const Duration(milliseconds: 1000));
-      controller.repeat(min: 0, max: 29, period: const Duration(milliseconds: 1000));
+      controller.repeat(
+          min: 0, max: 29, period: const Duration(milliseconds: 1000));
       switch (Base.pageIndexForWidget) {
         case 0:
           LoginPage().getValueLogin().then((val) async {
-            await schedeModel.loadData(
-                SchedeDBworker.schedeDBworker, val);
+            await schedeModel.loadData(SchedeDBworker.schedeDBworker, val);
           });
           break;
         case 12:
           Schede().getValueScheda().then((val) async {
-            eserciziModel.loadData(
-                EserciziDBworker.eserciziDBworker, val);
+            eserciziModel.loadData(EserciziDBworker.eserciziDBworker, val);
           });
-          Base.pageIndexForWidget-=10;
+          Base.pageIndexForWidget -= 10;
           break;
       }
 
       Timer(
           const Duration(milliseconds: 1000),
-              () => {
-              schedeModel.setStackIndex(Base.pageIndexForWidget),
-              controller.reset()
-            });
+          () => {
+                controller.reset(),
+                schedeModel.setStackIndex(Base.pageIndexForWidget),
+              });
     }
     return GifImage(
       controller: controller,
-      image: const AssetImage(
-          "assets/image/we.gif"),
+      image: const AssetImage("assets/image/we.gif"),
     );
   }
 }

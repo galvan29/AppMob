@@ -118,7 +118,7 @@ class FineAllenamento extends StatelessWidget {
                       print("OOOOOOOOOOOOOOOO "+rat.toString());
                       registriModel.registroBeingEdited = await RegistriDBworker.registriDBworker.get(FineAllenamento.idTempRegistro);
                       registriModel.registroBeingEdited.voto = rat.toString();
-                      registriModel.registroBeingEdited.giorno = DateFormat('dd-MM-yy').format(DateTime.now());
+                      registriModel.registroBeingEdited.giorno = DateTime.now().toString();
                       await RegistriDBworker.registriDBworker.update(registriModel.registroBeingEdited);
                       await registriModel.loadData(RegistriDBworker.registriDBworker, Schede.schedaAllenamento);
                       schedeModel.setStackIndex(0);
