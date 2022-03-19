@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../models/utentiModel.dart';
+
 PreferredSize buildAppBar(BuildContext context) {
   return PreferredSize(
     preferredSize:
@@ -40,6 +42,21 @@ PreferredSize buildAppBar(BuildContext context) {
                     textAlign: TextAlign.left,
                     maxLines: 1),
               ),
+              Container(
+                padding: EdgeInsets.zero,
+                decoration: const BoxDecoration(),
+                margin: EdgeInsets.only(
+                  left: MediaQuery.of(context).size.width * 0.01,
+                  top: MediaQuery.of(context).size.width * 0.08,
+                ),
+                child: IconButton(
+                  icon: const Icon(Icons.info),
+                  onPressed: () {
+                    utentiModel.setStackIndex(8);
+                  },
+                  color: Colors.white,
+                ),
+              ),
               /*Container(
                   padding: EdgeInsets.zero,
                   decoration: const BoxDecoration(),
@@ -71,6 +88,7 @@ PreferredSize buildAppBar(BuildContext context) {
             ],
           ),
         ),
+
       ],
     ),
   );

@@ -10,6 +10,7 @@ import 'package:mytraining/screen/register.dart';
 import 'package:mytraining/widget/Widget.dart';
 import 'package:provider/provider.dart';
 import 'package:double_back_to_close_app/double_back_to_close_app.dart';
+import 'package:mytraining/screen/Info.dart';
 
 class Base extends StatelessWidget {
   Base({Key? key}) : super(key: key);
@@ -35,7 +36,8 @@ class Base extends StatelessWidget {
                   MainSchede(),
                   Profilo2(),
                   CreaEvento(),
-                  WidgetClass()
+                  WidgetClass(),
+                  Info()
                 ],
               );
             },
