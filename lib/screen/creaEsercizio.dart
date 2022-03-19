@@ -20,6 +20,7 @@ class CreaEsercizio extends StatelessWidget{
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: buildAppBar(context),
+      backgroundColor: const Color.fromARGB(255, 42, 42, 42),
       body: Form(
         key: _formKey,
         child: Column(

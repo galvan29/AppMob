@@ -63,16 +63,52 @@ class _SchedeState extends State<Schede> {
                   top: MediaQuery.of(context).size.width * 0.05,
                 ),
               ),
-              const SizedBox(
-                  width: 330,
-                  child: Text(
-                    "Scegli la tua Scheda",
-                    style: TextStyle(
-                      fontSize: 22,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  )),
+                  Container(
+                      child: Row(
+                        children: [
+                          Container(
+                            margin: EdgeInsets.only(
+                              top: MediaQuery.of(context).size.width * 0.05,
+                              left: MediaQuery.of(context).size.width * 0.35,
+                            ),
+                          ),
+                          SizedBox(
+                              width: 330,
+                              child: Text(
+                                "Ecco le tue Schede!",
+                                style: GoogleFonts.adventPro(
+                                  textStyle: const TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 30,
+                                    fontStyle: FontStyle.normal,
+                                    decoration: TextDecoration.none,
+                                  ),
+                                ),
+                              )),
+                          Container(
+                              margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.08),
+                              decoration: BoxDecoration(
+                                border: Border.all(color: Colors.black, width: 1.5),
+                                color: Colors.white,
+                                shape: BoxShape.circle,
+                              ),
+                              child: IconButton(
+                                  icon: const Icon(Icons.add),
+                                  color: Colors.black,
+                                  onPressed: () {
+                                    // if (!Schede.valoreOrologio) {
+                                    schedeModel.schedaBeingEdited = Scheda();
+                                    print(schedeModel.schedaBeingEdited.nomeScheda);
+                                    schedeModel.setStackIndex(1);
+                                    //  }else{
+                                    //  print("Non puoi perchè c0è un allenamento in corso");
+                                    //}
+                                  }
+                              )),
+                        ],
+                      )
+                  ),
               Container(
                 margin: EdgeInsets.only(
                   top: MediaQuery.of(context).size.width * 0.05,
@@ -137,28 +173,6 @@ class _SchedeState extends State<Schede> {
                   );
                 },
               ),
-              Container(
-                  margin: EdgeInsets.only(
-                    top: MediaQuery.of(context).size.width * 0.05,
-                  ),
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.black, width: 1.5),
-                    color: Colors.white,
-                    shape: BoxShape.circle,
-                  ),
-                  child: IconButton(
-                    icon: const Icon(Icons.add),
-                    color: Colors.black,
-                    onPressed: () {
-                     // if (!Schede.valoreOrologio) {
-                        schedeModel.schedaBeingEdited = Scheda();
-                        print(schedeModel.schedaBeingEdited.nomeScheda);
-                        schedeModel.setStackIndex(1);
-                    //  }else{
-                      //  print("Non puoi perchè c0è un allenamento in corso");
-                      //}
-                    }
-                  )),
             ])),
         bottomNavigationBar: buildBottomNavigationBar(context, _currentIndex));
   }

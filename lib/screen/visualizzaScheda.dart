@@ -63,15 +63,47 @@ class VisualizzaScheda extends StatelessWidget {
                   top: MediaQuery.of(context).size.width * 0.05,
                 ),
               ),
-              const SizedBox(
-                  width: 330,
-                  child: Text(
-                    "Ecco la tua Scheda!",
-                    style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
+              Container(
+                child: Row(
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(
+                        top: MediaQuery.of(context).size.width * 0.05,
+                        left: MediaQuery.of(context).size.width * 0.35,
+                      ),
                     ),
-                  )),
+                    SizedBox(
+                        width: 330,
+                        child: Text(
+                          "Ecco la tua Scheda!",
+                          style: GoogleFonts.adventPro(
+                            textStyle: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w400,
+                              fontSize: 30,
+                              fontStyle: FontStyle.normal,
+                              decoration: TextDecoration.none,
+                            ),
+                          ),
+                        )),
+                    Container(
+                      margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.08),
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.black, width: 1.5),
+                          color: Colors.white,
+                          shape: BoxShape.circle,
+                        ),
+                        child: IconButton(
+                          icon: const Icon(Icons.add),
+                          color: Colors.black,
+                          onPressed: () {
+                            eserciziModel.esercizioBeingEdited = Esercizio();
+                            schedeModel.setStackIndex(3);
+                          },
+                        )),
+                  ],
+                )
+              ),
               Container(
                 margin: EdgeInsets.only(
                   top: MediaQuery.of(context).size.width * 0.05,
@@ -125,42 +157,25 @@ class VisualizzaScheda extends StatelessWidget {
                 },
               ),
               Container(
-                  margin: EdgeInsets.only(
-                    top: MediaQuery.of(context).size.width * 0.05,
-                  ),
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.black, width: 1.5),
-                    color: Colors.white,
-                    shape: BoxShape.circle,
-                  ),
-                  child: IconButton(
-                    icon: const Icon(Icons.add),
-                    color: Colors.black,
-                    onPressed: () {
-                      eserciziModel.esercizioBeingEdited = Esercizio();
-                      schedeModel.setStackIndex(3);
-                    },
-                  )),
-                  Container(
-                    margin: EdgeInsets.only(
-                      top: MediaQuery.of(context).size.width * 0.05,
+                margin: EdgeInsets.only(
+                  top: MediaQuery.of(context).size.width * 0.05,
+                ),
+                padding: EdgeInsets.zero,
+                width: double.maxFinite,
+                decoration: const BoxDecoration(),
+                child: Text('Registro Allenamenti',
+                    style: GoogleFonts.adventPro(
+                      textStyle: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 18,
+                        fontStyle: FontStyle.normal,
+                        decoration: TextDecoration.none,
+                      ),
                     ),
-                    padding: EdgeInsets.zero,
-                    width: double.maxFinite,
-                    decoration: const BoxDecoration(),
-                    child: Text('Registro Allenamenti',
-                        style: GoogleFonts.adventPro(
-                          textStyle: const TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w400,
-                            fontSize: 18,
-                            fontStyle: FontStyle.normal,
-                            decoration: TextDecoration.none,
-                          ),
-                        ),
-                        textAlign: TextAlign.center,
-                        maxLines: 1),
-                  ),
+                    textAlign: TextAlign.center,
+                    maxLines: 1),
+              ),
               Container(
                   margin: EdgeInsets.only(top: 10, left: 30, right: 30),
                   height: 330,

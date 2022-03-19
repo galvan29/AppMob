@@ -15,6 +15,7 @@ class CreaScheda extends StatelessWidget{
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildAppBar(context),
+      backgroundColor: const Color.fromARGB(255, 42, 42, 42),
       body: Form(
         key: _formKey,
         child: Column(

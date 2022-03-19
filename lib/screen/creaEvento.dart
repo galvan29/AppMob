@@ -20,6 +20,7 @@ class CreaEvento extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildAppBar(context),
+      backgroundColor: const Color.fromARGB(255, 42, 42, 42),
       bottomNavigationBar: Padding(
           padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
           child: Row(
