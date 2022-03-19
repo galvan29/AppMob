@@ -75,13 +75,13 @@ class VisualizzaScheda extends StatelessWidget {
                     Container(
                       margin: EdgeInsets.only(
                         top: MediaQuery.of(context).size.width * 0.05,
-                        left: MediaQuery.of(context).size.width * 0.35,
                       ),
                     ),
                     SizedBox(
                         width: 330,
                         child: Text(
                           "Ecco la tua Scheda!",
+                          textAlign: TextAlign.center,
                           style: GoogleFonts.adventPro(
                             textStyle: const TextStyle(
                               color: Colors.white,
@@ -93,7 +93,6 @@ class VisualizzaScheda extends StatelessWidget {
                           ),
                         )),
                     Container(
-                      margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.08),
                         decoration: BoxDecoration(
                           border: Border.all(color: Colors.black, width: 1.5),
                           color: Colors.white,
@@ -245,19 +244,21 @@ class VisualizzaScheda extends StatelessWidget {
             child: Row(
               children: [
                 FlatButton(
-                  onPressed: () {
+                  onPressed: (){
                     schedeModel.setStackIndex(0);
                   },
-                  child: const Text("Indietro"),
+                  child: Text("Indietro",
+                    style: GoogleFonts.adventPro(
+                      textStyle: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 20,
+                        fontStyle: FontStyle.normal,
+                        decoration: TextDecoration.none,
+                      ),
+                    ),
+                  ),
                 ),
-                const Spacer(),
-                /* FlatButton(
-                onPressed: (){
-                  //_save(context);
-                  schedeModel.setStackIndex(0);
-                },
-                child: const Text("Visionato"),
-              ), */
               ],
             )));
   }
