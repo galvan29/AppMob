@@ -32,7 +32,7 @@ class CreaEvento extends StatelessWidget {
                 child: Text("Indietro",
                   style: GoogleFonts.adventPro(
                     textStyle: const TextStyle(
-                      color: Colors.black,
+                      color: Colors.white,
                       fontWeight: FontWeight.w400,
                       fontSize: 20,
                       fontStyle: FontStyle.normal,
@@ -62,6 +62,7 @@ class CreaEvento extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
+                    color: Colors.white,
                   ),
                 )),
             Padding(
@@ -70,11 +71,17 @@ class CreaEvento extends StatelessWidget {
                   height: 70,
                   width: MediaQuery.of(context).size.width * 0.9,
                   child: TextFormField(
+                    style: TextStyle(color: Colors.white),
                     onTap: (){
                       _showDialog(context);
                     },
                     readOnly: true,
-                    decoration: const InputDecoration(labelText: "Nome Scheda"),
+                    decoration: const InputDecoration(
+                        labelText: "Nome Scheda",
+                        labelStyle: TextStyle(
+                            color: Colors.white,
+                        )
+                    ),
                     validator: (String? inValue) {
                       if (inValue!.isEmpty) {
                         return "Inserisci Nome";
@@ -92,8 +99,12 @@ class CreaEvento extends StatelessWidget {
                   height: 70,
                   width: MediaQuery.of(context).size.width * 0.9,
                   child: TextFormField(
+                    style: TextStyle(color: Colors.white),
                     controller: txt,
-                    decoration: const InputDecoration(labelText: "Data inizio"),
+                    decoration: const InputDecoration(labelText: "Data inizio",
+                        labelStyle: TextStyle(
+                          color: Colors.white,
+                        )),
                     onTap: () async {
                       FocusScope.of(context).requestFocus(new FocusNode());
                       DateTime? picked = await DatePicker.showDateTimePicker(context,
@@ -116,7 +127,11 @@ class CreaEvento extends StatelessWidget {
                   height: 70,
                   width: MediaQuery.of(context).size.width * 0.9,
                   child: TextFormField(
-                      decoration: const InputDecoration(labelText: "Durata"),
+                      decoration: const InputDecoration(labelText: "Durata",
+                          labelStyle: TextStyle(
+                            color: Colors.white,
+                          )),
+                      style: TextStyle(color: Colors.white),
                       controller: txt1,
                       onTap: () {
                         //double click
@@ -126,27 +141,48 @@ class CreaEvento extends StatelessWidget {
                         eventiModel.eventoBeingEdited.fine = a;
                         txt1.text = (a.subtract(Duration(milliseconds: eventiModel.eventoBeingEdited.inizio.millisecondsSinceEpoch)).millisecondsSinceEpoch/60000).toString().replaceAll(".0", "");
                       }),)),
-            Padding(
-                padding: EdgeInsets.only(
-                    top: MediaQuery.of(context).size.height * 0.03),
-                child: Align(
-                    alignment: Alignment.bottomCenter,
-                    child: SizedBox(
-                      width: 330,
+            Container(
+              margin: const EdgeInsets.only(
+                left: 30,
+                top: 20,
+                right: 30,
+              ),
+              padding: EdgeInsets.zero,
+              width: double.maxFinite,
+              decoration: const BoxDecoration(),
+              child: GestureDetector(
+                  onTap: () {
+                    if (_formKey.currentState!.validate()) {
+                      _save(context);
+                    }
+                  },
+                  child: Container(
+                      width: 10,
                       height: 50,
-                      child: ElevatedButton(
-                        onPressed: () async {
-                          // Validate returns true if the form is valid, or false otherwise.
-                          if (_formKey.currentState!.validate()) {
-                            _save(context);
-                          }
-                        },
-                        child: const Text(
-                          'Add',
-                          style: TextStyle(fontSize: 15),
+                      padding: const EdgeInsets.only(top: 8),
+                      decoration: BoxDecoration(
+                          color: const Color.fromARGB(255, 230, 245, 252),
+                          borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(20),
+                            topRight: Radius.circular(20),
+                            bottomRight: Radius.circular(20),
+                            bottomLeft: Radius.circular(20),
+                          ),
+                          border: Border.all(color: Colors.white)),
+                      child: Text(
+                        '''Aggiungi''',
+                        style: GoogleFonts.adventPro(
+                          textStyle: const TextStyle(
+                            color: const Color.fromARGB(255, 42, 42, 42),
+                            fontWeight: FontWeight.w500,
+                            fontSize: 20,
+                            fontStyle: FontStyle.normal,
+                            decoration: TextDecoration.none,
+                          ),
                         ),
-                      ),
-                    )))
+                        textAlign: TextAlign.center,
+                      ))),
+            ),
           ],
         ),
       ),
@@ -214,9 +250,9 @@ class CreaEvento extends StatelessWidget {
 
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
-        backgroundColor: Colors.green,
+        backgroundColor:  Color.fromARGB(255, 230, 220, 245),
         duration: Duration(seconds: 2),
-        content: Text("Evento saved"),
+        content: Text("Allenamento Programmato!"),
       ),
     );
   }

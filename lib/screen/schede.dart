@@ -69,13 +69,13 @@ class _SchedeState extends State<Schede> {
                           Container(
                             margin: EdgeInsets.only(
                               top: MediaQuery.of(context).size.width * 0.05,
-                              left: MediaQuery.of(context).size.width * 0.35,
                             ),
                           ),
                           SizedBox(
                               width: 330,
                               child: Text(
                                 "Ecco le tue Schede!",
+                                textAlign: TextAlign.center,
                                 style: GoogleFonts.adventPro(
                                   textStyle: const TextStyle(
                                     color: Colors.white,
@@ -87,7 +87,6 @@ class _SchedeState extends State<Schede> {
                                 ),
                               )),
                           Container(
-                              margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.08),
                               decoration: BoxDecoration(
                                 border: Border.all(color: Colors.black, width: 1.5),
                                 color: Colors.white,
