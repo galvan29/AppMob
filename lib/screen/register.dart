@@ -5,9 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:mytraining/models/utentiModel.dart';
 import 'package:mytraining/screen/login.dart';
 
-
-class RegisterPage extends StatelessWidget{
-
+class RegisterPage extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
@@ -20,10 +18,11 @@ class RegisterPage extends StatelessWidget{
           child: Row(
             children: [
               FlatButton(
-                onPressed: (){
+                onPressed: () {
                   utentiModel.setStackIndex(0);
                 },
-                child: Text("Indietro",
+                child: Text(
+                  "Indietro",
                   style: GoogleFonts.adventPro(
                     textStyle: const TextStyle(
                       color: Colors.white,
@@ -36,8 +35,7 @@ class RegisterPage extends StatelessWidget{
                 ),
               ),
             ],
-          )
-      ),
+          )),
       body: Form(
         key: _formKey,
         child: Stack(children: [
@@ -95,8 +93,7 @@ class RegisterPage extends StatelessWidget{
             ),
           ),
           SingleChildScrollView(
-              child:
-              Container(
+              child: Container(
                   margin: EdgeInsets.only(
                       top: MediaQuery.of(context).size.height * 0.75),
                   child: Column(
@@ -123,7 +120,7 @@ class RegisterPage extends StatelessWidget{
                                   bottomLeft: Radius.circular(5),
                                 ),
                                 border:
-                                Border.all(color: Colors.white, width: 2)),
+                                    Border.all(color: Colors.white, width: 2)),
                             child: Container(
                               child: TextFormField(
                                 //initialValue: "Password",
@@ -160,9 +157,7 @@ class RegisterPage extends StatelessWidget{
                                   utentiModel.utenteBeingEdited.nomeUtente =
                                       inValue;
                                 },
-                                onTap: (){
-
-                                },
+                                onTap: () {},
                               ),
                             )),
                       ),
@@ -187,7 +182,7 @@ class RegisterPage extends StatelessWidget{
                                   bottomLeft: Radius.circular(5),
                                 ),
                                 border:
-                                Border.all(color: Colors.white, width: 2)),
+                                    Border.all(color: Colors.white, width: 2)),
                             child: Container(
                               child: TextFormField(
                                 //initialValue: "Password",
@@ -217,7 +212,9 @@ class RegisterPage extends StatelessWidget{
                                 validator: (String? inValue) {
                                   if (inValue!.isEmpty) {
                                     return "Please enter a password";
-                                  }
+                                  } //else if (inValue.length < 8) {
+                                  //  return "Please enter a password of length maggiore di 8";
+                                 // }
                                   return null;
                                 },
                                 onChanged: (String inValue) {
@@ -236,9 +233,74 @@ class RegisterPage extends StatelessWidget{
                           padding: EdgeInsets.zero,
                           decoration: const BoxDecoration(),
                           child: GestureDetector(
-                            onTap: () {
-                              print("CiaOOASFAF");
-                              _save(context);
+                            onTap: () async {
+                              Utente u = await UtentiDBworker.utentiDBworker
+                                  .getId(utentiModel.utenteBeingEdited.nomeUtente);
+                              if (u.id == -1) {
+                                _save(context);
+                              } else {
+                                Widget riprovaButton = TextButton(
+                                  child: Text(
+                                    "Riprova",
+                                    style: GoogleFonts.adventPro(
+                                      textStyle: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.w400,
+                                        fontSize:
+                                            MediaQuery.of(context).size.height *
+                                                0.016,
+                                        fontStyle: FontStyle.normal,
+                                        decoration: TextDecoration.none,
+                                      ),
+                                    ),
+                                  ),
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                );
+
+                                // set up the AlertDialog
+                                AlertDialog alert = AlertDialog(
+                                  title: Text(
+                                    "Attenzione",
+                                    style: GoogleFonts.adventPro(
+                                      textStyle: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.w600,
+                                        fontSize:
+                                            MediaQuery.of(context).size.height *
+                                                0.025,
+                                        fontStyle: FontStyle.normal,
+                                        decoration: TextDecoration.none,
+                                      ),
+                                    ),
+                                  ),
+                                  content: Text(
+                                    "Nome Utente già presente",
+                                    style: GoogleFonts.adventPro(
+                                      textStyle: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.w400,
+                                        fontSize:
+                                            MediaQuery.of(context).size.height *
+                                                0.016,
+                                        fontStyle: FontStyle.normal,
+                                        decoration: TextDecoration.none,
+                                      ),
+                                    ),
+                                  ),
+                                  actions: [
+                                    riprovaButton,
+                                  ],
+                                );
+
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return alert;
+                                  },
+                                );
+                              }
                             },
                             child: Container(
                                 width: double.maxFinite,
@@ -269,16 +331,14 @@ class RegisterPage extends StatelessWidget{
                                 )),
                           ))
                     ],
-                  ))
-          )
+                  )))
         ]),
       ),
     );
   }
 
   void _save(BuildContext context) async {
-    print(context);   //dopo vedo cosa contiene
-    if(!_formKey.currentState!.validate()){
+    if (!_formKey.currentState!.validate()) {
       return;
     }
 
@@ -286,11 +346,7 @@ class RegisterPage extends StatelessWidget{
 
     //DEVO CONTROLLARE SE ESISTE O NO CON UN BEL GET
 
-    if(utentiModel.utenteBeingEdited.id==-1){
-      print("Utente CODDUE CREATO");
-      print(utentiModel.utenteBeingEdited.id);
-      print(utentiModel.utenteBeingEdited.nomeUtente);
-      print(utentiModel.utenteBeingEdited.password);
+    if (utentiModel.utenteBeingEdited.id == -1) {
       await UtentiDBworker.utentiDBworker.create(utentiModel.utenteBeingEdited);
     } //else {
     // await UtentiDBworker.utentiDBworker.update(utentiModel.utenteBeingEdited);
@@ -307,6 +363,5 @@ class RegisterPage extends StatelessWidget{
         content: Text("Utente creato"),
       ),
     );
-
   }
 }

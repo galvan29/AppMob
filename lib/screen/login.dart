@@ -267,8 +267,86 @@ class LoginPage extends StatelessWidget {
                           padding: EdgeInsets.zero,
                           decoration: const BoxDecoration(),
                           child: GestureDetector(
-                            onTap: () {
-                              _save(context);
+                            onTap: () async {
+                              await utentiModel.getPassword(UtentiDBworker.utentiDBworker,
+                                  utentiModel.utenteBeingEdited.nomeUtente);
+                              String passwordDatabase = utentiModel.up.password;
+                              if (utentiModel.utenteBeingEdited.password == passwordDatabase) {
+                                await utentiModel.getPassword(UtentiDBworker.utentiDBworker,
+                                    utentiModel.utenteBeingEdited.nomeUtente);
+                                _save(context);
+                              } else {
+                                Widget cancelButton = TextButton(
+                                  child: Text("Riprova",
+                                    style: GoogleFonts.adventPro(
+                                      textStyle: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: MediaQuery.of(context).size.height * 0.016,
+                                        fontStyle: FontStyle.normal,
+                                        decoration: TextDecoration.none,
+                                      ),
+                                    ),
+                                  ),
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                );
+                                Widget continueButton = TextButton(
+                                  child: Text("Registrati",
+                                    style: GoogleFonts.adventPro(
+                                      textStyle: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: MediaQuery.of(context).size.height * 0.016,
+                                        fontStyle: FontStyle.normal,
+                                        decoration: TextDecoration.none,
+                                      ),
+                                    ),
+                                  ),
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                    utentiModel.setStackIndex(2);
+                                  },
+                                );
+
+                                // set up the AlertDialog
+                                AlertDialog alert = AlertDialog(
+                                  title: Text("Attenzione",
+                                    style: GoogleFonts.adventPro(
+                                      textStyle: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: MediaQuery.of(context).size.height * 0.025,
+                                        fontStyle: FontStyle.normal,
+                                        decoration: TextDecoration.none,
+                                      ),
+                                    ),
+                                  ),
+                                  content: Text("Nome Utente o Password errata",
+                                    style: GoogleFonts.adventPro(
+                                      textStyle: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: MediaQuery.of(context).size.height * 0.016,
+                                        fontStyle: FontStyle.normal,
+                                        decoration: TextDecoration.none,
+                                      ),
+                                    ),
+                                  ),
+                                  actions: [
+                                    cancelButton,
+                                    continueButton,
+                                  ],
+                                );
+
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return alert;
+                                  },
+                                );
+                              }
                             },
                             child: Container(
                                 width: double.maxFinite,
@@ -307,37 +385,15 @@ class LoginPage extends StatelessWidget {
   }
 
   void _save(BuildContext context) async {
-    //dopo vedo cosa contiene
+
     if (!_formKey.currentState!.validate()) {
       return;
     }
-    print("BROOOOOOOOOOOOOOOO");
-    //_formKey.currentState.save();
-    // FACCIO UN GET NOMEUTENTE DATO L'ID E VEDO COSA RITORNA
-    //await per password
-    await utentiModel.getPassword(UtentiDBworker.utentiDBworker,
-        utentiModel.utenteBeingEdited.nomeUtente);
-    String passwordDatabase = utentiModel.up.password;
-    print("Nome utente inserito. " + utentiModel.utenteBeingEdited.nomeUtente);
-    print("Password inserita. " + utentiModel.utenteBeingEdited.password);
-    print("Password trovata. " + passwordDatabase);
-    if (utentiModel.utenteBeingEdited.password == passwordDatabase) {
-      print("Password corrispondente");
-      await utentiModel.getPassword(UtentiDBworker.utentiDBworker,
-          utentiModel.utenteBeingEdited.nomeUtente);
-      saveValueLogin(utentiModel.up.id);
-    } else {
-      print("Password diversa");
-      return;
-    }
-    print("LOGGGGATO E CARICO SCHEDE");
-    //CARICARE SOLO SCHEDE DEL TIPO CHE SI è LOGGATO
+    saveValueLogin(utentiModel.up.id);
     getValueLogin().then((val) async {
       await schedeModel.loadData(SchedeDBworker.schedeDBworker, val);
       await eventiModel.loadData(EventiDBworker.eventiDBworker, val);
     });
-
-    //utentiModel.loadData(UtentiDBworker.utentiDBworker);
 
     Base.pageIndexForWidget = 3;
     utentiModel.setStackIndex(7);
