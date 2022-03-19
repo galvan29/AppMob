@@ -59,6 +59,7 @@ class CreaEvento extends StatelessWidget {
                 width: 330,
                 child: Text(
                   "Programma un allenamento!",
+                  textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 22,
                     fontWeight: FontWeight.bold,

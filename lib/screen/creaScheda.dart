@@ -31,7 +31,9 @@ class CreaScheda extends StatelessWidget{
                 width: 330,
                 child: Text(
                   "Crea la tua Scheda!",
+                  textAlign: TextAlign.center,
                   style: TextStyle(
+                    color: Colors.white,
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
                   ),
@@ -42,17 +44,21 @@ class CreaScheda extends StatelessWidget{
                     height: 70,
                     width: MediaQuery.of(context).size.width * 0.9,
                     child: TextFormField(
+                      style: TextStyle(color: Colors.white),
                       initialValue: schedeModel.schedaBeingEdited == null ? null : schedeModel.schedaBeingEdited.nomeScheda,
                       validator: (String? inValue){
                         if(inValue!.isEmpty){
-                          return "Please enter a name";
+                          return "Inserisci Nome";
                         }
                         return null;
                       },
                       onChanged: (String inValue){
                         schedeModel.schedaBeingEdited.nomeScheda = inValue;
                       },
-                      decoration: const InputDecoration(labelText: "Nome Scheda"),
+                      decoration: const InputDecoration(labelText: "Nome Scheda",
+                          labelStyle: TextStyle(
+                            color: Colors.white,
+                          )),
                     ),)),
             Padding(
                 padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
@@ -60,40 +66,66 @@ class CreaScheda extends StatelessWidget{
                   height: 70,
                   width: MediaQuery.of(context).size.width * 0.9,
                   child: TextFormField(
+                    style: TextStyle(color: Colors.white),
                     keyboardType: TextInputType.number,
                     initialValue: schedeModel.schedaBeingEdited == null ? null : schedeModel.schedaBeingEdited.durataScheda,
                     validator: (String? inValue){
                       if(inValue!.isEmpty){
-                        return "Please enter a durata";
+                        return "Inserisci Durata";
                       }
                       return null;
                     },
                     onChanged: (String inValue){
                       schedeModel.schedaBeingEdited.durataScheda = inValue;
                     },
-                    decoration: const InputDecoration(labelText: "Durata Scheda"),
+                    decoration: const InputDecoration(labelText: "Durata Scheda",
+                        labelStyle: TextStyle(
+                          color: Colors.white,
+                        )),
                   ),)),
-            Padding(
-                padding: EdgeInsets.only(
-                    top: MediaQuery.of(context).size.height * 0.03),
-                child: Align(
-                    alignment: Alignment.bottomCenter,
-                    child: SizedBox(
-                      width: 330,
+            Container(
+              margin: const EdgeInsets.only(
+                left: 30,
+                top: 20,
+                right: 30,
+              ),
+              padding: EdgeInsets.zero,
+              width: double.maxFinite,
+              decoration: const BoxDecoration(),
+              child: GestureDetector(
+                  onTap: () async {
+                    // Validate returns true if the form is valid, or false otherwise.
+                    if (_formKey.currentState!.validate()) {
+                      _save(context);
+                    }
+                  },
+                  child: Container(
+                      width: 10,
                       height: 50,
-                      child: ElevatedButton(
-                        onPressed: () async {
-                          // Validate returns true if the form is valid, or false otherwise.
-                          if (_formKey.currentState!.validate()) {
-                            _save(context);
-                          }
-                        },
-                        child: const Text(
-                          'Add',
-                          style: TextStyle(fontSize: 15),
+                      padding: const EdgeInsets.only(top: 8),
+                      decoration: BoxDecoration(
+                          color: const Color.fromARGB(255, 230, 245, 252),
+                          borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(20),
+                            topRight: Radius.circular(20),
+                            bottomRight: Radius.circular(20),
+                            bottomLeft: Radius.circular(20),
+                          ),
+                          border: Border.all(color: Colors.white)),
+                      child: Text(
+                        '''Aggiungi''',
+                        style: GoogleFonts.adventPro(
+                          textStyle: const TextStyle(
+                            color: const Color.fromARGB(255, 42, 42, 42),
+                            fontWeight: FontWeight.w500,
+                            fontSize: 20,
+                            fontStyle: FontStyle.normal,
+                            decoration: TextDecoration.none,
+                          ),
                         ),
-                      ),
-                    )))
+                        textAlign: TextAlign.center,
+                      ))),
+            ),
           ],
         ),
       ),
@@ -108,7 +140,7 @@ class CreaScheda extends StatelessWidget{
                 child: Text("Indietro",
                   style: GoogleFonts.adventPro(
                     textStyle: const TextStyle(
-                      color: Colors.black,
+                      color: Colors.white,
                       fontWeight: FontWeight.w400,
                       fontSize: 20,
                       fontStyle: FontStyle.normal,
@@ -149,9 +181,9 @@ class CreaScheda extends StatelessWidget{
 
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
-        backgroundColor: Colors.green,
+        backgroundColor:  Color.fromARGB(255, 230, 220, 245),
         duration: Duration(seconds: 2),
-        content: Text("Cards saved"),
+        content: Text("Scheda Salvata!"),
       ),
     );
 
