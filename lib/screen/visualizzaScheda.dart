@@ -30,6 +30,12 @@ class VisualizzaScheda extends StatelessWidget {
           giorno: DateTime.parse(a.giorno),
           durata: fromDateToMinute(a.durataFinale)));
     }
+    /*dataR.add(ChartRegistri(
+        giorno: DateTime.parse("2022-03-20"),
+        durata: 120));
+    dataR.add(ChartRegistri(
+        giorno: DateTime.parse("2022-03-21"),
+        durata: 124));*/
 
     List<charts.Series<ChartRegistri, DateTime>> series = [
       charts.Series(
