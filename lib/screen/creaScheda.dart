@@ -59,6 +59,7 @@ class CreaScheda extends StatelessWidget{
                   height: 70,
                   width: MediaQuery.of(context).size.width * 0.9,
                   child: TextFormField(
+                    keyboardType: TextInputType.number,
                     initialValue: schedeModel.schedaBeingEdited == null ? null : schedeModel.schedaBeingEdited.durataScheda,
                     validator: (String? inValue){
                       if(inValue!.isEmpty){

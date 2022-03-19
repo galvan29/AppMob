@@ -147,33 +147,45 @@ class VisualizzaScheda extends StatelessWidget {
                       ),
                       border: Border.all(color: Colors.white)),
                   child: SingleChildScrollView(
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: registriModel.registriList.length,
-                      itemBuilder: (BuildContext inBuildContext, int inIndex) {
-                        Registro registro = registriModel.registriList[inIndex];
-                        Color color = Colors.white;
-
-                        return Card(
-                          margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                          elevation: 8,
-                          child: Slidable(
-                            actionPane: const SlidableScrollActionPane(),
-                            actionExtentRatio: .25,
-                            child: ListTile(
-                              title: Text(registro.durataFinale),
-                              subtitle: Text("Voto: " +
-                                  registro.voto +
-                                  " in data " +
-                                  registro.giorno),
-                              tileColor: color,
-                            ),
-                          ),
-                        );
-                      },
+                    //child: Row(
+                    //children: [
+                    child: Container(
+                      margin: EdgeInsets.only(top: 30, left: 30, right: 30),
+                      height: 400,
+                      width: MediaQuery.of(context).size.width * 0.90,
+                      child: Text("qui ci va il grafico"),
                     ),
-                  )),
+                    /* ListView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: registriModel.registriList.length,
+                        itemBuilder:
+                            (BuildContext inBuildContext, int inIndex) {
+                          Registro registro =
+                              registriModel.registriList[inIndex];
+                          Color color = Colors.white;
+
+                          return Card(
+                            margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                            elevation: 8,
+                            child: Slidable(
+                              actionPane: const SlidableScrollActionPane(),
+                              actionExtentRatio: .25,
+                              child: ListTile(
+                                title: Text(registro.durataFinale),
+                                subtitle: Text("Voto: " +
+                                    registro.voto +
+                                    " in data " +
+                                    registro.giorno),
+                                tileColor: color,
+                              ),
+                            ),
+                          );
+                        },
+                      ),*/
+                    //  ],
+                  ))
+              //),
             ])),
         //va in alto magari
         bottomNavigationBar: Padding(
