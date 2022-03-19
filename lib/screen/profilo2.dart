@@ -70,12 +70,18 @@ class _ProfiloState extends State<Profilo2> {
                 utentiModel.utenteBeingEdited.height, 'Altezza'),
             buildUserInfoDisplay(utentiModel.utenteBeingEdited.weight, 'Peso'),
             Container(
-                child: Column(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Container(
                       padding: EdgeInsets.zero,
-                      width: 100,
+                      width: 150,
                       decoration: const BoxDecoration(),
+                      margin: EdgeInsets.only(
+                        left: MediaQuery.of(context).size.width * 0.05,
+                        bottom: MediaQuery.of(context).size.width * 0.08,
+                      ),
                       child: GestureDetector(
                           onTap: () {
                             LoginPage().getValueLogin().then((val) async {
@@ -113,14 +119,13 @@ class _ProfiloState extends State<Profilo2> {
                               ))),
                     ),
                     Container(
-                      margin: const EdgeInsets.only(
-                        left: 30,
-                        top: 20,
-                        right: 30,
-                      ),
                       padding: EdgeInsets.zero,
-                      width: 100,
+                      width: 150,
                       decoration: const BoxDecoration(),
+                      margin: EdgeInsets.only(
+                        right: MediaQuery.of(context).size.width * 0.05,
+                        bottom: MediaQuery.of(context).size.width * 0.08,
+                      ),
                       child: GestureDetector(
                           onTap: () {
                             utentiModel.setStackIndex(0);
@@ -154,6 +159,7 @@ class _ProfiloState extends State<Profilo2> {
                     ),
                   ],
                 )),
+
           ],
         ),
       ),
