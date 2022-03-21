@@ -64,7 +64,7 @@ class EserciziDBworker {
     return await db.rawInsert(
         "INSERT INTO esercizi (id, idScheda, nomeEsercizio, ripEsercizio, serieEsercizio, pesoEsercizio, noteEsercizio) "
             "VALUES (?, ?, ?, ?, ?, ?, ?)",
-        [id, esercizio.idScheda, esercizio.nomeEsercizio, esercizio.ripEsercizio, esercizio.serieEsercizio, esercizio.pesoEsercizio, esercizio.nomeEsercizio]
+        [id, esercizio.idScheda, esercizio.nomeEsercizio, esercizio.ripEsercizio, esercizio.serieEsercizio, esercizio.pesoEsercizio, esercizio.noteEsercizio]
     );
   }
 

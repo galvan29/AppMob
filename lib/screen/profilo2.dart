@@ -31,13 +31,14 @@ class _ProfiloState extends State<Profilo2> {
 
   @override
   Widget build(BuildContext context) {
-    userNameController.text = utentiModel.utenteBeingEdited.nomeUtente;
-    firstNameController.text = utentiModel.utenteBeingEdited.nome;
-    secondNameController.text = utentiModel.utenteBeingEdited.cognome;
-    ageController.text = utentiModel.utenteBeingEdited.eta;
-    heightController.text = utentiModel.utenteBeingEdited.height;
-    weightController.text = utentiModel.utenteBeingEdited.weight;
-
+    setState(() {
+      userNameController.text = utentiModel.utenteBeingEdited.nomeUtente;
+      firstNameController.text = utentiModel.utenteBeingEdited.nome;
+      secondNameController.text = utentiModel.utenteBeingEdited.cognome;
+      ageController.text = utentiModel.utenteBeingEdited.eta;
+      heightController.text = utentiModel.utenteBeingEdited.height;
+      weightController.text = utentiModel.utenteBeingEdited.weight;
+    });
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: buildAppBar(context),
