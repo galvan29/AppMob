@@ -500,13 +500,6 @@ class _HomePageState extends State<HomePage> {
                 onPressed: () async {
                   await EventiDBworker.eventiDBworker.delete(ev.id);
                   Navigator.of(inAlertContext).pop();
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      backgroundColor: Colors.red,
-                      duration: Duration(seconds: 2),
-                      content: Text("Evento Eliminato!"),
-                    ),
-                  );
                   LoginPage().getValueLogin().then((val) async {
                     await eventiModel.loadData(
                         EventiDBworker.eventiDBworker, val);
