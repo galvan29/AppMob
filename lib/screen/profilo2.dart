@@ -1,7 +1,9 @@
 import 'dart:async';
+import 'dart:html';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:mytraining/common/appbar.dart';
 import 'package:mytraining/db/utentiDBworker.dart';
 import 'package:mytraining/editProfile/EditFormPage.dart';
@@ -54,11 +56,6 @@ class _ProfiloState extends State<Profilo2> {
                   ),
                   textAlign: TextAlign.center,
                   maxLines: 1),
-            ),
-            DisplayImage(
-              imagePath:
-                  "https://upload.wikimedia.org/wikipedia/en/0/0b/Darth_Vader_in_The_Empire_Strikes_Back.jpg",
-              onPressed: () {},
             ),
             buildUserInfoDisplay(
                 utentiModel.utenteBeingEdited.nomeUtente, 'Username'),
@@ -207,12 +204,14 @@ class _ProfiloState extends State<Profilo2> {
                         ))),
               ]))
         ],
-      ));
+      )
+  );
 
 // Widget builds the About Me Section
   FutureOr onGoBack(dynamic value) {
     setState(() {});
   }
+
 
   // Handles navigation and prompts refresh.
   void navigateSecondPage(Widget editForm) {
