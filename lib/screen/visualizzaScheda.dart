@@ -185,7 +185,7 @@ class VisualizzaScheda extends StatelessWidget {
                     maxLines: 1),
               ),
               Container(
-                  margin: EdgeInsets.only(top: 10, left: 30, right: 30),
+                  margin: EdgeInsets.only(top: 10, left: 30, right: 30, bottom: 40),
                   height: 330,
                   padding: const EdgeInsets.only(top: 8),
                   decoration: BoxDecoration(
