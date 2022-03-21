@@ -148,7 +148,7 @@ class VisualizzaScheda extends StatelessWidget {
                               schedeModel.setStackIndex(3);
                             },
                             child: Container(
-                              height: 90,
+                              height: MediaQuery.of(context).size.height * 0.125,
                               padding: const EdgeInsets.only(top: 8),
                               decoration: BoxDecoration(
                                   color:
