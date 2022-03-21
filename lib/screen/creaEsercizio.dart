@@ -143,7 +143,7 @@ class CreaEsercizio extends StatelessWidget{
                           color: Colors.white,
                         )),
                     maxLines: 2,
-                    initialValue: "eserciziModel.esercizioBeingEdited == null ? null : eserciziModel.esercizioBeingEdited.noteEsercizio",
+                    initialValue: eserciziModel.esercizioBeingEdited == null ? null : eserciziModel.esercizioBeingEdited.noteEsercizio,
                     validator: (String? inValue){
                       if(inValue!.isEmpty){
                         return "Inserisci Note";
