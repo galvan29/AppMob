@@ -171,11 +171,11 @@ class VisualizzaScheda extends StatelessWidget {
                                       Text(
                                         esercizio.nomeEsercizio,
                                         style: GoogleFonts.adventPro(
-                                          textStyle: const TextStyle(
+                                          textStyle: TextStyle(
                                             color: const Color.fromARGB(
                                                 255, 42, 42, 42),
                                             fontWeight: FontWeight.w500,
-                                            fontSize: 25,
+                                            fontSize: MediaQuery.of(context).size.height * 0.035,
                                             fontStyle: FontStyle.normal,
                                             decoration: TextDecoration.none,
                                           ),
@@ -190,11 +190,11 @@ class VisualizzaScheda extends StatelessWidget {
                                       Text(
                                         "Rip: " + esercizio.ripEsercizio,
                                         style: GoogleFonts.adventPro(
-                                          textStyle: const TextStyle(
+                                          textStyle: TextStyle(
                                             color: const Color.fromARGB(
                                                 255, 42, 42, 42),
                                             fontWeight: FontWeight.w500,
-                                            fontSize: 17,
+                                            fontSize: MediaQuery.of(context).size.height * 0.024,
                                             fontStyle: FontStyle.normal,
                                             decoration: TextDecoration.none,
                                           ),
@@ -204,11 +204,11 @@ class VisualizzaScheda extends StatelessWidget {
                                       Text(
                                         "Serie: " + esercizio.serieEsercizio,
                                         style: GoogleFonts.adventPro(
-                                          textStyle: const TextStyle(
+                                          textStyle: TextStyle(
                                             color: const Color.fromARGB(
                                                 255, 42, 42, 42),
                                             fontWeight: FontWeight.w500,
-                                            fontSize: 17,
+                                            fontSize: MediaQuery.of(context).size.height * 0.024,
                                             fontStyle: FontStyle.normal,
                                             decoration: TextDecoration.none,
                                           ),
@@ -218,11 +218,11 @@ class VisualizzaScheda extends StatelessWidget {
                                       Text(
                                         "Peso: " + esercizio.pesoEsercizio,
                                         style: GoogleFonts.adventPro(
-                                          textStyle: const TextStyle(
+                                          textStyle: TextStyle(
                                             color: const Color.fromARGB(
                                                 255, 42, 42, 42),
                                             fontWeight: FontWeight.w500,
-                                            fontSize: 17,
+                                            fontSize: MediaQuery.of(context).size.height * 0.024,
                                             fontStyle: FontStyle.normal,
                                             decoration: TextDecoration.none,
                                           ),
@@ -237,11 +237,11 @@ class VisualizzaScheda extends StatelessWidget {
                                       Text(
                                         "Note: " + esercizio.noteEsercizio,
                                         style: GoogleFonts.adventPro(
-                                          textStyle: const TextStyle(
+                                          textStyle: TextStyle(
                                             color: const Color.fromARGB(
                                                 255, 42, 42, 42),
                                             fontWeight: FontWeight.w500,
-                                            fontSize: 17,
+                                            fontSize: MediaQuery.of(context).size.height * 0.024,
                                             fontStyle: FontStyle.normal,
                                             decoration: TextDecoration.none,
                                           ),
