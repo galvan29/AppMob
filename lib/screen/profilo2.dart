@@ -123,6 +123,7 @@ class _ProfiloState extends State<Profilo2> {
                       ),
                       child: GestureDetector(
                           onTap: () {
+                            LoginPage().removeValueLogin();
                             utentiModel.setStackIndex(0);
                           },
                           child: Container(

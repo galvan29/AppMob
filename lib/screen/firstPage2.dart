@@ -1,9 +1,12 @@
 import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mytraining/db/utentiDBworker.dart';
 import 'package:mytraining/models/utentiModel.dart';
 import 'package:lottie/lottie.dart';
 import 'package:mytraining/screen/base.dart';
+import 'package:mytraining/screen/login.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class FirstPage2 extends StatefulWidget {
   const FirstPage2({Key? key}) : super(key: key);
@@ -12,12 +15,10 @@ class FirstPage2 extends StatefulWidget {
   State<FirstPage2> createState() => _FirstPage2State();
 }
 
-class _FirstPage2State extends State<FirstPage2>
-    with TickerProviderStateMixin {
+class _FirstPage2State extends State<FirstPage2> with TickerProviderStateMixin {
   late AnimationController? _animController;
   bool isAnimFinis = false;
   bool isTextReady = false;
-
 
   @override
   void initState() {
@@ -33,6 +34,13 @@ class _FirstPage2State extends State<FirstPage2>
           setState(() {});
         });
       }
+      if (isAnimFinis) {
+        LoginPage().getValueLogin().then((val) async {
+          if (val != null) {
+            utentiModel.setStackIndex(3);
+          }
+        });
+      }
     });
   }
 
@@ -42,11 +50,9 @@ class _FirstPage2State extends State<FirstPage2>
     _animController?.dispose();
   }
 
-
   @override
   Widget build(BuildContext context) {
     var screenHeight = MediaQuery.of(context).size.height;
-    var screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Colors.black,
       body: Stack(
@@ -88,8 +94,8 @@ class _FirstPage2State extends State<FirstPage2>
                 ),
                 Center(
                   child: AnimatedOpacity(
-                    opacity: isTextReady ? 1 : 0,
-                    duration: const Duration(seconds: 1),
+                      opacity: isTextReady ? 1 : 0,
+                      duration: const Duration(seconds: 1),
                       child: Column(
                         children: [
                           Text(
@@ -119,7 +125,7 @@ class _FirstPage2State extends State<FirstPage2>
                           ),
                         ],
                       )),
-                  ),
+                ),
               ],
             ),
           ),
@@ -132,7 +138,6 @@ class _FirstPage2State extends State<FirstPage2>
   }
 }
 
-
 @override
 class _BottomPart extends StatelessWidget {
   const _BottomPart({Key? key}) : super(key: key);
@@ -140,94 +145,94 @@ class _BottomPart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Align(
-      alignment: Alignment.bottomCenter,
+        alignment: Alignment.bottomCenter,
         child: Padding(
-        padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.1),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Container(
+          padding:
+              EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.1),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                  margin: const EdgeInsets.only(
+                    left: 50,
+                    top: 20,
+                    right: 50,
+                  ),
+                  padding: EdgeInsets.zero,
+                  decoration: const BoxDecoration(),
+                  child: GestureDetector(
+                    onTap: () {
+                      // Base.pageIndexForWidget = 1;
+                      utentiModel.setStackIndex(1);
+                    },
+                    child: Container(
+                        width: double.maxFinite,
+                        height: 40,
+                        padding: const EdgeInsets.only(top: 8),
+                        decoration: BoxDecoration(
+                            color: Colors.black.withOpacity(0.05),
+                            borderRadius: const BorderRadius.only(
+                              bottomRight: Radius.circular(5),
+                              bottomLeft: Radius.circular(5),
+                            ),
+                            border: Border.all(color: Colors.white)),
+                        child: Text(
+                          '''Login''',
+                          style: GoogleFonts.adventPro(
+                            textStyle: const TextStyle(
+                              color: Color(0xFFFFFFFF),
+                              fontWeight: FontWeight.w500,
+                              fontSize: 18,
+                              fontStyle: FontStyle.normal,
+                              decoration: TextDecoration.none,
+                            ),
+                          ),
+                          textAlign: TextAlign.center,
+                        )),
+                  )),
+              Container(
                 margin: const EdgeInsets.only(
                   left: 50,
-                  top: 20,
+                  top: 10,
                   right: 50,
                 ),
                 padding: EdgeInsets.zero,
+                width: double.maxFinite,
                 decoration: const BoxDecoration(),
                 child: GestureDetector(
-                  onTap: () {
-                   // Base.pageIndexForWidget = 1;
-                    utentiModel.setStackIndex(1);
-                  },
-                  child: Container(
-                      width: double.maxFinite,
-                      height: 40,
-                      padding: const EdgeInsets.only(top: 8),
-                      decoration: BoxDecoration(
-                          color: Colors.black.withOpacity(0.05),
-                          borderRadius: const BorderRadius.only(
-                            bottomRight: Radius.circular(5),
-                            bottomLeft: Radius.circular(5),
+                    onTap: () {
+                      utentiModel.utenteBeingEdited = Utente();
+                      utentiModel.setStackIndex(2);
+                    },
+                    child: Container(
+                        width: 10,
+                        height: 40,
+                        padding: const EdgeInsets.only(top: 8),
+                        decoration: BoxDecoration(
+                            color: Colors.black.withOpacity(0.05),
+                            borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(5),
+                              topRight: Radius.circular(5),
+                              bottomRight: Radius.circular(5),
+                              bottomLeft: Radius.circular(5),
+                            ),
+                            border: Border.all(color: Colors.white)),
+                        child: Text(
+                          '''Register''',
+                          style: GoogleFonts.adventPro(
+                            textStyle: const TextStyle(
+                              color: Color(0xFFFFFFFF),
+                              fontWeight: FontWeight.w500,
+                              fontSize: 18,
+                              fontStyle: FontStyle.normal,
+                              decoration: TextDecoration.none,
+                            ),
                           ),
-                          border: Border.all(color: Colors.white)),
-                      child: Text(
-                        '''Login''',
-                        style: GoogleFonts.adventPro(
-                          textStyle: const TextStyle(
-                            color: Color(0xFFFFFFFF),
-                            fontWeight: FontWeight.w500,
-                            fontSize: 18,
-                            fontStyle: FontStyle.normal,
-                            decoration: TextDecoration.none,
-                          ),
-                        ),
-                        textAlign: TextAlign.center,
-                      )),
-                )),
-            Container(
-              margin: const EdgeInsets.only(
-                left: 50,
-                top: 10,
-                right: 50,
+                          textAlign: TextAlign.center,
+                        ))),
               ),
-              padding: EdgeInsets.zero,
-              width: double.maxFinite,
-              decoration: const BoxDecoration(),
-              child: GestureDetector(
-                  onTap: () {
-                    utentiModel.utenteBeingEdited = Utente();
-                    utentiModel.setStackIndex(2);
-                  },
-                  child: Container(
-                      width: 10,
-                      height: 40,
-                      padding: const EdgeInsets.only(top: 8),
-                      decoration: BoxDecoration(
-                          color: Colors.black.withOpacity(0.05),
-                          borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(5),
-                            topRight: Radius.circular(5),
-                            bottomRight: Radius.circular(5),
-                            bottomLeft: Radius.circular(5),
-                          ),
-                          border: Border.all(color: Colors.white)),
-                      child: Text(
-                        '''Register''',
-                        style: GoogleFonts.adventPro(
-                          textStyle: const TextStyle(
-                            color: Color(0xFFFFFFFF),
-                            fontWeight: FontWeight.w500,
-                            fontSize: 18,
-                            fontStyle: FontStyle.normal,
-                            decoration: TextDecoration.none,
-                          ),
-                        ),
-                        textAlign: TextAlign.center,
-                      ))),
-            ),
-          ],
-        ),
-        )
-    );
+            ],
+          ),
+        ));
   }
 }
