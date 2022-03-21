@@ -130,7 +130,7 @@ class _SchedeState extends State<Schede> {
                       actionExtentRatio: .25,
                       secondaryActions: [
                         IconSlideAction(
-                          caption: "Delete",
+                          caption: "Elimina",
                           color: Colors.red,
                           icon: Icons.delete,
                           onTap: () {
@@ -182,15 +182,15 @@ class _SchedeState extends State<Schede> {
         barrierDismissible: false,
         builder: (BuildContext inAlertContext) {
           return AlertDialog(
-            title: const Text("Delete Scheda"),
+            title: const Text("Elinina Scheda"),
             content:
-                Text("Are you sure you want to delete ${scheda.nomeScheda}"),
+                Text("Sei sicuro di voler eliminare ${scheda.nomeScheda}? Perderai tutti i dati in essa contenuti"),
             actions: [
               FlatButton(
                 onPressed: () {
                   Navigator.of(inAlertContext).pop();
                 },
-                child: const Text("Cancel"),
+                child: const Text("Indietro"),
               ),
               FlatButton(
                 onPressed: () async {
@@ -200,7 +200,7 @@ class _SchedeState extends State<Schede> {
                     const SnackBar(
                       backgroundColor: Colors.red,
                       duration: Duration(seconds: 2),
-                      content: Text("Esercizio deleted"),
+                      content: Text("Scheda Eliminata!"),
                     ),
                   );
                   LoginPage().getValueLogin().then((val) async {
@@ -209,7 +209,7 @@ class _SchedeState extends State<Schede> {
                   });
                   schedeModel.setStackIndex(0);
                 },
-                child: const Text("Delete"),
+                child: const Text("Elimina"),
               ),
             ],
           );
