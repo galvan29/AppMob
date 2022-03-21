@@ -135,8 +135,6 @@ class Info extends StatelessWidget {
                   textAlign: TextAlign.left,
                   maxLines: 2),
             ),
-<<<<<<< Updated upstream
-=======
             Container(
               padding: EdgeInsets.zero,
               width: double.maxFinite,
@@ -158,7 +156,6 @@ class Info extends StatelessWidget {
                   textAlign: TextAlign.center,
                   maxLines: 2),
             ),
->>>>>>> Stashed changes
           ],
         ),
       ),
