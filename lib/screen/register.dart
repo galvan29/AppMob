@@ -3,6 +3,7 @@ import 'package:mytraining/db/utentiDBworker.dart';
 import 'package:mytraining/models/eserciziModel.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mytraining/models/utentiModel.dart';
+import 'package:mytraining/screen/base.dart';
 import 'package:mytraining/screen/login.dart';
 
 class RegisterPage extends StatelessWidget {
@@ -353,8 +354,9 @@ class RegisterPage extends StatelessWidget {
     //}
 
     utentiModel.loadData(UtentiDBworker.utentiDBworker);
-
-    utentiModel.setStackIndex(1);
+    Base.pageIndexForWidget=1;
+    utentiModel.setStackIndex(7);
+    //utentiModel.setStackIndex(1);
 
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(

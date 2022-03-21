@@ -135,6 +135,30 @@ class Info extends StatelessWidget {
                   textAlign: TextAlign.left,
                   maxLines: 2),
             ),
+<<<<<<< Updated upstream
+=======
+            Container(
+              padding: EdgeInsets.zero,
+              width: double.maxFinite,
+              alignment: Alignment.center,
+              decoration: const BoxDecoration(),
+              margin: const EdgeInsets.only(
+                top: 10,
+              ),
+              child: Text('',
+                  style: GoogleFonts.adventPro(
+                    textStyle: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 20,
+                      fontStyle: FontStyle.normal,
+                      decoration: TextDecoration.none,
+                    ),
+                  ),
+                  textAlign: TextAlign.center,
+                  maxLines: 2),
+            ),
+>>>>>>> Stashed changes
           ],
         ),
       ),

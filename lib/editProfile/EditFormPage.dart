@@ -38,6 +38,7 @@ class EditNameFormPageState extends State<EditNameFormPage> {
     utentiModel.utenteBeingEdited.eta = ageController.text;
     utentiModel.utenteBeingEdited.height = heightController.text;
     utentiModel.utenteBeingEdited.weight = weightController.text;
+    print(utentiModel.utenteBeingEdited.nomeUtente);
   }
 
   var ciao = true;

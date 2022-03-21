@@ -22,8 +22,22 @@ class _ProfiloState extends State<Profilo2> {
   //Profilo
   int _currentIndex = 2;
 
+  final userNameController = TextEditingController();
+  final firstNameController = TextEditingController();
+  final secondNameController = TextEditingController();
+  final ageController = TextEditingController();
+  final heightController = TextEditingController();
+  final weightController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
+    userNameController.text = utentiModel.utenteBeingEdited.nomeUtente;
+    firstNameController.text = utentiModel.utenteBeingEdited.nome;
+    secondNameController.text = utentiModel.utenteBeingEdited.cognome;
+    ageController.text = utentiModel.utenteBeingEdited.eta;
+    heightController.text = utentiModel.utenteBeingEdited.height;
+    weightController.text = utentiModel.utenteBeingEdited.weight;
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: buildAppBar(context),
@@ -56,162 +70,155 @@ class _ProfiloState extends State<Profilo2> {
                   textAlign: TextAlign.center,
                   maxLines: 1),
             ),
-            buildUserInfoDisplay(
-                utentiModel.utenteBeingEdited.nomeUtente, 'Username'),
-            buildUserInfoDisplay(utentiModel.utenteBeingEdited.nome, 'Nome'),
-            buildUserInfoDisplay(
-                utentiModel.utenteBeingEdited.cognome, 'Cognome'),
-            buildUserInfoDisplay(utentiModel.utenteBeingEdited.eta, 'Eta'),
-            buildUserInfoDisplay(
-                utentiModel.utenteBeingEdited.height, 'Altezza'),
-            buildUserInfoDisplay(utentiModel.utenteBeingEdited.weight, 'Peso'),
+            buildUserInfoDisplay(userNameController, 'Username'),
+            buildUserInfoDisplay(firstNameController, 'Nome'),
+            buildUserInfoDisplay(secondNameController, 'Cognome'),
+            buildUserInfoDisplay(ageController, 'Eta'),
+            buildUserInfoDisplay(heightController, 'Altezza'),
+            buildUserInfoDisplay(weightController, 'Peso'),
             Container(
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Container(
-                      padding: EdgeInsets.zero,
-                      width: 150,
-                      decoration: const BoxDecoration(),
-                      margin: EdgeInsets.only(
-                        left: MediaQuery.of(context).size.width * 0.05,
-                        bottom: MediaQuery.of(context).size.width * 0.08,
-                      ),
-                      child: GestureDetector(
-                          onTap: () {
-                            LoginPage().getValueLogin().then((val) async {
-                              utentiModel.utenteBeingEdited =
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Container(
+                  padding: EdgeInsets.zero,
+                  width: 150,
+                  decoration: const BoxDecoration(),
+                  margin: EdgeInsets.only(
+                    left: MediaQuery.of(context).size.width * 0.05,
+                    bottom: MediaQuery.of(context).size.width * 0.08,
+                  ),
+                  child: GestureDetector(
+                      onTap: () {
+                        LoginPage().getValueLogin().then((val) async {
+                          utentiModel.utenteBeingEdited =
                               await UtentiDBworker.utentiDBworker.get(val);
-                            });
-                            navigateSecondPage(const EditNameFormPage());
-                            //utentiModel.setStackIndex(7);
-                          },
-                          child: Container(
-                              width: 10,
-                              height: 50,
-                              padding: const EdgeInsets.only(top: 8),
-                              decoration: BoxDecoration(
-                                  color: const Color.fromARGB(255, 230, 245, 252),
-                                  borderRadius: const BorderRadius.only(
-                                    topLeft: Radius.circular(20),
-                                    topRight: Radius.circular(20),
-                                    bottomRight: Radius.circular(20),
-                                    bottomLeft: Radius.circular(20),
-                                  ),
-                                  border: Border.all(color: Colors.white)),
-                              child: Text(
-                                '''Modifica''',
-                                style: GoogleFonts.adventPro(
-                                  textStyle: const TextStyle(
-                                    color: const Color.fromARGB(255, 42, 42, 42),
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 20,
-                                    fontStyle: FontStyle.normal,
-                                    decoration: TextDecoration.none,
-                                  ),
-                                ),
-                                textAlign: TextAlign.center,
-                              ))),
-                    ),
-                    Container(
-                      padding: EdgeInsets.zero,
-                      width: 150,
-                      decoration: const BoxDecoration(),
-                      margin: EdgeInsets.only(
-                        right: MediaQuery.of(context).size.width * 0.05,
-                        bottom: MediaQuery.of(context).size.width * 0.08,
-                      ),
-                      child: GestureDetector(
-                          onTap: () {
-                            LoginPage().removeValueLogin();
-                            utentiModel.setStackIndex(0);
-                          },
-                          child: Container(
-                              width: 10,
-                              height: 50,
-                              padding: const EdgeInsets.only(top: 8),
-                              decoration: BoxDecoration(
-                                  color: Color.fromARGB(255, 230, 220, 245),
-                                  borderRadius: const BorderRadius.only(
-                                    topLeft: Radius.circular(20),
-                                    topRight: Radius.circular(20),
-                                    bottomRight: Radius.circular(20),
-                                    bottomLeft: Radius.circular(20),
-                                  ),
-                                  border: Border.all(color: Colors.white)),
-                              child: Text(
-                                '''Logout''',
-                                style: GoogleFonts.adventPro(
-                                  textStyle: const TextStyle(
-                                    color: const Color.fromARGB(255, 42, 42, 42),
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 20,
-                                    fontStyle: FontStyle.normal,
-                                    decoration: TextDecoration.none,
-                                  ),
-                                ),
-                                textAlign: TextAlign.center,
-                              ))),
-                    ),
-                  ],
-                )),
-
+                        });
+                        navigateSecondPage(const EditNameFormPage());
+                        //utentiModel.setStackIndex(7);
+                      },
+                      child: Container(
+                          width: 10,
+                          height: 50,
+                          padding: const EdgeInsets.only(top: 8),
+                          decoration: BoxDecoration(
+                              color: const Color.fromARGB(255, 230, 245, 252),
+                              borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(20),
+                                topRight: Radius.circular(20),
+                                bottomRight: Radius.circular(20),
+                                bottomLeft: Radius.circular(20),
+                              ),
+                              border: Border.all(color: Colors.white)),
+                          child: Text(
+                            '''Modifica''',
+                            style: GoogleFonts.adventPro(
+                              textStyle: const TextStyle(
+                                color: const Color.fromARGB(255, 42, 42, 42),
+                                fontWeight: FontWeight.w500,
+                                fontSize: 20,
+                                fontStyle: FontStyle.normal,
+                                decoration: TextDecoration.none,
+                              ),
+                            ),
+                            textAlign: TextAlign.center,
+                          ))),
+                ),
+                Container(
+                  padding: EdgeInsets.zero,
+                  width: 150,
+                  decoration: const BoxDecoration(),
+                  margin: EdgeInsets.only(
+                    right: MediaQuery.of(context).size.width * 0.05,
+                    bottom: MediaQuery.of(context).size.width * 0.08,
+                  ),
+                  child: GestureDetector(
+                      onTap: () {
+                        LoginPage().removeValueLogin();
+                        utentiModel.setStackIndex(0);
+                      },
+                      child: Container(
+                          width: 10,
+                          height: 50,
+                          padding: const EdgeInsets.only(top: 8),
+                          decoration: BoxDecoration(
+                              color: Color.fromARGB(255, 230, 220, 245),
+                              borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(20),
+                                topRight: Radius.circular(20),
+                                bottomRight: Radius.circular(20),
+                                bottomLeft: Radius.circular(20),
+                              ),
+                              border: Border.all(color: Colors.white)),
+                          child: Text(
+                            '''Logout''',
+                            style: GoogleFonts.adventPro(
+                              textStyle: const TextStyle(
+                                color: const Color.fromARGB(255, 42, 42, 42),
+                                fontWeight: FontWeight.w500,
+                                fontSize: 20,
+                                fontStyle: FontStyle.normal,
+                                decoration: TextDecoration.none,
+                              ),
+                            ),
+                            textAlign: TextAlign.center,
+                          ))),
+                ),
+              ],
+            )),
           ],
         ),
       ),
-        bottomNavigationBar: buildBottomNavigationBar(context, _currentIndex),
+      bottomNavigationBar: buildBottomNavigationBar(context, _currentIndex),
     );
   }
 
-  // Widget builds the display item with the proper formatting to display the user's info
-  Widget buildUserInfoDisplay(String getValue, String title) => Padding(
-      padding: const EdgeInsets.only(bottom: 20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            title,
-            style: const TextStyle(
-              fontSize: 15,
-              fontWeight: FontWeight.w500,
-              color: Colors.white,
-            ),
-          ),
-          const SizedBox(
-            height: 1,
-          ),
-          Container(
-              width: MediaQuery.of(context).size.width * 0.9,
-              height: 40,
-              decoration: const BoxDecoration(
-                  border: Border(
-                      bottom: BorderSide(
-                color: Colors.white,
-                width: 1,
-              ))),
-              child: Row(children: [
-                Expanded(
-                    child: TextButton(
-                        onPressed: () {},
-                        child: Align(
-                          child: Text(
-                            getValue,
-
-                            style: TextStyle(fontSize: 16, height: 1.4, color: Color.fromARGB(255, 230, 220, 245)),
-                          ),
-                          alignment: Alignment.centerLeft,
-                        ))),
-              ]))
-        ],
-      )
-  );
+  Widget buildUserInfoDisplay(TextEditingController contr, String title) =>
+      Padding(
+          padding: const EdgeInsets.only(bottom: 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: const TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.white,
+                ),
+              ),
+              const SizedBox(
+                height: 1,
+              ),
+              Container(
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  height: 40,
+                  decoration: const BoxDecoration(
+                      border: Border(
+                          bottom: BorderSide(
+                    color: Colors.white,
+                    width: 1,
+                  ))),
+                  child: Row(children: [
+                    Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                        child: SizedBox(
+                            height: 70,
+                            width: MediaQuery.of(context).size.width * 0.9,
+                            child: TextFormField(
+                              controller: contr,
+                              enabled: false,
+                              style: const TextStyle(color: Colors.white),
+                            ))),
+                  ]))
+            ],
+          ));
 
 // Widget builds the About Me Section
   FutureOr onGoBack(dynamic value) {
     setState(() {});
   }
-
 
   // Handles navigation and prompts refresh.
   void navigateSecondPage(Widget editForm) {
