@@ -1,9 +1,6 @@
 import 'dart:async';
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:mytraining/common/appbar.dart';
 import 'package:mytraining/db/utentiDBworker.dart';
 import 'package:mytraining/editProfile/EditFormPage.dart';

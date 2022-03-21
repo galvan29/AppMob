@@ -27,7 +27,7 @@ class LoginPage extends StatelessWidget {
 
   removeValueLogin() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.remove('idUtente')!;
+    return prefs.clear();
   }
 
   @override
