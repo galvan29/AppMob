@@ -133,7 +133,7 @@ class VisualizzaScheda extends StatelessWidget {
                         actionExtentRatio: .25,
                         secondaryActions: [
                           IconSlideAction(
-                            caption: "Delete",
+                            caption: "Elimina",
                             color: Colors.red,
                             icon: Icons.delete,
                             onTap: () {
@@ -309,15 +309,15 @@ class VisualizzaScheda extends StatelessWidget {
         barrierDismissible: false,
         builder: (BuildContext inAlertContext) {
           return AlertDialog(
-            title: const Text("Delete note"),
+            title: const Text("Elimina Scheda"),
             content: Text(
-                "Are you sure you want to delete ${esercizio.noteEsercizio}"),
+                "Sei sicuro di voler eliminare ${esercizio.noteEsercizio}? Perderai tutti i dati in essa contenuti"),
             actions: [
               FlatButton(
                 onPressed: () {
                   Navigator.of(inAlertContext).pop();
                 },
-                child: const Text("Cancel"),
+                child: const Text("Indietro"),
               ),
               FlatButton(
                 onPressed: () async {
@@ -327,7 +327,7 @@ class VisualizzaScheda extends StatelessWidget {
                     const SnackBar(
                       backgroundColor: Colors.red,
                       duration: Duration(seconds: 2),
-                      content: Text("Esercizio deleted"),
+                      content: Text("Esercizio eliminato"),
                     ),
                   );
                   Schede().getValueScheda().then((val) async {
@@ -336,7 +336,7 @@ class VisualizzaScheda extends StatelessWidget {
                   });
                   schedeModel.setStackIndex(0);
                 },
-                child: const Text("Delete"),
+                child: const Text("Elimina"),
               ),
             ],
           );
