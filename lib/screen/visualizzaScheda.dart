@@ -125,9 +125,8 @@ class VisualizzaScheda extends StatelessWidget {
                   Esercizio esercizio = eserciziModel.eserciziList[inIndex];
                   Color color = Colors.white;
 
-                  return Card(
+                  return Container(
                     margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                    elevation: 8,
                     child: Slidable(
                         actionPane: const SlidableScrollActionPane(),
                         actionExtentRatio: .25,
