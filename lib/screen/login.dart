@@ -402,13 +402,7 @@ class LoginPage extends StatelessWidget {
     Base.pageIndexForWidget = 3;
     utentiModel.setStackIndex(7);
 
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        backgroundColor: Colors.green,
-        duration: Duration(seconds: 2),
-        content: Text("Login Effettuato"),
-      ),
-    );
+
   }
 
   BackBro() {
