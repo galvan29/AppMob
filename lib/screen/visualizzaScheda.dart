@@ -129,38 +129,49 @@ class VisualizzaScheda extends StatelessWidget {
                     margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                     elevation: 8,
                     child: Slidable(
-                      actionPane: const SlidableScrollActionPane(),
-                      actionExtentRatio: .25,
-                      secondaryActions: [
-                        IconSlideAction(
-                          caption: "Delete",
-                          color: Colors.red,
-                          icon: Icons.delete,
-                          onTap: () {
-                            _deleteEsercizio(context, esercizio);
-                          },
-                        ),
-                      ],
-                      child: ListTile(
-                        title: Text(esercizio.nomeEsercizio),
-                        subtitle: Text("Rip: " +
-                            esercizio.ripEsercizio +
-                            "\n Serie: " +
-                            esercizio.serieEsercizio +
-                            "\n Peso: " +
-                            esercizio.pesoEsercizio +
-                            "\n Note: " +
-                            esercizio.noteEsercizio),
-                        tileColor: color,
-                        onLongPress: () async {
-                          eserciziModel.esercizioBeingEdited =
-                              await EserciziDBworker.eserciziDBworker
-                                  .get(esercizio.id);
-                          schedeModel.setStackIndex(3);
-                        },
-                        onTap: () {},
-                      ),
-                    ),
+                        actionPane: const SlidableScrollActionPane(),
+                        actionExtentRatio: .25,
+                        secondaryActions: [
+                          IconSlideAction(
+                            caption: "Delete",
+                            color: Colors.red,
+                            icon: Icons.delete,
+                            onTap: () {
+                              _deleteEsercizio(context, esercizio);
+                            },
+                          ),
+                        ],
+                        child: GestureDetector(
+                            onLongPress: () async {
+                              eserciziModel.esercizioBeingEdited =
+                                  await EserciziDBworker.eserciziDBworker
+                                      .get(esercizio.id);
+                              schedeModel.setStackIndex(3);
+                            },
+                            child: Container(
+                              height: 90,
+                              padding: const EdgeInsets.only(top: 8),
+                              decoration: BoxDecoration(
+                                  color: const Color.fromARGB(255, 230, 245, 252),
+                                  borderRadius: const BorderRadius.only(
+                                    topLeft: Radius.circular(20),
+                                    topRight: Radius.circular(20),
+                                    bottomRight: Radius.circular(20),
+                                    bottomLeft: Radius.circular(20),
+                                  ),
+                                  border: Border.all(color: Colors.white)),
+                              child: ListTile(
+                                title: Text(esercizio.nomeEsercizio),
+                                subtitle: Text("Rip: " +
+                                    esercizio.ripEsercizio +
+                                    "\n Serie: " +
+                                    esercizio.serieEsercizio +
+                                    "\n Peso: " +
+                                    esercizio.pesoEsercizio +
+                                    "\n Note: " +
+                                    esercizio.noteEsercizio),
+                              ),
+                            ))),
                   );
                 },
               ),
@@ -185,7 +196,8 @@ class VisualizzaScheda extends StatelessWidget {
                     maxLines: 1),
               ),
               Container(
-                  margin: EdgeInsets.only(top: 10, left: 30, right: 30, bottom: 40),
+                  margin:
+                      EdgeInsets.only(top: 10, left: 30, right: 30, bottom: 40),
                   height: 330,
                   padding: const EdgeInsets.only(top: 8),
                   decoration: BoxDecoration(
@@ -214,7 +226,8 @@ class VisualizzaScheda extends StatelessWidget {
                                       reg.giorno,
                                   yValueMapper: (ChartRegistri reg, _) =>
                                       reg.durata,
-                                  dataLabelMapper: (ChartRegistri reg, _) => reg.voto,
+                                  dataLabelMapper: (ChartRegistri reg, _) =>
+                                      reg.voto,
                                   dataLabelSettings:
                                       const DataLabelSettings(isVisible: true))
                             ])
