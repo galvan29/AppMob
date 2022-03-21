@@ -455,7 +455,7 @@ class _HomePageState extends State<HomePage> {
                 actionExtentRatio: .25,
                 secondaryActions: [
                   IconSlideAction(
-                    caption: "Delete",
+                    caption: "Elimina",
                     color: Colors.red,
                     icon: Icons.delete,
                     onTap: () async {
@@ -486,15 +486,15 @@ class _HomePageState extends State<HomePage> {
         barrierDismissible: false,
         builder: (BuildContext inAlertContext) {
           return AlertDialog(
-            title: const Text("Delete Scheda"),
+            title: const Text("Elimina Scheda"),
             content:
-            Text("Are you sure you want to delete ${ev.nomeScheda}"),
+            Text("Sei sicuro di voler eliminare ${ev.nomeScheda}?"),
             actions: [
               FlatButton(
                 onPressed: () {
                   Navigator.of(inAlertContext).pop();
                 },
-                child: const Text("Cancel"),
+                child: const Text("Indietro"),
               ),
               FlatButton(
                 onPressed: () async {
@@ -504,7 +504,7 @@ class _HomePageState extends State<HomePage> {
                     const SnackBar(
                       backgroundColor: Colors.red,
                       duration: Duration(seconds: 2),
-                      content: Text("Evento deleted"),
+                      content: Text("Evento Eliminato!"),
                     ),
                   );
                   LoginPage().getValueLogin().then((val) async {
@@ -516,7 +516,7 @@ class _HomePageState extends State<HomePage> {
                   });
                   Navigator.of(context).pop();
                 },
-                child: const Text("Delete"),
+                child: const Text("Elimina"),
               ),
             ],
           );
