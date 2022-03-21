@@ -101,7 +101,7 @@ class Info extends StatelessWidget {
               margin: const EdgeInsets.only(
                 top: 10,
               ),
-              child: Text(r'''Beta Tester:''',
+              child: Text(r'''Beta Tester: Christian Bolletta, Rebecca Giabardo, Tobia Giabardo, Anna Vaglieri''',
                   style: GoogleFonts.adventPro(
                     textStyle: const TextStyle(
                       color: Colors.white,
