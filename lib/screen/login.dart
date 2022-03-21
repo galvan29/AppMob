@@ -7,7 +7,6 @@ import 'package:mytraining/models/eventiModel.dart';
 import 'package:mytraining/models/schedeModel.dart';
 import 'package:mytraining/models/utentiModel.dart';
 import 'package:mytraining/screen/base.dart';
-import 'package:mytraining/screen/visualizzaScheda.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatelessWidget {
@@ -24,6 +23,11 @@ class LoginPage extends StatelessWidget {
   getValueLogin() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getInt('idUtente')!;
+  }
+
+  removeValueLogin() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.remove('idUtente')!;
   }
 
   @override
