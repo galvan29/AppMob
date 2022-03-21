@@ -148,7 +148,7 @@ class VisualizzaScheda extends StatelessWidget {
                               schedeModel.setStackIndex(3);
                             },
                             child: Container(
-                              height: MediaQuery.of(context).size.height * 0.125,
+                              height: MediaQuery.of(context).size.height * 0.1,
                               padding: const EdgeInsets.only(top: 8),
                               decoration: BoxDecoration(
                                   color:
@@ -181,12 +181,7 @@ class VisualizzaScheda extends StatelessWidget {
                                           ),
                                         ),
                                       ),
-                                    ],
-                                  ),
-                                  SizedBox(width: 10, height: 5,),
-                                  Row(
-                                    children: [
-                                      SizedBox(width: 10, height: 10,),
+                                      SizedBox(width: MediaQuery.of(context).size.width * 0.25),
                                       Text(
                                         "Rip: " + esercizio.ripEsercizio,
                                         style: GoogleFonts.adventPro(
