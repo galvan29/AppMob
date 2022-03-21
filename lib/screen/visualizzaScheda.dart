@@ -151,7 +151,8 @@ class VisualizzaScheda extends StatelessWidget {
                               height: 90,
                               padding: const EdgeInsets.only(top: 8),
                               decoration: BoxDecoration(
-                                  color: const Color.fromARGB(255, 230, 245, 252),
+                                  color:
+                                      const Color.fromARGB(255, 230, 245, 252),
                                   borderRadius: const BorderRadius.only(
                                     topLeft: Radius.circular(20),
                                     topRight: Radius.circular(20),
@@ -161,69 +162,91 @@ class VisualizzaScheda extends StatelessWidget {
                                   border: Border.all(color: Colors.white)),
                               child: Column(
                                 children: [
-                                  SizedBox(width: 10, height: 10,),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
                                   Row(
                                     children: [
                                       SizedBox(width: 10),
-                                      Text(esercizio.nomeEsercizio,
+                                      Text(
+                                        esercizio.nomeEsercizio,
                                         style: GoogleFonts.adventPro(
                                           textStyle: const TextStyle(
-                                            color: const Color.fromARGB(255, 42, 42, 42),
+                                            color: const Color.fromARGB(
+                                                255, 42, 42, 42),
                                             fontWeight: FontWeight.w500,
                                             fontSize: 25,
                                             fontStyle: FontStyle.normal,
                                             decoration: TextDecoration.none,
                                           ),
-                                        ),),
-                                      SizedBox(width: 10),
-                                      Text("Rip: " +esercizio.ripEsercizio,
-                                        style: GoogleFonts.adventPro(
-                                          textStyle: const TextStyle(
-                                            color: const Color.fromARGB(255, 42, 42, 42),
-                                            fontWeight: FontWeight.w500,
-                                            fontSize: 25,
-                                            fontStyle: FontStyle.normal,
-                                            decoration: TextDecoration.none,
-                                          ),
-                                        ),),
-                                      SizedBox(width: 10),
-                                      Text("Serie: " +esercizio.serieEsercizio,
-                                        style: GoogleFonts.adventPro(
-                                          textStyle: const TextStyle(
-                                            color: const Color.fromARGB(255, 42, 42, 42),
-                                            fontWeight: FontWeight.w500,
-                                            fontSize: 25,
-                                            fontStyle: FontStyle.normal,
-                                            decoration: TextDecoration.none,
-                                          ),
-                                        ),),
-                                      SizedBox(width: 10),
-                                      Text("Peso: " +esercizio.pesoEsercizio,
-                                        style: GoogleFonts.adventPro(
-                                          textStyle: const TextStyle(
-                                            color: const Color.fromARGB(255, 42, 42, 42),
-                                            fontWeight: FontWeight.w500,
-                                            fontSize: 25,
-                                            fontStyle: FontStyle.normal,
-                                            decoration: TextDecoration.none,
-                                          ),
-                                        ),),
+                                        ),
+                                      ),
                                     ],
                                   ),
-                                  SizedBox(width: 10, height: 10,),
+                                  SizedBox(width: 10, height: 5,),
                                   Row(
                                     children: [
-                                      SizedBox(width: 10),
-                                      Text("Note: " +esercizio.noteEsercizio,
+                                      SizedBox(width: 10, height: 10,),
+                                      Text(
+                                        "Rip: " + esercizio.ripEsercizio,
                                         style: GoogleFonts.adventPro(
                                           textStyle: const TextStyle(
-                                            color: const Color.fromARGB(255, 42, 42, 42),
+                                            color: const Color.fromARGB(
+                                                255, 42, 42, 42),
                                             fontWeight: FontWeight.w500,
-                                            fontSize: 25,
+                                            fontSize: 17,
                                             fontStyle: FontStyle.normal,
                                             decoration: TextDecoration.none,
                                           ),
-                                        ),),
+                                        ),
+                                      ),
+                                      SizedBox(width: 10),
+                                      Text(
+                                        "Serie: " + esercizio.serieEsercizio,
+                                        style: GoogleFonts.adventPro(
+                                          textStyle: const TextStyle(
+                                            color: const Color.fromARGB(
+                                                255, 42, 42, 42),
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 17,
+                                            fontStyle: FontStyle.normal,
+                                            decoration: TextDecoration.none,
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(width: 10),
+                                      Text(
+                                        "Peso: " + esercizio.pesoEsercizio,
+                                        style: GoogleFonts.adventPro(
+                                          textStyle: const TextStyle(
+                                            color: const Color.fromARGB(
+                                                255, 42, 42, 42),
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 17,
+                                            fontStyle: FontStyle.normal,
+                                            decoration: TextDecoration.none,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(width: 10, height: 5,),
+                                  Row(
+                                    children: [
+                                      SizedBox(width: 10, height: 5,),
+                                      Text(
+                                        "Note: " + esercizio.noteEsercizio,
+                                        style: GoogleFonts.adventPro(
+                                          textStyle: const TextStyle(
+                                            color: const Color.fromARGB(
+                                                255, 42, 42, 42),
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 17,
+                                            fontStyle: FontStyle.normal,
+                                            decoration: TextDecoration.none,
+                                          ),
+                                        ),
+                                      ),
                                     ],
                                   ),
                                 ],
