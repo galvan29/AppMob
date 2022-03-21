@@ -31,7 +31,8 @@ class VisualizzaScheda extends StatelessWidget {
     for (Registro a in registriModel.registriList) {
       dataR.add(ChartRegistri(
           giorno: DateTime.parse(a.giorno),
-          durata: fromDateToMinute(a.durataFinale)));
+          durata: fromDateToMinute(a.durataFinale),
+          voto: a.voto));
     }
     /*dataR.add(ChartRegistri(
         giorno: DateTime.parse("2022-03-20"),
@@ -213,6 +214,7 @@ class VisualizzaScheda extends StatelessWidget {
                                       reg.giorno,
                                   yValueMapper: (ChartRegistri reg, _) =>
                                       reg.durata,
+                                  dataLabelMapper: (ChartRegistri reg, _) => reg.voto,
                                   dataLabelSettings:
                                       DataLabelSettings(isVisible: true))
                             ])
