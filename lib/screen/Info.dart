@@ -135,27 +135,6 @@ class Info extends StatelessWidget {
                   textAlign: TextAlign.left,
                   maxLines: 2),
             ),
-            Container(
-              padding: EdgeInsets.zero,
-              width: double.maxFinite,
-              alignment: Alignment.center,
-              decoration: const BoxDecoration(),
-              margin: const EdgeInsets.only(
-                top: 10,
-              ),
-              child: Text('''Un particolare ringraziamento a: StackOverFlow''',
-                  style: GoogleFonts.adventPro(
-                    textStyle: const TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w400,
-                      fontSize: 20,
-                      fontStyle: FontStyle.normal,
-                      decoration: TextDecoration.none,
-                    ),
-                  ),
-                  textAlign: TextAlign.center,
-                  maxLines: 2),
-            ),
           ],
         ),
       ),

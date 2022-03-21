@@ -14,15 +14,14 @@ import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:intl/intl.dart';
 import 'package:mytraining/common/bottomNavigationBar.dart';
 
-//import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-//import 'package:mytraining/screen/notification_api.dart';
 
-
-//SCELTA RANDOM FRASE, DA RENDERE GIORNALIERA
-var list = ['La salute ci consente di godere la vita, la malattia di comprenderne meglio il significato.',
-  'Una mela al giorno toglie il medico di torno. Basta avere una buona mira.',
-  'Ho deciso di esserefelice perché fa bene alla mia salute.',
+var list = ['Chi vuol star sano, viver molti anni, mangi broccoli, broccoli e gnoccoli, e danzi senza zoccoli.',
+  'Mai affrettarti. Fai un sacco di esercizio fisico. Sii sempre allegro. Prendi tutto il sonno di cui hai bisogno. E puoi aspettarti di stare bene.',
+  'Ho deciso di essere felice perché fa bene alla mia salute.',
   'Mi sveglio sempre in forma e mi deformo attraverso gli altri.',
+  'Se volete la vitamina C o il beta-carotene, non ricorrete al flacone nell’armadietto dei medicinali, ma al cestino della frutta o alla verdura verde in foglia.',
+  'La vera ricchezza non sta nel possedere oggetti d’oro o d’argento, ma nella salute.',
+  'Prenditi cura del tuo corpo. È l’unico posto in cui devi vivere.',
   'Mangiare nel modo giusto non solo previene la malattia, ma genera anche la salute e un senso di benessere fisico e mentale.'];
 final _random = new Random();
 var element = list[_random.nextInt(list.length)];
@@ -363,7 +362,7 @@ class _HomePageState extends State<HomePage> {
                 padding: EdgeInsets.zero,
                 width: double.maxFinite,
                 decoration: const BoxDecoration(),
-                child: Text(r'''Suggerimento del Giorno''',
+                child: Text(r'''Suggerimento Utile''',
                     style: GoogleFonts.adventPro(
                       textStyle: const TextStyle(
                         color: Colors.white,

@@ -39,6 +39,9 @@ class _ProfiloState extends State<Profilo2> {
             Container(
               padding: EdgeInsets.zero,
               width: double.maxFinite,
+              margin: EdgeInsets.only(
+                bottom: MediaQuery.of(context).size.width * 0.07,
+              ),
               decoration: const BoxDecoration(),
               child: Text(r'''Profilo''',
                   style: GoogleFonts.adventPro(
