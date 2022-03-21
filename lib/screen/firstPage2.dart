@@ -343,7 +343,7 @@ class _BottomPart extends StatelessWidget {
                             ),
                             border: Border.all(color: Colors.white)),
                         child: Text(
-                          '''Register''',
+                          '''Registrati''',
                           style: GoogleFonts.adventPro(
                             textStyle: const TextStyle(
                               color: Color(0xFFFFFFFF),

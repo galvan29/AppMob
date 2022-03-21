@@ -249,13 +249,7 @@ class CreaEsercizio extends StatelessWidget{
     Base.pageIndexForWidget=12;
     schedeModel.setStackIndex(6);
 //dd
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        backgroundColor:  Color.fromARGB(255, 230, 220, 245),
-        duration: Duration(seconds: 2),
-        content: Text("Esercizio Aggiunto alla Scheda!"),
-      ),
-    );
+
 
   }
 }

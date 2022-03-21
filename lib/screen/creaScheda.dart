@@ -179,13 +179,7 @@ class CreaScheda extends StatelessWidget{
     Base.pageIndexForWidget=0;
     schedeModel.setStackIndex(6);
 
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        backgroundColor:  Color.fromARGB(255, 230, 220, 245),
-        duration: Duration(seconds: 2),
-        content: Text("Scheda Salvata!"),
-      ),
-    );
+
 
   }
 }

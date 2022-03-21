@@ -488,7 +488,7 @@ class _HomePageState extends State<HomePage> {
           return AlertDialog(
             title: const Text("Elimina Scheda"),
             content:
-            Text("Sei sicuro di voler eliminare ${ev.nomeScheda}?"),
+            Text("Sei sicuro di voler eliminare ${ev.nomeScheda}? Perderai l'evento programmato"),
             actions: [
               FlatButton(
                 onPressed: () {

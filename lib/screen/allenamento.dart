@@ -118,7 +118,7 @@ class _AllenamentoState extends State<Allenamento> {
                                   .add(StopWatchExecute.start);
                             },
                             child: const Text(
-                              'Start',
+                              'Inizio',
                               style: TextStyle(color: Colors.black),
                             ),
                             style: ElevatedButton.styleFrom(
@@ -147,7 +147,7 @@ class _AllenamentoState extends State<Allenamento> {
                                   .add(StopWatchExecute.stop);
                             },
                             child: const Text(
-                              'Pause',
+                              'Pausa',
                               style: TextStyle(color: Colors.black),
                             ),
                             style: ElevatedButton.styleFrom(
@@ -183,7 +183,7 @@ class _AllenamentoState extends State<Allenamento> {
                               //schedeModel.setStackIndex(5);
                             },
                             child: const Text(
-                              'Finish',
+                              'Fine',
                               style: TextStyle(color: Colors.black),
                             ),
                             style: ElevatedButton.styleFrom(
@@ -251,7 +251,7 @@ class _AllenamentoState extends State<Allenamento> {
                 onPressed: () {
                   schedeModel.setStackIndex(0);
                 },
-                child: const Text("Cancel"),
+                child: const Text("Elimina"),
               ),
             ],
           )),
@@ -273,12 +273,6 @@ class _AllenamentoState extends State<Allenamento> {
     //Base.pageIndexForWidget=12;
     schedeModel.setStackIndex(5);
 //dd
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        backgroundColor: Colors.green,
-        duration: Duration(seconds: 2),
-        content: Text("Scheda completata, ho salvato i dati della sessione"),
-      ),
-    );
+
   }
 }
