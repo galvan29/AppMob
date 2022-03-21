@@ -216,7 +216,7 @@ class VisualizzaScheda extends StatelessWidget {
                                       reg.durata,
                                   dataLabelMapper: (ChartRegistri reg, _) => reg.voto,
                                   dataLabelSettings:
-                                      DataLabelSettings(isVisible: true))
+                                      const DataLabelSettings(isVisible: true))
                             ])
                         /*charts.TimeSeriesChart(
                           series,
