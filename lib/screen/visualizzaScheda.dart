@@ -8,8 +8,11 @@ import 'package:mytraining/models/eserciziModel.dart';
 import 'package:mytraining/models/registriModel.dart';
 import 'package:mytraining/models/schedeModel.dart';
 import 'package:mytraining/screen/schede.dart';
-import 'package:charts_flutter/flutter.dart' as charts;
+
+//import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:intl/intl.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:syncfusion_flutter_charts/sparkcharts.dart';
 
 class VisualizzaScheda extends StatelessWidget {
   final datasets = <String, dynamic>{};
@@ -37,14 +40,14 @@ class VisualizzaScheda extends StatelessWidget {
         giorno: DateTime.parse("2022-03-21"),
         durata: 124));*/
 
-    List<charts.Series<ChartRegistri, DateTime>> series = [
+    /*  List<charts.Series<ChartRegistri, DateTime>> series = [
       charts.Series(
         id: 'Sales',
         data: dataR,
         domainFn: (ChartRegistri sales, _) => sales.giorno,
         measureFn: (ChartRegistri sales, _) => sales.durata,
       )
-    ];
+    ];  */
 
     return Scaffold(
         appBar: buildAppBar(context),
@@ -70,45 +73,44 @@ class VisualizzaScheda extends StatelessWidget {
                 ),
               ),
               Container(
-                child: Row(
-                  children: [
-                    Container(
-                      margin: EdgeInsets.only(
-                        top: MediaQuery.of(context).size.width * 0.05,
-                      ),
+                  child: Row(
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(
+                      top: MediaQuery.of(context).size.width * 0.05,
                     ),
-                    SizedBox(
-                        width: 330,
-                        child: Text(
-                          "Ecco la tua Scheda!",
-                          textAlign: TextAlign.center,
-                          style: GoogleFonts.adventPro(
-                            textStyle: const TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w400,
-                              fontSize: 30,
-                              fontStyle: FontStyle.normal,
-                              decoration: TextDecoration.none,
-                            ),
+                  ),
+                  SizedBox(
+                      width: 330,
+                      child: Text(
+                        "Ecco la tua Scheda!",
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.adventPro(
+                          textStyle: const TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w400,
+                            fontSize: 30,
+                            fontStyle: FontStyle.normal,
+                            decoration: TextDecoration.none,
                           ),
-                        )),
-                    Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.black, width: 1.5),
-                          color: Colors.white,
-                          shape: BoxShape.circle,
                         ),
-                        child: IconButton(
-                          icon: const Icon(Icons.add),
-                          color: Colors.black,
-                          onPressed: () {
-                            eserciziModel.esercizioBeingEdited = Esercizio();
-                            schedeModel.setStackIndex(3);
-                          },
-                        )),
-                  ],
-                )
-              ),
+                      )),
+                  Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.black, width: 1.5),
+                        color: Colors.white,
+                        shape: BoxShape.circle,
+                      ),
+                      child: IconButton(
+                        icon: const Icon(Icons.add),
+                        color: Colors.black,
+                        onPressed: () {
+                          eserciziModel.esercizioBeingEdited = Esercizio();
+                          schedeModel.setStackIndex(3);
+                        },
+                      )),
+                ],
+              )),
               Container(
                 margin: EdgeInsets.only(
                   top: MediaQuery.of(context).size.width * 0.05,
@@ -201,11 +203,33 @@ class VisualizzaScheda extends StatelessWidget {
                         margin: EdgeInsets.only(top: 10, left: 30, right: 30),
                         height: 300,
                         width: MediaQuery.of(context).size.width * 0.90,
-                        child: charts.TimeSeriesChart(
+                        child: SfCartesianChart(
+                            enableAxisAnimation: true,
+                            primaryXAxis: DateTimeAxis(),
+                            series: <CartesianSeries>[
+                              LineSeries<ChartRegistri, DateTime>(
+                                  dataSource: dataR,
+                                  xValueMapper: (ChartRegistri reg, _) =>
+                                      reg.giorno,
+                                  yValueMapper: (ChartRegistri reg, _) =>
+                                      reg.durata,
+                                  dataLabelSettings:
+                                      DataLabelSettings(isVisible: true))
+                            ])
+                        /*charts.TimeSeriesChart(
                           series,
                           animate: true,
                           dateTimeFactory: const charts.LocalDateTimeFactory(),
-                        )),
+                          selectionModels: [
+                            charts.SelectionModelConfig(
+                                changedListener: (charts.SelectionModel model) {
+                              if (model.hasDatumSelection) {
+                                model.selectedSeries[0].measureFn(model.selectedDatum[0].index);
+                              }
+                            })
+                          ],
+                        )*/
+                        ),
                     /* ListView.builder(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
@@ -244,10 +268,11 @@ class VisualizzaScheda extends StatelessWidget {
             child: Row(
               children: [
                 FlatButton(
-                  onPressed: (){
+                  onPressed: () {
                     schedeModel.setStackIndex(0);
                   },
-                  child: Text("Indietro",
+                  child: Text(
+                    "Indietro",
                     style: GoogleFonts.adventPro(
                       textStyle: const TextStyle(
                         color: Colors.white,

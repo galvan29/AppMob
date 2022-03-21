@@ -115,7 +115,6 @@ class FineAllenamento extends StatelessWidget {
                 decoration: const BoxDecoration(),
                 child: GestureDetector(
                     onTap: () async {
-                      print("OOOOOOOOOOOOOOOO "+rat.toString());
                       registriModel.registroBeingEdited = await RegistriDBworker.registriDBworker.get(FineAllenamento.idTempRegistro);
                       registriModel.registroBeingEdited.voto = rat.toString();
                       registriModel.registroBeingEdited.giorno = DateTime.now().toString();
