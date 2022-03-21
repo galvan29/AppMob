@@ -1,12 +1,19 @@
 import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mytraining/db/eserciziDBworker.dart';
+import 'package:mytraining/db/registriDBworker.dart';
+import 'package:mytraining/db/schedeDBworker.dart';
 import 'package:mytraining/db/utentiDBworker.dart';
+import 'package:mytraining/models/eserciziModel.dart';
+import 'package:mytraining/models/registriModel.dart';
+import 'package:mytraining/models/schedeModel.dart';
 import 'package:mytraining/models/utentiModel.dart';
 import 'package:lottie/lottie.dart';
 import 'package:mytraining/screen/base.dart';
 import 'package:mytraining/screen/login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:intl/intl.dart';
 
 class FirstPage2 extends StatefulWidget {
   const FirstPage2({Key? key}) : super(key: key);
@@ -22,6 +29,7 @@ class _FirstPage2State extends State<FirstPage2> with TickerProviderStateMixin {
 
   @override
   void initState() {
+    createAdminAccount();
     super.initState();
     _animController = AnimationController(vsync: this);
     _animController!.addListener(() {
@@ -135,6 +143,123 @@ class _FirstPage2State extends State<FirstPage2> with TickerProviderStateMixin {
         ],
       ),
     );
+  }
+
+  void createAdminAccount() async {
+    String admin = "admin17";
+    Utente ut = await UtentiDBworker.utentiDBworker.getId(admin);
+    if (ut.id != -1) {
+      return;
+    }
+    Utente u = Utente();
+    u.nomeUtente = admin;
+    u.password = "admin";
+    u.nome = "Mario";
+    u.cognome = "Rossi";
+    u.eta = "25";
+    u.weight = "75";
+    u.height = "185";
+    await UtentiDBworker.utentiDBworker.create(u);
+    ut = await UtentiDBworker.utentiDBworker.getId(admin);
+    Scheda sch1 = Scheda();
+    sch1.idUtente = ut.id.toString();
+    sch1.nomeScheda = "Gambe e Spalle";
+    sch1.durataScheda = "120";
+    int id = await SchedeDBworker.schedeDBworker.create(sch1);
+    Esercizio es1_1 = Esercizio();
+    es1_1.idScheda = id.toString();
+    es1_1.nomeEsercizio = "Lat Machine";
+    es1_1.serieEsercizio = "4";
+    es1_1.ripEsercizio = "12";
+    es1_1.pesoEsercizio = "40";
+    es1_1.noteEsercizio = "Attento alla posizione delle mani";
+    await EserciziDBworker.eserciziDBworker.create(es1_1);
+    Esercizio es2_1 = Esercizio();
+    es2_1.idScheda = id.toString();
+    es2_1.nomeEsercizio = "Leg-Press";
+    es2_1.serieEsercizio = "3";
+    es2_1.ripEsercizio = "12";
+    es2_1.pesoEsercizio = "80";
+    es2_1.noteEsercizio = "Tenere i piedi paralleli, 1 minuto di pausa";
+    await EserciziDBworker.eserciziDBworker.create(es2_1);
+    Esercizio es3_1 = Esercizio();
+    es3_1.idScheda = id.toString();
+    es3_1.nomeEsercizio = "Curl Machine";
+    es3_1.serieEsercizio = "4";
+    es3_1.ripEsercizio = "10";
+    es3_1.pesoEsercizio = "30";
+    es3_1.noteEsercizio = "Sali veloce e scendi piano, 1.30 minuti di pausa";
+    await EserciziDBworker.eserciziDBworker.create(es3_1);
+
+    Registro reg1 = Registro();
+    reg1.idScheda=id.toString();
+    reg1.giorno="2022-03-12";
+    reg1.durataFinale = "01:45:45.000";
+    reg1.voto=(4.5).toString();
+    await RegistriDBworker.registriDBworker.create(reg1);
+    Registro reg2 = Registro();
+    reg2.idScheda=id.toString();
+    reg2.giorno="2022-03-19";
+    reg2.durataFinale = "01:35:25.000";
+    reg2.voto=(5).toString();
+    await RegistriDBworker.registriDBworker.create(reg2);
+    Registro reg3 = Registro();
+    reg3.idScheda=id.toString();
+    reg3.giorno="2022-03-26";
+    reg3.durataFinale = "01:30:30.000";
+    reg3.voto=(4).toString();
+    await RegistriDBworker.registriDBworker.create(reg3);
+
+    Scheda sch2 = Scheda();
+    sch2.idUtente = ut.id.toString();
+    sch2.nomeScheda = "Petto e Tricipiti";
+    sch2.durataScheda = "100";
+
+    int id2 = await SchedeDBworker.schedeDBworker.create(sch2);
+    Esercizio es1_2 = Esercizio();
+    es1_2.idScheda = id2.toString();
+    es1_2.nomeEsercizio = "Panca Inclinata";
+    es1_2.serieEsercizio = "4";
+    es1_2.ripEsercizio = "12-10-8-6";
+    es1_2.pesoEsercizio = "45";
+    es1_2.noteEsercizio = "Presa larga, 1.30 minuti di pausa";
+    await EserciziDBworker.eserciziDBworker.create(es1_2);
+    Esercizio es2_2 = Esercizio();
+    es2_2.idScheda = id2.toString();
+    es2_2.nomeEsercizio = "Chest-Press";
+    es2_2.serieEsercizio = "4";
+    es2_2.ripEsercizio = "8";
+    es2_2.pesoEsercizio = "50";
+    es2_2.noteEsercizio = "Petto in fuori";
+    await EserciziDBworker.eserciziDBworker.create(es2_2);
+    Esercizio es3_2 = Esercizio();
+    es3_2.idScheda = id2.toString();
+    es3_2.nomeEsercizio = "French Press";
+    es3_2.serieEsercizio = "3";
+    es3_2.ripEsercizio = "12";
+    es3_2.pesoEsercizio = "20";
+    es3_2.noteEsercizio = "Gomiti stretti";
+    await EserciziDBworker.eserciziDBworker.create(es3_2);
+
+    Registro reg4 = Registro();
+    reg4.idScheda=id2.toString();
+    reg4.giorno="2022-03-12";
+    reg4.durataFinale = "01:53:53.000";
+    reg4.voto=(4).toString();
+    await RegistriDBworker.registriDBworker.create(reg4);
+    Registro reg5 = Registro();
+    reg5.idScheda=id2.toString();
+    reg5.giorno="2022-03-19";
+    reg5.durataFinale = "01:32:32.000";
+    reg5.voto=(4.5).toString();
+    await RegistriDBworker.registriDBworker.create(reg5);
+    Registro reg6 = Registro();
+    reg6.idScheda=id2.toString();
+    reg6.giorno="2022-03-26";
+    reg6.durataFinale = "01:55:41.000";
+    reg6.voto=(5).toString();
+    await RegistriDBworker.registriDBworker.create(reg6);
+
   }
 }
 

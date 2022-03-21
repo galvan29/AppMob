@@ -29,16 +29,6 @@ class UtentiModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setNomeUtente(String nomeUtente2){
-    nomeUtente = nomeUtente2;
-    notifyListeners();
-  }
-
-  void setUtentePassword(String password2){
-    password = password2;
-    notifyListeners();
-  }
-
   Future<int> getPassword(dynamic inDatabaseWorker, String nomeUtente) async {
     up = await inDatabaseWorker.getPassword(nomeUtente);
     notifyListeners();
