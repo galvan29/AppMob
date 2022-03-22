@@ -5,6 +5,7 @@ import 'package:mytraining/common/appbar.dart';
 import 'package:mytraining/db/utentiDBworker.dart';
 import 'package:mytraining/editProfile/EditFormPage.dart';
 import 'package:mytraining/models/utentiModel.dart';
+import 'package:mytraining/screen/base.dart';
 import 'package:mytraining/screen/login.dart';
 
 import '../common/bottomNavigationBar.dart';
@@ -29,17 +30,7 @@ class _ProfiloState extends State<Profilo2> {
   final heightController = TextEditingController();
   final weightController = TextEditingController();
 
-  @override
-  void initState() {
-    super.initState();
-    userNameController.text = utentiModel.utenteBeingEdited.nomeUtente;
-    firstNameController.text = utentiModel.utenteBeingEdited.nome;
-    secondNameController.text = utentiModel.utenteBeingEdited.cognome;
-    ageController.text = utentiModel.utenteBeingEdited.eta;
-    heightController.text = utentiModel.utenteBeingEdited.height;
-    weightController.text = utentiModel.utenteBeingEdited.weight;
-    print("IO SONO ENTRATO");
-  }
+  bool ciao = true;
 
   @override
   Widget build(BuildContext context) {
@@ -50,6 +41,14 @@ class _ProfiloState extends State<Profilo2> {
     ageController.text = utentiModel.utenteBeingEdited.eta;
     heightController.text = utentiModel.utenteBeingEdited.height;
     weightController.text = utentiModel.utenteBeingEdited.weight;
+
+    print(ciao);
+    if(ciao && utentiModel.stackIndex == 5){
+      utentiModel.setStackIndex(7);
+      Base.pageIndexForWidget = 5;
+      print("sto aggiornando tutto");
+      ciao = false;
+    }
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -148,6 +147,8 @@ class _ProfiloState extends State<Profilo2> {
                   ),
                   child: GestureDetector(
                       onTap: () {
+                        utentiModel.setStackIndex(3);
+                        ciao = true;
                         LoginPage().removeValueLogin();
                         utentiModel.setStackIndex(0);
                       },

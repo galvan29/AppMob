@@ -22,7 +22,7 @@ class LoginPage extends StatelessWidget {
 
   getValueLogin() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getInt('idUtente')!;
+      return prefs.getInt('idUtente')!;
   }
 
   removeValueLogin() async {
