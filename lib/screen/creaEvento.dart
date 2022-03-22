@@ -128,6 +128,7 @@ class CreaEvento extends StatelessWidget {
                   height: 70,
                   width: MediaQuery.of(context).size.width * 0.9,
                   child: TextFormField(
+                      //enabled: false,
                       decoration: const InputDecoration(labelText: "Durata",
                           labelStyle: TextStyle(
                             color: Colors.white,

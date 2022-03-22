@@ -122,7 +122,7 @@ class Info extends StatelessWidget {
               margin: const EdgeInsets.only(
                 top: 10,
               ),
-              child: Text(r'''Aiutanti: Christian Bolletta''',
+              child: Text(/*r'''Aiutanti: Christian Bolletta'''*/"",
                   style: GoogleFonts.adventPro(
                     textStyle: const TextStyle(
                       color: Colors.white,

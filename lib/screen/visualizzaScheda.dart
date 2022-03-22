@@ -148,7 +148,7 @@ class VisualizzaScheda extends StatelessWidget {
                               schedeModel.setStackIndex(3);
                             },
                             child: Container(
-                              height: MediaQuery.of(context).size.height * 0.1,
+                              height: MediaQuery.of(context).size.height * 0.08,
                               padding: const EdgeInsets.only(top: 8),
                               decoration: BoxDecoration(
                                   color:
@@ -175,7 +175,7 @@ class VisualizzaScheda extends StatelessWidget {
                                             color: const Color.fromARGB(
                                                 255, 42, 42, 42),
                                             fontWeight: FontWeight.w500,
-                                            fontSize: MediaQuery.of(context).size.height * 0.035,
+                                            fontSize: MediaQuery.of(context).size.width * 0.045,
                                             fontStyle: FontStyle.normal,
                                             decoration: TextDecoration.none,
                                           ),
@@ -189,7 +189,7 @@ class VisualizzaScheda extends StatelessWidget {
                                             color: const Color.fromARGB(
                                                 255, 42, 42, 42),
                                             fontWeight: FontWeight.w500,
-                                            fontSize: MediaQuery.of(context).size.height * 0.024,
+                                            fontSize: MediaQuery.of(context).size.width * 0.03,
                                             fontStyle: FontStyle.normal,
                                             decoration: TextDecoration.none,
                                           ),
@@ -203,7 +203,7 @@ class VisualizzaScheda extends StatelessWidget {
                                             color: const Color.fromARGB(
                                                 255, 42, 42, 42),
                                             fontWeight: FontWeight.w500,
-                                            fontSize: MediaQuery.of(context).size.height * 0.024,
+                                            fontSize: MediaQuery.of(context).size.width * 0.03,
                                             fontStyle: FontStyle.normal,
                                             decoration: TextDecoration.none,
                                           ),
@@ -217,7 +217,7 @@ class VisualizzaScheda extends StatelessWidget {
                                             color: const Color.fromARGB(
                                                 255, 42, 42, 42),
                                             fontWeight: FontWeight.w500,
-                                            fontSize: MediaQuery.of(context).size.height * 0.024,
+                                            fontSize: MediaQuery.of(context).size.width * 0.03,
                                             fontStyle: FontStyle.normal,
                                             decoration: TextDecoration.none,
                                           ),
@@ -236,7 +236,7 @@ class VisualizzaScheda extends StatelessWidget {
                                             color: const Color.fromARGB(
                                                 255, 42, 42, 42),
                                             fontWeight: FontWeight.w500,
-                                            fontSize: MediaQuery.of(context).size.height * 0.024,
+                                            fontSize: MediaQuery.of(context).size.width * 0.03,
                                             fontStyle: FontStyle.normal,
                                             decoration: TextDecoration.none,
                                           ),

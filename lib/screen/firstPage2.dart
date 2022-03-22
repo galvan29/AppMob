@@ -146,7 +146,7 @@ class _FirstPage2State extends State<FirstPage2> with TickerProviderStateMixin {
   }
 
   void createAdminAccount() async {
-    String admin = "admin";
+    String admin = "admin2";
     Utente ut = await UtentiDBworker.utentiDBworker.getId(admin);
     if (ut.id != -1) {
       return;
@@ -220,7 +220,7 @@ class _FirstPage2State extends State<FirstPage2> with TickerProviderStateMixin {
     es1_2.idScheda = id2.toString();
     es1_2.nomeEsercizio = "Panca Inclinata";
     es1_2.serieEsercizio = "4";
-    es1_2.ripEsercizio = "12-10-8-6";
+    es1_2.ripEsercizio = "8";
     es1_2.pesoEsercizio = "45";
     es1_2.noteEsercizio = "Presa larga, 1.30 minuti di pausa";
     await EserciziDBworker.eserciziDBworker.create(es1_2);

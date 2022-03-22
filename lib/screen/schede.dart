@@ -20,6 +20,7 @@ import '../common/bottomNavigationBar.dart';
 class Schede extends StatefulWidget {
   static bool valoreOrologio = false;
   static int schedaAllenamento = -2;
+
   @override
   State<Schede> createState() => _SchedeState();
 
@@ -63,51 +64,49 @@ class _SchedeState extends State<Schede> {
                   top: MediaQuery.of(context).size.width * 0.05,
                 ),
               ),
+              Container(
+                  child: Row(
+                children: [
                   Container(
-                      child: Row(
-                        children: [
-                          Container(
-                            margin: EdgeInsets.only(
-                              top: MediaQuery.of(context).size.width * 0.05,
-                            ),
-                          ),
-                          SizedBox(
-                              width: 330,
-                              child: Text(
-                                "Ecco le tue Schede!",
-                                textAlign: TextAlign.center,
-                                style: GoogleFonts.adventPro(
-                                  textStyle: const TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 30,
-                                    fontStyle: FontStyle.normal,
-                                    decoration: TextDecoration.none,
-                                  ),
-                                ),
-                              )),
-                          Container(
-                              decoration: BoxDecoration(
-                                border: Border.all(color: Colors.black, width: 1.5),
-                                color: Colors.white,
-                                shape: BoxShape.circle,
-                              ),
-                              child: IconButton(
-                                  icon: const Icon(Icons.add),
-                                  color: Colors.black,
-                                  onPressed: () {
-                                    // if (!Schede.valoreOrologio) {
-                                    schedeModel.schedaBeingEdited = Scheda();
-                                    print(schedeModel.schedaBeingEdited.nomeScheda);
-                                    schedeModel.setStackIndex(1);
-                                    //  }else{
-                                    //  print("Non puoi perchè c0è un allenamento in corso");
-                                    //}
-                                  }
-                              )),
-                        ],
-                      )
+                    margin: EdgeInsets.only(
+                      top: MediaQuery.of(context).size.width * 0.05,
+                    ),
                   ),
+                  SizedBox(
+                      width: 330,
+                      child: Text(
+                        "Ecco le tue Schede!",
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.adventPro(
+                          textStyle: const TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w400,
+                            fontSize: 30,
+                            fontStyle: FontStyle.normal,
+                            decoration: TextDecoration.none,
+                          ),
+                        ),
+                      )),
+                  Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.black, width: 1.5),
+                        color: Colors.white,
+                        shape: BoxShape.circle,
+                      ),
+                      child: IconButton(
+                          icon: const Icon(Icons.add),
+                          color: Colors.black,
+                          onPressed: () {
+                            // if (!Schede.valoreOrologio) {
+                            schedeModel.schedaBeingEdited = Scheda();
+                            print(schedeModel.schedaBeingEdited.nomeScheda);
+                            schedeModel.setStackIndex(1);
+                            //  }else{
+                            //  print("Non puoi perchè c0è un allenamento in corso");
+                            //}
+                          })),
+                ],
+              )),
               Container(
                 margin: EdgeInsets.only(
                   top: MediaQuery.of(context).size.width * 0.05,
@@ -121,40 +120,30 @@ class _SchedeState extends State<Schede> {
                   Scheda scheda = schedeModel.schedeList[inIndex];
                   Color color = Colors.white;
 
-                  return Card(
-                    margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                    elevation: 8,
-                    color: Colors.blue,
-                    child: Slidable(
-                      actionPane: const SlidableScrollActionPane(),
-                      actionExtentRatio: .25,
-                      secondaryActions: [
-                        IconSlideAction(
-                          caption: "Elimina",
-                          color: Colors.red,
-                          icon: Icons.delete,
-                          onTap: () {
-                            _deleteScheda(context, scheda);
-                          },
-                        ),
-                      ],
-                      child: ListTile(
-                        title: Text(scheda.nomeScheda),
-                        subtitle: Text(scheda.durataScheda),
-                        tileColor: color,
-                        onLongPress: () async {
-                          //if (!Schede.valoreOrologio) {
+                  return Container(
+                      margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                      child: Slidable(
+                        actionPane: const SlidableScrollActionPane(),
+                        actionExtentRatio: .25,
+                        secondaryActions: [
+                          IconSlideAction(
+                            caption: "Elimina",
+                            color: Colors.red,
+                            icon: Icons.delete,
+                            onTap: () {
+                              _deleteScheda(context, scheda);
+                            },
+                          ),
+                        ],
+                        child: GestureDetector(
+                          onLongPress: () async {
                             schedeModel.schedaBeingEdited = await SchedeDBworker
                                 .schedeDBworker
                                 .get(scheda.id);
                             print(schedeModel.schedaBeingEdited.nomeScheda);
                             schedeModel.setStackIndex(1);
-                        //  } else {
-                         //   print("C'E UN ALLENAMENTO IN CORSO");
-                        //  }
-                        },
-                        onTap: () async {
-                          //if (!Schede.valoreOrologio) {
+                          },
+                          onTap: () async {
                             saveValueScheda(scheda.id);
                             Schede.schedaAllenamento = scheda.id;
                             print("Ciao bro " + scheda.id.toString());
@@ -163,13 +152,65 @@ class _SchedeState extends State<Schede> {
                             await registriModel.loadData(
                                 RegistriDBworker.registriDBworker, scheda.id);
                             schedeModel.setStackIndex(2);
-                         // } else {
-                         //   print("C'E UN ALLENAMENTO IN CORSO");
-                          //}
-                        },
-                      ),
-                    ),
-                  );
+                          },
+                          child: Container(
+                              height: MediaQuery.of(context).size.height * 0.08,
+                              padding: const EdgeInsets.only(top: 8),
+                              decoration: BoxDecoration(
+                                  color:
+                                      const Color.fromARGB(255, 230, 245, 252),
+                                  borderRadius: const BorderRadius.only(
+                                    topLeft: Radius.circular(20),
+                                    topRight: Radius.circular(20),
+                                    bottomRight: Radius.circular(20),
+                                    bottomLeft: Radius.circular(20),
+                                  ),
+                                  border: Border.all(color: Colors.white)),
+                              child: Column(children: [
+                                Row(
+                                  children: [
+                                    SizedBox(width: 10),
+                                    Text(
+                                      scheda.nomeScheda,
+                                      style: GoogleFonts.adventPro(
+                                        textStyle: TextStyle(
+                                          color:
+                                          const Color.fromARGB(255, 42, 42, 42),
+                                          fontWeight: FontWeight.w500,
+                                          fontSize:
+                                          MediaQuery.of(context).size.width *
+                                              0.045,
+                                          fontStyle: FontStyle.normal,
+                                          decoration: TextDecoration.none,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(width: 10, height: 5,),
+                                Row(
+                                  children: [
+                                    SizedBox(width: 10),
+                                    Text(
+                                      "Durata: " + scheda.durataScheda,
+                                      style: GoogleFonts.adventPro(
+                                        textStyle: TextStyle(
+                                          color:
+                                          const Color.fromARGB(255, 42, 42, 42),
+                                          fontWeight: FontWeight.w500,
+                                          fontSize:
+                                          MediaQuery.of(context).size.width *
+                                              0.03,
+                                          fontStyle: FontStyle.normal,
+                                          decoration: TextDecoration.none,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ])),
+                        ),
+                      ));
                 },
               ),
             ])),
@@ -183,8 +224,8 @@ class _SchedeState extends State<Schede> {
         builder: (BuildContext inAlertContext) {
           return AlertDialog(
             title: const Text("Elinina Scheda"),
-            content:
-                Text("Sei sicuro di voler eliminare ${scheda.nomeScheda}? Perderai tutti i dati in essa contenuti"),
+            content: Text(
+                "Sei sicuro di voler eliminare ${scheda.nomeScheda}? Perderai tutti i dati in essa contenuti"),
             actions: [
               FlatButton(
                 onPressed: () {

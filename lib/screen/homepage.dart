@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
@@ -9,20 +10,22 @@ import 'package:mytraining/db/eventiDBworrker.dart';
 import 'package:mytraining/db/utentiDBworker.dart';
 import 'package:mytraining/models/eventiModel.dart';
 import 'package:mytraining/models/utentiModel.dart';
+import 'package:mytraining/screen/base.dart';
 import 'package:mytraining/screen/login.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:intl/intl.dart';
 import 'package:mytraining/common/bottomNavigationBar.dart';
 
-
-var list = ['Chi vuol star sano, viver molti anni, mangi broccoli, broccoli e gnoccoli, e danzi senza zoccoli.',
+var list = [
+  'Chi vuol star sano, viver molti anni, mangi broccoli, broccoli e gnoccoli, e danzi senza zoccoli.',
   'Mai affrettarti. Fai un sacco di esercizio fisico. Sii sempre allegro. Prendi tutto il sonno di cui hai bisogno. E puoi aspettarti di stare bene.',
   'Ho deciso di essere felice perché fa bene alla mia salute.',
   'Mi sveglio sempre in forma e mi deformo attraverso gli altri.',
   'Se volete la vitamina C o il beta-carotene, non ricorrete al flacone nell’armadietto dei medicinali, ma al cestino della frutta o alla verdura verde in foglia.',
   'La vera ricchezza non sta nel possedere oggetti d’oro o d’argento, ma nella salute.',
   'Prenditi cura del tuo corpo. È l’unico posto in cui devi vivere.',
-  'Mangiare nel modo giusto non solo previene la malattia, ma genera anche la salute e un senso di benessere fisico e mentale.'];
+  'Mangiare nel modo giusto non solo previene la malattia, ma genera anche la salute e un senso di benessere fisico e mentale.'
+];
 final _random = new Random();
 var element = list[_random.nextInt(list.length)];
 
@@ -160,7 +163,6 @@ class _HomePageState extends State<HomePage> {
                     bottomLeft: Radius.circular(20),
                   ),
                 ),
-
                 child: SfCalendar(
                     view: CalendarView.month,
                     cellBorderColor: Colors.blue.withOpacity(0),
@@ -175,15 +177,17 @@ class _HomePageState extends State<HomePage> {
                       List<String> text = [];
                       List<int> idEve = [];
                       String giorno = DateFormat('dd-MM-yy').format(date);
-                      if(appointments.length != 0){
-                        for(var app in appointments){
-                          alle += app.eventName+" alle "+ DateFormat('HH.mm').format(app.from);
+                      if (appointments.length != 0) {
+                        for (var app in appointments) {
+                          alle += app.eventName +
+                              " alle " +
+                              DateFormat('HH.mm').format(app.from);
                           idEve.add(app.id);
                           text.add(alle);
-                          print("Dario "+alle);
+                          print("Dario " + alle);
                           alle = "";
                         }
-                       _showDialog(context, text, idEve, giorno);
+                        _showDialog(context, text, idEve, giorno);
                       }
                       LoginPage().getValueLogin().then((val) async {
                         await eventiModel.loadData(
@@ -394,8 +398,7 @@ class _HomePageState extends State<HomePage> {
                     bottomLeft: Radius.circular(20),
                   ),
                 ),
-                child: Text(
-                    element,
+                child: Text(element,
                     style: GoogleFonts.adventPro(
                       textStyle: const TextStyle(
                         color: Colors.black,
@@ -414,12 +417,13 @@ class _HomePageState extends State<HomePage> {
         bottomNavigationBar: buildBottomNavigationBar(context, _currentIndex));
   }
 
-  void _showDialog(BuildContext context, List<String> text, List<int> idEve, String giorno) {
+  void _showDialog(
+      BuildContext context, List<String> text, List<int> idEve, String giorno) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text("Allenamenti del "+giorno),
+          title: Text("Allenamenti del " + giorno),
           content: setupAlertDialoadContainer(text, idEve),
           actions: <Widget>[
             FlatButton(
@@ -436,8 +440,8 @@ class _HomePageState extends State<HomePage> {
 
   Widget setupAlertDialoadContainer(List<String> text, List<int> idEve) {
     return Container(
-     // height: 300.0, // Change as per your requirement
-      width: 300.0, // Change as per your requirement
+        // height: 300.0, // Change as per your requirement
+        width: 300.0, // Change as per your requirement
         child: ListView.builder(
           shrinkWrap: true,
           physics: NeverScrollableScrollPhysics(),
@@ -447,37 +451,55 @@ class _HomePageState extends State<HomePage> {
             int id = idEve[inIndex];
             Color color = Colors.white;
 
-            return Card(
+            return Container(
               margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-              elevation: 8,
               child: Slidable(
-                actionPane: const SlidableScrollActionPane(),
-                actionExtentRatio: .25,
-                secondaryActions: [
-                  IconSlideAction(
-                    caption: "Elimina",
-                    color: Colors.red,
-                    icon: Icons.delete,
-                    onTap: () async {
-                      Evento ev = await EventiDBworker.eventiDBworker.get(id);
-                      _deleteEvento(context, ev);
-                    },
-                  ),
-                ],
-                child: ListTile(
-                  title: Text(str),
-                  //subtitle: Text(scheda.durataScheda),
-                  tileColor: color,
-                  onLongPress: () async {
-                  },
-                  onTap: () async {
-                  },
-                ),
-              ),
+                  actionPane: const SlidableScrollActionPane(),
+                  actionExtentRatio: .25,
+                  secondaryActions: [
+                    IconSlideAction(
+                      caption: "Elimina",
+                      color: Colors.red,
+                      icon: Icons.delete,
+                      onTap: () async {
+                        Evento ev = await EventiDBworker.eventiDBworker.get(id);
+                        _deleteEvento(context, ev);
+                      },
+                    ),
+                  ],
+                  child: Container(
+                    height: MediaQuery.of(context).size.height * 0.07,
+                    decoration: BoxDecoration(
+                        color: const Color.fromARGB(255, 230, 245, 252),
+                        borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(20),
+                          topRight: Radius.circular(20),
+                          bottomRight: Radius.circular(20),
+                          bottomLeft: Radius.circular(20),
+                        ),
+                        border: Border.all(color: Colors.white)),
+                    child: Row(
+                      children: [
+                        SizedBox(width: 10),
+                        Text(
+                          str,
+                          style: GoogleFonts.adventPro(
+                            textStyle: TextStyle(
+                              color: const Color.fromARGB(255, 42, 42, 42),
+                              fontWeight: FontWeight.w500,
+                              fontSize:
+                                  MediaQuery.of(context).size.width * 0.04,
+                              fontStyle: FontStyle.normal,
+                              decoration: TextDecoration.none,
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  )),
             );
           },
-        )
-    );
+        ));
   }
 
   Future _deleteEvento(BuildContext context, Evento ev) async {
@@ -487,8 +509,8 @@ class _HomePageState extends State<HomePage> {
         builder: (BuildContext inAlertContext) {
           return AlertDialog(
             title: const Text("Elimina Scheda"),
-            content:
-            Text("Sei sicuro di voler eliminare ${ev.nomeScheda}? Perderai l'evento programmato"),
+            content: Text(
+                "Sei sicuro di voler eliminare ${ev.nomeScheda}? Perderai l'evento programmato"),
             actions: [
               FlatButton(
                 onPressed: () {
@@ -504,10 +526,13 @@ class _HomePageState extends State<HomePage> {
                     await eventiModel.loadData(
                         EventiDBworker.eventiDBworker, val);
                   });
-                  setState(() {
-
-                  });
                   Navigator.of(context).pop();
+                  Timer(
+                      const Duration(milliseconds: 200),
+                      () => {
+                            Base.pageIndexForWidget = 3,
+                            utentiModel.setStackIndex(7),
+                          });
                 },
                 child: const Text("Elimina"),
               ),
@@ -515,7 +540,6 @@ class _HomePageState extends State<HomePage> {
           );
         });
   }
-
 }
 
 List<Meeting> getMeetingData() {

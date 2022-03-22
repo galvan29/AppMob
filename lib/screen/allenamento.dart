@@ -212,6 +212,21 @@ class _AllenamentoState extends State<Allenamento> {
             )
           ],
         ),
+        SizedBox(height: 15),
+        Container(
+          child: Text(
+            "Esercizi",
+            style: GoogleFonts.adventPro(
+              textStyle: TextStyle(
+                color: const Color.fromARGB(255, 42, 42, 42),
+                fontWeight: FontWeight.w500,
+                fontSize: MediaQuery.of(context).size.width * 0.06,
+                fontStyle: FontStyle.normal,
+                decoration: TextDecoration.none,
+              ),
+            ),
+          ),
+        ),
         ListView.builder(
           shrinkWrap: true,
           physics: NeverScrollableScrollPhysics(),
@@ -219,24 +234,112 @@ class _AllenamentoState extends State<Allenamento> {
           itemBuilder: (BuildContext inBuildContext, int inIndex) {
             Esercizio esercizio = eserciziModel.eserciziList[inIndex];
             Color color = Colors.white;
-            return Card(
+            return Container(
               margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-              elevation: 8,
-              child: Slidable(
-                actionPane: const SlidableScrollActionPane(),
-                actionExtentRatio: .25,
-                child: ListTile(
-                  title: Text(esercizio.nomeEsercizio),
-                  subtitle: Text("Rip: " +
-                      esercizio.ripEsercizio +
-                      "\n Serie: " +
-                      esercizio.serieEsercizio +
-                      "\n Peso: " +
-                      esercizio.pesoEsercizio +
-                      "\n Note: " +
-                      esercizio.noteEsercizio),
-                  tileColor: color,
-                  onTap: () {},
+              child: Container(
+                height: MediaQuery.of(context).size.height * 0.08,
+                padding: const EdgeInsets.only(top: 8),
+                decoration: BoxDecoration(
+                    color: const Color.fromARGB(255, 230, 245, 252),
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20),
+                      bottomRight: Radius.circular(20),
+                      bottomLeft: Radius.circular(20),
+                    ),
+                    border: Border.all(color: Colors.white)),
+                child: Column(
+                  children: [
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Row(
+                      children: [
+                        SizedBox(width: 10),
+                        Text(
+                          esercizio.nomeEsercizio,
+                          style: GoogleFonts.adventPro(
+                            textStyle: TextStyle(
+                              color: const Color.fromARGB(255, 42, 42, 42),
+                              fontWeight: FontWeight.w500,
+                              fontSize:
+                                  MediaQuery.of(context).size.width * 0.045,
+                              fontStyle: FontStyle.normal,
+                              decoration: TextDecoration.none,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.25),
+                        Text(
+                          "Rip: " + esercizio.ripEsercizio,
+                          style: GoogleFonts.adventPro(
+                            textStyle: TextStyle(
+                              color: const Color.fromARGB(255, 42, 42, 42),
+                              fontWeight: FontWeight.w500,
+                              fontSize:
+                                  MediaQuery.of(context).size.width * 0.03,
+                              fontStyle: FontStyle.normal,
+                              decoration: TextDecoration.none,
+                            ),
+                          ),
+                        ),
+                        SizedBox(width: 10),
+                        Text(
+                          "Serie: " + esercizio.serieEsercizio,
+                          style: GoogleFonts.adventPro(
+                            textStyle: TextStyle(
+                              color: const Color.fromARGB(255, 42, 42, 42),
+                              fontWeight: FontWeight.w500,
+                              fontSize:
+                                  MediaQuery.of(context).size.width * 0.03,
+                              fontStyle: FontStyle.normal,
+                              decoration: TextDecoration.none,
+                            ),
+                          ),
+                        ),
+                        SizedBox(width: 10),
+                        Text(
+                          "Peso: " + esercizio.pesoEsercizio,
+                          style: GoogleFonts.adventPro(
+                            textStyle: TextStyle(
+                              color: const Color.fromARGB(255, 42, 42, 42),
+                              fontWeight: FontWeight.w500,
+                              fontSize:
+                                  MediaQuery.of(context).size.width * 0.03,
+                              fontStyle: FontStyle.normal,
+                              decoration: TextDecoration.none,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      width: 10,
+                      height: 5,
+                    ),
+                    Row(
+                      children: [
+                        SizedBox(
+                          width: 10,
+                          height: 5,
+                        ),
+                        Text(
+                          "Note: " + esercizio.noteEsercizio,
+                          style: GoogleFonts.adventPro(
+                            textStyle: TextStyle(
+                              color: const Color.fromARGB(255, 42, 42, 42),
+                              fontWeight: FontWeight.w500,
+                              fontSize:
+                                  MediaQuery.of(context).size.width * 0.03,
+                              fontStyle: FontStyle.normal,
+                              decoration: TextDecoration.none,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ),
             );
@@ -260,7 +363,8 @@ class _AllenamentoState extends State<Allenamento> {
 
   void _save(BuildContext context) async {
     // if(registriModel.registroBeingEdited.id==-1){
-      registriModel.registroBeingEdited.idScheda = Schede.schedaAllenamento.toString();
+    registriModel.registroBeingEdited.idScheda =
+        Schede.schedaAllenamento.toString();
     FineAllenamento.idTempRegistro = await RegistriDBworker.registriDBworker
         .create(registriModel.registroBeingEdited);
     print("Creato una nuova registro con id " +
@@ -268,11 +372,11 @@ class _AllenamentoState extends State<Allenamento> {
     // } else {
     // await RegistriDBworker.registriDBworker.update(registriModel.registroBeingEdited);
     // }
-      await registriModel.loadData(RegistriDBworker.registriDBworker, Schede.schedaAllenamento);
+    await registriModel.loadData(
+        RegistriDBworker.registriDBworker, Schede.schedaAllenamento);
 
     //Base.pageIndexForWidget=12;
     schedeModel.setStackIndex(5);
 //dd
-
   }
 }

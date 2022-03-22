@@ -30,15 +30,27 @@ class _ProfiloState extends State<Profilo2> {
   final weightController = TextEditingController();
 
   @override
+  void initState() {
+    super.initState();
+    userNameController.text = utentiModel.utenteBeingEdited.nomeUtente;
+    firstNameController.text = utentiModel.utenteBeingEdited.nome;
+    secondNameController.text = utentiModel.utenteBeingEdited.cognome;
+    ageController.text = utentiModel.utenteBeingEdited.eta;
+    heightController.text = utentiModel.utenteBeingEdited.height;
+    weightController.text = utentiModel.utenteBeingEdited.weight;
+    print("IO SONO ENTRATO");
+  }
+
+  @override
   Widget build(BuildContext context) {
-    setState(() {
-      userNameController.text = utentiModel.utenteBeingEdited.nomeUtente;
-      firstNameController.text = utentiModel.utenteBeingEdited.nome;
-      secondNameController.text = utentiModel.utenteBeingEdited.cognome;
-      ageController.text = utentiModel.utenteBeingEdited.eta;
-      heightController.text = utentiModel.utenteBeingEdited.height;
-      weightController.text = utentiModel.utenteBeingEdited.weight;
-    });
+
+    userNameController.text = utentiModel.utenteBeingEdited.nomeUtente;
+    firstNameController.text = utentiModel.utenteBeingEdited.nome;
+    secondNameController.text = utentiModel.utenteBeingEdited.cognome;
+    ageController.text = utentiModel.utenteBeingEdited.eta;
+    heightController.text = utentiModel.utenteBeingEdited.height;
+    weightController.text = utentiModel.utenteBeingEdited.weight;
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: buildAppBar(context),
