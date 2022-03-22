@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -10,6 +12,7 @@ import 'package:mytraining/models/eserciziModel.dart';
 import 'package:mytraining/models/registriModel.dart';
 import 'package:mytraining/models/schedeModel.dart';
 import 'package:mytraining/models/utentiModel.dart';
+import 'package:mytraining/screen/base.dart';
 import 'package:mytraining/screen/creaScheda.dart';
 import 'package:mytraining/screen/login.dart';
 import 'package:mytraining/screen/visualizzaScheda.dart';
@@ -145,6 +148,7 @@ class _SchedeState extends State<Schede> {
                           },
                           onTap: () async {
                             saveValueScheda(scheda.id);
+                            print("ciao "+scheda.id.toString());
                             Schede.schedaAllenamento = scheda.id;
                             print("Ciao bro " + scheda.id.toString());
                             await eserciziModel.loadData(
@@ -222,38 +226,110 @@ class _SchedeState extends State<Schede> {
         context: context,
         barrierDismissible: false,
         builder: (BuildContext inAlertContext) {
-          return AlertDialog(
-            title: const Text("Elinina Scheda"),
-            content: Text(
-                "Sei sicuro di voler eliminare ${scheda.nomeScheda}? Perderai tutti i dati in essa contenuti"),
-            actions: [
-              FlatButton(
-                onPressed: () {
-                  Navigator.of(inAlertContext).pop();
-                },
-                child: const Text("Indietro"),
-              ),
-              FlatButton(
-                onPressed: () async {
-                  await SchedeDBworker.schedeDBworker.delete(scheda.id);
-                  Navigator.of(inAlertContext).pop();
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      backgroundColor: Colors.red,
-                      duration: Duration(seconds: 2),
-                      content: Text("Scheda Eliminata!"),
-                    ),
-                  );
-                  LoginPage().getValueLogin().then((val) async {
-                    await schedeModel.loadData(
-                        SchedeDBworker.schedeDBworker, val);
-                  });
-                  schedeModel.setStackIndex(0);
-                },
-                child: const Text("Elimina"),
-              ),
-            ],
+          return Dialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: setupAlertDialoadContainer(scheda),
           );
         });
+  }
+
+  Widget setupAlertDialoadContainer(Scheda scheda) {
+    return Container(
+        decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(20),
+              topRight: Radius.circular(20),
+              bottomRight: Radius.circular(20),
+              bottomLeft: Radius.circular(20),
+            ),
+            border: Border.all(color: Colors.white)),
+        height: 180.0, // Change as per your requirement
+        width: 300.0, // Change as per your requirement
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(
+                height: 20,
+              ),
+              Text(
+                "Elimina Scheda",
+                style: GoogleFonts.adventPro(
+                  textStyle: TextStyle(
+                    color: const Color.fromARGB(255, 42, 42, 42),
+                    fontWeight: FontWeight.w500,
+                    fontSize: MediaQuery.of(context).size.width * 0.04,
+                    fontStyle: FontStyle.normal,
+                    decoration: TextDecoration.none,
+                  ),
+                ),
+              ),
+              Text(
+                "Sei sicuro di voler eliminare "+scheda.nomeScheda+"? Perderai tutti i dati in essa contenuti",
+                style: GoogleFonts.adventPro(
+                  textStyle: TextStyle(
+                    color: const Color.fromARGB(255, 42, 42, 42),
+                    fontWeight: FontWeight.w500,
+                    fontSize: MediaQuery.of(context).size.width * 0.04,
+                    fontStyle: FontStyle.normal,
+                    decoration: TextDecoration.none,
+                  ),
+                ),
+              ),
+              Row(
+                children: [
+                  FlatButton(
+                    child: Text(
+                      "Annulla",
+                      style: GoogleFonts.adventPro(
+                        textStyle: TextStyle(
+                          color: const Color.fromARGB(255, 42, 42, 42),
+                          fontWeight: FontWeight.w500,
+                          fontSize: MediaQuery.of(context).size.width * 0.04,
+                          fontStyle: FontStyle.normal,
+                          decoration: TextDecoration.none,
+                        ),
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                  FlatButton(
+                    child: Text(
+                      "Conferma",
+                      style: GoogleFonts.adventPro(
+                        textStyle: TextStyle(
+                          color: const Color.fromARGB(255, 42, 42, 42),
+                          fontWeight: FontWeight.w500,
+                          fontSize: MediaQuery.of(context).size.width * 0.04,
+                          fontStyle: FontStyle.normal,
+                          decoration: TextDecoration.none,
+                        ),
+                      ),
+                    ),
+                    onPressed: () async {
+                      await SchedeDBworker.schedeDBworker.delete(scheda.id);
+                      Navigator.of(context).pop();
+                      LoginPage().getValueLogin().then((val) async {
+                        await schedeModel.loadData(
+                            SchedeDBworker.schedeDBworker, val);
+                      });
+                      Timer(
+                          const Duration(milliseconds: 170),
+                              () => {
+                            Base.pageIndexForWidget = 4,
+                            utentiModel.setStackIndex(7),
+                          });
+                    },
+                  ),
+                ],
+              )
+
+            ],
+          ),
+        ));
   }
 }

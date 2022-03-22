@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -7,6 +9,7 @@ import 'package:mytraining/db/eserciziDBworker.dart';
 import 'package:mytraining/models/eserciziModel.dart';
 import 'package:mytraining/models/registriModel.dart';
 import 'package:mytraining/models/schedeModel.dart';
+import 'package:mytraining/screen/base.dart';
 import 'package:mytraining/screen/schede.dart';
 
 //import 'package:charts_flutter/flutter.dart' as charts;
@@ -14,8 +17,14 @@ import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:syncfusion_flutter_charts/sparkcharts.dart';
 
-class VisualizzaScheda extends StatelessWidget {
+class VisualizzaScheda extends StatefulWidget {
+  @override
+  State<VisualizzaScheda> createState() => _VisualizzaSchedaState();
+}
+
+class _VisualizzaSchedaState extends State<VisualizzaScheda> {
   final datasets = <String, dynamic>{};
+
   ValueNotifier<bool> isDialOpen = ValueNotifier(false);
 
   bool checkNumber() {
@@ -383,39 +392,111 @@ class VisualizzaScheda extends StatelessWidget {
         context: context,
         barrierDismissible: false,
         builder: (BuildContext inAlertContext) {
-          return AlertDialog(
-            title: const Text("Elimina Scheda"),
-            content: Text(
-                "Sei sicuro di voler eliminare ${esercizio.noteEsercizio}? Perderai tutti i dati in essa contenuti"),
-            actions: [
-              FlatButton(
-                onPressed: () {
-                  Navigator.of(inAlertContext).pop();
-                },
-                child: const Text("Indietro"),
-              ),
-              FlatButton(
-                onPressed: () async {
-                  await EserciziDBworker.eserciziDBworker.delete(esercizio.id);
-                  Navigator.of(inAlertContext).pop();
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      backgroundColor: Colors.red,
-                      duration: Duration(seconds: 2),
-                      content: Text("Esercizio eliminato"),
-                    ),
-                  );
-                  Schede().getValueScheda().then((val) async {
-                    eserciziModel.loadData(
-                        EserciziDBworker.eserciziDBworker, val);
-                  });
-                  schedeModel.setStackIndex(0);
-                },
-                child: const Text("Elimina"),
-              ),
-            ],
+          return Dialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: setupAlertDialoadContainer(esercizio),
           );
         });
+  }
+
+  Widget setupAlertDialoadContainer(Esercizio esercizio) {
+    return Container(
+        decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(20),
+              topRight: Radius.circular(20),
+              bottomRight: Radius.circular(20),
+              bottomLeft: Radius.circular(20),
+            ),
+            border: Border.all(color: Colors.white)),
+        height: 180.0, // Change as per your requirement
+        width: 300.0, // Change as per your requirement
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(
+                height: 20,
+              ),
+              Text(
+                "Elimina Esercizio",
+                style: GoogleFonts.adventPro(
+                  textStyle: TextStyle(
+                    color: const Color.fromARGB(255, 42, 42, 42),
+                    fontWeight: FontWeight.w500,
+                    fontSize: MediaQuery.of(context).size.width * 0.04,
+                    fontStyle: FontStyle.normal,
+                    decoration: TextDecoration.none,
+                  ),
+                ),
+              ),
+              Text(
+                "Sei sicuro di voler eliminare "+esercizio.nomeEsercizio+"? Perderai tutti i dati in esso contenuti",
+                style: GoogleFonts.adventPro(
+                  textStyle: TextStyle(
+                    color: const Color.fromARGB(255, 42, 42, 42),
+                    fontWeight: FontWeight.w500,
+                    fontSize: MediaQuery.of(context).size.width * 0.04,
+                    fontStyle: FontStyle.normal,
+                    decoration: TextDecoration.none,
+                  ),
+                ),
+              ),
+              Row(
+                children: [
+                  FlatButton(
+                    child: Text(
+                      "Annulla",
+                      style: GoogleFonts.adventPro(
+                        textStyle: TextStyle(
+                          color: const Color.fromARGB(255, 42, 42, 42),
+                          fontWeight: FontWeight.w500,
+                          fontSize: MediaQuery.of(context).size.width * 0.04,
+                          fontStyle: FontStyle.normal,
+                          decoration: TextDecoration.none,
+                        ),
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                  FlatButton(
+                    child: Text(
+                      "Conferma",
+                      style: GoogleFonts.adventPro(
+                        textStyle: TextStyle(
+                          color: const Color.fromARGB(255, 42, 42, 42),
+                          fontWeight: FontWeight.w500,
+                          fontSize: MediaQuery.of(context).size.width * 0.04,
+                          fontStyle: FontStyle.normal,
+                          decoration: TextDecoration.none,
+                        ),
+                      ),
+                    ),
+                    onPressed: () async {
+                      await EserciziDBworker.eserciziDBworker.delete(esercizio.id);
+                      Schede().getValueScheda().then((val) async {
+                        eserciziModel.loadData(
+                            EserciziDBworker.eserciziDBworker, val);
+                      });
+                      Navigator.of(context).pop();
+                      Timer(
+                          const Duration(milliseconds: 200),
+                              () => {
+                            Base.pageIndexForWidget = 2,
+                            schedeModel.setStackIndex(6),
+                          });
+                    },
+                  ),
+                ],
+              )
+
+            ],
+          ),
+        ));
   }
 
   int fromDateToMinute(String durataFinale) {

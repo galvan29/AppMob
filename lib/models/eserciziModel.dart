@@ -25,7 +25,6 @@ class EserciziModel extends ChangeNotifier {
     notifyListeners();
     return 0;
   }
-
 }
 
 EserciziModel eserciziModel = EserciziModel();

@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:mytraining/db/eserciziDBworker.dart';
+import 'package:mytraining/models/eserciziModel.dart';
 import 'package:mytraining/models/schedeModel.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
@@ -78,7 +80,14 @@ class SchedeDBworker {
 
   Future delete(int inID) async {
     Database? db = await _getDB();
-    return await db!.delete("schede", where: "id = ?", whereArgs: [inID]);
+    Database? db2 = await EserciziDBworker.eserciziDBworker.getDB();
+    await db!.delete("schede", where: "id = ?", whereArgs: [inID]);
+    eserciziModel.loadData(EserciziDBworker.eserciziDBworker, inID);
+    for(Esercizio es in eserciziModel.eserciziList){
+      await db2!.delete("esercizi", where: "id = ?", whereArgs: [es.id]);
+      print(es.id);
+    }
+    return 0;
   }
 
 }

@@ -13,7 +13,7 @@ class EserciziDBworker {
 
   Database? _db;
 
-  Future<Database?> _getDB() async {
+  Future<Database?> getDB() async {
     Directory docsDir = await getApplicationDocumentsDirectory();
     if(_db==null){
       print("Sto creando il database esercizi");
@@ -58,7 +58,7 @@ class EserciziDBworker {
   }
 
   Future create(Esercizio esercizio) async {
-    Database? db = await _getDB();
+    Database? db = await getDB();
     var val = await db!.rawQuery("SELECT MAX(id) + 1 AS id FROM esercizi");
     int id = val.first["id"] == null ? 1 : val.first["id"] as int;
     return await db.rawInsert(
@@ -69,25 +69,25 @@ class EserciziDBworker {
   }
 
   Future<Esercizio> get(int inID) async {
-    Database? db = await _getDB();
+    Database? db = await getDB();
     var rec = await db!.query("esercizi", where: "id = ?", whereArgs: [inID]);
     return esercizioFromMap(rec.first);
   }
 
   Future<List> getAll(int id) async {
-    Database? db = await _getDB();
+    Database? db = await getDB();
     var recs = await db!.query("esercizi", where: "idScheda = ?", whereArgs: [id]);
     var list = recs.isEmpty ? [] : recs.map((m) => esercizioFromMap(m)).toList();
     return list;
   }
 
   Future update(Esercizio esercizio) async {
-    Database? db = await _getDB();
+    Database? db = await getDB();
     return await db!.update("esercizi", esercizioToMap(esercizio), where: "id = ?", whereArgs: [esercizio.id]);
   }
 
   Future delete(int inID) async {
-    Database? db = await _getDB();
+    Database? db = await getDB();
     return await db!.delete("esercizi", where: "id = ?", whereArgs: [inID]);
   }
 

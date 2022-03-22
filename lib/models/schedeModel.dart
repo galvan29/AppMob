@@ -40,7 +40,6 @@ class SchedeModel extends ChangeNotifier {
     notifyListeners();
     return 0;
   }
-
 }
 
 SchedeModel schedeModel = SchedeModel();
