@@ -14,11 +14,10 @@ import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:intl/intl.dart';
 import 'package:mytraining/common/bottomNavigationBar.dart';
 
-int currentColor =0;
 
 BottomNavigationBar buildBottomNavigationBar(
     BuildContext context, var _currentIndex2) {
-  int _currentIndex = 0;
+  int currentColor = _currentIndex2;
   return BottomNavigationBar(
     type: BottomNavigationBarType.fixed,
     currentIndex: currentColor,
@@ -30,7 +29,6 @@ BottomNavigationBar buildBottomNavigationBar(
     onTap: (value) {
       if (value == 1) {
         utentiModel.setStackIndex(4);
-        _currentIndex = 1;
         currentColor= 1;
       } else if (value == 2) {
         LoginPage().getValueLogin().then((val) async {
@@ -38,11 +36,9 @@ BottomNavigationBar buildBottomNavigationBar(
               await UtentiDBworker.utentiDBworker.get(val);
         });
         utentiModel.setStackIndex(5);
-        _currentIndex = 2;
         currentColor= 2;
       } else if (value == 0) {
         utentiModel.setStackIndex(3);
-        _currentIndex = 0;
         currentColor= 0;
       }
     },
