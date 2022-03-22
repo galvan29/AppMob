@@ -318,7 +318,7 @@ class _SchedeState extends State<Schede> {
                             SchedeDBworker.schedeDBworker, val);
                       });
                       Timer(
-                          const Duration(milliseconds: 170),
+                          const Duration(milliseconds: 0),
                               () => {
                             Base.pageIndexForWidget = 4,
                             utentiModel.setStackIndex(7),

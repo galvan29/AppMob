@@ -65,7 +65,6 @@ class _VisualizzaSchedaState extends State<VisualizzaScheda> {
           child: FloatingActionButton(
             child: const Icon(Icons.play_arrow, color: Colors.white),
             onPressed: () async {
-              Schede.valoreOrologio = true;
               schedeModel.setStackIndex(4);
             },
           ),

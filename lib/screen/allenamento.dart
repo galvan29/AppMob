@@ -114,6 +114,7 @@ class _AllenamentoState extends State<Allenamento> {
                           padding: const EdgeInsets.symmetric(horizontal: 4),
                           child: ElevatedButton(
                             onPressed: () async {
+                              Schede.valoreOrologio = true;
                               _stopWatchTimer.onExecute
                                   .add(StopWatchExecute.start);
                             },
