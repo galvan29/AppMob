@@ -37,6 +37,8 @@ BottomNavigationBar buildBottomNavigationBar(
         });
         utentiModel.setStackIndex(5);
         currentColor= 2;
+        print("ciao");
+        print(utentiModel.stackIndex);
       } else if (value == 0) {
         utentiModel.setStackIndex(3);
         currentColor= 0;

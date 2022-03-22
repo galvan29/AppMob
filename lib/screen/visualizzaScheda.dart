@@ -13,9 +13,7 @@ import 'package:mytraining/screen/base.dart';
 import 'package:mytraining/screen/schede.dart';
 
 //import 'package:charts_flutter/flutter.dart' as charts;
-import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
-import 'package:syncfusion_flutter_charts/sparkcharts.dart';
 
 class VisualizzaScheda extends StatefulWidget {
   @override
@@ -184,13 +182,20 @@ class _VisualizzaSchedaState extends State<VisualizzaScheda> {
                                             color: const Color.fromARGB(
                                                 255, 42, 42, 42),
                                             fontWeight: FontWeight.w500,
-                                            fontSize: MediaQuery.of(context).size.width * 0.045,
+                                            fontSize: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.045,
                                             fontStyle: FontStyle.normal,
                                             decoration: TextDecoration.none,
                                           ),
                                         ),
                                       ),
-                                      SizedBox(width: MediaQuery.of(context).size.width * 0.25),
+                                      SizedBox(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.25),
                                       Text(
                                         "Rip: " + esercizio.ripEsercizio,
                                         style: GoogleFonts.adventPro(
@@ -198,7 +203,10 @@ class _VisualizzaSchedaState extends State<VisualizzaScheda> {
                                             color: const Color.fromARGB(
                                                 255, 42, 42, 42),
                                             fontWeight: FontWeight.w500,
-                                            fontSize: MediaQuery.of(context).size.width * 0.03,
+                                            fontSize: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.03,
                                             fontStyle: FontStyle.normal,
                                             decoration: TextDecoration.none,
                                           ),
@@ -212,7 +220,10 @@ class _VisualizzaSchedaState extends State<VisualizzaScheda> {
                                             color: const Color.fromARGB(
                                                 255, 42, 42, 42),
                                             fontWeight: FontWeight.w500,
-                                            fontSize: MediaQuery.of(context).size.width * 0.03,
+                                            fontSize: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.03,
                                             fontStyle: FontStyle.normal,
                                             decoration: TextDecoration.none,
                                           ),
@@ -226,7 +237,10 @@ class _VisualizzaSchedaState extends State<VisualizzaScheda> {
                                             color: const Color.fromARGB(
                                                 255, 42, 42, 42),
                                             fontWeight: FontWeight.w500,
-                                            fontSize: MediaQuery.of(context).size.width * 0.03,
+                                            fontSize: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.03,
                                             fontStyle: FontStyle.normal,
                                             decoration: TextDecoration.none,
                                           ),
@@ -234,10 +248,16 @@ class _VisualizzaSchedaState extends State<VisualizzaScheda> {
                                       ),
                                     ],
                                   ),
-                                  SizedBox(width: 10, height: 5,),
+                                  SizedBox(
+                                    width: 10,
+                                    height: 5,
+                                  ),
                                   Row(
                                     children: [
-                                      SizedBox(width: 10, height: 5,),
+                                      SizedBox(
+                                        width: 10,
+                                        height: 5,
+                                      ),
                                       Text(
                                         "Note: " + esercizio.noteEsercizio,
                                         style: GoogleFonts.adventPro(
@@ -245,7 +265,10 @@ class _VisualizzaSchedaState extends State<VisualizzaScheda> {
                                             color: const Color.fromARGB(
                                                 255, 42, 42, 42),
                                             fontWeight: FontWeight.w500,
-                                            fontSize: MediaQuery.of(context).size.width * 0.03,
+                                            fontSize: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.03,
                                             fontStyle: FontStyle.normal,
                                             decoration: TextDecoration.none,
                                           ),
@@ -279,43 +302,45 @@ class _VisualizzaSchedaState extends State<VisualizzaScheda> {
                     textAlign: TextAlign.center,
                     maxLines: 1),
               ),
-              Container(
-                  margin:
-                      EdgeInsets.only(top: 10, left: 30, right: 30, bottom: 40),
-                  height: 330,
-                  padding: const EdgeInsets.only(top: 8),
-                  decoration: BoxDecoration(
-                      color: const Color.fromARGB(255, 230, 245, 252),
-                      borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(20),
-                        topRight: Radius.circular(20),
-                        bottomRight: Radius.circular(20),
-                        bottomLeft: Radius.circular(20),
-                      ),
-                      border: Border.all(color: Colors.white)),
-                  child: SingleChildScrollView(
-                    //child: Row(
-                    //children: [
-                    child: Container(
-                        margin: EdgeInsets.only(top: 10, left: 30, right: 30),
-                        height: 300,
-                        width: MediaQuery.of(context).size.width * 0.90,
-                        child: SfCartesianChart(
-                            enableAxisAnimation: true,
-                            primaryXAxis: DateTimeAxis(),
-                            series: <CartesianSeries>[
-                              LineSeries<ChartRegistri, DateTime>(
-                                  dataSource: dataR,
-                                  xValueMapper: (ChartRegistri reg, _) =>
-                                      reg.giorno,
-                                  yValueMapper: (ChartRegistri reg, _) =>
-                                      reg.durata,
-                                  dataLabelMapper: (ChartRegistri reg, _) =>
-                                      reg.voto,
-                                  dataLabelSettings:
-                                      const DataLabelSettings(isVisible: true))
-                            ])
-                        /*charts.TimeSeriesChart(
+              Visibility(
+                visible: registriModel.registriList.length > 0 ? true : false,
+                child: Container(
+                    margin: EdgeInsets.only(
+                        top: 10, left: 30, right: 30, bottom: 40),
+                    height: 330,
+                    padding: const EdgeInsets.only(top: 8),
+                    decoration: BoxDecoration(
+                        color: const Color.fromARGB(255, 230, 245, 252),
+                        borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(20),
+                          topRight: Radius.circular(20),
+                          bottomRight: Radius.circular(20),
+                          bottomLeft: Radius.circular(20),
+                        ),
+                        border: Border.all(color: Colors.white)),
+                    child: SingleChildScrollView(
+                      //child: Row(
+                      //children: [
+                      child: Container(
+                          margin: EdgeInsets.only(top: 10, left: 30, right: 30),
+                          height: 300,
+                          width: MediaQuery.of(context).size.width * 0.90,
+                          child: SfCartesianChart(
+                              enableAxisAnimation: true,
+                              primaryXAxis: DateTimeAxis(),
+                              series: <CartesianSeries>[
+                                LineSeries<ChartRegistri, DateTime>(
+                                    dataSource: dataR,
+                                    xValueMapper: (ChartRegistri reg, _) =>
+                                        reg.giorno,
+                                    yValueMapper: (ChartRegistri reg, _) =>
+                                        reg.durata,
+                                    dataLabelMapper: (ChartRegistri reg, _) =>
+                                        reg.voto,
+                                    dataLabelSettings: const DataLabelSettings(
+                                        isVisible: true))
+                              ])
+                          /*charts.TimeSeriesChart(
                           series,
                           animate: true,
                           dateTimeFactory: const charts.LocalDateTimeFactory(),
@@ -328,8 +353,8 @@ class _VisualizzaSchedaState extends State<VisualizzaScheda> {
                             })
                           ],
                         )*/
-                        ),
-                    /* ListView.builder(
+                          ),
+                      /* ListView.builder(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
                         itemCount: registriModel.registriList.length,
@@ -357,9 +382,46 @@ class _VisualizzaSchedaState extends State<VisualizzaScheda> {
                           );
                         },
                       ),*/
-                    //  ],
-                  ))
-              //),
+                      //  ],
+                    )),
+              ),
+              Visibility(
+                visible: registriModel.registriList.length > 0 ? false : true,
+                    child: Container(
+                        margin: const EdgeInsets.only(
+                          left: 30,
+                          top: 20,
+                          right: 30,
+                        ),
+                        padding: EdgeInsets.zero,
+                        width: double.maxFinite,
+                        decoration: const BoxDecoration(),
+                        child: Container(
+                            padding: EdgeInsets.fromLTRB(2.5, 3, 2.5, 5),
+                            decoration: BoxDecoration(
+                                color: const Color.fromARGB(255, 230, 245, 252)
+                                    .withOpacity(0),
+                                borderRadius: const BorderRadius.only(
+                                  topLeft: Radius.circular(20),
+                                  topRight: Radius.circular(20),
+                                  bottomRight: Radius.circular(20),
+                                  bottomLeft: Radius.circular(20),
+                                ),
+                                border: Border.all(color: Colors.white)),
+                            child: Text(
+                              "Per visualizzare le statistiche devi prima effettuare un allenamento",
+                              style: GoogleFonts.adventPro(
+                                textStyle: const TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 16,
+                                  fontStyle: FontStyle.normal,
+                                  decoration: TextDecoration.none,
+                                ),
+                              ),
+                              textAlign: TextAlign.center,
+                            ))),
+                  ),
             ])),
         //va in alto magari
         bottomNavigationBar: Padding(
@@ -433,7 +495,9 @@ class _VisualizzaSchedaState extends State<VisualizzaScheda> {
                 ),
               ),
               Text(
-                "Sei sicuro di voler eliminare "+esercizio.nomeEsercizio+"? Perderai tutti i dati in esso contenuti",
+                "Sei sicuro di voler eliminare " +
+                    esercizio.nomeEsercizio +
+                    "? Perderai tutti i dati in esso contenuti",
                 style: GoogleFonts.adventPro(
                   textStyle: TextStyle(
                     color: const Color.fromARGB(255, 42, 42, 42),
@@ -477,7 +541,8 @@ class _VisualizzaSchedaState extends State<VisualizzaScheda> {
                       ),
                     ),
                     onPressed: () async {
-                      await EserciziDBworker.eserciziDBworker.delete(esercizio.id);
+                      await EserciziDBworker.eserciziDBworker
+                          .delete(esercizio.id);
                       Schede().getValueScheda().then((val) async {
                         eserciziModel.loadData(
                             EserciziDBworker.eserciziDBworker, val);
@@ -485,15 +550,14 @@ class _VisualizzaSchedaState extends State<VisualizzaScheda> {
                       Navigator.of(context).pop();
                       Timer(
                           const Duration(milliseconds: 200),
-                              () => {
-                            Base.pageIndexForWidget = 2,
-                            schedeModel.setStackIndex(6),
-                          });
+                          () => {
+                                Base.pageIndexForWidget = 2,
+                                schedeModel.setStackIndex(6),
+                              });
                     },
                   ),
                 ],
               )
-
             ],
           ),
         ));

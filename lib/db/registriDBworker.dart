@@ -12,7 +12,7 @@ class RegistriDBworker {
 
   Database? _db;
 
-  Future<Database?> _getDB() async {
+  Future<Database?> getDB() async {
     Directory docsDir = await getApplicationDocumentsDirectory();
     if(_db==null){
       print("Sto creando il database registri");
@@ -51,7 +51,7 @@ class RegistriDBworker {
   }
 
   Future create(Registro registro) async {
-    Database? db = await _getDB();
+    Database? db = await getDB();
     var val = await db!.rawQuery("SELECT MAX(id) + 1 AS id FROM registri");
     int id = val.first["id"] == null ? 1 : val.first["id"] as int;
     return await db.rawInsert(
@@ -62,20 +62,20 @@ class RegistriDBworker {
   }
 
   Future<Registro> get(int inID) async {
-    Database? db = await _getDB();
+    Database? db = await getDB();
     var rec = await db!.query("registri", where: "id = ?", whereArgs: [inID]);
     return registroFromMap(rec.first);
   }
 
   Future<List> getAll(int id) async {
-    Database? db = await _getDB();
+    Database? db = await getDB();
     var recs = await db!.query("registri", where: "idScheda = ?", whereArgs: [id]);
     var list = recs.isEmpty ? [] : recs.map((m) => registroFromMap(m)).toList();
     return list;
   }
 
   Future update(Registro registro) async {
-    Database? db = await _getDB();
+    Database? db = await getDB();
     return await db!.update("registri", registroToMap(registro), where: "id = ?", whereArgs: [registro.id]);
   }
 }
