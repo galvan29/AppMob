@@ -11,6 +11,7 @@ import 'package:mytraining/widget/Widget.dart';
 import 'package:provider/provider.dart';
 import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:mytraining/screen/Info.dart';
+import 'package:flutter/services.dart';
 
 class Base extends StatelessWidget {
   Base({Key? key}) : super(key: key);
@@ -18,6 +19,10 @@ class Base extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     return ChangeNotifierProvider.value(
         value: utentiModel,
         child: DoubleBackToCloseApp(
