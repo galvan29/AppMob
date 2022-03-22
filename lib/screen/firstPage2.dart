@@ -12,6 +12,7 @@ import 'package:mytraining/models/utentiModel.dart';
 import 'package:lottie/lottie.dart';
 import 'package:mytraining/screen/base.dart';
 import 'package:mytraining/screen/login.dart';
+import 'package:mytraining/screen/profilo2.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:intl/intl.dart';
 
@@ -29,6 +30,7 @@ class _FirstPage2State extends State<FirstPage2> with TickerProviderStateMixin {
 
   @override
   void initState() {
+    Profilo2().updateVal();
     createAdminAccount();
     super.initState();
     _animController = AnimationController(vsync: this);
@@ -61,6 +63,7 @@ class _FirstPage2State extends State<FirstPage2> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     var screenHeight = MediaQuery.of(context).size.height;
+    Profilo2().updateVal();
     return Scaffold(
       backgroundColor: Colors.black,
       body: Stack(

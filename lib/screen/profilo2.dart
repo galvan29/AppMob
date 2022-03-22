@@ -13,6 +13,9 @@ import '../common/bottomNavigationBar.dart';
 class Profilo2 extends StatefulWidget {
   @override
   State<Profilo2> createState() => _ProfiloState();
+  updateVal(){
+    _ProfiloState().update();
+  }
 }
 
 class _ProfiloState extends State<Profilo2> {
@@ -30,7 +33,15 @@ class _ProfiloState extends State<Profilo2> {
   final heightController = TextEditingController();
   final weightController = TextEditingController();
 
-  bool ciao = true;
+  update(){
+    userNameController.text = utentiModel.utenteBeingEdited.nomeUtente;
+    firstNameController.text = utentiModel.utenteBeingEdited.nome;
+    secondNameController.text = utentiModel.utenteBeingEdited.cognome;
+    ageController.text = utentiModel.utenteBeingEdited.eta;
+    heightController.text = utentiModel.utenteBeingEdited.height;
+    weightController.text = utentiModel.utenteBeingEdited.weight;
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -42,13 +53,13 @@ class _ProfiloState extends State<Profilo2> {
     heightController.text = utentiModel.utenteBeingEdited.height;
     weightController.text = utentiModel.utenteBeingEdited.weight;
 
-    print(ciao);
+   /* print(ciao);
     if(ciao && utentiModel.stackIndex == 5){
       utentiModel.setStackIndex(7);
       Base.pageIndexForWidget = 5;
       print("sto aggiornando tutto");
       ciao = false;
-    }
+    } */
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -147,8 +158,6 @@ class _ProfiloState extends State<Profilo2> {
                   ),
                   child: GestureDetector(
                       onTap: () {
-                        utentiModel.setStackIndex(3);
-                        ciao = true;
                         LoginPage().removeValueLogin();
                         utentiModel.setStackIndex(0);
                       },
