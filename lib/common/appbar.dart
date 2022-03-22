@@ -6,7 +6,7 @@ import '../models/utentiModel.dart';
 PreferredSize buildAppBar(BuildContext context) {
   return PreferredSize(
     preferredSize:
-    Size.fromHeight(MediaQuery.of(context).size.height * 0.07),
+    Size.fromHeight(MediaQuery.of(context).size.height * 0.05),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -15,8 +15,8 @@ PreferredSize buildAppBar(BuildContext context) {
           width: double.maxFinite,
           height: MediaQuery.of(context).size.height * 0.08,
           decoration: const BoxDecoration(
-              color: Color.fromARGB(255, 42, 42, 42),
-),
+            color: Color.fromARGB(255, 42, 42, 42),
+          ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -42,49 +42,6 @@ PreferredSize buildAppBar(BuildContext context) {
                     textAlign: TextAlign.left,
                     maxLines: 1),
               ),
-              Container(
-                padding: EdgeInsets.zero,
-                decoration: const BoxDecoration(),
-                margin: EdgeInsets.only(
-                  left: MediaQuery.of(context).size.width * 0.01,
-                  top: MediaQuery.of(context).size.width * 0.08,
-                ),
-                child: IconButton(
-                  icon: const Icon(Icons.info),
-                  onPressed: () {
-                    utentiModel.setStackIndex(8);
-                  },
-                  color: Colors.white,
-                ),
-              ),
-              /*Container(
-                  padding: EdgeInsets.zero,
-                  decoration: const BoxDecoration(),
-                  margin: EdgeInsets.only(
-                    right: MediaQuery.of(context).size.width * 0.03,
-                    top: MediaQuery.of(context).size.width * 0.05,
-                  ),
-                  child: GestureDetector(
-                    onTap: () {
-                      schedeModel.setStackIndex(4);
-                    },
-                    child: Container(
-                        height: MediaQuery.of(context).size.height * 0.02,
-                        width: MediaQuery.of(context).size.height * 0.07,
-                        decoration: BoxDecoration(
-                            color: Colors.black.withOpacity(0),
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(5),
-                              topRight: Radius.circular(5),
-                              bottomRight: Radius.circular(5),
-                              bottomLeft: Radius.circular(5),
-                            ),
-                            border: Border.all(
-                                color: Colors.black, width: 1)),
-                        child:
-                        const Text("Riprendi")
-                    ),
-                  ))*/
             ],
           ),
         ),
