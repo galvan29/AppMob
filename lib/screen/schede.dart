@@ -237,13 +237,6 @@ class _SchedeState extends State<Schede> {
                 onPressed: () async {
                   await SchedeDBworker.schedeDBworker.delete(scheda.id);
                   Navigator.of(inAlertContext).pop();
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      backgroundColor: Colors.red,
-                      duration: Duration(seconds: 2),
-                      content: Text("Scheda Eliminata!"),
-                    ),
-                  );
                   LoginPage().getValueLogin().then((val) async {
                     await schedeModel.loadData(
                         SchedeDBworker.schedeDBworker, val);

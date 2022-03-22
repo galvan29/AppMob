@@ -6,7 +6,7 @@ import '../models/utentiModel.dart';
 PreferredSize buildAppBar(BuildContext context) {
   return PreferredSize(
     preferredSize:
-    Size.fromHeight(MediaQuery.of(context).size.height * 0.07),
+    Size.fromHeight(MediaQuery.of(context).size.height * 0.05),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

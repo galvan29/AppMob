@@ -111,7 +111,7 @@ class Info extends StatelessWidget {
                       decoration: TextDecoration.none,
                     ),
                   ),
-                  textAlign: TextAlign.left,
+                  textAlign: TextAlign.center,
                   maxLines: 2),
             ),
             Container(
