@@ -9,6 +9,7 @@ import 'package:mytraining/common/appbar.dart';
 import 'package:mytraining/db/eventiDBworrker.dart';
 import 'package:mytraining/db/utentiDBworker.dart';
 import 'package:mytraining/models/eventiModel.dart';
+import 'package:mytraining/models/schedeModel.dart';
 import 'package:mytraining/models/utentiModel.dart';
 import 'package:mytraining/screen/base.dart';
 import 'package:mytraining/screen/login.dart';
@@ -195,25 +196,65 @@ class _HomePageState extends State<HomePage> {
                       });
                     }),
               ),
-              Container(
-                margin: const EdgeInsets.only(
-                  left: 30,
-                  top: 20,
-                  right: 30,
+              Visibility(
+                visible: schedeModel.schedeList.length > 0 ? true : false,
+                child: Container(
+                  margin: const EdgeInsets.only(
+                    left: 30,
+                    top: 20,
+                    right: 30,
+                  ),
+                  padding: EdgeInsets.zero,
+                  width: double.maxFinite,
+                  decoration: const BoxDecoration(),
+                  child: GestureDetector(
+                      onTap: () async {
+                        eventiModel.eventoBeingEdited = Evento();
+                        utentiModel.setStackIndex(6);
+                      },
+                      child: Container(
+                          height: 50,
+                          padding: const EdgeInsets.only(top: 8),
+                          decoration: BoxDecoration(
+                              color: const Color.fromARGB(255, 230, 245, 252),
+                              borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(20),
+                                topRight: Radius.circular(20),
+                                bottomRight: Radius.circular(20),
+                                bottomLeft: Radius.circular(20),
+                              ),
+                              border: Border.all(color: Colors.white)),
+                          child: Text(
+                            '''Programma Allenamento''',
+                            style: GoogleFonts.adventPro(
+                              textStyle: const TextStyle(
+                                color: const Color.fromARGB(255, 42, 42, 42),
+                                fontWeight: FontWeight.w500,
+                                fontSize: 20,
+                                fontStyle: FontStyle.normal,
+                                decoration: TextDecoration.none,
+                              ),
+                            ),
+                            textAlign: TextAlign.center,
+                          ))),
                 ),
-                padding: EdgeInsets.zero,
-                width: double.maxFinite,
-                decoration: const BoxDecoration(),
-                child: GestureDetector(
-                    onTap: () async {
-                      eventiModel.eventoBeingEdited = Evento();
-                      utentiModel.setStackIndex(6);
-                    },
+              ),
+              Visibility(
+                visible: schedeModel.schedeList.length > 0 ? false : true,
+                child: Container(
+                    margin: const EdgeInsets.only(
+                      left: 30,
+                      top: 20,
+                      right: 30,
+                    ),
+                    padding: EdgeInsets.zero,
+                    width: double.maxFinite,
+                    decoration: const BoxDecoration(),
                     child: Container(
-                        height: 50,
-                        padding: const EdgeInsets.only(top: 8),
+                        padding: EdgeInsets.fromLTRB(2.5, 3, 2.5, 5),
                         decoration: BoxDecoration(
-                            color: const Color.fromARGB(255, 230, 245, 252),
+                            color: const Color.fromARGB(255, 230, 245, 252)
+                                .withOpacity(0),
                             borderRadius: const BorderRadius.only(
                               topLeft: Radius.circular(20),
                               topRight: Radius.circular(20),
@@ -222,12 +263,12 @@ class _HomePageState extends State<HomePage> {
                             ),
                             border: Border.all(color: Colors.white)),
                         child: Text(
-                          '''Programma Allenamento''',
+                          "Per programmare un allenamento è necessario prima creare almeno una scheda",
                           style: GoogleFonts.adventPro(
                             textStyle: const TextStyle(
-                              color: const Color.fromARGB(255, 42, 42, 42),
-                              fontWeight: FontWeight.w500,
-                              fontSize: 20,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w400,
+                              fontSize: 16,
                               fontStyle: FontStyle.normal,
                               decoration: TextDecoration.none,
                             ),
@@ -235,130 +276,6 @@ class _HomePageState extends State<HomePage> {
                           textAlign: TextAlign.center,
                         ))),
               ),
-              //scritta suggerimento
-              /*Container(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                        margin: EdgeInsets.only(
-                          left: MediaQuery.of(context).size.width * 0.07,
-                          top: MediaQuery.of(context).size.width * 0.05,
-                        ),
-                        width: MediaQuery.of(context).size.width * 0.20,
-                        height: 100,
-                        padding: const EdgeInsets.only(top: 8),
-                        decoration: BoxDecoration(
-                            color: const Color.fromARGB(255, 253, 237, 210),
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(5),
-                              topRight: Radius.circular(5),
-                              bottomRight: Radius.circular(5),
-                              bottomLeft: Radius.circular(5),
-                            ),
-                            border: Border.all(color: Colors.white)),
-                        child: Column(
-                          children: [
-                            Icon(
-                              Icons.info,
-                              size: MediaQuery.of(context).size.height * 0.07,
-                              color: const Color(0xFF000000),
-                            ),
-                            Text(
-                              '''70cm''',
-                              style: GoogleFonts.adventPro(
-                                textStyle: const TextStyle(
-                                  color: Color(0xFF000000),
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 20,
-                                  fontStyle: FontStyle.normal,
-                                  decoration: TextDecoration.none,
-                                ),
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                          ],
-                        )),
-                    Container(
-                        margin: EdgeInsets.only(
-                          top: MediaQuery.of(context).size.width * 0.05,
-                        ),
-                        width: MediaQuery.of(context).size.width * 0.20,
-                        height: 100,
-                        padding: const EdgeInsets.only(top: 8),
-                        decoration: BoxDecoration(
-                            color: const Color.fromARGB(255, 253, 237, 210),
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(5),
-                              topRight: Radius.circular(5),
-                              bottomRight: Radius.circular(5),
-                              bottomLeft: Radius.circular(5),
-                            ),
-                            border: Border.all(color: Colors.white)),
-                        child: Column(
-                          children: [
-                            Icon(
-                              Icons.info,
-                              size: MediaQuery.of(context).size.height * 0.07,
-                              color: const Color(0xFF000000),
-                            ),
-                            Text(
-                              '''10cm''',
-                              style: GoogleFonts.adventPro(
-                                textStyle: const TextStyle(
-                                  color: Color(0xFF000000),
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 20,
-                                  fontStyle: FontStyle.normal,
-                                  decoration: TextDecoration.none,
-                                ),
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                          ],
-                        )),
-                    Container(
-                        margin: EdgeInsets.only(
-                          right: MediaQuery.of(context).size.width * 0.07,
-                          top: MediaQuery.of(context).size.width * 0.05,
-                        ),
-                        width: MediaQuery.of(context).size.width * 0.20,
-                        height: 100,
-                        padding: const EdgeInsets.only(top: 8),
-                        decoration: BoxDecoration(
-                            color: const Color.fromARGB(255, 253, 237, 210),
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(5),
-                              topRight: Radius.circular(5),
-                              bottomRight: Radius.circular(5),
-                              bottomLeft: Radius.circular(5),
-                            ),
-                            border: Border.all(color: Colors.white)),
-                        child: Column(
-                          children: [
-                            Icon(
-                              Icons.info,
-                              size: MediaQuery.of(context).size.height * 0.07,
-                              color: const Color(0xFF000000),
-                            ),
-                            Text(
-                              '''20cm''',
-                              style: GoogleFonts.adventPro(
-                                textStyle: const TextStyle(
-                                  color: Color(0xFF000000),
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 20,
-                                  fontStyle: FontStyle.normal,
-                                  decoration: TextDecoration.none,
-                                ),
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                          ],
-                        )),
-                  ],
-                ),
-              ),*/
               Container(
                 margin: EdgeInsets.only(
                   top: MediaQuery.of(context).size.height * 0.02,
@@ -387,10 +304,10 @@ class _HomePageState extends State<HomePage> {
                   right: 30,
                   bottom: 70,
                 ),
-                padding: const EdgeInsets.only(top: 8),
+                padding: EdgeInsets.fromLTRB(2.5, 3, 2.5, 5),
                 decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 230, 245, 252),
-                  border: Border.all(color: Colors.black),
+                  color: Colors.white.withOpacity(0),
+                  border: Border.all(color: Colors.white),
                   borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(20),
                     topRight: Radius.circular(20),
@@ -401,9 +318,9 @@ class _HomePageState extends State<HomePage> {
                 child: Text(element,
                     style: GoogleFonts.adventPro(
                       textStyle: const TextStyle(
-                        color: Colors.black,
+                        color: Colors.white,
                         fontWeight: FontWeight.w400,
-                        fontSize: 18,
+                        fontSize: 16,
                         fontStyle: FontStyle.normal,
                         decoration: TextDecoration.none,
                       ),
@@ -422,83 +339,128 @@ class _HomePageState extends State<HomePage> {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text("Allenamenti del " + giorno),
-          content: setupAlertDialoadContainer(text, idEve),
-          actions: <Widget>[
-            FlatButton(
-              child: const Text("OK"),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
+        return Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: setupAlertDialoadContainer(text, idEve, giorno),
         );
       },
     );
   }
 
-  Widget setupAlertDialoadContainer(List<String> text, List<int> idEve) {
+  Widget setupAlertDialoadContainer(
+      List<String> text, List<int> idEve, String giorno) {
     return Container(
-        // height: 300.0, // Change as per your requirement
+        decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(20),
+              topRight: Radius.circular(20),
+              bottomRight: Radius.circular(20),
+              bottomLeft: Radius.circular(20),
+            ),
+            border: Border.all(color: Colors.white)),
+        height: 180.0 + (idEve.length - 1) * 80 > 280
+            ? 280
+            : 180.0 + (idEve.length - 1) * 80, // Change as per your requirement
         width: 300.0, // Change as per your requirement
-        child: ListView.builder(
-          shrinkWrap: true,
-          physics: NeverScrollableScrollPhysics(),
-          itemCount: text.length,
-          itemBuilder: (BuildContext inBuildContext, int inIndex) {
-            String str = text[inIndex];
-            int id = idEve[inIndex];
-            Color color = Colors.white;
-
-            return Container(
-              margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-              child: Slidable(
-                  actionPane: const SlidableScrollActionPane(),
-                  actionExtentRatio: .25,
-                  secondaryActions: [
-                    IconSlideAction(
-                      caption: "Elimina",
-                      color: Colors.red,
-                      icon: Icons.delete,
-                      onTap: () async {
-                        Evento ev = await EventiDBworker.eventiDBworker.get(id);
-                        _deleteEvento(context, ev);
-                      },
-                    ),
-                  ],
-                  child: Container(
-                    height: MediaQuery.of(context).size.height * 0.07,
-                    decoration: BoxDecoration(
-                        color: const Color.fromARGB(255, 230, 245, 252),
-                        borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(20),
-                          topRight: Radius.circular(20),
-                          bottomRight: Radius.circular(20),
-                          bottomLeft: Radius.circular(20),
-                        ),
-                        border: Border.all(color: Colors.white)),
-                    child: Row(
-                      children: [
-                        SizedBox(width: 10),
-                        Text(
-                          str,
-                          style: GoogleFonts.adventPro(
-                            textStyle: TextStyle(
-                              color: const Color.fromARGB(255, 42, 42, 42),
-                              fontWeight: FontWeight.w500,
-                              fontSize:
-                                  MediaQuery.of(context).size.width * 0.04,
-                              fontStyle: FontStyle.normal,
-                              decoration: TextDecoration.none,
-                            ),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(
+                height: 20,
+              ),
+              Text(
+                "Allenamenti del " + giorno,
+                style: GoogleFonts.adventPro(
+                  textStyle: TextStyle(
+                    color: const Color.fromARGB(255, 42, 42, 42),
+                    fontWeight: FontWeight.w500,
+                    fontSize: MediaQuery.of(context).size.width * 0.04,
+                    fontStyle: FontStyle.normal,
+                    decoration: TextDecoration.none,
+                  ),
+                ),
+              ),
+              ListView.builder(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                itemCount: text.length,
+                itemBuilder: (BuildContext inBuildContext, int inIndex) {
+                  String str = text[inIndex];
+                  int id = idEve[inIndex];
+                  return Container(
+                    margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                    child: Slidable(
+                        actionPane: const SlidableScrollActionPane(),
+                        actionExtentRatio: .25,
+                        secondaryActions: [
+                          IconSlideAction(
+                            caption: "Elimina",
+                            color: Colors.red,
+                            icon: Icons.delete,
+                            onTap: () async {
+                              Evento ev =
+                                  await EventiDBworker.eventiDBworker.get(id);
+                              _deleteEvento(context, ev);
+                            },
                           ),
-                        )
-                      ],
+                        ],
+                        child: Container(
+                          height: MediaQuery.of(context).size.height * 0.07,
+                          decoration: BoxDecoration(
+                              color: const Color.fromARGB(255, 230, 245, 252),
+                              borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(20),
+                                topRight: Radius.circular(20),
+                                bottomRight: Radius.circular(20),
+                                bottomLeft: Radius.circular(20),
+                              ),
+                              border: Border.all(color: Colors.white)),
+                          child: Row(
+                            children: [
+                              SizedBox(width: 10),
+                              Text(
+                                str,
+                                style: GoogleFonts.adventPro(
+                                  textStyle: TextStyle(
+                                    color:
+                                        const Color.fromARGB(255, 42, 42, 42),
+                                    fontWeight: FontWeight.w500,
+                                    fontSize:
+                                        MediaQuery.of(context).size.width *
+                                            0.04,
+                                    fontStyle: FontStyle.normal,
+                                    decoration: TextDecoration.none,
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                        )),
+                  );
+                },
+              ),
+              FlatButton(
+                child: Text(
+                  "OK",
+                  style: GoogleFonts.adventPro(
+                    textStyle: TextStyle(
+                      color: const Color.fromARGB(255, 42, 42, 42),
+                      fontWeight: FontWeight.w500,
+                      fontSize: MediaQuery.of(context).size.width * 0.04,
+                      fontStyle: FontStyle.normal,
+                      decoration: TextDecoration.none,
                     ),
-                  )),
-            );
-          },
+                  ),
+                ),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          ),
         ));
   }
 
@@ -528,7 +490,7 @@ class _HomePageState extends State<HomePage> {
                   });
                   Navigator.of(context).pop();
                   Timer(
-                      const Duration(milliseconds: 200),
+                      const Duration(milliseconds: 160),
                       () => {
                             Base.pageIndexForWidget = 3,
                             utentiModel.setStackIndex(7),

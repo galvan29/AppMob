@@ -46,10 +46,8 @@ class _Generated3WidgetState extends State<WidgetClass>
                 ),
               ),
               Positioned(
-                  left: MediaQuery.of(context).size.width * 0.37,
-                  top: MediaQuery.of(context).size.height * 0.45,
-                  width: MediaQuery.of(context).size.height * 0.10,
-                  height: MediaQuery.of(context).size.height * 0.10,
+                  width: MediaQuery.of(context).size.height * 0.15,
+                  height: MediaQuery.of(context).size.height * 0.15,
                   child: functionGif()),
             ])
           ])),
@@ -58,14 +56,14 @@ class _Generated3WidgetState extends State<WidgetClass>
 
   functionGif() {
     if (utentiModel.stackIndex == 7) {
-      controller.animateTo(110, duration: const Duration(milliseconds: 2000));
+      controller.animateTo(29, duration: const Duration(milliseconds: 1000));
       LoginPage().getValueLogin().then((val) async {
         await eventiModel.loadData(EventiDBworker.eventiDBworker, val);
       });
 
       print("SECONDO TIMER");
       Timer(
-          const Duration(milliseconds: 2000),
+          const Duration(milliseconds: 1000),
           () => {
                 utentiModel.setStackIndex(Base.pageIndexForWidget),
                 controller.reset()
@@ -74,7 +72,7 @@ class _Generated3WidgetState extends State<WidgetClass>
     return GifImage(
       controller: controller,
       image: const AssetImage(
-          "assets/image/9b61a1215a12665056f1ac4fc2b110319a660ef2.gif"),
+          "assets/image/we.gif"),
     );
   }
 }
