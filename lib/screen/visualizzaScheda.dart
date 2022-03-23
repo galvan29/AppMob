@@ -321,7 +321,7 @@ class _VisualizzaSchedaState extends State<VisualizzaScheda> {
                       //child: Row(
                       //children: [
                       child: Container(
-                          margin: EdgeInsets.only(top: 10, left: 30, right: 30),
+                          margin: EdgeInsets.only(top: 10, right: 30),
                           height: 300,
                           width: MediaQuery.of(context).size.width * 0.90,
                           child: SfCartesianChart(
@@ -336,7 +336,7 @@ class _VisualizzaSchedaState extends State<VisualizzaScheda> {
                                           fontStyle: FontStyle.italic,
                                           fontWeight: FontWeight.w300
                                       )
-                                  )
+                                  ),
                               ),
                               primaryYAxis: DateTimeAxis(
                                   title: AxisTitle(
@@ -348,7 +348,7 @@ class _VisualizzaSchedaState extends State<VisualizzaScheda> {
                                           fontStyle: FontStyle.italic,
                                           fontWeight: FontWeight.w300
                                       )
-                                  )
+                                  ),
                               ),
                               series: <CartesianSeries>[
                                 LineSeries<ChartRegistri, DateTime>(
