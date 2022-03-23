@@ -464,41 +464,129 @@ class _HomePageState extends State<HomePage> {
         ));
   }
 
+  Widget setupAlertDialoadContainer2(Evento ev) {
+    return Container(
+        decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(20),
+              topRight: Radius.circular(20),
+              bottomRight: Radius.circular(20),
+              bottomLeft: Radius.circular(20),
+            ),
+            border: Border.all(color: Colors.white)),
+        height: 180.0, // Change as per your requirement
+        width: 300.0, // Change as per your requirement
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(
+                height: 20,
+              ),
+              Text(
+                "Elimina Evento",
+                style: GoogleFonts.adventPro(
+                  textStyle: TextStyle(
+                    color: const Color.fromARGB(255, 42, 42, 42),
+                    fontWeight: FontWeight.w500,
+                    fontSize: MediaQuery.of(context).size.width * 0.04,
+                    fontStyle: FontStyle.normal,
+                    decoration: TextDecoration.none,
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Text(
+                "Sei sicuro di voler eliminare l'evento per la scheda "+ev.nomeScheda+"?",
+                style: GoogleFonts.adventPro(
+                  textStyle: TextStyle(
+                    color: const Color.fromARGB(255, 42, 42, 42),
+                    fontWeight: FontWeight.w500,
+                    fontSize: MediaQuery.of(context).size.width * 0.04,
+                    fontStyle: FontStyle.normal,
+                    decoration: TextDecoration.none,
+                  ),
+                ),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Row(
+                children: [
+                  FlatButton(
+                    child: Text(
+                      "Annulla",
+                      style: GoogleFonts.adventPro(
+                        textStyle: TextStyle(
+                          color: const Color.fromARGB(255, 42, 42, 42),
+                          fontWeight: FontWeight.w500,
+                          fontSize: MediaQuery.of(context).size.width * 0.04,
+                          fontStyle: FontStyle.normal,
+                          decoration: TextDecoration.none,
+                        ),
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                  Container(
+                    padding: EdgeInsets.zero,
+                    alignment: Alignment.center,
+                    decoration: const BoxDecoration(),
+                    margin: EdgeInsets.only(
+                      left: MediaQuery.of(context).size.width * 0.28,
+                    ),
+                  ),
+                  FlatButton(
+                    child: Text(
+                      "Conferma",
+                      style: GoogleFonts.adventPro(
+                        textStyle: TextStyle(
+                          color: const Color.fromARGB(255, 42, 42, 42),
+                          fontWeight: FontWeight.w500,
+                          fontSize: MediaQuery.of(context).size.width * 0.04,
+                          fontStyle: FontStyle.normal,
+                          decoration: TextDecoration.none,
+                        ),
+                      ),
+                    ),
+                    onPressed: () async {
+                      await EventiDBworker.eventiDBworker.delete(ev.id);
+                      LoginPage().getValueLogin().then((val) async {
+                        await eventiModel.loadData(
+                            EventiDBworker.eventiDBworker, val);
+                      });
+                      Navigator.of(context).pop();
+                      Timer(
+                          const Duration(milliseconds: 160),
+                              () => {
+                            Base.pageIndexForWidget = 3,
+                            utentiModel.setStackIndex(7),
+                          });
+                    },
+                  ),
+                ],
+              )
+
+            ],
+          ),
+        ));
+  }
+
   Future _deleteEvento(BuildContext context, Evento ev) async {
     return showDialog(
         context: context,
         barrierDismissible: false,
         builder: (BuildContext inAlertContext) {
-          return AlertDialog(
-            title: const Text("Elimina Scheda"),
-            content: Text(
-                "Sei sicuro di voler eliminare ${ev.nomeScheda}? Perderai l'evento programmato"),
-            actions: [
-              FlatButton(
-                onPressed: () {
-                  Navigator.of(inAlertContext).pop();
-                },
-                child: const Text("Indietro"),
-              ),
-              FlatButton(
-                onPressed: () async {
-                  await EventiDBworker.eventiDBworker.delete(ev.id);
-                  Navigator.of(inAlertContext).pop();
-                  LoginPage().getValueLogin().then((val) async {
-                    await eventiModel.loadData(
-                        EventiDBworker.eventiDBworker, val);
-                  });
-                  Navigator.of(context).pop();
-                  Timer(
-                      const Duration(milliseconds: 160),
-                      () => {
-                            Base.pageIndexForWidget = 3,
-                            utentiModel.setStackIndex(7),
-                          });
-                },
-                child: const Text("Elimina"),
-              ),
-            ],
+          return Dialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: setupAlertDialoadContainer2(ev),
           );
         });
   }
