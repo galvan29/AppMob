@@ -51,12 +51,14 @@ class _AllenamentoState extends State<Allenamento> {
     await _stopWatchTimer.dispose();
   }
 
+  bool isRunning = false;
+  bool firstTime = false;
   @override
   Widget build(BuildContext context) {
     String displayTime2 = "";
     return Scaffold(
       appBar: buildAppBar(context),
-      backgroundColor: Colors.white,
+      backgroundColor: const Color.fromARGB(255, 42, 42, 42),
       body: SingleChildScrollView(
           child: Column(children: <Widget>[
         Column(
@@ -83,7 +85,7 @@ class _AllenamentoState extends State<Allenamento> {
                           child: Text(displayTime,
                               style: GoogleFonts.adventPro(
                                 textStyle: const TextStyle(
-                                  color: Colors.black,
+                                  color: Colors.white,
                                   fontWeight: FontWeight.w400,
                                   fontSize: 40,
                                   fontStyle: FontStyle.normal,
@@ -110,101 +112,121 @@ class _AllenamentoState extends State<Allenamento> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 4),
-                          child: ElevatedButton(
-                            onPressed: () async {
-                              Schede.valoreOrologio = true;
-                              _stopWatchTimer.onExecute
-                                  .add(StopWatchExecute.start);
-                            },
-                            child: const Text(
-                              'Inizio',
-                              style: TextStyle(color: Colors.black),
-                            ),
-                            style: ElevatedButton.styleFrom(
-                                primary: Colors.white,
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 20, vertical: 10),
-                                textStyle: GoogleFonts.adventPro(
-                                  textStyle: const TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 20,
-                                    fontStyle: FontStyle.normal,
-                                    decoration: TextDecoration.none,
-                                  ),
+                        Visibility(
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 4),
+                              child: ElevatedButton(
+                                onPressed: () async {
+                                  Schede.valoreOrologio = true;
+                                  _stopWatchTimer.onExecute
+                                      .add(StopWatchExecute.start);
+                                  setState(() {
+                                    isRunning = true;
+                                    firstTime = true;
+                                  });
+                                },
+                                child: const Text(
+                                  'Start',
+                                  style: TextStyle(color: Colors.black),
                                 ),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(50),
-                                )),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 4),
-                          child: ElevatedButton(
-                            onPressed: () async {
-                              _stopWatchTimer.onExecute
-                                  .add(StopWatchExecute.stop);
-                            },
-                            child: const Text(
-                              'Pausa',
-                              style: TextStyle(color: Colors.black),
+                                style: ElevatedButton.styleFrom(
+                                    primary: Colors.white,
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 20, vertical: 10),
+                                    textStyle: GoogleFonts.adventPro(
+                                      textStyle: const TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 20,
+                                        fontStyle: FontStyle.normal,
+                                        decoration: TextDecoration.none,
+                                      ),
+                                    ),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(50),
+                                    )),
+                              ),
                             ),
-                            style: ElevatedButton.styleFrom(
-                                primary: Colors.white,
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 20, vertical: 10),
-                                textStyle: GoogleFonts.adventPro(
-                                  textStyle: const TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 20,
-                                    fontStyle: FontStyle.normal,
-                                    decoration: TextDecoration.none,
-                                  ),
+                            visible: !isRunning),
+                        Visibility(
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 4),
+                              child: ElevatedButton(
+                                onPressed: () async {
+                                  _stopWatchTimer.onExecute
+                                      .add(StopWatchExecute.stop);
+                                  setState(() {
+                                    isRunning = false;
+                                  });
+                                },
+                                child: const Text(
+                                  'Pausa',
+                                  style: TextStyle(color: Colors.black),
                                 ),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(50),
-                                )),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 4),
-                          child: ElevatedButton(
-                            onPressed: () async {
-                              _stopWatchTimer.onExecute
-                                  .add(StopWatchExecute.reset);
-                              Schede.valoreOrologio = false;
-                              registriModel.registroBeingEdited = Registro();
-                              registriModel.registroBeingEdited.durataFinale =
-                                  displayTime2;
-                              FineAllenamento.durataStringa = displayTime2;
-                              _save(context);
-                              //schedeModel.setStackIndex(5);
-                            },
-                            child: const Text(
-                              'Fine',
-                              style: TextStyle(color: Colors.black),
+                                style: ElevatedButton.styleFrom(
+                                    primary: Colors.white,
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 20, vertical: 10),
+                                    textStyle: GoogleFonts.adventPro(
+                                      textStyle: const TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 20,
+                                        fontStyle: FontStyle.normal,
+                                        decoration: TextDecoration.none,
+                                      ),
+                                    ),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(50),
+                                    )),
+                              ),
                             ),
-                            style: ElevatedButton.styleFrom(
-                                primary: Colors.white,
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 20, vertical: 10),
-                                textStyle: GoogleFonts.adventPro(
-                                  textStyle: const TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 20,
-                                    fontStyle: FontStyle.normal,
-                                    decoration: TextDecoration.none,
-                                  ),
+                            visible: isRunning),
+                        Visibility(
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 4),
+                              child: ElevatedButton(
+                                onPressed: () async {
+                                  _stopWatchTimer.onExecute
+                                      .add(StopWatchExecute.reset);
+                                  Schede.valoreOrologio = false;
+                                  registriModel.registroBeingEdited =
+                                      Registro();
+                                  registriModel.registroBeingEdited
+                                      .durataFinale = displayTime2;
+                                  FineAllenamento.durataStringa = displayTime2;
+                                  setState(() {
+                                    firstTime = false;
+                                  });
+                                  _save(context);
+                                  //schedeModel.setStackIndex(5);
+                                },
+                                child: const Text(
+                                  'Fine',
+                                  style: TextStyle(color: Colors.black),
                                 ),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(50),
-                                )),
-                          ),
-                        ),
+                                style: ElevatedButton.styleFrom(
+                                    primary: Colors.white,
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 20, vertical: 10),
+                                    textStyle: GoogleFonts.adventPro(
+                                      textStyle: const TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 20,
+                                        fontStyle: FontStyle.normal,
+                                        decoration: TextDecoration.none,
+                                      ),
+                                    ),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(50),
+                                    )),
+                              ),
+                            ),
+                            visible: firstTime),
                       ],
                     ),
                   ),
@@ -219,7 +241,7 @@ class _AllenamentoState extends State<Allenamento> {
             "Esercizi",
             style: GoogleFonts.adventPro(
               textStyle: TextStyle(
-                color: const Color.fromARGB(255, 42, 42, 42),
+                color: Colors.white,
                 fontWeight: FontWeight.w500,
                 fontSize: MediaQuery.of(context).size.width * 0.06,
                 fontStyle: FontStyle.normal,
@@ -352,13 +374,14 @@ class _AllenamentoState extends State<Allenamento> {
           child: Row(
             children: [
               FlatButton(
-                onPressed: (){
+                onPressed: () {
                   schedeModel.setStackIndex(0);
                 },
-                child: Text("Indietro",
+                child: Text(
+                  "Indietro",
                   style: GoogleFonts.adventPro(
                     textStyle: const TextStyle(
-                      color: Colors.black,
+                      color: Colors.white,
                       fontWeight: FontWeight.w400,
                       fontSize: 20,
                       fontStyle: FontStyle.normal,
