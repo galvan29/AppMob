@@ -353,6 +353,7 @@ class _VisualizzaSchedaState extends State<VisualizzaScheda> {
                           ],
                         )*/
                           ),
+
                       /* ListView.builder(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
@@ -493,6 +494,9 @@ class _VisualizzaSchedaState extends State<VisualizzaScheda> {
                   ),
                 ),
               ),
+              SizedBox(
+                height: 20,
+              ),
               Text(
                 "Sei sicuro di voler eliminare " +
                     esercizio.nomeEsercizio +
@@ -506,6 +510,10 @@ class _VisualizzaSchedaState extends State<VisualizzaScheda> {
                     decoration: TextDecoration.none,
                   ),
                 ),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(
+                height: 20,
               ),
               Row(
                 children: [
@@ -525,6 +533,14 @@ class _VisualizzaSchedaState extends State<VisualizzaScheda> {
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
+                  ),
+                  Container(
+                    padding: EdgeInsets.zero,
+                    alignment: Alignment.center,
+                    decoration: const BoxDecoration(),
+                    margin: EdgeInsets.only(
+                      left: MediaQuery.of(context).size.width * 0.28,
+                    ),
                   ),
                   FlatButton(
                     child: Text(

@@ -266,6 +266,9 @@ class _SchedeState extends State<Schede> {
                   ),
                 ),
               ),
+              SizedBox(
+                height: 20,
+              ),
               Text(
                 "Sei sicuro di voler eliminare "+scheda.nomeScheda+"? Perderai tutti i dati in essa contenuti",
                 style: GoogleFonts.adventPro(
@@ -277,6 +280,10 @@ class _SchedeState extends State<Schede> {
                     decoration: TextDecoration.none,
                   ),
                 ),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(
+                height: 20,
               ),
               Row(
                 children: [
@@ -296,6 +303,14 @@ class _SchedeState extends State<Schede> {
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
+                  ),
+                  Container(
+                    padding: EdgeInsets.zero,
+                    alignment: Alignment.center,
+                    decoration: const BoxDecoration(),
+                    margin: EdgeInsets.only(
+                      left: MediaQuery.of(context).size.width * 0.28,
+                    ),
                   ),
                   FlatButton(
                     child: Text(

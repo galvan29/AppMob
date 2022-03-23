@@ -352,10 +352,20 @@ class _AllenamentoState extends State<Allenamento> {
           child: Row(
             children: [
               FlatButton(
-                onPressed: () {
+                onPressed: (){
                   schedeModel.setStackIndex(0);
                 },
-                child: const Text("Elimina"),
+                child: Text("Indietro",
+                  style: GoogleFonts.adventPro(
+                    textStyle: const TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 20,
+                      fontStyle: FontStyle.normal,
+                      decoration: TextDecoration.none,
+                    ),
+                  ),
+                ),
               ),
             ],
           )),
