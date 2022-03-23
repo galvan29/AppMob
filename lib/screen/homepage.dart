@@ -557,11 +557,11 @@ class _HomePageState extends State<HomePage> {
                     ),
                     onPressed: () async {
                       await EventiDBworker.eventiDBworker.delete(ev.id);
+                      Navigator.of(context).pop();
                       LoginPage().getValueLogin().then((val) async {
                         await eventiModel.loadData(
                             EventiDBworker.eventiDBworker, val);
                       });
-                      Navigator.of(context).pop();
                       Timer(
                           const Duration(milliseconds: 160),
                               () => {

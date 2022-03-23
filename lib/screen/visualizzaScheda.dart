@@ -326,7 +326,30 @@ class _VisualizzaSchedaState extends State<VisualizzaScheda> {
                           width: MediaQuery.of(context).size.width * 0.90,
                           child: SfCartesianChart(
                               enableAxisAnimation: true,
-                              primaryXAxis: DateTimeAxis(),
+                              primaryXAxis: DateTimeAxis(
+                                  title: AxisTitle(
+                                      text: 'Giorno',
+                                      textStyle: TextStyle(
+                                          color: Colors.black,
+                                          fontFamily: 'Roboto',
+                                          fontSize: 16,
+                                          fontStyle: FontStyle.italic,
+                                          fontWeight: FontWeight.w300
+                                      )
+                                  )
+                              ),
+                              primaryYAxis: DateTimeAxis(
+                                  title: AxisTitle(
+                                      text: 'Durata',
+                                      textStyle: TextStyle(
+                                          color: Colors.black,
+                                          fontFamily: 'Roboto',
+                                          fontSize: 16,
+                                          fontStyle: FontStyle.italic,
+                                          fontWeight: FontWeight.w300
+                                      )
+                                  )
+                              ),
                               series: <CartesianSeries>[
                                 LineSeries<ChartRegistri, DateTime>(
                                     dataSource: dataR,
