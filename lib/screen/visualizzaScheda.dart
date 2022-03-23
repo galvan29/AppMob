@@ -139,7 +139,7 @@ class _VisualizzaSchedaState extends State<VisualizzaScheda> {
                         secondaryActions: [
                           IconSlideAction(
                             caption: "Elimina",
-                            color: Colors.red,
+                            color: Color.fromARGB(255, 42, 42, 42),
                             icon: Icons.delete,
                             onTap: () {
                               _deleteEsercizio(context, esercizio);
@@ -562,7 +562,7 @@ class _VisualizzaSchedaState extends State<VisualizzaScheda> {
                     alignment: Alignment.center,
                     decoration: const BoxDecoration(),
                     margin: EdgeInsets.only(
-                      left: MediaQuery.of(context).size.width * 0.28,
+                      left: MediaQuery.of(context).size.width * 0.26,
                     ),
                   ),
                   FlatButton(

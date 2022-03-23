@@ -398,7 +398,7 @@ class _HomePageState extends State<HomePage> {
                         secondaryActions: [
                           IconSlideAction(
                             caption: "Elimina",
-                            color: Colors.red,
+                            color: Colors.white,
                             icon: Icons.delete,
                             onTap: () async {
                               Evento ev =
