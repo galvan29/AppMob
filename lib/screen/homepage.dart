@@ -403,6 +403,7 @@ class _HomePageState extends State<HomePage> {
                             onTap: () async {
                               Evento ev =
                                   await EventiDBworker.eventiDBworker.get(id);
+                              Navigator.of(context).pop();
                               _deleteEvento(context, ev);
                             },
                           ),
