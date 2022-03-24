@@ -175,7 +175,7 @@ class CreaScheda extends StatelessWidget{
     LoginPage().getValueLogin().then((val) async {
       await schedeModel.loadData(SchedeDBworker.schedeDBworker, val);
     });
-
+//controllare, mettere index a 4 e utentimodel e magari si aggiusta
     Base.pageIndexForWidget=0;
     schedeModel.setStackIndex(6);
 
