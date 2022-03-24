@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:mytraining/chart/chartStr.dart';
 import 'package:mytraining/common/appbar.dart';
 import 'package:mytraining/db/eserciziDBworker.dart';
+import 'package:mytraining/db/schedeDBworker.dart';
 import 'package:mytraining/models/eserciziModel.dart';
 import 'package:mytraining/models/registriModel.dart';
 import 'package:mytraining/models/schedeModel.dart';
@@ -36,11 +37,14 @@ class _VisualizzaSchedaState extends State<VisualizzaScheda> {
   Widget build(BuildContext context) {
     final List<ChartRegistri> dataR = [];
     for (Registro a in registriModel.registriList) {
-      dataR.add(ChartRegistri(
-          giorno: DateTime.parse(a.giorno),
-          durata: fromDateToMinute(a.durataFinale),
-          voto: a.voto));
+      if (a.giorno != "") {
+        dataR.add(ChartRegistri(
+            giorno: DateTime.parse(a.giorno),
+            durata: fromDateToMinute(a.durataFinale),
+            voto: a.voto));
+      }
     }
+
     /*dataR.add(ChartRegistri(
         giorno: DateTime.parse("2022-03-20"),
         durata: 120));
@@ -90,7 +94,7 @@ class _VisualizzaSchedaState extends State<VisualizzaScheda> {
                   SizedBox(
                       width: 330,
                       child: Text(
-                        "Ecco la tua Scheda!",
+                        Schede.nomeSchedaGLobal,
                         textAlign: TextAlign.center,
                         style: GoogleFonts.adventPro(
                           textStyle: const TextStyle(
@@ -121,6 +125,20 @@ class _VisualizzaSchedaState extends State<VisualizzaScheda> {
               Container(
                 margin: EdgeInsets.only(
                   top: MediaQuery.of(context).size.width * 0.05,
+                ),
+              ),
+              Container(
+                child: Text(
+                  "Esercizi",
+                  style: GoogleFonts.adventPro(
+                    textStyle: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w500,
+                      fontSize: MediaQuery.of(context).size.width * 0.06,
+                      fontStyle: FontStyle.normal,
+                      decoration: TextDecoration.none,
+                    ),
+                  ),
                 ),
               ),
               ListView.builder(
@@ -304,9 +322,8 @@ class _VisualizzaSchedaState extends State<VisualizzaScheda> {
               Visibility(
                 visible: registriModel.registriList.length > 0 ? true : false,
                 child: Container(
-                    margin: EdgeInsets.only(
-                        top: 10, left: 30, right: 30, bottom: 40),
-                    height: 330,
+                    margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                    height: 305,
                     padding: const EdgeInsets.only(top: 8),
                     decoration: BoxDecoration(
                         color: const Color.fromARGB(255, 230, 245, 252),
@@ -325,30 +342,27 @@ class _VisualizzaSchedaState extends State<VisualizzaScheda> {
                           height: 300,
                           width: MediaQuery.of(context).size.width * 0.90,
                           child: SfCartesianChart(
+                              //plotAreaBackgroundColor: Colors.white,
                               enableAxisAnimation: true,
                               primaryXAxis: DateTimeAxis(
-                                  title: AxisTitle(
-                                      text: 'Giorno',
-                                      textStyle: TextStyle(
-                                          color: Colors.black,
-                                          fontFamily: 'Roboto',
-                                          fontSize: 16,
-                                          fontStyle: FontStyle.italic,
-                                          fontWeight: FontWeight.w300
-                                      )
-                                  ),
+                                title: AxisTitle(
+                                    text: 'Giorno',
+                                    textStyle: TextStyle(
+                                        color: Colors.black,
+                                        fontFamily: 'Roboto',
+                                        fontSize: 16,
+                                        fontStyle: FontStyle.italic,
+                                        fontWeight: FontWeight.w300)),
                               ),
                               primaryYAxis: DateTimeAxis(
-                                  title: AxisTitle(
-                                      text: 'Durata',
-                                      textStyle: TextStyle(
-                                          color: Colors.black,
-                                          fontFamily: 'Roboto',
-                                          fontSize: 16,
-                                          fontStyle: FontStyle.italic,
-                                          fontWeight: FontWeight.w300
-                                      )
-                                  ),
+                                title: AxisTitle(
+                                    text: 'Durata',
+                                    textStyle: TextStyle(
+                                        color: Colors.black,
+                                        fontFamily: 'Roboto',
+                                        fontSize: 16,
+                                        fontStyle: FontStyle.italic,
+                                        fontWeight: FontWeight.w300)),
                               ),
                               series: <CartesianSeries>[
                                 LineSeries<ChartRegistri, DateTime>(
@@ -361,90 +375,47 @@ class _VisualizzaSchedaState extends State<VisualizzaScheda> {
                                         reg.voto,
                                     dataLabelSettings: const DataLabelSettings(
                                         isVisible: true))
-                              ])
-                          /*charts.TimeSeriesChart(
-                          series,
-                          animate: true,
-                          dateTimeFactory: const charts.LocalDateTimeFactory(),
-                          selectionModels: [
-                            charts.SelectionModelConfig(
-                                changedListener: (charts.SelectionModel model) {
-                              if (model.hasDatumSelection) {
-                                model.selectedSeries[0].measureFn(model.selectedDatum[0].index);
-                              }
-                            })
-                          ],
-                        )*/
-                          ),
-
-                      /* ListView.builder(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemCount: registriModel.registriList.length,
-                        itemBuilder:
-                            (BuildContext inBuildContext, int inIndex) {
-                          Registro registro =
-                              registriModel.registriList[inIndex];
-                          Color color = Colors.white;
-
-                          return Card(
-                            margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                            elevation: 8,
-                            child: Slidable(
-                              actionPane: const SlidableScrollActionPane(),
-                              actionExtentRatio: .25,
-                              child: ListTile(
-                                title: Text(registro.durataFinale),
-                                subtitle: Text("Voto: " +
-                                    registro.voto +
-                                    " in data " +
-                                    registro.giorno),
-                                tileColor: color,
-                              ),
-                            ),
-                          );
-                        },
-                      ),*/
+                              ])),
                       //  ],
                     )),
               ),
               Visibility(
                 visible: registriModel.registriList.length > 0 ? false : true,
+                child: Container(
+                    margin: const EdgeInsets.only(
+                      left: 30,
+                      top: 20,
+                      right: 30,
+                    ),
+                    padding: EdgeInsets.zero,
+                    width: double.maxFinite,
+                    decoration: const BoxDecoration(),
                     child: Container(
-                        margin: const EdgeInsets.only(
-                          left: 30,
-                          top: 20,
-                          right: 30,
-                        ),
-                        padding: EdgeInsets.zero,
-                        width: double.maxFinite,
-                        decoration: const BoxDecoration(),
-                        child: Container(
-                            padding: EdgeInsets.fromLTRB(2.5, 3, 2.5, 5),
-                            decoration: BoxDecoration(
-                                color: const Color.fromARGB(255, 230, 245, 252)
-                                    .withOpacity(0),
-                                borderRadius: const BorderRadius.only(
-                                  topLeft: Radius.circular(20),
-                                  topRight: Radius.circular(20),
-                                  bottomRight: Radius.circular(20),
-                                  bottomLeft: Radius.circular(20),
-                                ),
-                                border: Border.all(color: Colors.white)),
-                            child: Text(
-                              "Per visualizzare le statistiche devi prima effettuare un allenamento",
-                              style: GoogleFonts.adventPro(
-                                textStyle: const TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 16,
-                                  fontStyle: FontStyle.normal,
-                                  decoration: TextDecoration.none,
-                                ),
-                              ),
-                              textAlign: TextAlign.center,
-                            ))),
-                  ),
+                        padding: EdgeInsets.fromLTRB(2.5, 3, 2.5, 5),
+                        decoration: BoxDecoration(
+                            color: const Color.fromARGB(255, 230, 245, 252)
+                                .withOpacity(0),
+                            borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(20),
+                              topRight: Radius.circular(20),
+                              bottomRight: Radius.circular(20),
+                              bottomLeft: Radius.circular(20),
+                            ),
+                            border: Border.all(color: Colors.white)),
+                        child: Text(
+                          "Per visualizzare le statistiche devi prima effettuare un allenamento",
+                          style: GoogleFonts.adventPro(
+                            textStyle: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w400,
+                              fontSize: 16,
+                              fontStyle: FontStyle.normal,
+                              decoration: TextDecoration.none,
+                            ),
+                          ),
+                          textAlign: TextAlign.center,
+                        ))),
+              ),
             ])),
         //va in alto magari
         bottomNavigationBar: Padding(

@@ -23,6 +23,7 @@ import '../common/bottomNavigationBar.dart';
 class Schede extends StatefulWidget {
   static bool valoreOrologio = false;
   static int schedaAllenamento = -2;
+  static String nomeSchedaGLobal = "";
 
   @override
   State<Schede> createState() => _SchedeState();
@@ -37,7 +38,6 @@ class _SchedeState extends State<Schede> {
   final datasets = <String, dynamic>{};
 
   int _currentIndex = 1;
-
   saveValueScheda(int id) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setInt('idScheda', id);
@@ -148,9 +148,9 @@ class _SchedeState extends State<Schede> {
                           },
                           onTap: () async {
                             saveValueScheda(scheda.id);
-                            print("ciao "+scheda.id.toString());
+                            print("OOOOOOOOOOOOOOOOOO "+scheda.nomeScheda);
                             Schede.schedaAllenamento = scheda.id;
-                            print("Ciao bro " + scheda.id.toString());
+                            Schede.nomeSchedaGLobal = scheda.nomeScheda;
                             await eserciziModel.loadData(
                                 EserciziDBworker.eserciziDBworker, scheda.id);
                             await registriModel.loadData(

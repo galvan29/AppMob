@@ -189,19 +189,8 @@ class _AllenamentoState extends State<Allenamento> {
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 4),
                               child: ElevatedButton(
-                                onPressed: () async {
-                                  _stopWatchTimer.onExecute
-                                      .add(StopWatchExecute.reset);
-                                  Schede.valoreOrologio = false;
-                                  registriModel.registroBeingEdited =
-                                      Registro();
-                                  registriModel.registroBeingEdited
-                                      .durataFinale = displayTime2;
-                                  FineAllenamento.durataStringa = displayTime2;
-                                  setState(() {
-                                    firstTime = false;
-                                  });
-                                  _save(context);
+                                onPressed: () {
+                                  mostraPopUpFine(context, displayTime2);
                                   //schedeModel.setStackIndex(5);
                                 },
                                 child: const Text(
@@ -402,7 +391,7 @@ class _AllenamentoState extends State<Allenamento> {
     FineAllenamento.idTempRegistro = await RegistriDBworker.registriDBworker
         .create(registriModel.registroBeingEdited);
     print("Creato una nuova registro con id " +
-        FineAllenamento.idTempRegistro.toString());
+        FineAllenamento.durataStringa.toString());
     // } else {
     // await RegistriDBworker.registriDBworker.update(registriModel.registroBeingEdited);
     // }
@@ -412,5 +401,130 @@ class _AllenamentoState extends State<Allenamento> {
     //Base.pageIndexForWidget=12;
     schedeModel.setStackIndex(5);
 //dd
+  }
+
+  setupAlertDialoadContainer(String displayTime2) {
+    return Container(
+        decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(20),
+              topRight: Radius.circular(20),
+              bottomRight: Radius.circular(20),
+              bottomLeft: Radius.circular(20),
+            ),
+            border: Border.all(color: Colors.white)),
+        height: 180.0, // Change as per your requirement
+        width: 300.0, // Change as per your requirement
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(
+                height: 20,
+              ),
+              Text(
+                "Termina allenamento",
+                style: GoogleFonts.adventPro(
+                  textStyle: TextStyle(
+                    color: const Color.fromARGB(255, 42, 42, 42),
+                    fontWeight: FontWeight.w500,
+                    fontSize: MediaQuery.of(context).size.width * 0.04,
+                    fontStyle: FontStyle.normal,
+                    decoration: TextDecoration.none,
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Text(
+                "Sei sicuro di voler terminare l'allenamento?",
+                style: GoogleFonts.adventPro(
+                  textStyle: TextStyle(
+                    color: const Color.fromARGB(255, 42, 42, 42),
+                    fontWeight: FontWeight.w500,
+                    fontSize: MediaQuery.of(context).size.width * 0.04,
+                    fontStyle: FontStyle.normal,
+                    decoration: TextDecoration.none,
+                  ),
+                ),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  FlatButton(
+                    child: Text(
+                      "Annulla",
+                      style: GoogleFonts.adventPro(
+                        textStyle: TextStyle(
+                          color: const Color.fromARGB(255, 42, 42, 42),
+                          fontWeight: FontWeight.w500,
+                          fontSize: MediaQuery.of(context).size.width * 0.04,
+                          fontStyle: FontStyle.normal,
+                          decoration: TextDecoration.none,
+                        ),
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                  Container(
+                    padding: EdgeInsets.zero,
+                    alignment: Alignment.center,
+                    decoration: const BoxDecoration(),
+                  ),
+                  FlatButton(
+                    child: Text(
+                      "Conferma",
+                      style: GoogleFonts.adventPro(
+                        textStyle: TextStyle(
+                          color: const Color.fromARGB(255, 42, 42, 42),
+                          fontWeight: FontWeight.w500,
+                          fontSize: MediaQuery.of(context).size.width * 0.04,
+                          fontStyle: FontStyle.normal,
+                          decoration: TextDecoration.none,
+                        ),
+                      ),
+                    ),
+                    onPressed: () async {
+                      Navigator.of(context).pop();
+                      _stopWatchTimer.onExecute
+                          .add(StopWatchExecute.reset);
+                      Schede.valoreOrologio = false;
+                      registriModel.registroBeingEdited =
+                          Registro();
+                      registriModel.registroBeingEdited
+                          .durataFinale = displayTime2;
+                      FineAllenamento.durataStringa = displayTime2;
+                      setState(() {
+                        firstTime = false;
+                      });
+                      _save(context);
+                    },
+                  ),
+                ],
+              )
+            ],
+          ),
+        ));
+  }
+
+  void mostraPopUpFine(BuildContext context, String displayTime2) async {
+    return showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext inAlertContext) {
+          return Dialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: setupAlertDialoadContainer(displayTime2),
+          );
+        });
   }
 }
