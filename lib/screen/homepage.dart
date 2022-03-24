@@ -516,6 +516,7 @@ class _HomePageState extends State<HomePage> {
                 height: 20,
               ),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   FlatButton(
                     child: Text(
@@ -538,9 +539,6 @@ class _HomePageState extends State<HomePage> {
                     padding: EdgeInsets.zero,
                     alignment: Alignment.center,
                     decoration: const BoxDecoration(),
-                    margin: EdgeInsets.only(
-                      left: MediaQuery.of(context).size.width * 0.28,
-                    ),
                   ),
                   FlatButton(
                     child: Text(

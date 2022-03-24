@@ -539,6 +539,7 @@ class _VisualizzaSchedaState extends State<VisualizzaScheda> {
                 height: 20,
               ),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   FlatButton(
                     child: Text(
@@ -561,9 +562,6 @@ class _VisualizzaSchedaState extends State<VisualizzaScheda> {
                     padding: EdgeInsets.zero,
                     alignment: Alignment.center,
                     decoration: const BoxDecoration(),
-                    margin: EdgeInsets.only(
-                      left: MediaQuery.of(context).size.width * 0.26,
-                    ),
                   ),
                   FlatButton(
                     child: Text(
