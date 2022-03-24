@@ -149,7 +149,7 @@ class _FirstPage2State extends State<FirstPage2> with TickerProviderStateMixin {
   }
 
   void createAdminAccount() async {
-    String admin = "admin2";
+    String admin = "admin";
     Utente ut = await UtentiDBworker.utentiDBworker.getId(admin);
     if (ut.id != -1) {
       return;

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mytraining/common/appbar.dart';
@@ -24,7 +25,7 @@ class Schede extends StatefulWidget {
   static bool valoreOrologio = false;
   static int schedaAllenamento = -2;
   static String nomeSchedaGLobal = "";
-
+  List<Registro> listaVoti = [];
   @override
   State<Schede> createState() => _SchedeState();
 
@@ -170,49 +171,83 @@ class _SchedeState extends State<Schede> {
                                     bottomLeft: Radius.circular(20),
                                   ),
                                   border: Border.all(color: Colors.white)),
-                              child: Column(children: [
+                              child: Row( children: [
+                                Column(children: [
+                                  Row(
+                                    children: [
+                                      SizedBox(width: 10),
+                                      Text(
+                                        scheda.nomeScheda,
+                                        style: GoogleFonts.adventPro(
+                                          textStyle: TextStyle(
+                                            color:
+                                            const Color.fromARGB(255, 42, 42, 42),
+                                            fontWeight: FontWeight.w500,
+                                            fontSize:
+                                            MediaQuery.of(context).size.width *
+                                                0.045,
+                                            fontStyle: FontStyle.normal,
+                                            decoration: TextDecoration.none,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(width: 10, height: 5,),
+                                  Row(
+                                    children: [
+                                      SizedBox(width: 10),
+                                      Text(
+                                        "Durata: " + scheda.durataScheda,
+                                        style: GoogleFonts.adventPro(
+                                          textStyle: TextStyle(
+                                            color:
+                                            const Color.fromARGB(255, 42, 42, 42),
+                                            fontWeight: FontWeight.w500,
+                                            fontSize:
+                                            MediaQuery.of(context).size.width *
+                                                0.03,
+                                            fontStyle: FontStyle.normal,
+                                            decoration: TextDecoration.none,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ]
+                                ),
                                 Row(
                                   children: [
-                                    SizedBox(width: 10),
-                                    Text(
-                                      scheda.nomeScheda,
-                                      style: GoogleFonts.adventPro(
-                                        textStyle: TextStyle(
-                                          color:
-                                          const Color.fromARGB(255, 42, 42, 42),
-                                          fontWeight: FontWeight.w500,
-                                          fontSize:
-                                          MediaQuery.of(context).size.width *
-                                              0.045,
-                                          fontStyle: FontStyle.normal,
-                                          decoration: TextDecoration.none,
+                                    Container(
+                                      padding: EdgeInsets.zero,
+                                      decoration: const BoxDecoration(),
+                                      margin: EdgeInsets.only(
+                                        //top: MediaQuery.of(context).size.width * 0.10,
+                                        left: 30,
+                                        bottom: 10,
+                                      ),
+                                      alignment: Alignment.center,
+                                      child:  RatingBar.builder(
+                                        initialRating: calcolaStelleAlle(scheda.id),
+                                        minRating: 0,
+                                        direction: Axis.horizontal,
+                                        allowHalfRating: true,
+                                        itemCount: 5,
+                                        itemPadding: EdgeInsets.symmetric(horizontal: 0),
+                                        itemBuilder: (context, _) => Icon(
+                                          Icons.star,
+                                          color: Colors.amber,
                                         ),
+                                        onRatingUpdate: (rating) {
+                                          print(rating);
+                                          //rat = rating;
+                                        },
                                       ),
                                     ),
                                   ],
-                                ),
-                                SizedBox(width: 10, height: 5,),
-                                Row(
-                                  children: [
-                                    SizedBox(width: 10),
-                                    Text(
-                                      "Durata: " + scheda.durataScheda,
-                                      style: GoogleFonts.adventPro(
-                                        textStyle: TextStyle(
-                                          color:
-                                          const Color.fromARGB(255, 42, 42, 42),
-                                          fontWeight: FontWeight.w500,
-                                          fontSize:
-                                          MediaQuery.of(context).size.width *
-                                              0.03,
-                                          fontStyle: FontStyle.normal,
-                                          decoration: TextDecoration.none,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ])),
+                                )
+                              ],)
+                              ),
                         ),
                       ));
                 },
@@ -344,5 +379,28 @@ class _SchedeState extends State<Schede> {
             ],
           ),
         ));
+  }
+
+
+
+  double calcolaStelleAlle(int id) {
+    double tot = 0;
+    updateList(id);
+    print("Aggiorno e creo " + id.toString());
+    for(Registro r in registriModel.registriList2){
+      tot += (2*double.parse(r.voto)).floorToDouble()/2;
+      print(id.toString() + " cd " +r.id.toString() + " ji " +tot.toString());
+    }
+    tot = tot/registriModel.registriList2.length;
+    print(tot.toString());
+    if(registriModel.registriList2.length > 0)
+      registriModel.registriList2 = [];
+    return tot;
+  }
+
+  Future<int> updateList(int id) async {
+    await registriModel.loadData2(
+        RegistriDBworker.registriDBworker, id);
+    return 0;
   }
 }

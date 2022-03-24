@@ -503,6 +503,7 @@ class _AllenamentoState extends State<Allenamento> {
                       FineAllenamento.durataStringa = displayTime2;
                       setState(() {
                         firstTime = false;
+                        isRunning = false;
                       });
                       _save(context);
                     },
