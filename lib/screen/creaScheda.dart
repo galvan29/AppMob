@@ -176,10 +176,8 @@ class CreaScheda extends StatelessWidget{
       await schedeModel.loadData(SchedeDBworker.schedeDBworker, val);
     });
 
-    Base.pageIndexForWidget=0;
-    schedeModel.setStackIndex(6);
-
-
-
+    Base.pageIndexForWidget=4;
+    schedeModel.setStackIndex(0);
+    utentiModel.setStackIndex(7);
   }
 }
