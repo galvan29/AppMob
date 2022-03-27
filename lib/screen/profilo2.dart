@@ -13,10 +13,6 @@ import '../common/bottomNavigationBar.dart';
 class Profilo2 extends StatefulWidget {
   @override
   State<Profilo2> createState() => _ProfiloState();
-
-  updateVal() {
-    _ProfiloState().update();
-  }
 }
 
 class _ProfiloState extends State<Profilo2> {
@@ -34,23 +30,31 @@ class _ProfiloState extends State<Profilo2> {
   final heightController = TextEditingController();
   final weightController = TextEditingController();
 
-  update() {
+  @override
+  void initState() {
     userNameController.text = utentiModel.utenteBeingEdited.nomeUtente;
     firstNameController.text = utentiModel.utenteBeingEdited.nome;
     secondNameController.text = utentiModel.utenteBeingEdited.cognome;
     ageController.text = utentiModel.utenteBeingEdited.eta;
     heightController.text = utentiModel.utenteBeingEdited.height;
     weightController.text = utentiModel.utenteBeingEdited.weight;
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+
     userNameController.text = utentiModel.utenteBeingEdited.nomeUtente;
     firstNameController.text = utentiModel.utenteBeingEdited.nome;
     secondNameController.text = utentiModel.utenteBeingEdited.cognome;
     ageController.text = utentiModel.utenteBeingEdited.eta;
     heightController.text = utentiModel.utenteBeingEdited.height;
     weightController.text = utentiModel.utenteBeingEdited.weight;
+    
+    setState(() {
+      print(userNameController.text);
+      print("teoricamente sto aggiornando ");
+    });
 
     /* print(ciao);
     if(ciao && utentiModel.stackIndex == 5){
@@ -107,7 +111,7 @@ class _ProfiloState extends State<Profilo2> {
             ],
                 ),
               visible: userNameController.text == utentiModel.utenteBeingEdited.nomeUtente ? true : false,
-              replacement: CircularProgressIndicator(
+              replacement: const CircularProgressIndicator(
                 color: Colors.white
               ),
             ),
@@ -192,7 +196,7 @@ class _ProfiloState extends State<Profilo2> {
                               height: 50,
                               padding: const EdgeInsets.only(top: 8),
                               decoration: BoxDecoration(
-                                  color: Color.fromARGB(255, 230, 220, 245),
+                                  color: const Color.fromARGB(255, 230, 220, 245),
                                   borderRadius: const BorderRadius.only(
                                     topLeft: Radius.circular(20),
                                     topRight: Radius.circular(20),
