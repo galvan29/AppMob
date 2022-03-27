@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mytraining/common/appbar.dart';
@@ -25,7 +24,9 @@ class Schede extends StatefulWidget {
   static bool valoreOrologio = false;
   static int schedaAllenamento = -2;
   static String nomeSchedaGLobal = "";
+  static bool hoCaricatoleSchede = true;
   List<Registro> listaVoti = [];
+
   @override
   State<Schede> createState() => _SchedeState();
 
@@ -39,6 +40,7 @@ class _SchedeState extends State<Schede> {
   final datasets = <String, dynamic>{};
 
   int _currentIndex = 1;
+
   saveValueScheda(int id) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setInt('idScheda', id);
@@ -116,15 +118,20 @@ class _SchedeState extends State<Schede> {
                   top: MediaQuery.of(context).size.width * 0.05,
                 ),
               ),
-              ListView.builder(
-                shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
-                itemCount: schedeModel.schedeList.length,
-                itemBuilder: (BuildContext inBuildContext, int inIndex) {
-                  Scheda scheda = schedeModel.schedeList[inIndex];
-                  Color color = Colors.white;
+              Visibility(
+                visible: Schede.hoCaricatoleSchede,
+                replacement: const CircularProgressIndicator(
+                  color: Colors.white,
+                ),
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: schedeModel.schedeList.length,
+                  itemBuilder: (BuildContext inBuildContext, int inIndex) {
+                    Scheda scheda = schedeModel.schedeList[inIndex];
+                    Color color = Colors.white;
 
-                  return Container(
+                    return Container(
                       margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                       child: Slidable(
                         actionPane: const SlidableScrollActionPane(),
@@ -132,7 +139,7 @@ class _SchedeState extends State<Schede> {
                         secondaryActions: [
                           IconSlideAction(
                             caption: "Elimina",
-                            color: Color.fromARGB(255, 42, 42, 42),
+                            color: const Color.fromARGB(255, 42, 42, 42),
                             icon: Icons.delete,
                             onTap: () {
                               _deleteScheda(context, scheda);
@@ -140,117 +147,80 @@ class _SchedeState extends State<Schede> {
                           ),
                         ],
                         child: GestureDetector(
-                          onLongPress: () async {
-                            schedeModel.schedaBeingEdited = await SchedeDBworker
-                                .schedeDBworker
-                                .get(scheda.id);
-                            print(schedeModel.schedaBeingEdited.nomeScheda);
-                            schedeModel.setStackIndex(1);
-                          },
-                          onTap: () async {
-                            saveValueScheda(scheda.id);
-                            print("OOOOOOOOOOOOOOOOOO "+scheda.nomeScheda);
-                            Schede.schedaAllenamento = scheda.id;
-                            Schede.nomeSchedaGLobal = scheda.nomeScheda;
-                            await eserciziModel.loadData(
-                                EserciziDBworker.eserciziDBworker, scheda.id);
-                            await registriModel.loadData(
-                                RegistriDBworker.registriDBworker, scheda.id);
-                            schedeModel.setStackIndex(2);
-                          },
-                          child: Container(
-                              height: MediaQuery.of(context).size.height * 0.08,
-                              padding: const EdgeInsets.only(top: 8),
-                              decoration: BoxDecoration(
-                                  color:
-                                      const Color.fromARGB(255, 230, 245, 252),
-                                  borderRadius: const BorderRadius.only(
-                                    topLeft: Radius.circular(20),
-                                    topRight: Radius.circular(20),
-                                    bottomRight: Radius.circular(20),
-                                    bottomLeft: Radius.circular(20),
-                                  ),
-                                  border: Border.all(color: Colors.white)),
-                              child: Row( children: [
-                                Column(children: [
-                                  Row(
-                                    children: [
-                                      SizedBox(width: 10),
-                                      Text(
-                                        scheda.nomeScheda,
-                                        style: GoogleFonts.adventPro(
-                                          textStyle: TextStyle(
-                                            color:
-                                            const Color.fromARGB(255, 42, 42, 42),
-                                            fontWeight: FontWeight.w500,
-                                            fontSize:
+                            onLongPress: () async {
+                              schedeModel.schedaBeingEdited =
+                                  await SchedeDBworker.schedeDBworker
+                                      .get(scheda.id);
+                              print(schedeModel.schedaBeingEdited.nomeScheda);
+                              schedeModel.setStackIndex(1);
+                            },
+                            onTap: () async {
+                              saveValueScheda(scheda.id);
+                              print("OOOOOOOOOOOOOOOOOO " + scheda.nomeScheda);
+                              Schede.schedaAllenamento = scheda.id;
+                              Schede.nomeSchedaGLobal = scheda.nomeScheda;
+                              await eserciziModel.loadData(
+                                  EserciziDBworker.eserciziDBworker, scheda.id);
+                              await registriModel.loadData(
+                                  RegistriDBworker.registriDBworker, scheda.id);
+                              schedeModel.setStackIndex(2);
+                            },
+                            child: Container(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.08,
+                                padding: const EdgeInsets.only(top: 8),
+                                decoration: BoxDecoration(
+                                    color: const Color.fromARGB(
+                                        255, 230, 245, 252),
+                                    borderRadius: const BorderRadius.only(
+                                      topLeft: Radius.circular(20),
+                                      topRight: Radius.circular(20),
+                                      bottomRight: Radius.circular(20),
+                                      bottomLeft: Radius.circular(20),
+                                    ),
+                                    border: Border.all(color: Colors.white)),
+                                child: Row(children: [
+                                  const SizedBox(width: 10),
+                                  Text(
+                                    scheda.nomeScheda,
+                                    style: GoogleFonts.adventPro(
+                                      textStyle: TextStyle(
+                                        color: const Color.fromARGB(
+                                            255, 42, 42, 42),
+                                        fontWeight: FontWeight.w500,
+                                        fontSize:
                                             MediaQuery.of(context).size.width *
                                                 0.045,
-                                            fontStyle: FontStyle.normal,
-                                            decoration: TextDecoration.none,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(width: 10, height: 5,),
-                                  Row(
-                                    children: [
-                                      SizedBox(width: 10),
-                                      Text(
-                                        "Durata: " + scheda.durataScheda,
-                                        style: GoogleFonts.adventPro(
-                                          textStyle: TextStyle(
-                                            color:
-                                            const Color.fromARGB(255, 42, 42, 42),
-                                            fontWeight: FontWeight.w500,
-                                            fontSize:
-                                            MediaQuery.of(context).size.width *
-                                                0.03,
-                                            fontStyle: FontStyle.normal,
-                                            decoration: TextDecoration.none,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ]
-                                ),
-                                Row(
-                                  children: [
-                                    Container(
-                                      padding: EdgeInsets.zero,
-                                      decoration: const BoxDecoration(),
-                                      margin: EdgeInsets.only(
-                                        //top: MediaQuery.of(context).size.width * 0.10,
-                                        left: 30,
-                                        bottom: 10,
-                                      ),
-                                      alignment: Alignment.center,
-                                      child:  RatingBar.builder(
-                                        initialRating: calcolaStelleAlle(scheda.id),
-                                        minRating: 0,
-                                        direction: Axis.horizontal,
-                                        allowHalfRating: true,
-                                        itemCount: 5,
-                                        itemPadding: EdgeInsets.symmetric(horizontal: 0),
-                                        itemBuilder: (context, _) => Icon(
-                                          Icons.star,
-                                          color: Colors.amber,
-                                        ),
-                                        onRatingUpdate: (rating) {
-                                          print(rating);
-                                          //rat = rating;
-                                        },
+                                        fontStyle: FontStyle.normal,
+                                        decoration: TextDecoration.none,
                                       ),
                                     ),
-                                  ],
-                                )
-                              ],)
-                              ),
-                        ),
-                      ));
-                },
+                                  ),
+                                  const SizedBox(
+                                    width: 10,
+                                    height: 5,
+                                  ),
+                                  const SizedBox(width: 10),
+                                  Text(
+                                    "Durata: " + scheda.durataScheda,
+                                    style: GoogleFonts.adventPro(
+                                      textStyle: TextStyle(
+                                        color: const Color.fromARGB(
+                                            255, 42, 42, 42),
+                                        fontWeight: FontWeight.w500,
+                                        fontSize:
+                                            MediaQuery.of(context).size.width *
+                                                0.03,
+                                        fontStyle: FontStyle.normal,
+                                        decoration: TextDecoration.none,
+                                      ),
+                                    ),
+                                  ),
+                                ]))),
+                      ),
+                    );
+                  },
+                ),
               ),
             ])),
         bottomNavigationBar: buildBottomNavigationBar(context, _currentIndex));
@@ -286,7 +256,7 @@ class _SchedeState extends State<Schede> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Text(
@@ -301,11 +271,13 @@ class _SchedeState extends State<Schede> {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Text(
-                "Sei sicuro di voler eliminare "+scheda.nomeScheda+"? Perderai tutti i dati in essa contenuti",
+                "Sei sicuro di voler eliminare " +
+                    scheda.nomeScheda +
+                    "? Perderai tutti i dati in essa contenuti",
                 style: GoogleFonts.adventPro(
                   textStyle: TextStyle(
                     color: const Color.fromARGB(255, 42, 42, 42),
@@ -317,7 +289,7 @@ class _SchedeState extends State<Schede> {
                 ),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Row(
@@ -367,23 +339,20 @@ class _SchedeState extends State<Schede> {
                       });
                       Timer(
                           const Duration(milliseconds: 0),
-                              () => {
-                            Base.pageIndexForWidget = 4,
-                            utentiModel.setStackIndex(7),
-                          });
+                          () => {
+                                Base.pageIndexForWidget = 4,
+                                utentiModel.setStackIndex(7),
+                              });
                     },
                   ),
                 ],
               )
-
             ],
           ),
         ));
   }
 
-
-
-  double calcolaStelleAlle(int id) {
+/*double calcolaStelleAlle(int id) {
     double tot = 0;
     updateList(id);
     print("Aggiorno e creo " + id.toString());
@@ -402,5 +371,5 @@ class _SchedeState extends State<Schede> {
     await registriModel.loadData2(
         RegistriDBworker.registriDBworker, id);
     return 0;
-  }
+  } */
 }

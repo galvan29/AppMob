@@ -33,6 +33,7 @@ var element = list[_random.nextInt(list.length)];
 class HomePage extends StatefulWidget {
   @override
   State<HomePage> createState() => _HomePageState();
+  static bool hoCaricatoGliEventi = true;
 }
 
 class _HomePageState extends State<HomePage> {
@@ -197,6 +198,24 @@ class _HomePageState extends State<HomePage> {
                     }),
               ),
               Visibility(
+                visible: HomePage.hoCaricatoGliEventi,
+                replacement: const CircularProgressIndicator(
+                  color: Colors.white,
+                ),
+                child: Text(
+                  "Se mostro questo ho caricato gli eventi",
+                  style: GoogleFonts.adventPro(
+                    textStyle: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 25,
+                      fontStyle: FontStyle.normal,
+                      decoration: TextDecoration.none,
+                    ),
+                  ),
+                ),
+              ),
+              Visibility(
                 visible: schedeModel.schedeList.length > 0 ? true : false,
                 child: Container(
                   margin: const EdgeInsets.only(
@@ -251,7 +270,7 @@ class _HomePageState extends State<HomePage> {
                     width: double.maxFinite,
                     decoration: const BoxDecoration(),
                     child: Container(
-                        padding: EdgeInsets.fromLTRB(2.5, 3, 2.5, 5),
+                        padding: const EdgeInsets.fromLTRB(2.5, 3, 2.5, 5),
                         decoration: BoxDecoration(
                             color: const Color.fromARGB(255, 230, 245, 252)
                                 .withOpacity(0),
@@ -304,7 +323,7 @@ class _HomePageState extends State<HomePage> {
                   right: 30,
                   bottom: 70,
                 ),
-                padding: EdgeInsets.fromLTRB(2.5, 3, 2.5, 5),
+                padding: const EdgeInsets.fromLTRB(2.5, 3, 2.5, 5),
                 decoration: BoxDecoration(
                   color: Colors.white.withOpacity(0),
                   border: Border.all(color: Colors.white),
@@ -368,7 +387,7 @@ class _HomePageState extends State<HomePage> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Text(
@@ -385,7 +404,7 @@ class _HomePageState extends State<HomePage> {
               ),
               ListView.builder(
                 shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 itemCount: text.length,
                 itemBuilder: (BuildContext inBuildContext, int inIndex) {
                   String str = text[inIndex];
@@ -421,7 +440,7 @@ class _HomePageState extends State<HomePage> {
                               border: Border.all(color: Colors.white)),
                           child: Row(
                             children: [
-                              SizedBox(width: 10),
+                              const SizedBox(width: 10),
                               Text(
                                 str,
                                 style: GoogleFonts.adventPro(
@@ -481,7 +500,7 @@ class _HomePageState extends State<HomePage> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Text(
@@ -496,11 +515,13 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Text(
-                "Sei sicuro di voler eliminare l'evento per la scheda "+ev.nomeScheda+"?",
+                "Sei sicuro di voler eliminare l'evento per la scheda " +
+                    ev.nomeScheda +
+                    "?",
                 style: GoogleFonts.adventPro(
                   textStyle: TextStyle(
                     color: const Color.fromARGB(255, 42, 42, 42),
@@ -512,7 +533,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Row(
@@ -556,21 +577,27 @@ class _HomePageState extends State<HomePage> {
                     onPressed: () async {
                       await EventiDBworker.eventiDBworker.delete(ev.id);
                       Navigator.of(context).pop();
+                      setState(() {
+                        HomePage.hoCaricatoGliEventi = false;
+                      });
                       LoginPage().getValueLogin().then((val) async {
                         await eventiModel.loadData(
                             EventiDBworker.eventiDBworker, val);
                       });
-                      Timer(
+                      setState(() {
+                        HomePage.hoCaricatoGliEventi = true;
+                      });
+                      /*Timer(
                           const Duration(milliseconds: 160),
                               () => {
                             Base.pageIndexForWidget = 3,
                             utentiModel.setStackIndex(7),
-                          });
+                          }); */
+                      utentiModel.setStackIndex(3);
                     },
                   ),
                 ],
               )
-
             ],
           ),
         ));
