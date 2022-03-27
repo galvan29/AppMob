@@ -30,7 +30,7 @@ class _FirstPage2State extends State<FirstPage2> with TickerProviderStateMixin {
 
   @override
   void initState() {
-    Profilo2().updateVal();
+    //Profilo2().updateVal();
     createAdminAccount();
     super.initState();
     _animController = AnimationController(vsync: this);
@@ -63,7 +63,7 @@ class _FirstPage2State extends State<FirstPage2> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     var screenHeight = MediaQuery.of(context).size.height;
-    Profilo2().updateVal();
+    //Profilo2().updateVal();
     return Scaffold(
       backgroundColor: Colors.black,
       body: Stack(

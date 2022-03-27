@@ -10,6 +10,7 @@ import 'package:mytraining/models/schedeModel.dart';
 import 'package:mytraining/models/utentiModel.dart';
 import 'package:mytraining/screen/base.dart';
 import 'package:mytraining/screen/schede.dart';
+import 'package:mytraining/screen/visualizzaScheda.dart';
 
 class CreaEsercizio extends StatelessWidget{
 
@@ -245,9 +246,11 @@ class CreaEsercizio extends StatelessWidget{
     Schede().getValueScheda().then((val) async {
       await eserciziModel.loadData(EserciziDBworker.eserciziDBworker, val);
     });
-
-    Base.pageIndexForWidget=12;
-    schedeModel.setStackIndex(6);
+    VisualizzaScheda.hoCaricatoGliEs = false;
+    print(VisualizzaScheda.hoCaricatoGliEs);
+    /*Base.pageIndexForWidget=12;
+    schedeModel.setStackIndex(6);*/
+    schedeModel.setStackIndex(2);
 //dd
 
 

@@ -19,10 +19,21 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 class VisualizzaScheda extends StatefulWidget {
   @override
   State<VisualizzaScheda> createState() => _VisualizzaSchedaState();
+  static bool hoCaricatoGliEs = false;
+
 }
 
 class _VisualizzaSchedaState extends State<VisualizzaScheda> {
   final datasets = <String, dynamic>{};
+
+  bool Carica(){
+    Timer(
+        const Duration(milliseconds: 5000),
+            () => {
+          VisualizzaScheda.hoCaricatoGliEs = true,
+        });
+    return false;
+  }
 
   ValueNotifier<bool> isDialOpen = ValueNotifier(false);
 
@@ -60,6 +71,8 @@ class _VisualizzaSchedaState extends State<VisualizzaScheda> {
         measureFn: (ChartRegistri sales, _) => sales.durata,
       )
     ];  */
+
+
 
     return Scaffold(
         appBar: buildAppBar(context),
@@ -416,6 +429,22 @@ class _VisualizzaSchedaState extends State<VisualizzaScheda> {
                           textAlign: TextAlign.center,
                         ))),
               ),
+              Visibility(
+                visible: VisualizzaScheda.hoCaricatoGliEs,
+                child: Text("Test del caricamento",
+                  style: GoogleFonts.adventPro(
+                  textStyle: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w400,
+                    fontSize: 20,
+                    fontStyle: FontStyle.normal,
+                    decoration: TextDecoration.none,
+                  ),
+                ),),
+                replacement: const CircularProgressIndicator(
+                  color: Colors.white,
+                ),
+              ),
             ])),
         //va in alto magari
         bottomNavigationBar: Padding(
@@ -424,6 +453,7 @@ class _VisualizzaSchedaState extends State<VisualizzaScheda> {
               children: [
                 FlatButton(
                   onPressed: () {
+                    VisualizzaScheda.hoCaricatoGliEs = false;
                     schedeModel.setStackIndex(0);
                   },
                   child: Text(
@@ -548,19 +578,26 @@ class _VisualizzaSchedaState extends State<VisualizzaScheda> {
                       ),
                     ),
                     onPressed: () async {
+                      setState((){
+                        VisualizzaScheda.hoCaricatoGliEs = false;
+                      });
                       await EserciziDBworker.eserciziDBworker
                           .delete(esercizio.id);
                       Schede().getValueScheda().then((val) async {
                         eserciziModel.loadData(
                             EserciziDBworker.eserciziDBworker, val);
+                        setState((){
+                          VisualizzaScheda.hoCaricatoGliEs = true;
+                        });
                       });
                       Navigator.of(context).pop();
-                      Timer(
+                      /*Timer(
                           const Duration(milliseconds: 200),
                           () => {
                                 Base.pageIndexForWidget = 2,
                                 schedeModel.setStackIndex(6),
-                              });
+                              }); */
+                      schedeModel.setStackIndex(2);
                     },
                   ),
                 ],
