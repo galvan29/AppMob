@@ -56,12 +56,12 @@ class CreaEsercizio extends StatelessWidget{
                           color: Colors.white,
                         )),
                     initialValue: eserciziModel.esercizioBeingEdited == null ? null : eserciziModel.esercizioBeingEdited.nomeEsercizio,
-                    validator: (String? inValue){
+                    /*validator: (String? inValue){
                       if(inValue!.isEmpty){
                         return "Inserisci Nome";
                       }
                       return null;
-                    },
+                    }, */
                     onChanged: (String inValue){
                       eserciziModel.esercizioBeingEdited.nomeEsercizio = inValue;
                     },
@@ -78,12 +78,12 @@ class CreaEsercizio extends StatelessWidget{
                           color: Colors.white,
                         )),
                     initialValue: eserciziModel.esercizioBeingEdited == null ? null : eserciziModel.esercizioBeingEdited.serieEsercizio,
-                    validator: (String? inValue){
+                    /*validator: (String? inValue){
                       if(inValue!.isEmpty){
-                        return "Inserisci Serie";
+                        return "Inserisci Note";
                       }
                       return null;
-                    },
+                    }, */
                     onChanged: (String inValue){
                       eserciziModel.esercizioBeingEdited.serieEsercizio = inValue;
                     },
@@ -100,12 +100,12 @@ class CreaEsercizio extends StatelessWidget{
                           color: Colors.white,
                         )),
                     initialValue: eserciziModel.esercizioBeingEdited == null ? null : eserciziModel.esercizioBeingEdited.ripEsercizio,
-                    validator: (String? inValue){
+                    /*validator: (String? inValue){
                       if(inValue!.isEmpty){
-                        return "Inserisci Ripetizioni";
+                        return "Inserisci Note";
                       }
                       return null;
-                    },
+                    }, */
                     onChanged: (String inValue){
                       eserciziModel.esercizioBeingEdited.ripEsercizio = inValue;
                     },
@@ -122,12 +122,12 @@ class CreaEsercizio extends StatelessWidget{
                           color: Colors.white,
                         )),
                     initialValue: eserciziModel.esercizioBeingEdited == null ? null : eserciziModel.esercizioBeingEdited.pesoEsercizio,
-                    validator: (String? inValue){
+                    /*validator: (String? inValue){
                       if(inValue!.isEmpty){
-                        return "Inserisci Peso";
+                        return "Inserisci Note";
                       }
                       return null;
-                    },
+                    }, */
                     onChanged: (String inValue){
                       eserciziModel.esercizioBeingEdited.pesoEsercizio = inValue;
                     },
@@ -144,12 +144,12 @@ class CreaEsercizio extends StatelessWidget{
                           color: Colors.white,
                         )),
                     initialValue: eserciziModel.esercizioBeingEdited == null ? null : eserciziModel.esercizioBeingEdited.noteEsercizio,
-                    validator: (String? inValue){
+                    /*validator: (String? inValue){
                       if(inValue!.isEmpty){
                         return "Inserisci Note";
                       }
                       return null;
-                    },
+                    }, */
                     onChanged: (String inValue){
                       eserciziModel.esercizioBeingEdited.noteEsercizio = inValue;
                     },
@@ -242,12 +242,12 @@ class CreaEsercizio extends StatelessWidget{
     } else {
       await EserciziDBworker.eserciziDBworker.update(eserciziModel.esercizioBeingEdited);
     }
-
+    VisualizzaScheda.hoCaricatoGliEs = false;
     Schede().getValueScheda().then((val) async {
       await eserciziModel.loadData(EserciziDBworker.eserciziDBworker, val);
     });
-    VisualizzaScheda.hoCaricatoGliEs = false;
-    print(VisualizzaScheda.hoCaricatoGliEs);
+    VisualizzaScheda.hoCaricatoGliEs = true;
+    //print(VisualizzaScheda.hoCaricatoGliEs);
     /*Base.pageIndexForWidget=12;
     schedeModel.setStackIndex(6);*/
     schedeModel.setStackIndex(2);

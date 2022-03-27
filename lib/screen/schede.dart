@@ -156,13 +156,19 @@ class _SchedeState extends State<Schede> {
                             },
                             onTap: () async {
                               saveValueScheda(scheda.id);
-                              print("OOOOOOOOOOOOOOOOOO " + scheda.nomeScheda);
+                              print("OOOOOOOOOOOOOOOOOO "+scheda.nomeScheda);
                               Schede.schedaAllenamento = scheda.id;
                               Schede.nomeSchedaGLobal = scheda.nomeScheda;
+                              setState((){
+                                VisualizzaScheda.hoCaricatoGliEs = false;
+                              });
                               await eserciziModel.loadData(
                                   EserciziDBworker.eserciziDBworker, scheda.id);
                               await registriModel.loadData(
                                   RegistriDBworker.registriDBworker, scheda.id);
+                              setState((){
+                                VisualizzaScheda.hoCaricatoGliEs = true;
+                              });
                               schedeModel.setStackIndex(2);
                             },
                             child: Container(
@@ -251,8 +257,8 @@ class _SchedeState extends State<Schede> {
               bottomLeft: Radius.circular(20),
             ),
             border: Border.all(color: Colors.white)),
-        height: 180.0, // Change as per your requirement
-        width: 300.0, // Change as per your requirement
+        height: MediaQuery.of(context).size.width * 0.32, // Change as per your requirement
+        width: MediaQuery.of(context).size.width * 0.80, // Change as per your requirement
         child: SingleChildScrollView(
           child: Column(
             children: [
@@ -333,16 +339,23 @@ class _SchedeState extends State<Schede> {
                     onPressed: () async {
                       await SchedeDBworker.schedeDBworker.delete(scheda.id);
                       Navigator.of(context).pop();
+                      setState(() {
+                        Schede.hoCaricatoleSchede = false;
+                      });
                       LoginPage().getValueLogin().then((val) async {
                         await schedeModel.loadData(
                             SchedeDBworker.schedeDBworker, val);
                       });
-                      Timer(
+                      setState(() {
+                        Schede.hoCaricatoleSchede = true;
+                      });
+                      utentiModel.setStackIndex(4);
+                      /*Timer(
                           const Duration(milliseconds: 0),
                           () => {
                                 Base.pageIndexForWidget = 4,
                                 utentiModel.setStackIndex(7),
-                              });
+                              }); */
                     },
                   ),
                 ],

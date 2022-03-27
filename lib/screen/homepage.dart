@@ -1,13 +1,11 @@
 import 'dart:async';
 import 'dart:math';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mytraining/common/appbarHome.dart';
 import 'package:mytraining/db/eventiDBworrker.dart';
-import 'package:mytraining/db/utentiDBworker.dart';
 import 'package:mytraining/models/eventiModel.dart';
 import 'package:mytraining/models/schedeModel.dart';
 import 'package:mytraining/models/utentiModel.dart';
@@ -147,76 +145,64 @@ class _HomePageState extends State<HomePage> {
                     maxLines: 1),
               ),
               //calendario
-              Container(
-                margin: const EdgeInsets.only(
-                  left: 30,
-                  top: 10,
-                  right: 30,
-                ),
-                padding: EdgeInsets.zero,
-                width: double.maxFinite,
-                height: 350,
-                decoration: const BoxDecoration(
-                  color: Color.fromARGB(255, 230, 220, 245),
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(20),
-                    topRight: Radius.circular(20),
-                    bottomRight: Radius.circular(20),
-                    bottomLeft: Radius.circular(20),
-                  ),
-                ),
-                child: SfCalendar(
-                    view: CalendarView.month,
-                    cellBorderColor: Colors.blue.withOpacity(0),
-                    dataSource: MeetingDataSource(getMeetingData()),
-                    monthViewSettings: const MonthViewSettings(
-                        appointmentDisplayMode:
-                            MonthAppointmentDisplayMode.appointment),
-                    onTap: (CalendarTapDetails details) async {
-                      DateTime date = details.date!;
-                      dynamic appointments = details.appointments;
-                      String alle = "";
-                      List<String> text = [];
-                      List<int> idEve = [];
-                      String giorno = DateFormat('dd-MM-yy').format(date);
-                      if (appointments.length != 0) {
-                        for (var app in appointments) {
-                          alle += app.eventName +
-                              " alle " +
-                              DateFormat('HH.mm').format(app.from);
-                          idEve.add(app.id);
-                          text.add(alle);
-                          print("Dario " + alle);
-                          alle = "";
-                        }
-                        _showDialog(context, text, idEve, giorno);
-                      }
-                      LoginPage().getValueLogin().then((val) async {
-                        await eventiModel.loadData(
-                            EventiDBworker.eventiDBworker, val);
-                      });
-                    }),
-              ),
               Visibility(
                 visible: HomePage.hoCaricatoGliEventi,
                 replacement: const CircularProgressIndicator(
                   color: Colors.white,
                 ),
-                child: Text(
-                  "Se mostro questo ho caricato gli eventi",
-                  style: GoogleFonts.adventPro(
-                    textStyle: const TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w500,
-                      fontSize: 25,
-                      fontStyle: FontStyle.normal,
-                      decoration: TextDecoration.none,
+                child: Container(
+                  margin: const EdgeInsets.only(
+                    left: 30,
+                    top: 10,
+                    right: 30,
+                  ),
+                  padding: EdgeInsets.zero,
+                  width: double.maxFinite,
+                  height: 350,
+                  decoration: const BoxDecoration(
+                    color: Color.fromARGB(255, 230, 220, 245),
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20),
+                      bottomRight: Radius.circular(20),
+                      bottomLeft: Radius.circular(20),
                     ),
                   ),
+                  child: SfCalendar(
+                      view: CalendarView.month,
+                      cellBorderColor: Colors.blue.withOpacity(0),
+                      dataSource: MeetingDataSource(getMeetingData()),
+                      monthViewSettings: const MonthViewSettings(
+                          appointmentDisplayMode:
+                          MonthAppointmentDisplayMode.appointment),
+                      onTap: (CalendarTapDetails details) async {
+                        DateTime date = details.date!;
+                        dynamic appointments = details.appointments;
+                        String alle = "";
+                        List<String> text = [];
+                        List<int> idEve = [];
+                        String giorno = DateFormat('dd-MM-yy').format(date);
+                        if (appointments.length != 0) {
+                          for (var app in appointments) {
+                            alle += app.eventName +
+                                " alle " +
+                                DateFormat('HH.mm').format(app.from);
+                            idEve.add(app.id);
+                            text.add(alle);
+                            print("Dario " + alle);
+                            alle = "";
+                          }
+                          _showDialog(context, text, idEve, giorno);
+                        }
+                        LoginPage().getValueLogin().then((val) async {
+                          await eventiModel.loadData(
+                              EventiDBworker.eventiDBworker, val);
+                        });
+                      }),
                 ),
               ),
               Visibility(
-                visible: schedeModel.schedeList.length > 0 ? true : false,
+                visible: schedeModel.schedeList.isNotEmpty ? true : false,
                 child: Container(
                   margin: const EdgeInsets.only(
                     left: 30,
@@ -259,7 +245,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               Visibility(
-                visible: schedeModel.schedeList.length > 0 ? false : true,
+                visible: schedeModel.schedeList.isNotEmpty ? false : true,
                 child: Container(
                     margin: const EdgeInsets.only(
                       left: 30,
@@ -370,6 +356,7 @@ class _HomePageState extends State<HomePage> {
 
   Widget setupAlertDialoadContainer(
       List<String> text, List<int> idEve, String giorno) {
+    var height_size = MediaQuery.of(context).size.width * 0.32;
     return Container(
         decoration: BoxDecoration(
             color: Colors.white,
@@ -380,10 +367,11 @@ class _HomePageState extends State<HomePage> {
               bottomLeft: Radius.circular(20),
             ),
             border: Border.all(color: Colors.white)),
-        height: 180.0 + (idEve.length - 1) * 80 > 280
-            ? 280
-            : 180.0 + (idEve.length - 1) * 80, // Change as per your requirement
-        width: 300.0, // Change as per your requirement
+         // Change as per your requirement
+        width: MediaQuery.of(context).size.width * 0.80,
+        height: height_size + (idEve.length - 1) * height_size * 0.44 > height_size * 1.55
+            ? height_size * 1.55
+            : height_size + (idEve.length - 1) * height_size * 0.44, // Change as per your requirement// Change as per your requirement
         child: SingleChildScrollView(
           child: Column(
             children: [
@@ -462,7 +450,7 @@ class _HomePageState extends State<HomePage> {
                   );
                 },
               ),
-              FlatButton(
+              TextButton(
                 child: Text(
                   "OK",
                   style: GoogleFonts.adventPro(
@@ -495,8 +483,8 @@ class _HomePageState extends State<HomePage> {
               bottomLeft: Radius.circular(20),
             ),
             border: Border.all(color: Colors.white)),
-        height: 180.0, // Change as per your requirement
-        width: 300.0, // Change as per your requirement
+        height: MediaQuery.of(context).size.width * 0.32, // Change as per your requirement
+        width: MediaQuery.of(context).size.width * 0.80, // Change as per your requirement
         child: SingleChildScrollView(
           child: Column(
             children: [
@@ -539,7 +527,7 @@ class _HomePageState extends State<HomePage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  FlatButton(
+                  TextButton(
                     child: Text(
                       "Annulla",
                       style: GoogleFonts.adventPro(
@@ -561,7 +549,7 @@ class _HomePageState extends State<HomePage> {
                     alignment: Alignment.center,
                     decoration: const BoxDecoration(),
                   ),
-                  FlatButton(
+                  TextButton(
                     child: Text(
                       "Conferma",
                       style: GoogleFonts.adventPro(
@@ -577,22 +565,22 @@ class _HomePageState extends State<HomePage> {
                     onPressed: () async {
                       await EventiDBworker.eventiDBworker.delete(ev.id);
                       Navigator.of(context).pop();
-                      setState(() {
-                        HomePage.hoCaricatoGliEventi = false;
-                      });
+                      //setState(() {
+                      //  HomePage.hoCaricatoGliEventi = false;
+                      //});
                       LoginPage().getValueLogin().then((val) async {
                         await eventiModel.loadData(
                             EventiDBworker.eventiDBworker, val);
                       });
-                      setState(() {
-                        HomePage.hoCaricatoGliEventi = true;
-                      });
-                      /*Timer(
+                      //setState(() {
+                      //  HomePage.hoCaricatoGliEventi = true;
+                      //});
+                      Timer(
                           const Duration(milliseconds: 160),
                               () => {
                             Base.pageIndexForWidget = 3,
                             utentiModel.setStackIndex(7),
-                          }); */
+                          });
                       utentiModel.setStackIndex(3);
                     },
                   ),
@@ -620,7 +608,10 @@ class _HomePageState extends State<HomePage> {
 
 List<Meeting> getMeetingData() {
   final List<Meeting> listMeetings = <Meeting>[];
-  print("Ma entra qua");
+  LoginPage().getValueLogin().then((val) async {
+    await eventiModel.loadData(
+        EventiDBworker.eventiDBworker, val);
+  });
   for (Evento eve in eventiModel.eventiList) {
     listMeetings.add(Meeting(eve.nomeScheda, eve.inizio, eve.fine, eve.id));
   }
