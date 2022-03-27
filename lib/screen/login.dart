@@ -22,7 +22,7 @@ class LoginPage extends StatelessWidget {
 
   getValueLogin() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-      return prefs.getInt('idUtente')!;
+    return prefs.getInt('idUtente')!;
   }
 
   removeValueLogin() async {
@@ -130,8 +130,7 @@ class LoginPage extends StatelessWidget {
             ),
           ),
           SingleChildScrollView(
-             child:
-         Container(
+              child: Container(
                   margin: EdgeInsets.only(
                       top: MediaQuery.of(context).size.height * 0.75),
                   child: Column(
@@ -146,60 +145,57 @@ class LoginPage extends StatelessWidget {
                         padding: EdgeInsets.zero,
                         decoration: const BoxDecoration(),
                         child: Container(
-                            width: double.maxFinite,
-                            height: 40,
-                            padding: const EdgeInsets.only(top: 0, left: 10),
-                            decoration: BoxDecoration(
-                                color: Colors.black.withOpacity(0.05),
-                                borderRadius: const BorderRadius.only(
-                                  topLeft: Radius.circular(5),
-                                  topRight: Radius.circular(5),
-                                  bottomRight: Radius.circular(5),
-                                  bottomLeft: Radius.circular(5),
-                                ),
-                                border:
-                                    Border.all(color: Colors.white, width: 2)),
-                            child: Container(
-                              child: TextFormField(
-                                //initialValue: "Password",
-                                obscureText: false,
-                                style: GoogleFonts.adventPro(
-                                  textStyle: const TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 20,
-                                    fontStyle: FontStyle.normal,
-                                    decoration: TextDecoration.none,
-                                  ),
-                                ),
-                                decoration: InputDecoration(
-                                  contentPadding: EdgeInsets.only(bottom: 10),
-                                  hintText: 'Nome Utente',
-                                  hintStyle: GoogleFonts.adventPro(
-                                    textStyle: TextStyle(
-                                      color: Colors.white.withOpacity(0.5),
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 20,
-                                      fontStyle: FontStyle.normal,
-                                      decoration: TextDecoration.none,
-                                    ),
-                                  ),
-                                ),
-                                validator: (String? inValue) {
-                                  if (inValue!.isEmpty) {
-                                    return "Please enter a nome utente";
-                                  }
-                                  return null;
-                                },
-                                onChanged: (String inValue) {
-                                  utentiModel.utenteBeingEdited.nomeUtente =
-                                      inValue;
-                                },
-                                onTap: (){
-
-                                },
+                            child: TextFormField(
+                          textInputAction: TextInputAction.next,
+                          //initialValue: "Password",
+                          obscureText: false,
+                          style: GoogleFonts.adventPro(
+                            textStyle: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w400,
+                              fontSize: 20,
+                              fontStyle: FontStyle.normal,
+                              decoration: TextDecoration.none,
+                            ),
+                          ),
+                          decoration: InputDecoration(
+                            contentPadding:
+                                EdgeInsets.only(bottom: 10, left: 10),
+                            hintText: 'Nome Utente',
+                            hintStyle: GoogleFonts.adventPro(
+                              textStyle: TextStyle(
+                                color: Colors.white.withOpacity(0.5),
+                                fontWeight: FontWeight.w400,
+                                fontSize: 20,
+                                fontStyle: FontStyle.normal,
+                                decoration: TextDecoration.none,
                               ),
-                            )),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                              borderSide: BorderSide(
+                                color: Colors.white,
+                              ),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                              borderSide: BorderSide(
+                                color: Colors.white,
+                                width: 2.0,
+                              ),
+                            ),
+                          ),
+                          validator: (String? inValue) {
+                            if (inValue!.isEmpty) {
+                              return "Please enter a nome utente";
+                            }
+                            return null;
+                          },
+                          onChanged: (String inValue) {
+                            utentiModel.utenteBeingEdited.nomeUtente = inValue;
+                          },
+                          onTap: () {},
+                        )),
                       ),
                       Container(
                         margin: const EdgeInsets.only(
@@ -210,57 +206,57 @@ class LoginPage extends StatelessWidget {
                         padding: EdgeInsets.zero,
                         decoration: const BoxDecoration(),
                         child: Container(
-                            width: double.maxFinite,
-                            height: 40,
-                            padding: const EdgeInsets.only(top: 0, left: 10),
-                            decoration: BoxDecoration(
-                                color: Colors.black.withOpacity(0.05),
-                                borderRadius: const BorderRadius.only(
-                                  topLeft: Radius.circular(5),
-                                  topRight: Radius.circular(5),
-                                  bottomRight: Radius.circular(5),
-                                  bottomLeft: Radius.circular(5),
-                                ),
-                                border:
-                                    Border.all(color: Colors.white, width: 2)),
-                            child: Container(
-                              child: TextFormField(
-                                //initialValue: "Password",
-                                obscureText: true,
-                                style: GoogleFonts.adventPro(
-                                  textStyle: const TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 20,
-                                    fontStyle: FontStyle.normal,
-                                    decoration: TextDecoration.none,
-                                  ),
-                                ),
-                                decoration: InputDecoration(
-                                  contentPadding: EdgeInsets.only(bottom: 10),
-                                  hintText: 'Password',
-                                  hintStyle: GoogleFonts.adventPro(
-                                    textStyle: TextStyle(
-                                      color: Colors.white.withOpacity(0.5),
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 20,
-                                      fontStyle: FontStyle.normal,
-                                      decoration: TextDecoration.none,
-                                    ),
-                                  ),
-                                ),
-                                validator: (String? inValue) {
-                                  if (inValue!.isEmpty) {
-                                    return "Please enter a password";
-                                  }
-                                  return null;
-                                },
-                                onChanged: (String inValue) {
-                                  utentiModel.utenteBeingEdited.password =
-                                      inValue;
-                                },
+                          child: TextFormField(
+                            textInputAction: TextInputAction.done,
+                            //initialValue: "Password",
+                            obscureText: true,
+                            style: GoogleFonts.adventPro(
+                              textStyle: const TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w400,
+                                fontSize: 20,
+                                fontStyle: FontStyle.normal,
+                                decoration: TextDecoration.none,
                               ),
-                            )),
+                            ),
+                            decoration: InputDecoration(
+                              contentPadding:
+                                  EdgeInsets.only(bottom: 10, left: 10),
+                              hintText: 'Password',
+                              hintStyle: GoogleFonts.adventPro(
+                                textStyle: TextStyle(
+                                  color: Colors.white.withOpacity(0.5),
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 20,
+                                  fontStyle: FontStyle.normal,
+                                  decoration: TextDecoration.none,
+                                ),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                                borderSide: BorderSide(
+                                  color: Colors.white,
+                                ),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                                borderSide: BorderSide(
+                                  color: Colors.white,
+                                  width: 2.0,
+                                ),
+                              ),
+                            ),
+                            validator: (String? inValue) {
+                              if (inValue!.isEmpty) {
+                                return "Please enter a password";
+                              }
+                              return null;
+                            },
+                            onChanged: (String inValue) {
+                              utentiModel.utenteBeingEdited.password = inValue;
+                            },
+                          ),
+                        ),
                       ),
                       Container(
                           margin: const EdgeInsets.only(
@@ -269,24 +265,31 @@ class LoginPage extends StatelessWidget {
                             right: 50,
                           ),
                           padding: EdgeInsets.zero,
+                          width: double.maxFinite,
                           decoration: const BoxDecoration(),
                           child: GestureDetector(
                             onTap: () async {
-                              await utentiModel.getPassword(UtentiDBworker.utentiDBworker,
+                              await utentiModel.getPassword(
+                                  UtentiDBworker.utentiDBworker,
                                   utentiModel.utenteBeingEdited.nomeUtente);
                               String passwordDatabase = utentiModel.up.password;
-                              if (utentiModel.utenteBeingEdited.password == passwordDatabase) {
-                                await utentiModel.getPassword(UtentiDBworker.utentiDBworker,
+                              if (utentiModel.utenteBeingEdited.password ==
+                                  passwordDatabase) {
+                                await utentiModel.getPassword(
+                                    UtentiDBworker.utentiDBworker,
                                     utentiModel.utenteBeingEdited.nomeUtente);
                                 _save(context);
                               } else {
                                 Widget cancelButton = TextButton(
-                                  child: Text("Riprova",
+                                  child: Text(
+                                    "Riprova",
                                     style: GoogleFonts.adventPro(
                                       textStyle: TextStyle(
                                         color: Colors.black,
                                         fontWeight: FontWeight.w400,
-                                        fontSize: MediaQuery.of(context).size.height * 0.016,
+                                        fontSize:
+                                            MediaQuery.of(context).size.height *
+                                                0.016,
                                         fontStyle: FontStyle.normal,
                                         decoration: TextDecoration.none,
                                       ),
@@ -297,12 +300,15 @@ class LoginPage extends StatelessWidget {
                                   },
                                 );
                                 Widget continueButton = TextButton(
-                                  child: Text("Registrati",
+                                  child: Text(
+                                    "Registrati",
                                     style: GoogleFonts.adventPro(
                                       textStyle: TextStyle(
                                         color: Colors.black,
                                         fontWeight: FontWeight.w400,
-                                        fontSize: MediaQuery.of(context).size.height * 0.016,
+                                        fontSize:
+                                            MediaQuery.of(context).size.height *
+                                                0.016,
                                         fontStyle: FontStyle.normal,
                                         decoration: TextDecoration.none,
                                       ),
@@ -316,23 +322,29 @@ class LoginPage extends StatelessWidget {
 
                                 // set up the AlertDialog
                                 AlertDialog alert = AlertDialog(
-                                  title: Text("Attenzione",
+                                  title: Text(
+                                    "Attenzione",
                                     style: GoogleFonts.adventPro(
                                       textStyle: TextStyle(
                                         color: Colors.black,
                                         fontWeight: FontWeight.w600,
-                                        fontSize: MediaQuery.of(context).size.height * 0.025,
+                                        fontSize:
+                                            MediaQuery.of(context).size.height *
+                                                0.025,
                                         fontStyle: FontStyle.normal,
                                         decoration: TextDecoration.none,
                                       ),
                                     ),
                                   ),
-                                  content: Text("Nome Utente o Password errata",
+                                  content: Text(
+                                    "Nome Utente o Password errata",
                                     style: GoogleFonts.adventPro(
                                       textStyle: TextStyle(
                                         color: Colors.black,
                                         fontWeight: FontWeight.w400,
-                                        fontSize: MediaQuery.of(context).size.height * 0.016,
+                                        fontSize:
+                                            MediaQuery.of(context).size.height *
+                                                0.016,
                                         fontStyle: FontStyle.normal,
                                         decoration: TextDecoration.none,
                                       ),
@@ -353,9 +365,9 @@ class LoginPage extends StatelessWidget {
                               }
                             },
                             child: Container(
-                                width: double.maxFinite,
-                                height: 40,
-                                padding: const EdgeInsets.only(top: 7),
+                                width: 10,
+                                height: 45,
+                                padding: const EdgeInsets.only(top: 9),
                                 decoration: BoxDecoration(
                                     color: Colors.black.withOpacity(0.05),
                                     borderRadius: const BorderRadius.only(
@@ -364,15 +376,14 @@ class LoginPage extends StatelessWidget {
                                       bottomRight: Radius.circular(5),
                                       bottomLeft: Radius.circular(5),
                                     ),
-                                    border: Border.all(
-                                        color: Colors.white, width: 2)),
+                                    border: Border.all(color: Colors.white, width: 2)),
                                 child: Text(
-                                  '''Login''',
+                                  'Login',
                                   style: GoogleFonts.adventPro(
                                     textStyle: const TextStyle(
                                       color: Color(0xFFFFFFFF),
                                       fontWeight: FontWeight.w500,
-                                      fontSize: 16,
+                                      fontSize: 18,
                                       fontStyle: FontStyle.normal,
                                       decoration: TextDecoration.none,
                                     ),
@@ -381,15 +392,13 @@ class LoginPage extends StatelessWidget {
                                 )),
                           ))
                     ],
-                  ))
-                  )
+                  )))
         ]),
       ),
     );
   }
 
   void _save(BuildContext context) async {
-
     if (!_formKey.currentState!.validate()) {
       return;
     }
@@ -401,8 +410,6 @@ class LoginPage extends StatelessWidget {
 
     Base.pageIndexForWidget = 3;
     utentiModel.setStackIndex(7);
-
-
   }
 
   BackBro() {
