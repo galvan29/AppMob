@@ -96,7 +96,7 @@ class RegisterPage extends StatelessWidget {
           SingleChildScrollView(
               child: Container(
                   margin: EdgeInsets.only(
-                      top: MediaQuery.of(context).size.height * 0.75),
+                      top: MediaQuery.of(context).size.height * 0.72),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
@@ -357,9 +357,9 @@ class RegisterPage extends StatelessWidget {
     //}
 
     utentiModel.loadData(UtentiDBworker.utentiDBworker);
-    Base.pageIndexForWidget=1;
-    utentiModel.setStackIndex(7);
-    //utentiModel.setStackIndex(1);
+    //Base.pageIndexForWidget=1;
+    //utentiModel.setStackIndex(7);
+    utentiModel.setStackIndex(1);
 
 
   }

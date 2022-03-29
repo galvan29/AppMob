@@ -76,24 +76,29 @@ class _SchedeState extends State<Schede> {
                   Container(
                     margin: EdgeInsets.only(
                       top: MediaQuery.of(context).size.width * 0.05,
+                      left: MediaQuery.of(context).size.width * 0.05,
                     ),
                   ),
                   SizedBox(
-                      width: 330,
+                      width: MediaQuery.of(context).size.width * 0.6,
                       child: Text(
                         "Ecco le tue Schede!",
-                        textAlign: TextAlign.center,
+                        //textAlign: TextAlign.center,
                         style: GoogleFonts.adventPro(
-                          textStyle: const TextStyle(
+                          textStyle: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.w400,
-                            fontSize: 30,
+                            fontSize: MediaQuery.of(context).size.width * 0.07,
                             fontStyle: FontStyle.normal,
                             decoration: TextDecoration.none,
                           ),
                         ),
                       )),
+                  Spacer(),
                   Container(
+                      margin: EdgeInsets.only(
+                        right: MediaQuery.of(context).size.width * 0.03,
+                      ),
                       decoration: BoxDecoration(
                         border: Border.all(color: Colors.black, width: 1.5),
                         color: Colors.white,
@@ -257,7 +262,7 @@ class _SchedeState extends State<Schede> {
               bottomLeft: Radius.circular(20),
             ),
             border: Border.all(color: Colors.white)),
-        height: MediaQuery.of(context).size.width * 0.32, // Change as per your requirement
+        height: MediaQuery.of(context).size.height * 0.2, // Change as per your requirement
         width: MediaQuery.of(context).size.width * 0.80, // Change as per your requirement
         child: SingleChildScrollView(
           child: Column(

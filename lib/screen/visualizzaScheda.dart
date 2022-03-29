@@ -489,7 +489,7 @@ class _VisualizzaSchedaState extends State<VisualizzaScheda> {
               bottomLeft: Radius.circular(20),
             ),
             border: Border.all(color: Colors.white)),
-        height: MediaQuery.of(context).size.width * 0.32, // Change as per your requirement
+        height: MediaQuery.of(context).size.height * 0.2, // Change as per your requirement
         width: MediaQuery.of(context).size.width * 0.80, // Change as per your requirement
         child: SingleChildScrollView(
           child: Column(

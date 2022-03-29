@@ -21,7 +21,7 @@ class _ProfiloState extends State<Profilo2> {
   ValueNotifier<bool> isDialOpen = ValueNotifier(false);
 
   //Profilo
-  int _currentIndex = 2;
+  final int _currentIndex = 2;
 
   final userNameController = TextEditingController();
   final firstNameController = TextEditingController();
@@ -51,11 +51,6 @@ class _ProfiloState extends State<Profilo2> {
     heightController.text = utentiModel.utenteBeingEdited.height;
     weightController.text = utentiModel.utenteBeingEdited.weight;
     
-    setState(() {
-      print(userNameController.text);
-      print("teoricamente sto aggiornando ");
-    });
-
     /* print(ciao);
     if(ciao && utentiModel.stackIndex == 5){
       utentiModel.setStackIndex(7);

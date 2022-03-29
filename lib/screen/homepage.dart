@@ -356,7 +356,7 @@ class _HomePageState extends State<HomePage> {
 
   Widget setupAlertDialoadContainer(
       List<String> text, List<int> idEve, String giorno) {
-    var height_size = MediaQuery.of(context).size.width * 0.32;
+    var height_size = MediaQuery.of(context).size.height * 0.2;
     return Container(
         decoration: BoxDecoration(
             color: Colors.white,
@@ -483,7 +483,7 @@ class _HomePageState extends State<HomePage> {
               bottomLeft: Radius.circular(20),
             ),
             border: Border.all(color: Colors.white)),
-        height: MediaQuery.of(context).size.width * 0.32, // Change as per your requirement
+        height: MediaQuery.of(context).size.height * 0.2, // Change as per your requirement
         width: MediaQuery.of(context).size.width * 0.80, // Change as per your requirement
         child: SingleChildScrollView(
           child: Column(

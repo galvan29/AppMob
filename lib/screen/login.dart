@@ -108,21 +108,6 @@ class LoginPage extends StatelessWidget {
                           ),
                         ),
                       ),
-                      /*Container(
-                        margin: EdgeInsets.only(top: 0),
-                        child: Text(
-                          'Login',
-                          style: GoogleFonts.adventPro(
-                            textStyle: const TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.w500,
-                              fontSize: 30,
-                              fontStyle: FontStyle.normal,
-                              decoration: TextDecoration.none,
-                            ),
-                          ),
-                        ),
-                      ), */
                     ],
                   ),
                 ),
@@ -132,7 +117,7 @@ class LoginPage extends StatelessWidget {
           SingleChildScrollView(
               child: Container(
                   margin: EdgeInsets.only(
-                      top: MediaQuery.of(context).size.height * 0.75),
+                      top: MediaQuery.of(context).size.height * 0.72),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
