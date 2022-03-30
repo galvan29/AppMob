@@ -7,10 +7,12 @@ import 'package:mytraining/models/utentiModel.dart';
 import 'package:mytraining/screen/base.dart';
 import 'package:mytraining/screen/login.dart';
 import 'package:mytraining/screen/schede.dart';
+import 'package:flutter_iconpicker/flutter_iconpicker.dart';
 
 class CreaScheda extends StatelessWidget{
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  
 
   @override
   Widget build(BuildContext context) {
