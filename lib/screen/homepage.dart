@@ -153,9 +153,9 @@ class _HomePageState extends State<HomePage> {
                 replacement: Container(
                   margin: const EdgeInsets.only(
                     left: 100,
-                    top: 100,
+                    top: 160,
                     right: 100,
-                    bottom: 100
+                    bottom: 160
                   ),
                   child: CircularProgressIndicator(
                     color: Colors.white,
@@ -634,7 +634,7 @@ class _HomePageState extends State<HomePage> {
                         await eventiModel.loadData(
                             EventiDBworker.eventiDBworker, val);
                       });
-                      Timer(Duration(milliseconds: 1000), () {
+                      Timer(Duration(milliseconds: 700), () {
                         setState(() {
                           HomePage.hoCaricatoGliEventi = true;
                         });
