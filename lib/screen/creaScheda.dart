@@ -116,7 +116,7 @@ class CreaScheda extends StatelessWidget{
                     onPressed: () {
                       _pickIcon(context);
                     },
-                    child: Text("visvijsd"),
+                    child: Text("Scegli Icona"),
                   ),
                 )),
             Container(
