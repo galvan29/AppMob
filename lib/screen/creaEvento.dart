@@ -132,11 +132,11 @@ class CreaEvento extends StatelessWidget {
                     padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
                     child: SizedBox(
                       height: 70,
-                      width: MediaQuery.of(context).size.width * 0.2,
+                      width: MediaQuery.of(context).size.width * 0.25,
                       child: TextFormField(
                           //enabled: false,
                           decoration: const InputDecoration(
-                              labelText: "Durata",
+                              labelText: "Durata (m)",
                               labelStyle: TextStyle(
                                 color: Colors.white,
                               )),
@@ -148,13 +148,26 @@ class CreaEvento extends StatelessWidget {
                                 .requestFocus(new FocusNode());
                           }),
                     )),
+                /*Text(
+                  " minuti",
+                  style: GoogleFonts.adventPro(
+                    textStyle: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w500,
+                      fontSize: MediaQuery.of(context).size.width * 0.045,
+                      fontStyle: FontStyle.normal,
+                      decoration: TextDecoration.none,
+                    ),
+                  ),
+                ),*/
                 Spacer(),
                 Container(
                   margin: EdgeInsets.only(
                     right: MediaQuery.of(context).size.width * 0.03,
                   ),
                   decoration: BoxDecoration(
-                    border: Border.all(color: Colors.white.withOpacity(0), width: 1.5),
+                    border: Border.all(
+                        color: Colors.white.withOpacity(0), width: 1.5),
                     color: Colors.white.withOpacity(0),
                     shape: BoxShape.circle,
                   ),
@@ -162,18 +175,18 @@ class CreaEvento extends StatelessWidget {
                       icon: const Icon(Icons.remove),
                       color: Colors.white,
                       onPressed: () {
-                        if(int.parse(txt1.text) > 0){
+                        if (int.parse(txt1.text) > 0) {
                           DateTime a = eventiModel.eventoBeingEdited.fine
                               .add(const Duration(minutes: -30));
                           eventiModel.eventoBeingEdited.fine = a;
                           txt1.text = (a
-                              .subtract(Duration(
-                              milliseconds: eventiModel
-                                  .eventoBeingEdited
-                                  .inizio
-                                  .millisecondsSinceEpoch))
-                              .millisecondsSinceEpoch /
-                              60000)
+                                      .subtract(Duration(
+                                          milliseconds: eventiModel
+                                              .eventoBeingEdited
+                                              .inizio
+                                              .millisecondsSinceEpoch))
+                                      .millisecondsSinceEpoch /
+                                  60000)
                               .toString()
                               .replaceAll(".0", "");
                         }
@@ -184,7 +197,8 @@ class CreaEvento extends StatelessWidget {
                     right: MediaQuery.of(context).size.width * 0.03,
                   ),
                   decoration: BoxDecoration(
-                    border: Border.all(color: Colors.black.withOpacity(0), width: 1.5),
+                    border: Border.all(
+                        color: Colors.black.withOpacity(0), width: 1.5),
                     color: Colors.black.withOpacity(0),
                     shape: BoxShape.circle,
                   ),
@@ -196,13 +210,13 @@ class CreaEvento extends StatelessWidget {
                             .add(const Duration(minutes: 30));
                         eventiModel.eventoBeingEdited.fine = a;
                         txt1.text = (a
-                            .subtract(Duration(
-                            milliseconds: eventiModel
-                                .eventoBeingEdited
-                                .inizio
-                                .millisecondsSinceEpoch))
-                            .millisecondsSinceEpoch /
-                            60000)
+                                    .subtract(Duration(
+                                        milliseconds: eventiModel
+                                            .eventoBeingEdited
+                                            .inizio
+                                            .millisecondsSinceEpoch))
+                                    .millisecondsSinceEpoch /
+                                60000)
                             .toString()
                             .replaceAll(".0", "");
                       }),
