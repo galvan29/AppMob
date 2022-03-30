@@ -37,6 +37,11 @@ class SchedeModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  void setNIcona(int n){
+    icona = n;
+    notifyListeners();
+  }
+
   Future<int> loadData(dynamic inDatabaseWorker, int id) async {
     schedeList = await inDatabaseWorker.getAll(id);
     notifyListeners();
