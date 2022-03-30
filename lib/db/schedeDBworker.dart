@@ -25,7 +25,7 @@ class SchedeDBworker {
           onCreate: (Database inDB, int inVersion) async {
             await inDB.execute("CREATE TABLE IF NOT EXISTS schede ("
                 "id INTEGER PRIMARY KEY,"
-                "icona TEXT,"
+                "icona INTEGER,"
                 "idUtente TEXT,"
                 "nomeScheda TEXT,"
                 "durataScheda TEXT)");
@@ -61,7 +61,7 @@ class SchedeDBworker {
     return await db.rawInsert(
         "INSERT INTO schede (id, icona, idUtente, nomeScheda, durataScheda) "
             "VALUES (?, ?, ?, ?, ?)",
-        [id,scheda.icona, scheda.idUtente, scheda.nomeScheda, scheda.durataScheda]
+        [id, scheda.icona, scheda.idUtente, scheda.nomeScheda, scheda.durataScheda]
     );
   }
 

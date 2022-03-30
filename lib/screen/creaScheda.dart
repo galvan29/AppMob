@@ -12,7 +12,28 @@ import 'package:flutter_iconpicker/flutter_iconpicker.dart';
 class CreaScheda extends StatelessWidget{
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  
+  bool isAdaptive = true;
+  bool showTooltips = false;
+  bool showSearch = true;
+
+  _pickIcon(BuildContext context) async {
+    IconData? icon2 = await FlutterIconPicker.showIconPicker(
+      context,
+      adaptiveDialog: isAdaptive,
+      showTooltips: showTooltips,
+      showSearchBar: showSearch,
+      iconPickerShape:
+      RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      iconPackModes: [IconPack.cupertino, IconPack.lineAwesomeIcons],
+    );
+    print(icon2);
+    var iconData = IconData(58717, fontFamily: 'MaterialIcons');
+    int? iconCodePoint = icon2?.codePoint;
+    print(iconCodePoint);
+    iconData = IconData(iconCodePoint!, fontFamily: 'MaterialIcons');
+    print(iconData);
+    schedeModel.schedaBeingEdited.icona = iconCodePoint;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -86,6 +107,18 @@ class CreaScheda extends StatelessWidget{
                           color: Colors.white,
                         )),
                   ),)),
+            Padding(
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                child: SizedBox(
+                  height: 70,
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  child: TextButton(
+                    onPressed: () {
+                      _pickIcon(context);
+                    },
+                    child: Text("visvijsd"),
+                  ),
+                )),
             Container(
               margin: const EdgeInsets.only(
                 left: 30,

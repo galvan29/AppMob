@@ -242,14 +242,15 @@ class CreaEvento extends StatelessWidget {
     } else {
       await EventiDBworker.eventiDBworker.update(eventiModel.eventoBeingEdited);
     }
-    //HomePage.hoCaricatoGliEventi = false;
+    HomePage.hoCaricatoGliEventi = false;
     LoginPage().getValueLogin().then((val) async {
       await eventiModel.loadData(EventiDBworker.eventiDBworker, val);
     });
-   // HomePage.hoCaricatoGliEventi = true;
-    Base.pageIndexForWidget = 3;
-    utentiModel.setStackIndex(7);
-    //utentiModel.setStackIndex(3);
+
+    HomePage.hoCaricatoGliEventi = true;
+    //Base.pageIndexForWidget = 3;
+    //utentiModel.setStackIndex(7);
+    utentiModel.setStackIndex(3);
 
   }
 }

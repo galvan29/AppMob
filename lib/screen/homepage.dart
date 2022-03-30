@@ -126,7 +126,10 @@ class _HomePageState extends State<HomePage> {
               ),
               Container(
                 margin: EdgeInsets.only(
-                  top: MediaQuery.of(context).size.width * 0.05,
+                  top: MediaQuery
+                      .of(context)
+                      .size
+                      .width * 0.05,
                 ),
                 padding: EdgeInsets.zero,
                 width: double.maxFinite,
@@ -147,8 +150,16 @@ class _HomePageState extends State<HomePage> {
               //calendario
               Visibility(
                 visible: HomePage.hoCaricatoGliEventi,
-                replacement: const CircularProgressIndicator(
-                  color: Colors.white,
+                replacement: Container(
+                  margin: const EdgeInsets.only(
+                    left: 100,
+                    top: 100,
+                    right: 100,
+                    bottom: 100
+                  ),
+                  child: CircularProgressIndicator(
+                    color: Colors.white,
+                  ),
                 ),
                 child: Container(
                   margin: const EdgeInsets.only(
@@ -172,6 +183,14 @@ class _HomePageState extends State<HomePage> {
                       view: CalendarView.month,
                       cellBorderColor: Colors.blue.withOpacity(0),
                       dataSource: MeetingDataSource(getMeetingData()),
+                      todayHighlightColor: Colors.black,
+                      selectionDecoration: BoxDecoration(
+                        color: Colors.transparent,
+                        border: Border.all(color: Colors.black, width: 2),
+                        borderRadius:
+                        const BorderRadius.all(Radius.circular(4)),
+                        shape: BoxShape.rectangle,
+                      ),
                       monthViewSettings: const MonthViewSettings(
                           appointmentDisplayMode:
                           MonthAppointmentDisplayMode.appointment),
@@ -283,7 +302,10 @@ class _HomePageState extends State<HomePage> {
               ),
               Container(
                 margin: EdgeInsets.only(
-                  top: MediaQuery.of(context).size.height * 0.02,
+                  top: MediaQuery
+                      .of(context)
+                      .size
+                      .height * 0.02,
                 ),
                 padding: EdgeInsets.zero,
                 width: double.maxFinite,
@@ -339,8 +361,8 @@ class _HomePageState extends State<HomePage> {
         bottomNavigationBar: buildBottomNavigationBar(context, _currentIndex));
   }
 
-  void _showDialog(
-      BuildContext context, List<String> text, List<int> idEve, String giorno) {
+  void _showDialog(BuildContext context, List<String> text, List<int> idEve,
+      String giorno) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -354,9 +376,12 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget setupAlertDialoadContainer(
-      List<String> text, List<int> idEve, String giorno) {
-    var height_size = MediaQuery.of(context).size.height * 0.2;
+  Widget setupAlertDialoadContainer(List<String> text, List<int> idEve,
+      String giorno) {
+    var height_size = MediaQuery
+        .of(context)
+        .size
+        .height * 0.2;
     return Container(
         decoration: BoxDecoration(
             color: Colors.white,
@@ -367,11 +392,16 @@ class _HomePageState extends State<HomePage> {
               bottomLeft: Radius.circular(20),
             ),
             border: Border.all(color: Colors.white)),
-         // Change as per your requirement
-        width: MediaQuery.of(context).size.width * 0.80,
-        height: height_size + (idEve.length - 1) * height_size * 0.44 > height_size * 1.55
+        // Change as per your requirement
+        width: MediaQuery
+            .of(context)
+            .size
+            .width * 0.80,
+        height: height_size + (idEve.length - 1) * height_size * 0.44 >
+            height_size * 1.55
             ? height_size * 1.55
-            : height_size + (idEve.length - 1) * height_size * 0.44, // Change as per your requirement// Change as per your requirement
+            : height_size + (idEve.length - 1) * height_size * 0.44,
+        // Change as per your requirement// Change as per your requirement
         child: SingleChildScrollView(
           child: Column(
             children: [
@@ -384,7 +414,10 @@ class _HomePageState extends State<HomePage> {
                   textStyle: TextStyle(
                     color: const Color.fromARGB(255, 42, 42, 42),
                     fontWeight: FontWeight.w500,
-                    fontSize: MediaQuery.of(context).size.width * 0.04,
+                    fontSize: MediaQuery
+                        .of(context)
+                        .size
+                        .width * 0.04,
                     fontStyle: FontStyle.normal,
                     decoration: TextDecoration.none,
                   ),
@@ -409,14 +442,17 @@ class _HomePageState extends State<HomePage> {
                             icon: Icons.delete,
                             onTap: () async {
                               Evento ev =
-                                  await EventiDBworker.eventiDBworker.get(id);
+                              await EventiDBworker.eventiDBworker.get(id);
                               Navigator.of(context).pop();
                               _deleteEvento(context, ev);
                             },
                           ),
                         ],
                         child: Container(
-                          height: MediaQuery.of(context).size.height * 0.07,
+                          height: MediaQuery
+                              .of(context)
+                              .size
+                              .height * 0.07,
                           decoration: BoxDecoration(
                               color: const Color.fromARGB(255, 230, 245, 252),
                               borderRadius: const BorderRadius.only(
@@ -434,11 +470,14 @@ class _HomePageState extends State<HomePage> {
                                 style: GoogleFonts.adventPro(
                                   textStyle: TextStyle(
                                     color:
-                                        const Color.fromARGB(255, 42, 42, 42),
+                                    const Color.fromARGB(255, 42, 42, 42),
                                     fontWeight: FontWeight.w500,
                                     fontSize:
-                                        MediaQuery.of(context).size.width *
-                                            0.04,
+                                    MediaQuery
+                                        .of(context)
+                                        .size
+                                        .width *
+                                        0.04,
                                     fontStyle: FontStyle.normal,
                                     decoration: TextDecoration.none,
                                   ),
@@ -457,7 +496,10 @@ class _HomePageState extends State<HomePage> {
                     textStyle: TextStyle(
                       color: const Color.fromARGB(255, 42, 42, 42),
                       fontWeight: FontWeight.w500,
-                      fontSize: MediaQuery.of(context).size.width * 0.04,
+                      fontSize: MediaQuery
+                          .of(context)
+                          .size
+                          .width * 0.04,
                       fontStyle: FontStyle.normal,
                       decoration: TextDecoration.none,
                     ),
@@ -483,8 +525,16 @@ class _HomePageState extends State<HomePage> {
               bottomLeft: Radius.circular(20),
             ),
             border: Border.all(color: Colors.white)),
-        height: MediaQuery.of(context).size.height * 0.2, // Change as per your requirement
-        width: MediaQuery.of(context).size.width * 0.80, // Change as per your requirement
+        height: MediaQuery
+            .of(context)
+            .size
+            .height *
+            0.2, // Change as per your requirement
+        width: MediaQuery
+            .of(context)
+            .size
+            .width *
+            0.80, // Change as per your requirement
         child: SingleChildScrollView(
           child: Column(
             children: [
@@ -497,7 +547,10 @@ class _HomePageState extends State<HomePage> {
                   textStyle: TextStyle(
                     color: const Color.fromARGB(255, 42, 42, 42),
                     fontWeight: FontWeight.w500,
-                    fontSize: MediaQuery.of(context).size.width * 0.04,
+                    fontSize: MediaQuery
+                        .of(context)
+                        .size
+                        .width * 0.04,
                     fontStyle: FontStyle.normal,
                     decoration: TextDecoration.none,
                   ),
@@ -514,7 +567,10 @@ class _HomePageState extends State<HomePage> {
                   textStyle: TextStyle(
                     color: const Color.fromARGB(255, 42, 42, 42),
                     fontWeight: FontWeight.w500,
-                    fontSize: MediaQuery.of(context).size.width * 0.04,
+                    fontSize: MediaQuery
+                        .of(context)
+                        .size
+                        .width * 0.04,
                     fontStyle: FontStyle.normal,
                     decoration: TextDecoration.none,
                   ),
@@ -534,7 +590,10 @@ class _HomePageState extends State<HomePage> {
                         textStyle: TextStyle(
                           color: const Color.fromARGB(255, 42, 42, 42),
                           fontWeight: FontWeight.w500,
-                          fontSize: MediaQuery.of(context).size.width * 0.04,
+                          fontSize: MediaQuery
+                              .of(context)
+                              .size
+                              .width * 0.04,
                           fontStyle: FontStyle.normal,
                           decoration: TextDecoration.none,
                         ),
@@ -556,7 +615,10 @@ class _HomePageState extends State<HomePage> {
                         textStyle: TextStyle(
                           color: const Color.fromARGB(255, 42, 42, 42),
                           fontWeight: FontWeight.w500,
-                          fontSize: MediaQuery.of(context).size.width * 0.04,
+                          fontSize: MediaQuery
+                              .of(context)
+                              .size
+                              .width * 0.04,
                           fontStyle: FontStyle.normal,
                           decoration: TextDecoration.none,
                         ),
@@ -565,22 +627,24 @@ class _HomePageState extends State<HomePage> {
                     onPressed: () async {
                       await EventiDBworker.eventiDBworker.delete(ev.id);
                       Navigator.of(context).pop();
-                      //setState(() {
-                      //  HomePage.hoCaricatoGliEventi = false;
-                      //});
+                      setState(() {
+                        HomePage.hoCaricatoGliEventi = false;
+                      });
                       LoginPage().getValueLogin().then((val) async {
                         await eventiModel.loadData(
                             EventiDBworker.eventiDBworker, val);
                       });
-                      //setState(() {
-                      //  HomePage.hoCaricatoGliEventi = true;
-                      //});
-                      Timer(
+                      Timer(Duration(milliseconds: 1000), () {
+                        setState(() {
+                          HomePage.hoCaricatoGliEventi = true;
+                        });
+                      });
+                      /*Timer(
                           const Duration(milliseconds: 160),
                               () => {
                             Base.pageIndexForWidget = 3,
                             utentiModel.setStackIndex(7),
-                          });
+                          });*/
                       utentiModel.setStackIndex(3);
                     },
                   ),
@@ -609,11 +673,11 @@ class _HomePageState extends State<HomePage> {
 List<Meeting> getMeetingData() {
   final List<Meeting> listMeetings = <Meeting>[];
   LoginPage().getValueLogin().then((val) async {
-    await eventiModel.loadData(
-        EventiDBworker.eventiDBworker, val);
+    await eventiModel.loadData(EventiDBworker.eventiDBworker, val);
   });
   for (Evento eve in eventiModel.eventiList) {
-    listMeetings.add(Meeting(eve.nomeScheda, eve.inizio, eve.fine, eve.id));
+    listMeetings.add(
+        Meeting(eve.nomeScheda, eve.inizio, eve.fine, eve.id, Colors.black));
   }
   print(listMeetings.length);
 
@@ -647,15 +711,21 @@ class MeetingDataSource extends CalendarDataSource {
   int getId(int index) {
     return appointments![index].id;
   }
+
+  @override
+  Color getColor(int index) {
+    return appointments![index].color;
+  }
 }
 
 class Meeting {
-  Meeting(this.eventName, this.from, this.to, this.id);
+  Meeting(this.eventName, this.from, this.to, this.id, this.color);
 
   String eventName;
   DateTime from;
   DateTime to;
   int id;
+  Color color;
 
   @override
   String toString() {
