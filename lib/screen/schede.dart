@@ -177,8 +177,7 @@ class _SchedeState extends State<Schede> {
                               schedeModel.setStackIndex(2);
                             },
                             child: Container(
-                                height:
-                                    MediaQuery.of(context).size.height * 0.08,
+                                height: MediaQuery.of(context).size.height * 0.08,
                                 padding: const EdgeInsets.only(top: 8),
                                 decoration: BoxDecoration(
                                     color: const Color.fromARGB(
@@ -190,8 +189,33 @@ class _SchedeState extends State<Schede> {
                                       bottomLeft: Radius.circular(20),
                                     ),
                                     border: Border.all(color: Colors.white)),
-                                child: Row(children: [
+                                child: Row(
+                                    children: [
                                   const SizedBox(width: 10),
+                                      Container(
+                                        height: MediaQuery.of(context).size.height * 0.10,
+                                        width : MediaQuery.of(context).size.width * 0.13,
+                                        margin: EdgeInsets.only(
+                                          bottom: MediaQuery.of(context).size.height * 0.01,
+                                          right: MediaQuery.of(context).size.width * 0.05,
+                                          left: MediaQuery.of(context).size.width * 0.03,
+                                        ),
+                                        decoration: BoxDecoration(
+                                            borderRadius: const BorderRadius.only(
+                                              topLeft: Radius.circular(30),
+                                              topRight: Radius.circular(30),
+                                              bottomRight: Radius.circular(30),
+                                              bottomLeft: Radius.circular(30),
+                                            ),
+                                            border: Border.all(color: Colors.black)),
+                                        child:IconButton(
+                                          icon: Icon(Icons.star),
+                                          onPressed: () {
+                                          },
+                                          color: Colors.black,
+                                        ),
+
+                                      ),
                                   Text(
                                     scheda.nomeScheda,
                                     style: GoogleFonts.adventPro(
