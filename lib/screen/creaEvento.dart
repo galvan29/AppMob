@@ -1,12 +1,9 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:mytraining/common/appbar.dart';
 import 'package:mytraining/db/eventiDBworrker.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mytraining/models/schedeModel.dart';
 import 'package:mytraining/models/utentiModel.dart';
-import 'package:mytraining/screen/base.dart';
 import 'package:mytraining/screen/homepage.dart';
 import 'package:mytraining/screen/login.dart';
 import 'package:mytraining/models/eventiModel.dart';
@@ -19,6 +16,7 @@ class CreaEvento extends StatelessWidget {
   var txt = TextEditingController(), txt1 = TextEditingController();
   int selectedRadio = -1;
   var nomeScheda = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,10 +27,11 @@ class CreaEvento extends StatelessWidget {
           child: Row(
             children: [
               FlatButton(
-                onPressed: (){
+                onPressed: () {
                   utentiModel.setStackIndex(3);
                 },
-                child: Text("Indietro",
+                child: Text(
+                  "Indietro",
                   style: GoogleFonts.adventPro(
                     textStyle: const TextStyle(
                       color: Colors.white,
@@ -45,8 +44,7 @@ class CreaEvento extends StatelessWidget {
                 ),
               ),
             ],
-          )
-      ),
+          )),
       body: Form(
         key: _formKey,
         child: Column(
@@ -76,16 +74,15 @@ class CreaEvento extends StatelessWidget {
                   width: MediaQuery.of(context).size.width * 0.9,
                   child: TextFormField(
                     style: TextStyle(color: Colors.white),
-                    onTap: (){
+                    onTap: () {
                       _showDialog(context);
                     },
                     readOnly: true,
                     decoration: const InputDecoration(
                         labelText: "Nome Scheda",
                         labelStyle: TextStyle(
-                            color: Colors.white,
-                        )
-                    ),
+                          color: Colors.white,
+                        )),
                     validator: (String? inValue) {
                       if (inValue!.isEmpty) {
                         return "Inserisci Nome";
@@ -96,7 +93,8 @@ class CreaEvento extends StatelessWidget {
                       eventiModel.eventoBeingEdited.nomeScheda = inValue;
                     },
                     controller: nomeScheda,
-                  ),)),
+                  ),
+                )),
             Padding(
                 padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                 child: SizedBox(
@@ -105,47 +103,112 @@ class CreaEvento extends StatelessWidget {
                   child: TextFormField(
                     style: TextStyle(color: Colors.white),
                     controller: txt,
-                    decoration: const InputDecoration(labelText: "Data inizio",
+                    decoration: const InputDecoration(
+                        labelText: "Data inizio",
                         labelStyle: TextStyle(
                           color: Colors.white,
                         )),
                     onTap: () async {
                       FocusScope.of(context).requestFocus(new FocusNode());
-                      DateTime? picked = await DatePicker.showDateTimePicker(context,
+                      DateTime? picked = await DatePicker.showDateTimePicker(
+                          context,
                           showTitleActions: true,
                           minTime: DateTime(2022, 1, 1), onConfirm: (date) {
-                            inidata = date;
-                            txt.text = inidata.toString();
-                            txt1.text = "0";
-                            eventiModel.eventoBeingEdited.inizio = inidata;
-                            eventiModel.eventoBeingEdited.fine = inidata;
-                          }, currentTime: DateTime.now(), locale: LocaleType.it);
+                        inidata = date;
+                        txt.text = inidata.toString();
+                        txt1.text = "0";
+                        eventiModel.eventoBeingEdited.inizio = inidata;
+                        eventiModel.eventoBeingEdited.fine = inidata;
+                      }, currentTime: DateTime.now(), locale: LocaleType.it);
                     },
                     onChanged: (String inValue) {
                       eventiModel.eventoBeingEdited.inizio = inidata;
                     },
-                  ),)),
-            Padding(
-                padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                child: SizedBox(
-                  height: 70,
-                  width: MediaQuery.of(context).size.width * 0.9,
-                  child: TextFormField(
-                      //enabled: false,
-                      decoration: const InputDecoration(labelText: "Durata",
-                          labelStyle: TextStyle(
-                            color: Colors.white,
-                          )),
-                      style: TextStyle(color: Colors.white),
-                      controller: txt1,
-                      onTap: () {
-                        //double click
-                        FocusScope.of(context).requestFocus(new FocusNode());
+                  ),
+                )),
+            Row(
+              children: [
+                Padding(
+                    padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+                    child: SizedBox(
+                      height: 70,
+                      width: MediaQuery.of(context).size.width * 0.2,
+                      child: TextFormField(
+                          //enabled: false,
+                          decoration: const InputDecoration(
+                              labelText: "Durata",
+                              labelStyle: TextStyle(
+                                color: Colors.white,
+                              )),
+                          style: TextStyle(color: Colors.white),
+                          controller: txt1,
+                          onTap: () {
+                            //double click
+                            FocusScope.of(context)
+                                .requestFocus(new FocusNode());
+                          }),
+                    )),
+                Spacer(),
+                Container(
+                  margin: EdgeInsets.only(
+                    right: MediaQuery.of(context).size.width * 0.03,
+                  ),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.white.withOpacity(0), width: 1.5),
+                    color: Colors.white.withOpacity(0),
+                    shape: BoxShape.circle,
+                  ),
+                  child: IconButton(
+                      icon: const Icon(Icons.remove),
+                      color: Colors.white,
+                      onPressed: () {
+                        if(int.parse(txt1.text) > 0){
+                          DateTime a = eventiModel.eventoBeingEdited.fine
+                              .add(const Duration(minutes: -30));
+                          eventiModel.eventoBeingEdited.fine = a;
+                          txt1.text = (a
+                              .subtract(Duration(
+                              milliseconds: eventiModel
+                                  .eventoBeingEdited
+                                  .inizio
+                                  .millisecondsSinceEpoch))
+                              .millisecondsSinceEpoch /
+                              60000)
+                              .toString()
+                              .replaceAll(".0", "");
+                        }
+                      }),
+                ),
+                Container(
+                  margin: EdgeInsets.only(
+                    right: MediaQuery.of(context).size.width * 0.03,
+                  ),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.black.withOpacity(0), width: 1.5),
+                    color: Colors.black.withOpacity(0),
+                    shape: BoxShape.circle,
+                  ),
+                  child: IconButton(
+                      icon: const Icon(Icons.add),
+                      color: Colors.white,
+                      onPressed: () {
                         DateTime a = eventiModel.eventoBeingEdited.fine
-                            .add(Duration(minutes: 30));
+                            .add(const Duration(minutes: 30));
                         eventiModel.eventoBeingEdited.fine = a;
-                        txt1.text = (a.subtract(Duration(milliseconds: eventiModel.eventoBeingEdited.inizio.millisecondsSinceEpoch)).millisecondsSinceEpoch/60000).toString().replaceAll(".0", "");
-                      }),)),
+                        txt1.text = (a
+                            .subtract(Duration(
+                            milliseconds: eventiModel
+                                .eventoBeingEdited
+                                .inizio
+                                .millisecondsSinceEpoch))
+                            .millisecondsSinceEpoch /
+                            60000)
+                            .toString()
+                            .replaceAll(".0", "");
+                      }),
+                ),
+              ],
+            ),
             Container(
               margin: const EdgeInsets.only(
                 left: 30,
@@ -203,20 +266,22 @@ class CreaEvento extends StatelessWidget {
             builder: (BuildContext context, StateSetter setState) {
               return Column(
                 mainAxisSize: MainAxisSize.min,
-                children: List<Widget>.generate(schedeModel.schedeList.length, (int index) {
-                  return
-                    ListTile(
-                        title: Text(schedeModel.schedeList[index].nomeScheda),
-                        leading: Radio<int>(
-                    value: index,
-                    groupValue: selectedRadio,
-                    onChanged: (int? value) {
-                      nomeScheda.text = schedeModel.schedeList[index].nomeScheda;
-                      setState(() => selectedRadio = value!);
-                      eventiModel.eventoBeingEdited.nomeScheda=schedeModel.schedeList[index].nomeScheda;
-                      Navigator.of(context).pop();
-                    },
-                  ));
+                children: List<Widget>.generate(schedeModel.schedeList.length,
+                    (int index) {
+                  return ListTile(
+                      title: Text(schedeModel.schedeList[index].nomeScheda),
+                      leading: Radio<int>(
+                        value: index,
+                        groupValue: selectedRadio,
+                        onChanged: (int? value) {
+                          nomeScheda.text =
+                              schedeModel.schedeList[index].nomeScheda;
+                          setState(() => selectedRadio = value!);
+                          eventiModel.eventoBeingEdited.nomeScheda =
+                              schedeModel.schedeList[index].nomeScheda;
+                          Navigator.of(context).pop();
+                        },
+                      ));
                 }),
               );
             },
@@ -253,6 +318,5 @@ class CreaEvento extends StatelessWidget {
     //Base.pageIndexForWidget = 3;
     //utentiModel.setStackIndex(7);
     utentiModel.setStackIndex(3);
-
   }
 }
