@@ -59,6 +59,7 @@ dependencies:
   syncfusion_flutter_charts: ^19.4.56
 dev_dependencies:
   flutter_launcher_icons_maker: "^0.10.1"
+  icon_picker: "^1.1.0"
   flutter_test:
     sdk: flutter
 
