@@ -24,6 +24,8 @@ class Schede extends StatefulWidget {
   static bool valoreOrologio = false;
   static int schedaAllenamento = -2;
   static String nomeSchedaGLobal = "";
+  static bool hoCaricatoleSchede = true;
+  List<Registro> listaVoti = [];
 
   @override
   State<Schede> createState() => _SchedeState();
@@ -38,6 +40,7 @@ class _SchedeState extends State<Schede> {
   final datasets = <String, dynamic>{};
 
   int _currentIndex = 1;
+
   saveValueScheda(int id) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setInt('idScheda', id);
@@ -73,24 +76,29 @@ class _SchedeState extends State<Schede> {
                   Container(
                     margin: EdgeInsets.only(
                       top: MediaQuery.of(context).size.width * 0.05,
+                      left: MediaQuery.of(context).size.width * 0.05,
                     ),
                   ),
                   SizedBox(
-                      width: 330,
+                      width: MediaQuery.of(context).size.width * 0.6,
                       child: Text(
                         "Ecco le tue Schede!",
-                        textAlign: TextAlign.center,
+                        //textAlign: TextAlign.center,
                         style: GoogleFonts.adventPro(
-                          textStyle: const TextStyle(
+                          textStyle: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.w400,
-                            fontSize: 30,
+                            fontSize: MediaQuery.of(context).size.width * 0.07,
                             fontStyle: FontStyle.normal,
                             decoration: TextDecoration.none,
                           ),
                         ),
                       )),
+                  Spacer(),
                   Container(
+                      margin: EdgeInsets.only(
+                        right: MediaQuery.of(context).size.width * 0.03,
+                      ),
                       decoration: BoxDecoration(
                         border: Border.all(color: Colors.black, width: 1.5),
                         color: Colors.white,
@@ -115,15 +123,20 @@ class _SchedeState extends State<Schede> {
                   top: MediaQuery.of(context).size.width * 0.05,
                 ),
               ),
-              ListView.builder(
-                shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
-                itemCount: schedeModel.schedeList.length,
-                itemBuilder: (BuildContext inBuildContext, int inIndex) {
-                  Scheda scheda = schedeModel.schedeList[inIndex];
-                  Color color = Colors.white;
+              Visibility(
+                visible: Schede.hoCaricatoleSchede,
+                replacement: const CircularProgressIndicator(
+                  color: Colors.white,
+                ),
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: schedeModel.schedeList.length,
+                  itemBuilder: (BuildContext inBuildContext, int inIndex) {
+                    Scheda scheda = schedeModel.schedeList[inIndex];
+                    Color color = Colors.white;
 
-                  return Container(
+                    return Container(
                       margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                       child: Slidable(
                         actionPane: const SlidableScrollActionPane(),
@@ -131,7 +144,7 @@ class _SchedeState extends State<Schede> {
                         secondaryActions: [
                           IconSlideAction(
                             caption: "Elimina",
-                            color: Color.fromARGB(255, 42, 42, 42),
+                            color: const Color.fromARGB(255, 42, 42, 42),
                             icon: Icons.delete,
                             onTap: () {
                               _deleteScheda(context, scheda);
@@ -139,83 +152,86 @@ class _SchedeState extends State<Schede> {
                           ),
                         ],
                         child: GestureDetector(
-                          onLongPress: () async {
-                            schedeModel.schedaBeingEdited = await SchedeDBworker
-                                .schedeDBworker
-                                .get(scheda.id);
-                            print(schedeModel.schedaBeingEdited.nomeScheda);
-                            schedeModel.setStackIndex(1);
-                          },
-                          onTap: () async {
-                            saveValueScheda(scheda.id);
-                            print("OOOOOOOOOOOOOOOOOO "+scheda.nomeScheda);
-                            Schede.schedaAllenamento = scheda.id;
-                            Schede.nomeSchedaGLobal = scheda.nomeScheda;
-                            await eserciziModel.loadData(
-                                EserciziDBworker.eserciziDBworker, scheda.id);
-                            await registriModel.loadData(
-                                RegistriDBworker.registriDBworker, scheda.id);
-                            schedeModel.setStackIndex(2);
-                          },
-                          child: Container(
-                              height: MediaQuery.of(context).size.height * 0.08,
-                              padding: const EdgeInsets.only(top: 8),
-                              decoration: BoxDecoration(
-                                  color:
-                                      const Color.fromARGB(255, 230, 245, 252),
-                                  borderRadius: const BorderRadius.only(
-                                    topLeft: Radius.circular(20),
-                                    topRight: Radius.circular(20),
-                                    bottomRight: Radius.circular(20),
-                                    bottomLeft: Radius.circular(20),
+                            onLongPress: () async {
+                              schedeModel.schedaBeingEdited =
+                                  await SchedeDBworker.schedeDBworker
+                                      .get(scheda.id);
+                              print(schedeModel.schedaBeingEdited.nomeScheda);
+                              schedeModel.setStackIndex(1);
+                            },
+                            onTap: () async {
+                              saveValueScheda(scheda.id);
+                              print("OOOOOOOOOOOOOOOOOO "+scheda.nomeScheda);
+                              Schede.schedaAllenamento = scheda.id;
+                              Schede.nomeSchedaGLobal = scheda.nomeScheda;
+                              setState((){
+                                VisualizzaScheda.hoCaricatoGliEs = false;
+                              });
+                              await eserciziModel.loadData(
+                                  EserciziDBworker.eserciziDBworker, scheda.id);
+                              await registriModel.loadData(
+                                  RegistriDBworker.registriDBworker, scheda.id);
+                              setState((){
+                                VisualizzaScheda.hoCaricatoGliEs = true;
+                              });
+                              schedeModel.setStackIndex(2);
+                            },
+                            child: Container(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.08,
+                                padding: const EdgeInsets.only(top: 8),
+                                decoration: BoxDecoration(
+                                    color: const Color.fromARGB(
+                                        255, 230, 245, 252),
+                                    borderRadius: const BorderRadius.only(
+                                      topLeft: Radius.circular(20),
+                                      topRight: Radius.circular(20),
+                                      bottomRight: Radius.circular(20),
+                                      bottomLeft: Radius.circular(20),
+                                    ),
+                                    border: Border.all(color: Colors.white)),
+                                child: Row(children: [
+                                  const SizedBox(width: 10),
+                                  Text(
+                                    scheda.nomeScheda,
+                                    style: GoogleFonts.adventPro(
+                                      textStyle: TextStyle(
+                                        color: const Color.fromARGB(
+                                            255, 42, 42, 42),
+                                        fontWeight: FontWeight.w500,
+                                        fontSize:
+                                            MediaQuery.of(context).size.width *
+                                                0.045,
+                                        fontStyle: FontStyle.normal,
+                                        decoration: TextDecoration.none,
+                                      ),
+                                    ),
                                   ),
-                                  border: Border.all(color: Colors.white)),
-                              child: Column(children: [
-                                Row(
-                                  children: [
-                                    SizedBox(width: 10),
-                                    Text(
-                                      scheda.nomeScheda,
-                                      style: GoogleFonts.adventPro(
-                                        textStyle: TextStyle(
-                                          color:
-                                          const Color.fromARGB(255, 42, 42, 42),
-                                          fontWeight: FontWeight.w500,
-                                          fontSize:
-                                          MediaQuery.of(context).size.width *
-                                              0.045,
-                                          fontStyle: FontStyle.normal,
-                                          decoration: TextDecoration.none,
-                                        ),
+                                  const SizedBox(
+                                    width: 10,
+                                    height: 5,
+                                  ),
+                                  const SizedBox(width: 10),
+                                  Text(
+                                    "Durata: " + scheda.durataScheda,
+                                    style: GoogleFonts.adventPro(
+                                      textStyle: TextStyle(
+                                        color: const Color.fromARGB(
+                                            255, 42, 42, 42),
+                                        fontWeight: FontWeight.w500,
+                                        fontSize:
+                                            MediaQuery.of(context).size.width *
+                                                0.03,
+                                        fontStyle: FontStyle.normal,
+                                        decoration: TextDecoration.none,
                                       ),
                                     ),
-                                  ],
-                                ),
-                                SizedBox(width: 10, height: 5,),
-                                Row(
-                                  children: [
-                                    SizedBox(width: 10),
-                                    Text(
-                                      "Durata: " + scheda.durataScheda,
-                                      style: GoogleFonts.adventPro(
-                                        textStyle: TextStyle(
-                                          color:
-                                          const Color.fromARGB(255, 42, 42, 42),
-                                          fontWeight: FontWeight.w500,
-                                          fontSize:
-                                          MediaQuery.of(context).size.width *
-                                              0.03,
-                                          fontStyle: FontStyle.normal,
-                                          decoration: TextDecoration.none,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ])),
-                        ),
-                      ));
-                },
+                                  ),
+                                ]))),
+                      ),
+                    );
+                  },
+                ),
               ),
             ])),
         bottomNavigationBar: buildBottomNavigationBar(context, _currentIndex));
@@ -246,12 +262,12 @@ class _SchedeState extends State<Schede> {
               bottomLeft: Radius.circular(20),
             ),
             border: Border.all(color: Colors.white)),
-        height: 180.0, // Change as per your requirement
-        width: 300.0, // Change as per your requirement
+        height: MediaQuery.of(context).size.height * 0.2, // Change as per your requirement
+        width: MediaQuery.of(context).size.width * 0.80, // Change as per your requirement
         child: SingleChildScrollView(
           child: Column(
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Text(
@@ -266,11 +282,13 @@ class _SchedeState extends State<Schede> {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Text(
-                "Sei sicuro di voler eliminare "+scheda.nomeScheda+"? Perderai tutti i dati in essa contenuti",
+                "Sei sicuro di voler eliminare " +
+                    scheda.nomeScheda +
+                    "? Perderai tutti i dati in essa contenuti",
                 style: GoogleFonts.adventPro(
                   textStyle: TextStyle(
                     color: const Color.fromARGB(255, 42, 42, 42),
@@ -282,7 +300,7 @@ class _SchedeState extends State<Schede> {
                 ),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Row(
@@ -326,23 +344,50 @@ class _SchedeState extends State<Schede> {
                     onPressed: () async {
                       await SchedeDBworker.schedeDBworker.delete(scheda.id);
                       Navigator.of(context).pop();
+                      setState(() {
+                        Schede.hoCaricatoleSchede = false;
+                      });
                       LoginPage().getValueLogin().then((val) async {
                         await schedeModel.loadData(
                             SchedeDBworker.schedeDBworker, val);
                       });
-                      Timer(
+                      setState(() {
+                        Schede.hoCaricatoleSchede = true;
+                      });
+                      utentiModel.setStackIndex(4);
+                      /*Timer(
                           const Duration(milliseconds: 0),
-                              () => {
-                            Base.pageIndexForWidget = 4,
-                            utentiModel.setStackIndex(7),
-                          });
+                          () => {
+                                Base.pageIndexForWidget = 4,
+                                utentiModel.setStackIndex(7),
+                              }); */
                     },
                   ),
                 ],
               )
-
             ],
           ),
         ));
   }
+
+/*double calcolaStelleAlle(int id) {
+    double tot = 0;
+    updateList(id);
+    print("Aggiorno e creo " + id.toString());
+    for(Registro r in registriModel.registriList2){
+      tot += (2*double.parse(r.voto)).floorToDouble()/2;
+      print(id.toString() + " cd " +r.id.toString() + " ji " +tot.toString());
+    }
+    tot = tot/registriModel.registriList2.length;
+    print(tot.toString());
+    if(registriModel.registriList2.length > 0)
+      registriModel.registriList2 = [];
+    return tot;
+  }
+
+  Future<int> updateList(int id) async {
+    await registriModel.loadData2(
+        RegistriDBworker.registriDBworker, id);
+    return 0;
+  } */
 }

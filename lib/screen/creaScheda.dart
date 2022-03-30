@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:mytraining/models/utentiModel.dart';
 import 'package:mytraining/screen/base.dart';
 import 'package:mytraining/screen/login.dart';
+import 'package:mytraining/screen/schede.dart';
 
 class CreaScheda extends StatelessWidget{
 
@@ -171,13 +172,13 @@ class CreaScheda extends StatelessWidget{
     } else {
       await SchedeDBworker.schedeDBworker.update(schedeModel.schedaBeingEdited);
     }
-
+    Schede.hoCaricatoleSchede = false;
     LoginPage().getValueLogin().then((val) async {
       await schedeModel.loadData(SchedeDBworker.schedeDBworker, val);
     });
-
-    Base.pageIndexForWidget=4;
+    Schede.hoCaricatoleSchede = true;
+   // Base.pageIndexForWidget=4;
     schedeModel.setStackIndex(0);
-    utentiModel.setStackIndex(7);
+    utentiModel.setStackIndex(4);
   }
 }

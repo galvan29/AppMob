@@ -19,10 +19,21 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 class VisualizzaScheda extends StatefulWidget {
   @override
   State<VisualizzaScheda> createState() => _VisualizzaSchedaState();
+  static bool hoCaricatoGliEs = true;
+
 }
 
 class _VisualizzaSchedaState extends State<VisualizzaScheda> {
   final datasets = <String, dynamic>{};
+
+  bool Carica(){
+    Timer(
+        const Duration(milliseconds: 5000),
+            () => {
+          VisualizzaScheda.hoCaricatoGliEs = true,
+        });
+    return false;
+  }
 
   ValueNotifier<bool> isDialOpen = ValueNotifier(false);
 
@@ -60,6 +71,8 @@ class _VisualizzaSchedaState extends State<VisualizzaScheda> {
         measureFn: (ChartRegistri sales, _) => sales.durata,
       )
     ];  */
+
+
 
     return Scaffold(
         appBar: buildAppBar(context),
@@ -141,164 +154,171 @@ class _VisualizzaSchedaState extends State<VisualizzaScheda> {
                   ),
                 ),
               ),
-              ListView.builder(
-                shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
-                itemCount: eserciziModel.eserciziList.length,
-                itemBuilder: (BuildContext inBuildContext, int inIndex) {
-                  Esercizio esercizio = eserciziModel.eserciziList[inIndex];
-                  Color color = Colors.white;
+              Visibility(
+                visible: VisualizzaScheda.hoCaricatoGliEs,
+                replacement: const CircularProgressIndicator(
+                  color: Colors.white,
+                ),
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: eserciziModel.eserciziList.length,
+                  itemBuilder: (BuildContext inBuildContext, int inIndex) {
+                    Esercizio esercizio = eserciziModel.eserciziList[inIndex];
+                    Color color = Colors.white;
 
-                  return Container(
-                    margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                    child: Slidable(
-                        actionPane: const SlidableScrollActionPane(),
-                        actionExtentRatio: .25,
-                        secondaryActions: [
-                          IconSlideAction(
-                            caption: "Elimina",
-                            color: Color.fromARGB(255, 42, 42, 42),
-                            icon: Icons.delete,
-                            onTap: () {
-                              _deleteEsercizio(context, esercizio);
-                            },
-                          ),
-                        ],
-                        child: GestureDetector(
-                            onLongPress: () async {
-                              eserciziModel.esercizioBeingEdited =
-                                  await EserciziDBworker.eserciziDBworker
-                                      .get(esercizio.id);
-                              schedeModel.setStackIndex(3);
-                            },
-                            child: Container(
-                              height: MediaQuery.of(context).size.height * 0.08,
-                              padding: const EdgeInsets.only(top: 8),
-                              decoration: BoxDecoration(
-                                  color:
-                                      const Color.fromARGB(255, 230, 245, 252),
-                                  borderRadius: const BorderRadius.only(
-                                    topLeft: Radius.circular(20),
-                                    topRight: Radius.circular(20),
-                                    bottomRight: Radius.circular(20),
-                                    bottomLeft: Radius.circular(20),
-                                  ),
-                                  border: Border.all(color: Colors.white)),
-                              child: Column(
-                                children: [
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  Row(
-                                    children: [
-                                      SizedBox(width: 10),
-                                      Text(
-                                        esercizio.nomeEsercizio,
-                                        style: GoogleFonts.adventPro(
-                                          textStyle: TextStyle(
-                                            color: const Color.fromARGB(
-                                                255, 42, 42, 42),
-                                            fontWeight: FontWeight.w500,
-                                            fontSize: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                0.045,
-                                            fontStyle: FontStyle.normal,
-                                            decoration: TextDecoration.none,
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                          width: MediaQuery.of(context)
+                    return Container(
+                      margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                      child: Slidable(
+                          actionPane: const SlidableScrollActionPane(),
+                          actionExtentRatio: .25,
+                          secondaryActions: [
+                            IconSlideAction(
+                              caption: "Elimina",
+                              color: const Color.fromARGB(255, 42, 42, 42),
+                              icon: Icons.delete,
+                              onTap: () {
+                                _deleteEsercizio(context, esercizio);
+                              },
+                            ),
+                          ],
+                          child: GestureDetector(
+                              onLongPress: () async {
+                                eserciziModel.esercizioBeingEdited =
+                                await EserciziDBworker.eserciziDBworker
+                                    .get(esercizio.id);
+                                schedeModel.setStackIndex(3);
+                              },
+                              child: Container(
+                                height: MediaQuery.of(context).size.height * 0.08,
+                                padding: const EdgeInsets.only(top: 8),
+                                decoration: BoxDecoration(
+                                    color:
+                                    const Color.fromARGB(255, 230, 245, 252),
+                                    borderRadius: const BorderRadius.only(
+                                      topLeft: Radius.circular(20),
+                                      topRight: Radius.circular(20),
+                                      bottomRight: Radius.circular(20),
+                                      bottomLeft: Radius.circular(20),
+                                    ),
+                                    border: Border.all(color: Colors.white)),
+                                child: Column(
+                                  children: [
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
+                                    Row(
+                                      children: [
+                                        const SizedBox(width: 10),
+                                        Text(
+                                          esercizio.nomeEsercizio,
+                                          style: GoogleFonts.adventPro(
+                                            textStyle: TextStyle(
+                                              color: const Color.fromARGB(
+                                                  255, 42, 42, 42),
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: MediaQuery.of(context)
                                                   .size
                                                   .width *
-                                              0.25),
-                                      Text(
-                                        "Rip: " + esercizio.ripEsercizio,
-                                        style: GoogleFonts.adventPro(
-                                          textStyle: TextStyle(
-                                            color: const Color.fromARGB(
-                                                255, 42, 42, 42),
-                                            fontWeight: FontWeight.w500,
-                                            fontSize: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                0.03,
-                                            fontStyle: FontStyle.normal,
-                                            decoration: TextDecoration.none,
+                                                  0.045,
+                                              fontStyle: FontStyle.normal,
+                                              decoration: TextDecoration.none,
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                      SizedBox(width: 10),
-                                      Text(
-                                        "Serie: " + esercizio.serieEsercizio,
-                                        style: GoogleFonts.adventPro(
-                                          textStyle: TextStyle(
-                                            color: const Color.fromARGB(
-                                                255, 42, 42, 42),
-                                            fontWeight: FontWeight.w500,
-                                            fontSize: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                0.03,
-                                            fontStyle: FontStyle.normal,
-                                            decoration: TextDecoration.none,
+                                        SizedBox(
+                                            width: MediaQuery.of(context)
+                                                .size
+                                                .width *
+                                                0.25),
+                                        Text(
+                                          "Rip: " + esercizio.ripEsercizio,
+                                          style: GoogleFonts.adventPro(
+                                            textStyle: TextStyle(
+                                              color: const Color.fromARGB(
+                                                  255, 42, 42, 42),
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                                  0.03,
+                                              fontStyle: FontStyle.normal,
+                                              decoration: TextDecoration.none,
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                      SizedBox(width: 10),
-                                      Text(
-                                        "Peso: " + esercizio.pesoEsercizio,
-                                        style: GoogleFonts.adventPro(
-                                          textStyle: TextStyle(
-                                            color: const Color.fromARGB(
-                                                255, 42, 42, 42),
-                                            fontWeight: FontWeight.w500,
-                                            fontSize: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                0.03,
-                                            fontStyle: FontStyle.normal,
-                                            decoration: TextDecoration.none,
+                                        const SizedBox(width: 10),
+                                        Text(
+                                          "Serie: " + esercizio.serieEsercizio,
+                                          style: GoogleFonts.adventPro(
+                                            textStyle: TextStyle(
+                                              color: const Color.fromARGB(
+                                                  255, 42, 42, 42),
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                                  0.03,
+                                              fontStyle: FontStyle.normal,
+                                              decoration: TextDecoration.none,
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    width: 10,
-                                    height: 5,
-                                  ),
-                                  Row(
-                                    children: [
-                                      SizedBox(
-                                        width: 10,
-                                        height: 5,
-                                      ),
-                                      Text(
-                                        "Note: " + esercizio.noteEsercizio,
-                                        style: GoogleFonts.adventPro(
-                                          textStyle: TextStyle(
-                                            color: const Color.fromARGB(
-                                                255, 42, 42, 42),
-                                            fontWeight: FontWeight.w500,
-                                            fontSize: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                0.03,
-                                            fontStyle: FontStyle.normal,
-                                            decoration: TextDecoration.none,
+                                        const SizedBox(width: 10),
+                                        Text(
+                                          "Peso: " + esercizio.pesoEsercizio,
+                                          style: GoogleFonts.adventPro(
+                                            textStyle: TextStyle(
+                                              color: const Color.fromARGB(
+                                                  255, 42, 42, 42),
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                                  0.03,
+                                              fontStyle: FontStyle.normal,
+                                              decoration: TextDecoration.none,
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ))),
-                  );
-                },
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      width: 10,
+                                      height: 5,
+                                    ),
+                                    Row(
+                                      children: [
+                                        const SizedBox(
+                                          width: 10,
+                                          height: 5,
+                                        ),
+                                        Text(
+                                          "Note: " + esercizio.noteEsercizio,
+                                          style: GoogleFonts.adventPro(
+                                            textStyle: TextStyle(
+                                              color: const Color.fromARGB(
+                                                  255, 42, 42, 42),
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                                  0.03,
+                                              fontStyle: FontStyle.normal,
+                                              decoration: TextDecoration.none,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ))),
+                    );
+                  },
+                )
               ),
+
               Container(
                 margin: EdgeInsets.only(
                   top: MediaQuery.of(context).size.width * 0.05,
@@ -338,7 +358,7 @@ class _VisualizzaSchedaState extends State<VisualizzaScheda> {
                       //child: Row(
                       //children: [
                       child: Container(
-                          margin: EdgeInsets.only(top: 10, right: 30),
+                          margin: const EdgeInsets.only(top: 10, right: 30),
                           height: 300,
                           width: MediaQuery.of(context).size.width * 0.90,
                           child: SfCartesianChart(
@@ -347,7 +367,7 @@ class _VisualizzaSchedaState extends State<VisualizzaScheda> {
                               primaryXAxis: DateTimeAxis(
                                 title: AxisTitle(
                                     text: 'Giorno',
-                                    textStyle: TextStyle(
+                                    textStyle: const TextStyle(
                                         color: Colors.black,
                                         fontFamily: 'Roboto',
                                         fontSize: 16,
@@ -357,7 +377,7 @@ class _VisualizzaSchedaState extends State<VisualizzaScheda> {
                               primaryYAxis: DateTimeAxis(
                                 title: AxisTitle(
                                     text: 'Durata',
-                                    textStyle: TextStyle(
+                                    textStyle: const TextStyle(
                                         color: Colors.black,
                                         fontFamily: 'Roboto',
                                         fontSize: 16,
@@ -391,7 +411,7 @@ class _VisualizzaSchedaState extends State<VisualizzaScheda> {
                     width: double.maxFinite,
                     decoration: const BoxDecoration(),
                     child: Container(
-                        padding: EdgeInsets.fromLTRB(2.5, 3, 2.5, 5),
+                        padding: const EdgeInsets.fromLTRB(2.5, 3, 2.5, 5),
                         decoration: BoxDecoration(
                             color: const Color.fromARGB(255, 230, 245, 252)
                                 .withOpacity(0),
@@ -424,6 +444,7 @@ class _VisualizzaSchedaState extends State<VisualizzaScheda> {
               children: [
                 FlatButton(
                   onPressed: () {
+                    VisualizzaScheda.hoCaricatoGliEs = false;
                     schedeModel.setStackIndex(0);
                   },
                   child: Text(
@@ -468,12 +489,12 @@ class _VisualizzaSchedaState extends State<VisualizzaScheda> {
               bottomLeft: Radius.circular(20),
             ),
             border: Border.all(color: Colors.white)),
-        height: 180.0, // Change as per your requirement
-        width: 300.0, // Change as per your requirement
+        height: MediaQuery.of(context).size.height * 0.2, // Change as per your requirement
+        width: MediaQuery.of(context).size.width * 0.80, // Change as per your requirement
         child: SingleChildScrollView(
           child: Column(
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Text(
@@ -488,7 +509,7 @@ class _VisualizzaSchedaState extends State<VisualizzaScheda> {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Text(
@@ -506,7 +527,7 @@ class _VisualizzaSchedaState extends State<VisualizzaScheda> {
                 ),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Row(
@@ -548,19 +569,26 @@ class _VisualizzaSchedaState extends State<VisualizzaScheda> {
                       ),
                     ),
                     onPressed: () async {
+                      setState((){
+                        VisualizzaScheda.hoCaricatoGliEs = false;
+                      });
                       await EserciziDBworker.eserciziDBworker
                           .delete(esercizio.id);
                       Schede().getValueScheda().then((val) async {
                         eserciziModel.loadData(
                             EserciziDBworker.eserciziDBworker, val);
+                        setState((){
+                          VisualizzaScheda.hoCaricatoGliEs = true;
+                        });
                       });
                       Navigator.of(context).pop();
-                      Timer(
+                      /*Timer(
                           const Duration(milliseconds: 200),
                           () => {
                                 Base.pageIndexForWidget = 2,
                                 schedeModel.setStackIndex(6),
-                              });
+                              }); */
+                      schedeModel.setStackIndex(2);
                     },
                   ),
                 ],

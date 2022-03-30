@@ -96,7 +96,7 @@ class RegisterPage extends StatelessWidget {
           SingleChildScrollView(
               child: Container(
                   margin: EdgeInsets.only(
-                      top: MediaQuery.of(context).size.height * 0.75),
+                      top: MediaQuery.of(context).size.height * 0.72),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
@@ -109,21 +109,9 @@ class RegisterPage extends StatelessWidget {
                         padding: EdgeInsets.zero,
                         decoration: const BoxDecoration(),
                         child: Container(
-                            width: double.maxFinite,
-                            height: 40,
-                            padding: const EdgeInsets.only(top: 0, left: 10),
-                            decoration: BoxDecoration(
-                                color: Colors.black.withOpacity(0.05),
-                                borderRadius: const BorderRadius.only(
-                                  topLeft: Radius.circular(5),
-                                  topRight: Radius.circular(5),
-                                  bottomRight: Radius.circular(5),
-                                  bottomLeft: Radius.circular(5),
-                                ),
-                                border:
-                                    Border.all(color: Colors.white, width: 2)),
                             child: Container(
                               child: TextFormField(
+                                textInputAction: TextInputAction.next,
                                 //initialValue: "Password",
                                 obscureText: false,
                                 style: GoogleFonts.adventPro(
@@ -136,7 +124,8 @@ class RegisterPage extends StatelessWidget {
                                   ),
                                 ),
                                 decoration: InputDecoration(
-                                  contentPadding: EdgeInsets.only(bottom: 10),
+                                  contentPadding:
+                                  EdgeInsets.only(bottom: 10, left: 10),
                                   hintText: 'Nome Utente',
                                   hintStyle: GoogleFonts.adventPro(
                                     textStyle: TextStyle(
@@ -145,6 +134,19 @@ class RegisterPage extends StatelessWidget {
                                       fontSize: 20,
                                       fontStyle: FontStyle.normal,
                                       decoration: TextDecoration.none,
+                                    ),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                    borderSide: BorderSide(
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                    borderSide: BorderSide(
+                                      color: Colors.white,
+                                      width: 2.0,
                                     ),
                                   ),
                                 ),
@@ -171,59 +173,60 @@ class RegisterPage extends StatelessWidget {
                         padding: EdgeInsets.zero,
                         decoration: const BoxDecoration(),
                         child: Container(
-                            width: double.maxFinite,
-                            height: 40,
-                            padding: const EdgeInsets.only(top: 0, left: 10),
-                            decoration: BoxDecoration(
-                                color: Colors.black.withOpacity(0.05),
-                                borderRadius: const BorderRadius.only(
-                                  topLeft: Radius.circular(5),
-                                  topRight: Radius.circular(5),
-                                  bottomRight: Radius.circular(5),
-                                  bottomLeft: Radius.circular(5),
-                                ),
-                                border:
-                                    Border.all(color: Colors.white, width: 2)),
-                            child: Container(
-                              child: TextFormField(
-                                //initialValue: "Password",
-                                obscureText: true,
-                                style: GoogleFonts.adventPro(
-                                  textStyle: const TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 20,
-                                    fontStyle: FontStyle.normal,
-                                    decoration: TextDecoration.none,
-                                  ),
-                                ),
-                                decoration: InputDecoration(
-                                  contentPadding: EdgeInsets.only(bottom: 10),
-                                  hintText: 'Password',
-                                  hintStyle: GoogleFonts.adventPro(
-                                    textStyle: TextStyle(
-                                      color: Colors.white.withOpacity(0.5),
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 20,
-                                      fontStyle: FontStyle.normal,
-                                      decoration: TextDecoration.none,
-                                    ),
-                                  ),
-                                ),
-                                validator: (String? inValue) {
-                                  if (inValue!.isEmpty) {
-                                    return "Please enter a password";
-                                  } //else if (inValue.length < 8) {
-                                  //  return "Please enter a password of length maggiore di 8";
-                                 // }
-                                  return null;
-                                },
-                                onChanged: (String inValue) {
-                                  utentiModel.utenteBeingEdited.password =
-                                      inValue;
-                                },
+                          child: TextFormField(
+                            textInputAction: TextInputAction.done,
+                            //initialValue: "Password",
+                            obscureText: true,
+                            style: GoogleFonts.adventPro(
+                              textStyle: const TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w400,
+                                fontSize: 20,
+                                fontStyle: FontStyle.normal,
+                                decoration: TextDecoration.none,
                               ),
-                            )),
+                            ),
+                            decoration: InputDecoration(
+                              contentPadding:
+                              EdgeInsets.only(bottom: 10, left: 10),
+                              hintText: 'Password',
+                              hintStyle: GoogleFonts.adventPro(
+                                textStyle: TextStyle(
+                                  color: Colors.white.withOpacity(0.5),
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 20,
+                                  fontStyle: FontStyle.normal,
+                                  decoration: TextDecoration.none,
+                                ),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                                borderSide: BorderSide(
+                                  color: Colors.white,
+                                ),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                                borderSide: BorderSide(
+                                  color: Colors.white,
+                                  width: 2.0,
+                                ),
+                              ),
+                            ),
+                            validator: (String? inValue) {
+                              if (inValue!.isEmpty) {
+                                return "Please enter a password";
+                              } //else if (inValue.length < 8) {
+                              //  return "Please enter a password of length maggiore di 8";
+                             // }
+                              return null;
+                            },
+                            onChanged: (String inValue) {
+                              utentiModel.utenteBeingEdited.password =
+                                  inValue;
+                            },
+                          ),
+                        ),
                       ),
                       Container(
                           margin: const EdgeInsets.only(
@@ -232,6 +235,7 @@ class RegisterPage extends StatelessWidget {
                             right: 50,
                           ),
                           padding: EdgeInsets.zero,
+                          width: double.maxFinite,
                           decoration: const BoxDecoration(),
                           child: GestureDetector(
                             onTap: () async {
@@ -304,9 +308,9 @@ class RegisterPage extends StatelessWidget {
                               }
                             },
                             child: Container(
-                                width: double.maxFinite,
-                                height: 40,
-                                padding: const EdgeInsets.only(top: 7),
+                                width: 10,
+                                height: 45,
+                                padding: const EdgeInsets.only(top: 9),
                                 decoration: BoxDecoration(
                                     color: Colors.black.withOpacity(0.05),
                                     borderRadius: const BorderRadius.only(
@@ -315,15 +319,14 @@ class RegisterPage extends StatelessWidget {
                                       bottomRight: Radius.circular(5),
                                       bottomLeft: Radius.circular(5),
                                     ),
-                                    border: Border.all(
-                                        color: Colors.white, width: 2)),
+                                    border: Border.all(color: Colors.white, width: 2)),
                                 child: Text(
-                                  'Register',
+                                  'Registrati',
                                   style: GoogleFonts.adventPro(
                                     textStyle: const TextStyle(
                                       color: Color(0xFFFFFFFF),
                                       fontWeight: FontWeight.w500,
-                                      fontSize: 16,
+                                      fontSize: 18,
                                       fontStyle: FontStyle.normal,
                                       decoration: TextDecoration.none,
                                     ),
@@ -354,9 +357,9 @@ class RegisterPage extends StatelessWidget {
     //}
 
     utentiModel.loadData(UtentiDBworker.utentiDBworker);
-    Base.pageIndexForWidget=1;
-    utentiModel.setStackIndex(7);
-    //utentiModel.setStackIndex(1);
+    //Base.pageIndexForWidget=1;
+    //utentiModel.setStackIndex(7);
+    utentiModel.setStackIndex(1);
 
 
   }

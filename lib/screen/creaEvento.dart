@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:mytraining/models/schedeModel.dart';
 import 'package:mytraining/models/utentiModel.dart';
 import 'package:mytraining/screen/base.dart';
+import 'package:mytraining/screen/homepage.dart';
 import 'package:mytraining/screen/login.dart';
 import 'package:mytraining/models/eventiModel.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
@@ -241,14 +242,14 @@ class CreaEvento extends StatelessWidget {
     } else {
       await EventiDBworker.eventiDBworker.update(eventiModel.eventoBeingEdited);
     }
-
+    //HomePage.hoCaricatoGliEventi = false;
     LoginPage().getValueLogin().then((val) async {
       await eventiModel.loadData(EventiDBworker.eventiDBworker, val);
     });
-
+   // HomePage.hoCaricatoGliEventi = true;
     Base.pageIndexForWidget = 3;
     utentiModel.setStackIndex(7);
-
+    //utentiModel.setStackIndex(3);
 
   }
 }
