@@ -259,7 +259,7 @@ class _AllenamentoState extends State<Allenamento> {
             )
           ],
         ),
-        SizedBox(height: 15),
+        const SizedBox(height: 15),
         Container(
           child: Text(
             "Esercizi",
@@ -276,7 +276,7 @@ class _AllenamentoState extends State<Allenamento> {
         ),
         ListView.builder(
           shrinkWrap: true,
-          physics: NeverScrollableScrollPhysics(),
+          physics: const NeverScrollableScrollPhysics(),
           itemCount: eserciziModel.eserciziList.length,
           itemBuilder: (BuildContext inBuildContext, int inIndex) {
             Esercizio esercizio = eserciziModel.eserciziList[inIndex];
@@ -297,12 +297,12 @@ class _AllenamentoState extends State<Allenamento> {
                     border: Border.all(color: Colors.white)),
                 child: Column(
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       width: 10,
                     ),
                     Row(
                       children: [
-                        SizedBox(width: 10),
+                        const SizedBox(width: 10),
                         Text(
                           esercizio.nomeEsercizio,
                           style: GoogleFonts.adventPro(
@@ -316,8 +316,7 @@ class _AllenamentoState extends State<Allenamento> {
                             ),
                           ),
                         ),
-                        SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.25),
+                        Spacer(),
                         Text(
                           "Rip: " + esercizio.ripEsercizio,
                           style: GoogleFonts.adventPro(
@@ -331,7 +330,7 @@ class _AllenamentoState extends State<Allenamento> {
                             ),
                           ),
                         ),
-                        SizedBox(width: 10),
+                        const SizedBox(width: 10),
                         Text(
                           "Serie: " + esercizio.serieEsercizio,
                           style: GoogleFonts.adventPro(
@@ -345,7 +344,7 @@ class _AllenamentoState extends State<Allenamento> {
                             ),
                           ),
                         ),
-                        SizedBox(width: 10),
+                        const SizedBox(width: 10),
                         Text(
                           "Peso: " + esercizio.pesoEsercizio,
                           style: GoogleFonts.adventPro(
@@ -359,15 +358,16 @@ class _AllenamentoState extends State<Allenamento> {
                             ),
                           ),
                         ),
+                        const SizedBox(width: 10),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 10,
                       height: 5,
                     ),
                     Row(
                       children: [
-                        SizedBox(
+                        const SizedBox(
                           width: 10,
                           height: 5,
                         ),
@@ -454,7 +454,7 @@ class _AllenamentoState extends State<Allenamento> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Text(
@@ -469,7 +469,7 @@ class _AllenamentoState extends State<Allenamento> {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Text(
@@ -485,7 +485,7 @@ class _AllenamentoState extends State<Allenamento> {
                 ),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Row(
@@ -578,7 +578,7 @@ class _AllenamentoState extends State<Allenamento> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Text(

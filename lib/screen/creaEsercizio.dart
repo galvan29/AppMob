@@ -12,8 +12,7 @@ import 'package:mytraining/screen/base.dart';
 import 'package:mytraining/screen/schede.dart';
 import 'package:mytraining/screen/visualizzaScheda.dart';
 
-class CreaEsercizio extends StatelessWidget{
-
+class CreaEsercizio extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
@@ -50,110 +49,174 @@ class CreaEsercizio extends StatelessWidget{
                   height: 70,
                   width: MediaQuery.of(context).size.width * 0.9,
                   child: TextFormField(
-                    style: TextStyle(color: Colors.white),
-                    decoration: const InputDecoration(labelText: "Nome Esercizio",
+                    style: GoogleFonts.adventPro(
+                      textStyle: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w400,
+                        fontSize: MediaQuery.of(context).size.width * 0.045,
+                        fontStyle: FontStyle.normal,
+                        decoration: TextDecoration.none,
+                      ),
+                    ),
+                    decoration: const InputDecoration(
+                        labelText: "Nome Esercizio",
                         labelStyle: TextStyle(
                           color: Colors.white,
                         )),
-                    initialValue: eserciziModel.esercizioBeingEdited == null ? null : eserciziModel.esercizioBeingEdited.nomeEsercizio,
+                    initialValue: eserciziModel.esercizioBeingEdited == null
+                        ? null
+                        : eserciziModel.esercizioBeingEdited.nomeEsercizio,
                     /*validator: (String? inValue){
                       if(inValue!.isEmpty){
                         return "Inserisci Nome";
                       }
                       return null;
                     }, */
-                    onChanged: (String inValue){
-                      eserciziModel.esercizioBeingEdited.nomeEsercizio = inValue;
+                    onChanged: (String inValue) {
+                      eserciziModel.esercizioBeingEdited.nomeEsercizio =
+                          inValue;
                     },
-                  ),)),
-            Padding(
-                padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                child: SizedBox(
-                  height: 70,
-                  width: MediaQuery.of(context).size.width * 0.9,
-                  child:  TextFormField(
-                    style: TextStyle(color: Colors.white),
-                    decoration: const InputDecoration(labelText: "Serie",
-                        labelStyle: TextStyle(
-                          color: Colors.white,
-                        )),
-                    initialValue: eserciziModel.esercizioBeingEdited == null ? null : eserciziModel.esercizioBeingEdited.serieEsercizio,
-                    /*validator: (String? inValue){
-                      if(inValue!.isEmpty){
-                        return "Inserisci Note";
-                      }
-                      return null;
-                    }, */
-                    onChanged: (String inValue){
-                      eserciziModel.esercizioBeingEdited.serieEsercizio = inValue;
-                    },
-                  ),)),
+                  ),
+                )),
             Padding(
                 padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                 child: SizedBox(
                   height: 70,
                   width: MediaQuery.of(context).size.width * 0.9,
                   child: TextFormField(
-                    style: TextStyle(color: Colors.white),
-                    decoration: const InputDecoration(labelText: "Ripetizioni",
+                    style: GoogleFonts.adventPro(
+                      textStyle: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w400,
+                        fontSize: MediaQuery.of(context).size.width * 0.045,
+                        fontStyle: FontStyle.normal,
+                        decoration: TextDecoration.none,
+                      ),
+                    ),
+                    decoration: const InputDecoration(
+                        labelText: "Serie",
                         labelStyle: TextStyle(
                           color: Colors.white,
                         )),
-                    initialValue: eserciziModel.esercizioBeingEdited == null ? null : eserciziModel.esercizioBeingEdited.ripEsercizio,
+                    initialValue: eserciziModel.esercizioBeingEdited == null
+                        ? null
+                        : eserciziModel.esercizioBeingEdited.serieEsercizio,
                     /*validator: (String? inValue){
                       if(inValue!.isEmpty){
                         return "Inserisci Note";
                       }
                       return null;
                     }, */
-                    onChanged: (String inValue){
+                    onChanged: (String inValue) {
+                      eserciziModel.esercizioBeingEdited.serieEsercizio =
+                          inValue;
+                    },
+                  ),
+                )),
+            Padding(
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                child: SizedBox(
+                  height: 70,
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  child: TextFormField(
+                    style: GoogleFonts.adventPro(
+                      textStyle: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w400,
+                        fontSize: MediaQuery.of(context).size.width * 0.045,
+                        fontStyle: FontStyle.normal,
+                        decoration: TextDecoration.none,
+                      ),
+                    ),
+                    decoration: const InputDecoration(
+                        labelText: "Ripetizioni",
+                        labelStyle: TextStyle(
+                          color: Colors.white,
+                        )),
+                    initialValue: eserciziModel.esercizioBeingEdited == null
+                        ? null
+                        : eserciziModel.esercizioBeingEdited.ripEsercizio,
+                    /*validator: (String? inValue){
+                      if(inValue!.isEmpty){
+                        return "Inserisci Note";
+                      }
+                      return null;
+                    }, */
+                    onChanged: (String inValue) {
                       eserciziModel.esercizioBeingEdited.ripEsercizio = inValue;
                     },
-                  ),)),
+                  ),
+                )),
             Padding(
                 padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                 child: SizedBox(
                   height: 70,
                   width: MediaQuery.of(context).size.width * 0.9,
                   child: TextFormField(
-                    style: TextStyle(color: Colors.white),
-                    decoration: const InputDecoration(labelText: "Peso",
+                    style: GoogleFonts.adventPro(
+                      textStyle: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w400,
+                        fontSize: MediaQuery.of(context).size.width * 0.045,
+                        fontStyle: FontStyle.normal,
+                        decoration: TextDecoration.none,
+                      ),
+                    ),
+                    decoration: const InputDecoration(
+                        labelText: "Peso",
                         labelStyle: TextStyle(
                           color: Colors.white,
                         )),
-                    initialValue: eserciziModel.esercizioBeingEdited == null ? null : eserciziModel.esercizioBeingEdited.pesoEsercizio,
+                    initialValue: eserciziModel.esercizioBeingEdited == null
+                        ? null
+                        : eserciziModel.esercizioBeingEdited.pesoEsercizio,
                     /*validator: (String? inValue){
                       if(inValue!.isEmpty){
                         return "Inserisci Note";
                       }
                       return null;
                     }, */
-                    onChanged: (String inValue){
-                      eserciziModel.esercizioBeingEdited.pesoEsercizio = inValue;
+                    onChanged: (String inValue) {
+                      eserciziModel.esercizioBeingEdited.pesoEsercizio =
+                          inValue;
                     },
-                  ),)),
+                  ),
+                )),
             Padding(
                 padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                 child: SizedBox(
                   height: 70,
                   width: MediaQuery.of(context).size.width * 0.9,
                   child: TextFormField(
-                    style: TextStyle(color: Colors.white),
-                    decoration: const InputDecoration(labelText: "Note",
+                    style: GoogleFonts.adventPro(
+                      textStyle: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w400,
+                        fontSize: MediaQuery.of(context).size.width * 0.045,
+                        fontStyle: FontStyle.normal,
+                        decoration: TextDecoration.none,
+                      ),
+                    ),
+                    decoration: const InputDecoration(
+                        labelText: "Note",
                         labelStyle: TextStyle(
                           color: Colors.white,
                         )),
-                    initialValue: eserciziModel.esercizioBeingEdited == null ? null : eserciziModel.esercizioBeingEdited.noteEsercizio,
+                    initialValue: eserciziModel.esercizioBeingEdited == null
+                        ? null
+                        : eserciziModel.esercizioBeingEdited.noteEsercizio,
                     /*validator: (String? inValue){
                       if(inValue!.isEmpty){
                         return "Inserisci Note";
                       }
                       return null;
                     }, */
-                    onChanged: (String inValue){
-                      eserciziModel.esercizioBeingEdited.noteEsercizio = inValue;
+                    onChanged: (String inValue) {
+                      eserciziModel.esercizioBeingEdited.noteEsercizio =
+                          inValue;
                     },
-                  ),)),
+                  ),
+                )),
             Container(
               margin: const EdgeInsets.only(
                 left: 30,
@@ -205,10 +268,11 @@ class CreaEsercizio extends StatelessWidget{
           child: Row(
             children: [
               FlatButton(
-                onPressed: (){
+                onPressed: () {
                   schedeModel.setStackIndex(2);
                 },
-                child: Text("Indietro",
+                child: Text(
+                  "Indietro",
                   style: GoogleFonts.adventPro(
                     textStyle: const TextStyle(
                       color: Colors.white,
@@ -221,26 +285,26 @@ class CreaEsercizio extends StatelessWidget{
                 ),
               ),
             ],
-          )
-      ),
+          )),
     );
   }
 
   void _save(BuildContext context) async {
-
-    if(!_formKey.currentState!.validate()){
+    if (!_formKey.currentState!.validate()) {
       return;
     }
 
     //_formKey.currentState.save();
 
-    if(eserciziModel.esercizioBeingEdited.id==-1){
+    if (eserciziModel.esercizioBeingEdited.id == -1) {
       Schede().getValueScheda().then((val) async {
         eserciziModel.esercizioBeingEdited.idScheda = val.toString();
       });
-      await EserciziDBworker.eserciziDBworker.create(eserciziModel.esercizioBeingEdited);
+      await EserciziDBworker.eserciziDBworker
+          .create(eserciziModel.esercizioBeingEdited);
     } else {
-      await EserciziDBworker.eserciziDBworker.update(eserciziModel.esercizioBeingEdited);
+      await EserciziDBworker.eserciziDBworker
+          .update(eserciziModel.esercizioBeingEdited);
     }
     VisualizzaScheda.hoCaricatoGliEs = false;
     Schede().getValueScheda().then((val) async {
@@ -252,7 +316,5 @@ class CreaEsercizio extends StatelessWidget{
     schedeModel.setStackIndex(6);*/
     schedeModel.setStackIndex(2);
 //dd
-
-
   }
 }

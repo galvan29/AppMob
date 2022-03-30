@@ -226,11 +226,7 @@ class _VisualizzaSchedaState extends State<VisualizzaScheda> {
                                             ),
                                           ),
                                         ),
-                                        SizedBox(
-                                            width: MediaQuery.of(context)
-                                                .size
-                                                .width *
-                                                0.25),
+                                        const Spacer(),
                                         Text(
                                           "Rip: " + esercizio.ripEsercizio,
                                           style: GoogleFonts.adventPro(
@@ -281,6 +277,7 @@ class _VisualizzaSchedaState extends State<VisualizzaScheda> {
                                             ),
                                           ),
                                         ),
+                                        const SizedBox(width: 10),
                                       ],
                                     ),
                                     const SizedBox(

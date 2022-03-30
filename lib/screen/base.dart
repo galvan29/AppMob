@@ -27,7 +27,7 @@ class Base extends StatelessWidget {
         value: utentiModel,
         child: DoubleBackToCloseApp(
           snackBar: const SnackBar(
-            content: Text('Tocca ancora per uscire dalla applicazione'),
+            content: Text('Tocca ancora per uscire dalla applicazione',),
           ),
           child: Consumer<UtentiModel>(
             builder: (context, utentiModel, child) {

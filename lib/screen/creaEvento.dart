@@ -73,7 +73,7 @@ class CreaEvento extends StatelessWidget {
                   height: 70,
                   width: MediaQuery.of(context).size.width * 0.9,
                   child: TextFormField(
-                    style: TextStyle(color: Colors.white),
+                    style: const TextStyle(color: Colors.white),
                     onTap: () {
                       _showDialog(context);
                     },
@@ -101,7 +101,7 @@ class CreaEvento extends StatelessWidget {
                   height: 70,
                   width: MediaQuery.of(context).size.width * 0.9,
                   child: TextFormField(
-                    style: TextStyle(color: Colors.white),
+                    style: const TextStyle(color: Colors.white),
                     controller: txt,
                     decoration: const InputDecoration(
                         labelText: "Data inizio",
@@ -109,7 +109,7 @@ class CreaEvento extends StatelessWidget {
                           color: Colors.white,
                         )),
                     onTap: () async {
-                      FocusScope.of(context).requestFocus(new FocusNode());
+                      FocusScope.of(context).requestFocus(FocusNode());
                       DateTime? picked = await DatePicker.showDateTimePicker(
                           context,
                           showTitleActions: true,
@@ -140,12 +140,12 @@ class CreaEvento extends StatelessWidget {
                               labelStyle: TextStyle(
                                 color: Colors.white,
                               )),
-                          style: TextStyle(color: Colors.white),
+                          style: const TextStyle(color: Colors.white),
                           controller: txt1,
                           onTap: () {
                             //double click
                             FocusScope.of(context)
-                                .requestFocus(new FocusNode());
+                                .requestFocus(FocusNode());
                           }),
                     )),
                 /*Text(
@@ -160,7 +160,7 @@ class CreaEvento extends StatelessWidget {
                     ),
                   ),
                 ),*/
-                Spacer(),
+                const Spacer(),
                 Container(
                   margin: EdgeInsets.only(
                     right: MediaQuery.of(context).size.width * 0.03,
