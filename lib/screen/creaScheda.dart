@@ -9,31 +9,8 @@ import 'package:mytraining/screen/login.dart';
 import 'package:mytraining/screen/schede.dart';
 import 'package:flutter_iconpicker/flutter_iconpicker.dart';
 
-class CreaScheda extends StatelessWidget{
-
+class CreaScheda extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  bool isAdaptive = true;
-  bool showTooltips = false;
-  bool showSearch = true;
-
-  _pickIcon(BuildContext context) async {
-    IconData? icon2 = await FlutterIconPicker.showIconPicker(
-      context,
-      adaptiveDialog: isAdaptive,
-      showTooltips: showTooltips,
-      showSearchBar: showSearch,
-      iconPickerShape:
-      RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      iconPackModes: [IconPack.cupertino, IconPack.lineAwesomeIcons],
-    );
-    print(icon2);
-    var iconData = IconData(58717, fontFamily: 'MaterialIcons');
-    int? iconCodePoint = icon2?.codePoint;
-    print(iconCodePoint);
-    iconData = IconData(iconCodePoint!, fontFamily: 'MaterialIcons');
-    print(iconData);
-    schedeModel.schedaBeingEdited.icona = iconCodePoint;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -65,25 +42,29 @@ class CreaScheda extends StatelessWidget{
             Padding(
                 padding: const EdgeInsets.fromLTRB(0, 40, 0, 0),
                 child: SizedBox(
-                    height: 70,
-                    width: MediaQuery.of(context).size.width * 0.9,
-                    child: TextFormField(
-                      style: TextStyle(color: Colors.white),
-                      initialValue: schedeModel.schedaBeingEdited == null ? null : schedeModel.schedaBeingEdited.nomeScheda,
-                      validator: (String? inValue){
-                        if(inValue!.isEmpty){
-                          return "Inserisci Nome";
-                        }
-                        return null;
-                      },
-                      onChanged: (String inValue){
-                        schedeModel.schedaBeingEdited.nomeScheda = inValue;
-                      },
-                      decoration: const InputDecoration(labelText: "Nome Scheda",
-                          labelStyle: TextStyle(
-                            color: Colors.white,
-                          )),
-                    ),)),
+                  height: 70,
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  child: TextFormField(
+                    style: TextStyle(color: Colors.white),
+                    initialValue: schedeModel.schedaBeingEdited == null
+                        ? null
+                        : schedeModel.schedaBeingEdited.nomeScheda,
+                    validator: (String? inValue) {
+                      if (inValue!.isEmpty) {
+                        return "Inserisci Nome";
+                      }
+                      return null;
+                    },
+                    onChanged: (String inValue) {
+                      schedeModel.schedaBeingEdited.nomeScheda = inValue;
+                    },
+                    decoration: const InputDecoration(
+                        labelText: "Nome Scheda",
+                        labelStyle: TextStyle(
+                          color: Colors.white,
+                        )),
+                  ),
+                )),
             Padding(
                 padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                 child: SizedBox(
@@ -92,37 +73,130 @@ class CreaScheda extends StatelessWidget{
                   child: TextFormField(
                     style: TextStyle(color: Colors.white),
                     keyboardType: TextInputType.number,
-                    initialValue: schedeModel.schedaBeingEdited == null ? null : schedeModel.schedaBeingEdited.durataScheda,
-                    validator: (String? inValue){
-                      if(inValue!.isEmpty){
+                    initialValue: schedeModel.schedaBeingEdited == null
+                        ? null
+                        : schedeModel.schedaBeingEdited.durataScheda,
+                    validator: (String? inValue) {
+                      if (inValue!.isEmpty) {
                         return "Inserisci Durata";
                       }
                       return null;
                     },
-                    onChanged: (String inValue){
+                    onChanged: (String inValue) {
                       schedeModel.schedaBeingEdited.durataScheda = inValue;
                     },
-                    decoration: const InputDecoration(labelText: "Durata Scheda",
+                    decoration: const InputDecoration(
+                        labelText: "Durata Scheda",
                         labelStyle: TextStyle(
                           color: Colors.white,
                         )),
-                  ),)),
-            Padding(
-                padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                child: SizedBox(
-                  height: 70,
-                  width: MediaQuery.of(context).size.width * 0.9,
-                  child: TextButton(
-                    onPressed: () {
-                      _pickIcon(context);
-                    },
-                    child: Text("Scegli Icona"),
                   ),
                 )),
             Container(
+              margin: EdgeInsets.only(
+                top: MediaQuery.of(context).size.width * 0.05,
+                bottom: MediaQuery.of(context).size.width * 0.07,
+              ),
+              padding: EdgeInsets.zero,
+              width: double.maxFinite,
+              decoration: const BoxDecoration(),
+              child: Text(r'''Seleziona Icona''',
+                  style: GoogleFonts.adventPro(
+                    textStyle: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 18,
+                      fontStyle: FontStyle.normal,
+                      decoration: TextDecoration.none,
+                    ),
+                  ),
+                  textAlign: TextAlign.center,
+                  maxLines: 1),
+            ),
+            Container(
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+
+
+                    Container(
+                        margin: EdgeInsets.only(
+                          left: MediaQuery.of(context).size.width * 0.08,
+                        ),
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                              color: schedeModel.schedaBeingEdited.icona == 61562 ? Colors.white : Colors.black.withOpacity(0),
+                              width: 1.5
+                          ),
+                          color: Colors.white.withOpacity(0),
+                          shape: BoxShape.circle,
+                        ),
+                        child: IconButton(
+                            icon: const Icon(Icons.fitness_center_outlined),
+                            color: Colors.white,
+                            onPressed: () {
+                              saveIcona(61562);
+                            })),
+                    Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                              color: schedeModel.schedaBeingEdited.icona == 58829 ? Colors.white : Colors.black.withOpacity(0),
+                              width: 1.5
+                          ),
+                          color: Colors.white.withOpacity(0),
+                          shape: BoxShape.circle,
+                        ),
+                        child: IconButton(
+                            icon: const Icon(Icons.snowboarding ),
+                            color: Colors.white,
+                            onPressed: () {
+                              saveIcona(58829);
+                            })),
+                    Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                              color: schedeModel.schedaBeingEdited.icona == 984771 ? Colors.white : Colors.black.withOpacity(0),
+                              width: 1.5
+                          ),
+                          color: Colors.white.withOpacity(0),
+                          shape: BoxShape.circle,
+                        ),
+                        child: IconButton(
+                            icon: const Icon(Icons.sports_gymnastics),
+                            color: Colors.white,
+                            onPressed: () {
+                              saveIcona(984771);
+                              Icons.select_all_rounded;
+                            })),
+                    Container(
+                        margin: EdgeInsets.only(
+                          right: MediaQuery.of(context).size.width * 0.08,
+                        ),
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                              color: schedeModel.schedaBeingEdited.icona == 58861 ? Colors.white : Colors.black.withOpacity(0),
+                              width: 1.5
+                          ),
+                          color: Colors.white.withOpacity(0),
+                          shape: BoxShape.circle,
+                        ),
+                        child: IconButton(
+                            icon: const Icon(Icons.sports_kabaddi ),
+                            color: Colors.white,
+                            onPressed: () {
+                              saveIcona(58861);
+                            })),
+
+
+                  ]),
+            ),
+
+
+
+            Container(
               margin: const EdgeInsets.only(
                 left: 30,
-                top: 20,
+                top: 40,
                 right: 30,
               ),
               padding: EdgeInsets.zero,
@@ -170,10 +244,11 @@ class CreaScheda extends StatelessWidget{
           child: Row(
             children: [
               FlatButton(
-                onPressed: (){
+                onPressed: () {
                   schedeModel.setStackIndex(0);
                 },
-                child: Text("Indietro",
+                child: Text(
+                  "Indietro",
                   style: GoogleFonts.adventPro(
                     textStyle: const TextStyle(
                       color: Colors.white,
@@ -186,20 +261,19 @@ class CreaScheda extends StatelessWidget{
                 ),
               ),
             ],
-          )
-      ),
+          )),
     );
   }
 
   void _save(BuildContext context) async {
-    print(context);   //dopo vedo cosa contiene
-    if(!_formKey.currentState!.validate()){
+    print(context); //dopo vedo cosa contiene
+    if (!_formKey.currentState!.validate()) {
       return;
     }
 
     //_formKey.currentState.save();
 
-    if(schedeModel.schedaBeingEdited.id==-1){
+    if (schedeModel.schedaBeingEdited.id == -1) {
       LoginPage().getValueLogin().then((val) async {
         schedeModel.schedaBeingEdited.idUtente = val.toString();
       });
@@ -212,8 +286,12 @@ class CreaScheda extends StatelessWidget{
       await schedeModel.loadData(SchedeDBworker.schedeDBworker, val);
     });
     Schede.hoCaricatoleSchede = true;
-   // Base.pageIndexForWidget=4;
+    // Base.pageIndexForWidget=4;
     schedeModel.setStackIndex(0);
     utentiModel.setStackIndex(4);
+  }
+
+  void saveIcona(int n) {
+    schedeModel.schedaBeingEdited.icona = n;
   }
 }
