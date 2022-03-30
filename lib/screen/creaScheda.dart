@@ -157,7 +157,7 @@ class CreaScheda extends StatelessWidget {
                     Container(
                         decoration: BoxDecoration(
                           border: Border.all(
-                              color: schedeModel.schedaBeingEdited.icona == 984771 ? Colors.white : Colors.black.withOpacity(0),
+                              color: schedeModel.schedaBeingEdited.icona == 58854 ? Colors.white : Colors.black.withOpacity(0),
                               width: 1.5
                           ),
                           color: Colors.white.withOpacity(0),
