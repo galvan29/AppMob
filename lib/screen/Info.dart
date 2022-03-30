@@ -16,6 +16,7 @@ class Info extends StatelessWidget {
   var txt = TextEditingController(), txt1 = TextEditingController();
   int selectedRadio = -1;
   var nomeScheda = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,10 +27,11 @@ class Info extends StatelessWidget {
           child: Row(
             children: [
               FlatButton(
-                onPressed: (){
+                onPressed: () {
                   utentiModel.setStackIndex(3);
                 },
-                child: Text("Indietro",
+                child: Text(
+                  "Indietro",
                   style: GoogleFonts.adventPro(
                     textStyle: const TextStyle(
                       color: Colors.white,
@@ -42,8 +44,7 @@ class Info extends StatelessWidget {
                 ),
               ),
             ],
-          )
-      ),
+          )),
       body: Form(
         key: _formKey,
         child: Column(
@@ -101,7 +102,8 @@ class Info extends StatelessWidget {
               margin: const EdgeInsets.only(
                 top: 10,
               ),
-              child: Text(r'''Beta Tester: Christian Bolletta, Rebecca Giabardo, Tobia Giabardo, Anna Vaglieri''',
+              child: Text(
+                  r'''Beta Tester: Christian Bolletta, Rebecca Giabardo, Tobia Giabardo, Anna Vaglieri''',
                   style: GoogleFonts.adventPro(
                     textStyle: const TextStyle(
                       color: Colors.white,
@@ -122,7 +124,7 @@ class Info extends StatelessWidget {
               margin: const EdgeInsets.only(
                 top: 10,
               ),
-              child: Text(/*r'''Aiutanti: Christian Bolletta'''*/"",
+              child: Text(/*r'''Aiutanti: Christian Bolletta'''*/ "",
                   style: GoogleFonts.adventPro(
                     textStyle: const TextStyle(
                       color: Colors.white,
@@ -142,18 +144,20 @@ class Info extends StatelessWidget {
               margin: const EdgeInsets.only(
                 top: 10,
               ),
-              child: Image.asset(
-                'assets/image/logoGym.png',
-                height: MediaQuery.of(context).size.height * 0.2,
-                width: MediaQuery.of(context).size.width * 0.2,
-              ),,
+              child: Container(
+                padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.06),
+                decoration:
+                    BoxDecoration(shape: BoxShape.circle, color: Colors.white),
+                child: Image.asset(
+                  'assets/image/logoGym.png',
+                  height: MediaQuery.of(context).size.height * 0.3,
+                  width: MediaQuery.of(context).size.width * 0.3,
+                ),
+              ),
             ),
           ],
         ),
       ),
     );
   }
-
-
-
 }
