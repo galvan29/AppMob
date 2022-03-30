@@ -25,7 +25,7 @@ PreferredSize buildAppBar(BuildContext context) {
                 decoration: const BoxDecoration(),
                 margin: EdgeInsets.only(
                   left: MediaQuery.of(context).size.width * 0.01,
-                  top: MediaQuery.of(context).size.width * 0.08,
+                  top: MediaQuery.of(context).size.height * 0.04,  //mytraining
                 ),
                 child: Text(
                     'MyTraining',

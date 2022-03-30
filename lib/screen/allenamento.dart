@@ -31,6 +31,12 @@ class _AllenamentoState extends State<Allenamento> {
     onChangeRawSecond: (value) => print('onChangeRawSecond $value'),
     onChangeRawMinute: (value) => print('onChangeRawMinute $value'),
   );
+  final StopWatchTimer _stopWatchTimerPausa = StopWatchTimer(
+    mode: StopWatchMode.countUp,
+    onChange: (value) => print('onChange $value'),
+    onChangeRawSecond: (value) => print('onChangeRawSecond $value'),
+    onChangeRawMinute: (value) => print('onChangeRawMinute $value'),
+  );
 
   @override
   void initState() {
@@ -49,16 +55,46 @@ class _AllenamentoState extends State<Allenamento> {
   void dispose() async {
     super.dispose();
     await _stopWatchTimer.dispose();
+    await _stopWatchTimerPausa.dispose();
   }
 
   bool isRunning = false;
   bool firstTime = false;
+
   @override
   Widget build(BuildContext context) {
     String displayTime2 = "";
     return Scaffold(
       appBar: buildAppBar(context),
       backgroundColor: const Color.fromARGB(255, 42, 42, 42),
+      floatingActionButton: Visibility(
+        visible: firstTime,
+        child: FloatingActionButton(
+          backgroundColor: Colors.white,
+          onPressed: () {
+            mostraPopUpPausa(context);
+            _stopWatchTimerPausa.onExecute
+                .add(StopWatchExecute.start);
+          },
+          child: Column(
+            children: [
+              const Icon(Icons.pause, color: Colors.black),
+              Text(
+                "Pausa",
+                style: GoogleFonts.adventPro(
+                  textStyle: const TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 16,
+                    fontStyle: FontStyle.normal,
+                    decoration: TextDecoration.none,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
       body: SingleChildScrollView(
           child: Column(children: <Widget>[
         Column(
@@ -66,8 +102,7 @@ class _AllenamentoState extends State<Allenamento> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Container(
-              margin: EdgeInsets.only(
-                  left: MediaQuery.of(context).size.width * 0.25),
+              alignment: Alignment.center,
               child: Padding(
                 padding: const EdgeInsets.only(bottom: 0),
                 child: StreamBuilder<int>(
@@ -493,13 +528,11 @@ class _AllenamentoState extends State<Allenamento> {
                     ),
                     onPressed: () async {
                       Navigator.of(context).pop();
-                      _stopWatchTimer.onExecute
-                          .add(StopWatchExecute.reset);
+                      _stopWatchTimer.onExecute.add(StopWatchExecute.reset);
                       Schede.valoreOrologio = false;
-                      registriModel.registroBeingEdited =
-                          Registro();
-                      registriModel.registroBeingEdited
-                          .durataFinale = displayTime2;
+                      registriModel.registroBeingEdited = Registro();
+                      registriModel.registroBeingEdited.durataFinale =
+                          displayTime2;
                       FineAllenamento.durataStringa = displayTime2;
                       setState(() {
                         firstTime = false;
@@ -525,6 +558,108 @@ class _AllenamentoState extends State<Allenamento> {
               borderRadius: BorderRadius.circular(20),
             ),
             child: setupAlertDialoadContainer(displayTime2),
+          );
+        });
+  }
+
+  setupAlertDialoadContainer2() {
+    return Container(
+        decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(20),
+              topRight: Radius.circular(20),
+              bottomRight: Radius.circular(20),
+              bottomLeft: Radius.circular(20),
+            ),
+            border: Border.all(color: Colors.white)),
+        height: 180, // Change as per your requirement
+        width: 330, // Change as per your requirement
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(
+                height: 20,
+              ),
+              Text(
+                "Pausa intermedia",
+                style: GoogleFonts.adventPro(
+                  textStyle: TextStyle(
+                    color: const Color.fromARGB(255, 42, 42, 42),
+                    fontWeight: FontWeight.w500,
+                    fontSize: MediaQuery.of(context).size.width * 0.04,
+                    fontStyle: FontStyle.normal,
+                    decoration: TextDecoration.none,
+                  ),
+                ),
+              ),
+              Container(
+                alignment: Alignment.center,
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 0),
+                  child: StreamBuilder<int>(
+                    stream: _stopWatchTimerPausa.rawTime,
+                    initialData: _stopWatchTimerPausa.rawTime.value,
+                    builder: (context, snap) {
+                      final value = snap.data!;
+                      final displayTime =
+                      StopWatchTimer.getDisplayTime(value, hours: _isHours);
+                      return Column(
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.all(8),
+                            child: Text(displayTime,
+                                style: GoogleFonts.adventPro(
+                                  textStyle: const TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 40,
+                                    fontStyle: FontStyle.normal,
+                                    decoration: TextDecoration.none,
+                                  ),
+                                )),
+                          ),
+                        ],
+                      );
+                    },
+                  ),
+                ),
+              ),
+              FlatButton(
+                    child:
+                    Text(
+                      "Riprendi",
+                      style: GoogleFonts.adventPro(
+                        textStyle: TextStyle(
+                          color: const Color.fromARGB(255, 42, 42, 42),
+                          fontWeight: FontWeight.w500,
+                          fontSize: MediaQuery.of(context).size.width * 0.04,
+                          fontStyle: FontStyle.normal,
+                          decoration: TextDecoration.none,
+                        ),
+                      ),
+                    ),
+                    onPressed: () async {
+                      Navigator.of(context).pop();
+                      _stopWatchTimerPausa.onExecute
+                          .add(StopWatchExecute.reset);
+                    },
+                  ),
+            ],
+          ),
+        ));
+  }
+
+  void mostraPopUpPausa(BuildContext context) async {
+    return showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext inAlertContext) {
+          return Dialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: setupAlertDialoadContainer2(),
           );
         });
   }
