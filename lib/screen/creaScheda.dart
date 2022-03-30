@@ -164,11 +164,11 @@ class CreaScheda extends StatelessWidget {
                           shape: BoxShape.circle,
                         ),
                         child: IconButton(
-                            icon: const Icon(Icons.sports_gymnastics),
+                            icon: const Icon(Icons.sports_basketball),
                             color: Colors.white,
                             onPressed: () {
-                              saveIcona(984771);
-                              schedeModel.setNIcona(984771);
+                              saveIcona(58854);
+                              schedeModel.setNIcona(58854);
                             })),
                     Container(
                         margin: EdgeInsets.only(
