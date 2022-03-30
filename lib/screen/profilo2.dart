@@ -13,6 +13,7 @@ import '../common/bottomNavigationBar.dart';
 class Profilo2 extends StatefulWidget {
   @override
   State<Profilo2> createState() => _ProfiloState();
+  static bool caricatoInfoProfilo = false;
 }
 
 class _ProfiloState extends State<Profilo2> {
@@ -105,7 +106,7 @@ class _ProfiloState extends State<Profilo2> {
                     buildUserInfoDisplay(weightController, 'Peso'),
             ],
                 ),
-              visible: userNameController.text == utentiModel.utenteBeingEdited.nomeUtente ? true : false,
+              visible: Profilo2.caricatoInfoProfilo,
               replacement: const CircularProgressIndicator(
                 color: Colors.white
               ),

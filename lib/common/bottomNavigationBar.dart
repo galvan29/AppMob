@@ -10,6 +10,7 @@ import 'package:mytraining/db/utentiDBworker.dart';
 import 'package:mytraining/models/eventiModel.dart';
 import 'package:mytraining/models/utentiModel.dart';
 import 'package:mytraining/screen/login.dart';
+import 'package:mytraining/screen/profilo2.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:intl/intl.dart';
 import 'package:mytraining/common/bottomNavigationBar.dart';
@@ -31,10 +32,12 @@ BottomNavigationBar buildBottomNavigationBar(
         utentiModel.setStackIndex(4);
         currentColor= 1;
       } else if (value == 2) {
+        Profilo2.caricatoInfoProfilo = false;
         LoginPage().getValueLogin().then((val) async {
           utentiModel.utenteBeingEdited =
               await UtentiDBworker.utentiDBworker.get(val);
         });
+        Profilo2.caricatoInfoProfilo = true;
         utentiModel.setStackIndex(5);
         currentColor= 2;
         print("ciao");

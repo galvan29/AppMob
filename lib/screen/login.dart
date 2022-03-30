@@ -389,6 +389,7 @@ class LoginPage extends StatelessWidget {
     getValueLogin().then((val) async {
       await schedeModel.loadData(SchedeDBworker.schedeDBworker, val);
       await eventiModel.loadData(EventiDBworker.eventiDBworker, val);
+      utentiModel.utenteBeingEdited = await UtentiDBworker.utentiDBworker.get(val);
     });
 
     Base.pageIndexForWidget = 3;
