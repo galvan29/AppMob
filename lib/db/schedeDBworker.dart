@@ -59,8 +59,8 @@ class SchedeDBworker {
     var val = await db!.rawQuery("SELECT MAX(id) + 1 AS id FROM schede");
     int id = val.first["id"] == null ? 1 : val.first["id"] as int;
     return await db.rawInsert(
-        "INSERT INTO schede (id, idUtente, nomeScheda, durataScheda) "
-            "VALUES (?, ?, ?, ?)",
+        "INSERT INTO schede (id, icona, idUtente, nomeScheda, durataScheda) "
+            "VALUES (?, ?, ?, ?, ?)",
         [id,scheda.icona, scheda.idUtente, scheda.nomeScheda, scheda.durataScheda]
     );
   }
