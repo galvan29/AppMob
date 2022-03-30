@@ -137,24 +137,16 @@ class Info extends StatelessWidget {
             ),
             Container(
               padding: EdgeInsets.zero,
-              width: double.maxFinite,
               alignment: Alignment.center,
               decoration: const BoxDecoration(),
               margin: const EdgeInsets.only(
                 top: 10,
               ),
-              child: Text('',
-                  style: GoogleFonts.adventPro(
-                    textStyle: const TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w400,
-                      fontSize: 20,
-                      fontStyle: FontStyle.normal,
-                      decoration: TextDecoration.none,
-                    ),
-                  ),
-                  textAlign: TextAlign.center,
-                  maxLines: 2),
+              child: Image.asset(
+                'assets/image/logoGym.png',
+                height: MediaQuery.of(context).size.height * 0.2,
+                width: MediaQuery.of(context).size.width * 0.2,
+              ),,
             ),
           ],
         ),
