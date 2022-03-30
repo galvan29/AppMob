@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class Scheda {
   int id = -1;
+  String icona = "";
   String idUtente = "";
   String nomeScheda = "";
   String durataScheda = "";
@@ -11,6 +12,7 @@ class SchedeModel extends ChangeNotifier {
   int stackIndex = 0;
   List schedeList = [];
   Scheda schedaBeingEdited = Scheda();
+  String icona = "";
   String idUtente = "";
   String nomeScheda = "";
   String durataScheda = "";

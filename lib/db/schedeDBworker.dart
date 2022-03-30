@@ -25,6 +25,7 @@ class SchedeDBworker {
           onCreate: (Database inDB, int inVersion) async {
             await inDB.execute("CREATE TABLE IF NOT EXISTS schede ("
                 "id INTEGER PRIMARY KEY,"
+                "icona TEXT,"
                 "idUtente TEXT,"
                 "nomeScheda TEXT,"
                 "durataScheda TEXT)");
@@ -36,6 +37,7 @@ class SchedeDBworker {
   Scheda schedaFromMap(Map inMap){
     Scheda scheda = Scheda();
     scheda.id = inMap["id"];
+    scheda.icona = inMap["icona"];
     scheda.idUtente = inMap["idUtente"];
     scheda.nomeScheda = inMap["nomeScheda"];
     scheda.durataScheda = inMap["durataScheda"];
@@ -45,6 +47,7 @@ class SchedeDBworker {
   Map<String, dynamic> schedaToMap(Scheda scheda) {
     Map<String, dynamic> map = Map<String, dynamic>();
     map["id"] = scheda.id;
+    map["icona"] = scheda.icona;
     map["idUtente"] = scheda.idUtente;
     map["nomeScheda"] = scheda.nomeScheda;
     map["durataScheda"] = scheda.durataScheda;
@@ -58,7 +61,7 @@ class SchedeDBworker {
     return await db.rawInsert(
         "INSERT INTO schede (id, idUtente, nomeScheda, durataScheda) "
             "VALUES (?, ?, ?, ?)",
-        [id, scheda.idUtente, scheda.nomeScheda, scheda.durataScheda]
+        [id,scheda.icona, scheda.idUtente, scheda.nomeScheda, scheda.durataScheda]
     );
   }
 
