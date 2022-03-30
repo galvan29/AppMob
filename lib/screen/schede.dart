@@ -194,26 +194,15 @@ class _SchedeState extends State<Schede> {
                                 child: Row(children: [
                                   const SizedBox(width: 10),
                                   Container(
-                                    height: MediaQuery.of(context).size.height *
-                                        0.10,
-                                    width: MediaQuery.of(context).size.width *
-                                        0.13,
+                                    height: MediaQuery.of(context).size.height * 0.10,
+                                    width: MediaQuery.of(context).size.width * 0.13,
                                     margin: EdgeInsets.only(
-                                      bottom:
-                                          MediaQuery.of(context).size.height *
-                                              0.01,
-                                      right: MediaQuery.of(context).size.width *
-                                          0.05,
-                                      left: MediaQuery.of(context).size.width *
-                                          0.03,
+                                      bottom: MediaQuery.of(context).size.height * 0.01,
+                                      right: MediaQuery.of(context).size.width * 0.05,
+                                      left: MediaQuery.of(context).size.width * 0.03,
                                     ),
                                     decoration: BoxDecoration(
-                                        borderRadius: const BorderRadius.only(
-                                          topLeft: Radius.circular(30),
-                                          topRight: Radius.circular(30),
-                                          bottomRight: Radius.circular(30),
-                                          bottomLeft: Radius.circular(30),
-                                        ),
+                                        shape: BoxShape.circle,
                                         border:
                                             Border.all(color: Colors.black)),
                                     child: IconButton(
