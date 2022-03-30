@@ -136,6 +136,7 @@ class CreaScheda extends StatelessWidget {
                             color: Colors.white,
                             onPressed: () {
                               saveIcona(61562);
+                              schedeModel.setNIcona(61562);
                             })),
                     Container(
                         decoration: BoxDecoration(
@@ -151,6 +152,7 @@ class CreaScheda extends StatelessWidget {
                             color: Colors.white,
                             onPressed: () {
                               saveIcona(58829);
+                              schedeModel.setNIcona(58829);
                             })),
                     Container(
                         decoration: BoxDecoration(
@@ -166,7 +168,7 @@ class CreaScheda extends StatelessWidget {
                             color: Colors.white,
                             onPressed: () {
                               saveIcona(984771);
-                              Icons.select_all_rounded;
+                              schedeModel.setNIcona(984771);
                             })),
                     Container(
                         margin: EdgeInsets.only(
@@ -185,6 +187,7 @@ class CreaScheda extends StatelessWidget {
                             color: Colors.white,
                             onPressed: () {
                               saveIcona(58861);
+                              schedeModel.setNIcona(58861);
                             })),
 
 
