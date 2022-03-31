@@ -232,10 +232,14 @@ class _ProfiloState extends State<Profilo2> {
             children: [
               Text(
                 title,
-                style: const TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.white,
+                style: GoogleFonts.adventPro(
+                  textStyle: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w400,
+                    fontSize: MediaQuery.of(context).size.width * 0.035,
+                    fontStyle: FontStyle.normal,
+                    decoration: TextDecoration.none,
+                  ),
                 ),
               ),
               const SizedBox(
@@ -265,7 +269,15 @@ class _ProfiloState extends State<Profilo2> {
                             child: TextFormField(
                               controller: contr,
                               enabled: false,
-                              style: const TextStyle(color: Colors.white),
+                              style: GoogleFonts.adventPro(
+                                textStyle: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: MediaQuery.of(context).size.width * 0.045,
+                                  fontStyle: FontStyle.normal,
+                                  decoration: TextDecoration.none,
+                                ),
+                              ),
                             ))),
                   ]))
             ],
