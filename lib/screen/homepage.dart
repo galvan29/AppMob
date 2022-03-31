@@ -16,14 +16,19 @@ import 'package:intl/intl.dart';
 import 'package:mytraining/common/bottomNavigationBar.dart';
 
 var list = [
-  'Chi vuol star sano, viver molti anni, mangi broccoli, broccoli e gnoccoli, e danzi senza zoccoli.',
-  'Mai affrettarti. Fai un sacco di esercizio fisico. Sii sempre allegro. Prendi tutto il sonno di cui hai bisogno. E puoi aspettarti di stare bene.',
-  'Ho deciso di essere felice perché fa bene alla mia salute.',
-  'Mi sveglio sempre in forma e mi deformo attraverso gli altri.',
-  'Se volete la vitamina C o il beta-carotene, non ricorrete al flacone nell’armadietto dei medicinali, ma al cestino della frutta o alla verdura verde in foglia.',
-  'La vera ricchezza non sta nel possedere oggetti d’oro o d’argento, ma nella salute.',
-  'Prenditi cura del tuo corpo. È l’unico posto in cui devi vivere.',
-  'Mangiare nel modo giusto non solo previene la malattia, ma genera anche la salute e un senso di benessere fisico e mentale.'
+  '"La migliore preparazione per domani è fare il tuo meglio oggi." (H. Jackson Brown Jr.)',
+  '"Cerco sempre di fare ciò che non sono capace di fare, per imparare come farlo." (Pablo Picasso)',
+  '“Esiste un’isola di opportunità all’interno di ogni difficoltà.” (Anonimo)',
+  '“Gli ostacoli sono quelle cose spaventose che vediamo ogni qualvolta distogliamo lo sguardo dalla nostra meta.” (Anonimo)',
+  '“Le sfide sono ciò che rendono la vita interessante… Superarle è ciò che le dà siginificato.” (Joshua J. Marine)',
+  '“Sbagli il 100% dei colpi che non spari.” (Wayne Gretzky)',
+  '“Se puoi sognarlo, puoi farlo.’’ (Walt Disney)',
+  '"Non arrenderti. Rischieresti di farlo un’ora prima del miracolo." (Proverbio arabo)',
+  '“Il primo passo che devi fare se vuoi essere una persona di successo è  decidere che tipo di persona vuoi essere. Esistono 3 tipi di persone:  coloro che fanno accadere le cose; coloro che guardano accadere le cose e  coloro che si meravigliano di ciò che accade.” (John M. Capozzi)',
+  '“Non avrai mai fallito finché continuerai a provare.” (Anonimo)',
+  '“Tra vent’anni non sarete delusi delle cose che avete fatto ma da   quelle che non avete fatto. Allora levate l’ancora,abbandonate i porti   sicuri, catturate il vento nelle vostre vele. Esplorate. Sognate.   Scoprite." (Mark Twain)',
+  '“Non aver paura di lottare per ciò in cui credi, anche se questo significa lottare da solo.” (Anonimo)',
+  '“Piccole opportunità sono spesso l’inizio di grandi imprese.” (Demostene)'
 ];
 final _random = new Random();
 var element = list[_random.nextInt(list.length)];
