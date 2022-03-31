@@ -168,7 +168,7 @@ class _FirstPage2State extends State<FirstPage2> with TickerProviderStateMixin {
     sch1.idUtente = ut.id.toString();
     sch1.nomeScheda = "Gambe e Spalle";
     sch1.durataScheda = "120";
-    sch1.icona = 58854;
+    sch1.icona = 61562;
     int id = await SchedeDBworker.schedeDBworker.create(sch1);
     Esercizio es1_1 = Esercizio();
     es1_1.idScheda = id.toString();
