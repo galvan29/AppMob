@@ -15,6 +15,7 @@ class CreaScheda extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: buildAppBar(context),
       backgroundColor: const Color.fromARGB(255, 42, 42, 42),
       body: Form(
@@ -28,15 +29,34 @@ class CreaScheda extends StatelessWidget {
                 top: MediaQuery.of(context).size.width * 0.05,
               ),
             ),
-            const SizedBox(
+            SizedBox(
                 width: 330,
                 child: Text(
                   "Crea la tua Scheda!",
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
+                  style: GoogleFonts.adventPro(
+                    textStyle: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 24,
+                      fontStyle: FontStyle.normal,
+                      decoration: TextDecoration.none,
+                    ),
+                  ),
+                )),
+            SizedBox(
+                width: 330,
+                child: Text(
+                  "Scegli il nome della scheda, la data, la possibile \n durata ed un'icona rappresentativa.",
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.adventPro(
+                    textStyle: TextStyle(
+                      color: Colors.white.withOpacity(0.5),
+                      fontWeight: FontWeight.w400,
+                      fontSize: 13,
+                      fontStyle: FontStyle.normal,
+                      decoration: TextDecoration.none,
+                    ),
                   ),
                 )),
             Padding(
@@ -45,7 +65,15 @@ class CreaScheda extends StatelessWidget {
                   height: 70,
                   width: MediaQuery.of(context).size.width * 0.9,
                   child: TextFormField(
-                    style: TextStyle(color: Colors.white),
+                    style: GoogleFonts.adventPro(
+                      textStyle: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 20,
+                        fontStyle: FontStyle.normal,
+                        decoration: TextDecoration.none,
+                      ),
+                    ),
                     initialValue: schedeModel.schedaBeingEdited == null
                         ? null
                         : schedeModel.schedaBeingEdited.nomeScheda,
@@ -71,7 +99,15 @@ class CreaScheda extends StatelessWidget {
                   height: 70,
                   width: MediaQuery.of(context).size.width * 0.9,
                   child: TextFormField(
-                    style: TextStyle(color: Colors.white),
+                    style: GoogleFonts.adventPro(
+                      textStyle: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 20,
+                        fontStyle: FontStyle.normal,
+                        decoration: TextDecoration.none,
+                      ),
+                    ),
                     keyboardType: TextInputType.number,
                     initialValue: schedeModel.schedaBeingEdited == null
                         ? null
@@ -193,9 +229,6 @@ class CreaScheda extends StatelessWidget {
 
                   ]),
             ),
-
-
-
             Container(
               margin: const EdgeInsets.only(
                 left: 30,
@@ -226,7 +259,7 @@ class CreaScheda extends StatelessWidget {
                           ),
                           border: Border.all(color: Colors.white)),
                       child: Text(
-                        '''Aggiungi''',
+                        'Aggiungi',
                         style: GoogleFonts.adventPro(
                           textStyle: const TextStyle(
                             color: const Color.fromARGB(255, 42, 42, 42),
