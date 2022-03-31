@@ -56,14 +56,14 @@ class _Generated3WidgetState extends State<WidgetClass>
 
   functionGif() {
     if (utentiModel.stackIndex == 7) {
-      controller.animateTo(29, duration: const Duration(milliseconds: 1000));
+      controller.animateTo(20, duration: const Duration(milliseconds: 700));
       LoginPage().getValueLogin().then((val) async {
         await eventiModel.loadData(EventiDBworker.eventiDBworker, val);
       });
 
       print("SECONDO TIMER");
       Timer(
-          const Duration(milliseconds: 1000),
+          const Duration(milliseconds: 700),
           () => {
                 utentiModel.setStackIndex(Base.pageIndexForWidget),
                 controller.reset()

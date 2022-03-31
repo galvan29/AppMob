@@ -60,7 +60,7 @@ class _Generated3WidgetState extends State<WidgetClass2>
     if (schedeModel.stackIndex == 6) {
       //controller.animateTo(29, duration: const Duration(milliseconds: 1000));
       controller.repeat(
-          min: 0, max: 29, period: const Duration(milliseconds: 1000));
+          min: 0, max: 20, period: const Duration(milliseconds: 700));
       switch (Base.pageIndexForWidget) {
         case 0:
           LoginPage().getValueLogin().then((val) async {
@@ -76,7 +76,7 @@ class _Generated3WidgetState extends State<WidgetClass2>
       }
 
       Timer(
-          const Duration(milliseconds: 1000),
+          const Duration(milliseconds: 700),
           () => {
                 controller.reset(),
                 schedeModel.setStackIndex(Base.pageIndexForWidget),

@@ -630,7 +630,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     onPressed: () async {
                       await EventiDBworker.eventiDBworker.delete(ev.id);
-                      Navigator.of(context).pop();
+                     // Navigator.of(context).pop();
                       setState(() {
                         HomePage.hoCaricatoGliEventi = false;
                       });
@@ -638,7 +638,8 @@ class _HomePageState extends State<HomePage> {
                         await eventiModel.loadData(
                             EventiDBworker.eventiDBworker, val);
                       });
-                      Timer(Duration(milliseconds: 700), () {
+                      Navigator.of(context).pop();
+                      Timer(Duration(milliseconds: 300), () {
                         setState(() {
                           HomePage.hoCaricatoGliEventi = true;
                         });
