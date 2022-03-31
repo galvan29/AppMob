@@ -66,14 +66,15 @@ class CreaScheda extends StatelessWidget {
                   width: MediaQuery.of(context).size.width * 0.9,
                   child: TextFormField(
                     style: GoogleFonts.adventPro(
-                      textStyle: const TextStyle(
+                      textStyle: TextStyle(
                         color: Colors.white,
-                        fontWeight: FontWeight.w500,
-                        fontSize: 20,
+                        fontWeight: FontWeight.w400,
+                        fontSize: MediaQuery.of(context).size.width * 0.045,
                         fontStyle: FontStyle.normal,
                         decoration: TextDecoration.none,
                       ),
                     ),
+                    maxLength: 16,
                     initialValue: schedeModel.schedaBeingEdited == null
                         ? null
                         : schedeModel.schedaBeingEdited.nomeScheda,
@@ -90,7 +91,8 @@ class CreaScheda extends StatelessWidget {
                         labelText: "Nome Scheda",
                         labelStyle: TextStyle(
                           color: Colors.white,
-                        )),
+                        ),
+                        counterText: ""),
                   ),
                 )),
             Padding(
@@ -108,6 +110,7 @@ class CreaScheda extends StatelessWidget {
                         decoration: TextDecoration.none,
                       ),
                     ),
+                    maxLength: 4,
                     keyboardType: TextInputType.number,
                     initialValue: schedeModel.schedaBeingEdited == null
                         ? null
@@ -125,7 +128,8 @@ class CreaScheda extends StatelessWidget {
                         labelText: "Durata Scheda",
                         labelStyle: TextStyle(
                           color: Colors.white,
-                        )),
+                        ),
+                        counterText: ""),
                   ),
                 )),
             Container(

@@ -104,14 +104,12 @@ class _SchedeState extends State<Schede> {
                         color: Colors.white,
                         shape: BoxShape.circle,
                       ),
-                      child:
-                      IconButton(
+                      child: IconButton(
                           icon: const Icon(Icons.add),
                           color: Colors.black,
                           onPressed: () {
                             // if (!Schede.valoreOrologio) {
                             schedeModel.schedaBeingEdited = Scheda();
-                            print("Aaaaaaaaaaaaa "+schedeModel.schedaBeingEdited.nomeScheda);
                             schedeModel.setStackIndex(1);
                             //  }else{
                             //  print("Non puoi perchè c0è un allenamento in corso");
@@ -191,65 +189,83 @@ class _SchedeState extends State<Schede> {
                                       bottomLeft: Radius.circular(20),
                                     ),
                                     border: Border.all(color: Colors.white)),
-                                child: Row(children: [
-                                  const SizedBox(width: 10),
-                                  Container(
-                                    height: MediaQuery.of(context).size.height * 0.10,
-                                    width: MediaQuery.of(context).size.width * 0.13,
-                                    margin: EdgeInsets.only(
-                                      bottom: MediaQuery.of(context).size.height * 0.01,
-                                      right: MediaQuery.of(context).size.width * 0.05,
-                                      left: MediaQuery.of(context).size.width * 0.03,
-                                    ),
-                                    decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        border:
-                                            Border.all(color: Colors.black)),
-                                    child: IconButton(
-                                      icon: Icon(
-                                        IconData(scheda.icona,
-                                            fontFamily: 'MaterialIcons'),
-                                      ),
-                                      onPressed: () {},
-                                      color: Colors.black,
-                                    ),
-                                  ),
-                                  Text(
-                                    scheda.nomeScheda,
-                                    style: GoogleFonts.adventPro(
-                                      textStyle: TextStyle(
-                                        color: const Color.fromARGB(
-                                            255, 42, 42, 42),
-                                        fontWeight: FontWeight.w500,
-                                        fontSize:
+                                child: Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Container(
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.10,
+                                        width:
                                             MediaQuery.of(context).size.width *
+                                                0.13,
+                                        margin: EdgeInsets.only(
+                                          bottom: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              0.01,
+                                          right: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.03,
+                                          left: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.03,
+                                        ),
+                                        decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            border: Border.all(
+                                                color: Colors.black)),
+                                        child: IconButton(
+                                          icon: Icon(
+                                            IconData(scheda.icona,
+                                                fontFamily: 'MaterialIcons'),
+                                          ),
+                                          onPressed: () {},
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                      Container(padding: EdgeInsets.only(top: 15), child: Text(
+                                        scheda.nomeScheda,
+                                        style: GoogleFonts.adventPro(
+                                          textStyle: TextStyle(
+                                            color: const Color.fromARGB(
+                                                255, 42, 42, 42),
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: MediaQuery.of(context)
+                                                .size
+                                                .width *
                                                 0.045,
-                                        fontStyle: FontStyle.normal,
-                                        decoration: TextDecoration.none,
+                                            fontStyle: FontStyle.normal,
+                                            decoration: TextDecoration.none,
+                                          ),
+                                        ),
+                                      ),),
+                                      Spacer(),
+                                      Container(
+                                        padding: EdgeInsets.only(right: 10, top: 23),
+                                        child: Text(
+                                          "Durata: " + scheda.durataScheda,
+                                          style: GoogleFonts.adventPro(
+                                            textStyle: TextStyle(
+                                              color: const Color.fromARGB(
+                                                  255, 42, 42, 42),
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.03,
+                                              fontStyle: FontStyle.normal,
+                                              decoration: TextDecoration.none,
+                                            ),
+                                          ),
+                                        ),
                                       ),
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    width: 10,
-                                    height: 5,
-                                  ),
-                                  const SizedBox(width: 10),
-                                  Text(
-                                    "Durata: " + scheda.durataScheda,
-                                    style: GoogleFonts.adventPro(
-                                      textStyle: TextStyle(
-                                        color: const Color.fromARGB(
-                                            255, 42, 42, 42),
-                                        fontWeight: FontWeight.w500,
-                                        fontSize:
-                                            MediaQuery.of(context).size.width *
-                                                0.03,
-                                        fontStyle: FontStyle.normal,
-                                        decoration: TextDecoration.none,
-                                      ),
-                                    ),
-                                  ),
-                                ]))),
+                                      const SizedBox(width: 10),
+                                    ]))),
                       ),
                     );
                   },

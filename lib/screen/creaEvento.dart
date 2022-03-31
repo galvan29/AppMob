@@ -326,7 +326,7 @@ class CreaEvento extends StatelessWidget {
                           ),
                           border: Border.all(color: Colors.white)),
                       child: Text(
-                        '''Aggiungi''',
+                        'Aggiungi',
                         style: GoogleFonts.adventPro(
                           textStyle: const TextStyle(
                             color: const Color.fromARGB(255, 42, 42, 42),
