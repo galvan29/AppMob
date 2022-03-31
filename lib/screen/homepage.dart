@@ -331,7 +331,7 @@ class _HomePageState extends State<HomePage> {
                   right: 30,
                   bottom: 70,
                 ),
-                padding: const EdgeInsets.fromLTRB(2.5, 3, 2.5, 5),
+                padding: const EdgeInsets.fromLTRB(15, 3, 15, 5),
                 decoration: BoxDecoration(
                   color: Colors.white.withOpacity(0),
                   border: Border.all(color: Colors.white),
@@ -352,8 +352,7 @@ class _HomePageState extends State<HomePage> {
                         decoration: TextDecoration.none,
                       ),
                     ),
-                    textAlign: TextAlign.center,
-                    maxLines: 10),
+                    textAlign: TextAlign.center),
               ),
             ],
           ),
