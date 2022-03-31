@@ -13,7 +13,8 @@ class CreaEvento extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   static DateTime inidata = DateTime.now();
   static DateTime findata = DateTime.now();
-  var txt = TextEditingController(), txt1 = TextEditingController();
+  var txt = TextEditingController(),
+      txt1 = TextEditingController();
   int selectedRadio = -1;
   var nomeScheda = TextEditingController();
 
@@ -53,27 +54,63 @@ class CreaEvento extends StatelessWidget {
           children: <Widget>[
             Container(
               margin: EdgeInsets.only(
-                top: MediaQuery.of(context).size.width * 0.05,
+                top: MediaQuery.of(context).size.width * 0.08,
               ),
             ),
-            const SizedBox(
+            SizedBox(
                 width: 330,
                 child: Text(
-                  "Programma un allenamento!",
+                    "Programma il tuo allenamento!",
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.adventPro(
+                      textStyle: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 24,
+                        fontStyle: FontStyle.normal,
+                        decoration: TextDecoration.none,
+                      ),
+                    ),
+                )),
+            Container(
+              margin: EdgeInsets.only(
+                top: MediaQuery.of(context).size.height * 0.007,
+              ),
+            ),
+            SizedBox(
+                width: 330,
+                child: Text(
+                  "Scegli la scheda tra quelle da te create, la data del tuo allenamento e la possibile durata.",
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                  style: GoogleFonts.adventPro(
+                    textStyle: TextStyle(
+                      color: Colors.white.withOpacity(0.5),
+                      fontWeight: FontWeight.w400,
+                      fontSize: 13,
+                      fontStyle: FontStyle.normal,
+                      decoration: TextDecoration.none,
+                    ),
                   ),
                 )),
             Padding(
                 padding: const EdgeInsets.fromLTRB(0, 40, 0, 0),
                 child: SizedBox(
                   height: 70,
-                  width: MediaQuery.of(context).size.width * 0.9,
+                  width: MediaQuery
+                      .of(context)
+                      .size
+                      .width * 0.9,
                   child: TextFormField(
-                    style: const TextStyle(color: Colors.white),
+
+                    style: GoogleFonts.adventPro(
+                      textStyle: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w400,
+                        fontSize: MediaQuery.of(context).size.width * 0.045,
+                        fontStyle: FontStyle.normal,
+                        decoration: TextDecoration.none,
+                      ),
+                    ),
                     onTap: () {
                       _showDialog(context);
                     },
@@ -85,7 +122,7 @@ class CreaEvento extends StatelessWidget {
                         )),
                     validator: (String? inValue) {
                       if (inValue!.isEmpty) {
-                        return "Inserisci Nome";
+                        return "Scegli Scheda";
                       }
                       return null;
                     },
@@ -99,9 +136,26 @@ class CreaEvento extends StatelessWidget {
                 padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                 child: SizedBox(
                   height: 70,
-                  width: MediaQuery.of(context).size.width * 0.9,
+                  width: MediaQuery
+                      .of(context)
+                      .size
+                      .width * 0.9,
                   child: TextFormField(
-                    style: const TextStyle(color: Colors.white),
+                    style: GoogleFonts.adventPro(
+                      textStyle: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w400,
+                        fontSize: MediaQuery.of(context).size.width * 0.045,
+                        fontStyle: FontStyle.normal,
+                        decoration: TextDecoration.none,
+                      ),
+                    ),
+                    validator: (String? inValue) {
+                      if (inValue!.isEmpty) {
+                        return "Scegli Data ed Orario ";
+                      }
+                      return null;
+                    },
                     controller: txt,
                     decoration: const InputDecoration(
                         labelText: "Data inizio",
@@ -113,13 +167,16 @@ class CreaEvento extends StatelessWidget {
                       DateTime? picked = await DatePicker.showDateTimePicker(
                           context,
                           showTitleActions: true,
-                          minTime: DateTime(2022, 1, 1), onConfirm: (date) {
-                        inidata = date;
-                        txt.text = inidata.toString();
-                        txt1.text = "0";
-                        eventiModel.eventoBeingEdited.inizio = inidata;
-                        eventiModel.eventoBeingEdited.fine = inidata;
-                      }, currentTime: DateTime.now(), locale: LocaleType.it);
+                          minTime: DateTime(2022, 1, 1),
+                          onConfirm: (date) {
+                            inidata = date;
+                            txt.text = inidata.toString();
+                            txt1.text = "0";
+                            eventiModel.eventoBeingEdited.inizio = inidata;
+                            eventiModel.eventoBeingEdited.fine = inidata;
+                          },
+                          currentTime: DateTime.now(),
+                          locale: LocaleType.it);
                     },
                     onChanged: (String inValue) {
                       eventiModel.eventoBeingEdited.inizio = inidata;
@@ -132,15 +189,26 @@ class CreaEvento extends StatelessWidget {
                     padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
                     child: SizedBox(
                       height: 70,
-                      width: MediaQuery.of(context).size.width * 0.25,
+                      width: MediaQuery
+                          .of(context)
+                          .size
+                          .width * 0.25,
                       child: TextFormField(
-                          //enabled: false,
+                        //enabled: false,
                           decoration: const InputDecoration(
                               labelText: "Durata (m)",
                               labelStyle: TextStyle(
                                 color: Colors.white,
                               )),
-                          style: const TextStyle(color: Colors.white),
+                          style: GoogleFonts.adventPro(
+                            textStyle: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w400,
+                              fontSize: MediaQuery.of(context).size.width * 0.045,
+                              fontStyle: FontStyle.normal,
+                              decoration: TextDecoration.none,
+                            ),
+                          ),
                           controller: txt1,
                           onTap: () {
                             //double click
@@ -163,7 +231,10 @@ class CreaEvento extends StatelessWidget {
                 const Spacer(),
                 Container(
                   margin: EdgeInsets.only(
-                    right: MediaQuery.of(context).size.width * 0.03,
+                    right: MediaQuery
+                        .of(context)
+                        .size
+                        .width * 0.03,
                   ),
                   decoration: BoxDecoration(
                     border: Border.all(
@@ -180,13 +251,13 @@ class CreaEvento extends StatelessWidget {
                               .add(const Duration(minutes: -30));
                           eventiModel.eventoBeingEdited.fine = a;
                           txt1.text = (a
-                                      .subtract(Duration(
-                                          milliseconds: eventiModel
-                                              .eventoBeingEdited
-                                              .inizio
-                                              .millisecondsSinceEpoch))
-                                      .millisecondsSinceEpoch /
-                                  60000)
+                              .subtract(Duration(
+                              milliseconds: eventiModel
+                                  .eventoBeingEdited
+                                  .inizio
+                                  .millisecondsSinceEpoch))
+                              .millisecondsSinceEpoch /
+                              60000)
                               .toString()
                               .replaceAll(".0", "");
                         }
@@ -194,7 +265,10 @@ class CreaEvento extends StatelessWidget {
                 ),
                 Container(
                   margin: EdgeInsets.only(
-                    right: MediaQuery.of(context).size.width * 0.03,
+                    right: MediaQuery
+                        .of(context)
+                        .size
+                        .width * 0.03,
                   ),
                   decoration: BoxDecoration(
                     border: Border.all(
@@ -210,13 +284,13 @@ class CreaEvento extends StatelessWidget {
                             .add(const Duration(minutes: 30));
                         eventiModel.eventoBeingEdited.fine = a;
                         txt1.text = (a
-                                    .subtract(Duration(
-                                        milliseconds: eventiModel
-                                            .eventoBeingEdited
-                                            .inizio
-                                            .millisecondsSinceEpoch))
-                                    .millisecondsSinceEpoch /
-                                60000)
+                            .subtract(Duration(
+                            milliseconds: eventiModel
+                                .eventoBeingEdited
+                                .inizio
+                                .millisecondsSinceEpoch))
+                            .millisecondsSinceEpoch /
+                            60000)
                             .toString()
                             .replaceAll(".0", "");
                       }),
@@ -281,22 +355,22 @@ class CreaEvento extends StatelessWidget {
               return Column(
                 mainAxisSize: MainAxisSize.min,
                 children: List<Widget>.generate(schedeModel.schedeList.length,
-                    (int index) {
-                  return ListTile(
-                      title: Text(schedeModel.schedeList[index].nomeScheda),
-                      leading: Radio<int>(
-                        value: index,
-                        groupValue: selectedRadio,
-                        onChanged: (int? value) {
-                          nomeScheda.text =
-                              schedeModel.schedeList[index].nomeScheda;
-                          setState(() => selectedRadio = value!);
-                          eventiModel.eventoBeingEdited.nomeScheda =
-                              schedeModel.schedeList[index].nomeScheda;
-                          Navigator.of(context).pop();
-                        },
-                      ));
-                }),
+                        (int index) {
+                      return ListTile(
+                          title: Text(schedeModel.schedeList[index].nomeScheda),
+                          leading: Radio<int>(
+                            value: index,
+                            groupValue: selectedRadio,
+                            onChanged: (int? value) {
+                              nomeScheda.text =
+                                  schedeModel.schedeList[index].nomeScheda;
+                              setState(() => selectedRadio = value!);
+                              eventiModel.eventoBeingEdited.nomeScheda =
+                                  schedeModel.schedeList[index].nomeScheda;
+                              Navigator.of(context).pop();
+                            },
+                          ));
+                    }),
               );
             },
           ),
