@@ -359,7 +359,7 @@ class _VisualizzaSchedaState extends State<VisualizzaScheda> {
                 visible: registriModel.registriList.length > 0 ? true : false,
                 child: Container(
                     margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                    height: 310,
+                    height: 320,
                     padding: const EdgeInsets.only(top: 8),
                     decoration: BoxDecoration(
                         color: const Color.fromARGB(255, 230, 245, 252),
