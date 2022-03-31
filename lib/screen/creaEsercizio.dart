@@ -32,15 +32,34 @@ class CreaEsercizio extends StatelessWidget {
                 top: MediaQuery.of(context).size.width * 0.05,
               ),
             ),
-            const SizedBox(
+            SizedBox(
                 width: 330,
                 child: Text(
-                  "Crea un esercizio!",
+                  "Crea un Esercizio!",
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                  style: GoogleFonts.adventPro(
+                    textStyle: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 24,
+                      fontStyle: FontStyle.normal,
+                      decoration: TextDecoration.none,
+                    ),
+                  ),
+                )),
+            SizedBox(
+                width: 330,
+                child: Text(
+                  "Compila tutti i parametri del form per crearne uno.",
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.adventPro(
+                    textStyle: TextStyle(
+                      color: Colors.white.withOpacity(0.5),
+                      fontWeight: FontWeight.w400,
+                      fontSize: 13,
+                      fontStyle: FontStyle.normal,
+                      decoration: TextDecoration.none,
+                    ),
                   ),
                 )),
             Padding(
@@ -105,12 +124,13 @@ class CreaEsercizio extends StatelessWidget {
                     initialValue: eserciziModel.esercizioBeingEdited == null
                         ? null
                         : eserciziModel.esercizioBeingEdited.serieEsercizio,
-                    /*validator: (String? inValue){
+                    validator: (String? inValue){
                       if(inValue!.isEmpty){
-                        return "Inserisci Note";
+                        return "Inserisci Nome Scheda";
                       }
                       return null;
-                    }, */
+                    },
+                    keyboardType: TextInputType.number,
                     onChanged: (String inValue) {
                       eserciziModel.esercizioBeingEdited.serieEsercizio =
                           inValue;
@@ -142,12 +162,13 @@ class CreaEsercizio extends StatelessWidget {
                     initialValue: eserciziModel.esercizioBeingEdited == null
                         ? null
                         : eserciziModel.esercizioBeingEdited.ripEsercizio,
-                    /*validator: (String? inValue){
+                    validator: (String? inValue){
                       if(inValue!.isEmpty){
-                        return "Inserisci Note";
+                        return "Inserisci Numero Serie";
                       }
                       return null;
-                    }, */
+                    },
+                    keyboardType: TextInputType.number,
                     onChanged: (String inValue) {
                       eserciziModel.esercizioBeingEdited.ripEsercizio = inValue;
                     },
@@ -168,7 +189,8 @@ class CreaEsercizio extends StatelessWidget {
                         decoration: TextDecoration.none,
                       ),
                     ),
-                    maxLength: 3,
+                    keyboardType: TextInputType.number,
+                    maxLength: 4,
                     decoration: const InputDecoration(
                         labelText: "Peso (kg)",
                         labelStyle: TextStyle(
@@ -178,12 +200,12 @@ class CreaEsercizio extends StatelessWidget {
                     initialValue: eserciziModel.esercizioBeingEdited == null
                         ? null
                         : eserciziModel.esercizioBeingEdited.pesoEsercizio,
-                    /*validator: (String? inValue){
+                    validator: (String? inValue){
                       if(inValue!.isEmpty){
-                        return "Inserisci Note";
+                        return "Inserisci Peso";
                       }
                       return null;
-                    }, */
+                    },
                     onChanged: (String inValue) {
                       eserciziModel.esercizioBeingEdited.pesoEsercizio =
                           inValue;
