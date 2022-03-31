@@ -15,7 +15,7 @@ PreferredSize buildAppBar(BuildContext context) {
           width: double.maxFinite,
           height: MediaQuery.of(context).size.height * 0.08,
           decoration: const BoxDecoration(
-            color: Color.fromARGB(255, 23, 23, 23),
+            color: Color.fromARGB(255, 42, 42, 42),
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
