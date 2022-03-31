@@ -320,7 +320,6 @@ class _VisualizzaSchedaState extends State<VisualizzaScheda> {
                   },
                 )
               ),
-
               Container(
                 margin: EdgeInsets.only(
                   top: MediaQuery.of(context).size.width * 0.05,
@@ -341,11 +340,26 @@ class _VisualizzaSchedaState extends State<VisualizzaScheda> {
                     textAlign: TextAlign.center,
                     maxLines: 1),
               ),
+                  SizedBox(
+                      width: 330,
+                      child: Text(
+                        "Grafico dell'andamento della durata della scheda. \n Il numero sul punto del grafico rappresenta la valutazione data dall'utente.",
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.adventPro(
+                          textStyle: TextStyle(
+                            color: Colors.white.withOpacity(0.5),
+                            fontWeight: FontWeight.w400,
+                            fontSize: 13,
+                            fontStyle: FontStyle.normal,
+                            decoration: TextDecoration.none,
+                          ),
+                        ),
+                      )),
               Visibility(
                 visible: registriModel.registriList.length > 0 ? true : false,
                 child: Container(
                     margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                    height: 305,
+                    height: MediaQuery.of(context).size.height * 0.35,
                     padding: const EdgeInsets.only(top: 8),
                     decoration: BoxDecoration(
                         color: const Color.fromARGB(255, 230, 245, 252),

@@ -15,7 +15,7 @@ PreferredSize buildAppBar(BuildContext context) {
           width: double.maxFinite,
           height: MediaQuery.of(context).size.height * 0.08,
           decoration: const BoxDecoration(
-            color: Color.fromARGB(255, 42, 42, 42),
+            color: Color.fromARGB(255, 23, 23, 23),
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -34,7 +34,7 @@ PreferredSize buildAppBar(BuildContext context) {
                         color: Colors.white,
                         fontWeight: FontWeight.w400,
                         fontSize:
-                        MediaQuery.of(context).size.height * 0.03,
+                        MediaQuery.of(context).size.height * 0.02,
                         fontStyle: FontStyle.normal,
                         decoration: TextDecoration.none,
                       ),

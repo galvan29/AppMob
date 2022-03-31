@@ -58,11 +58,13 @@ class CreaEsercizio extends StatelessWidget {
                         decoration: TextDecoration.none,
                       ),
                     ),
+                    maxLength: 20,
                     decoration: const InputDecoration(
                         labelText: "Nome Esercizio",
                         labelStyle: TextStyle(
                           color: Colors.white,
-                        )),
+                        ),
+                        counterText: ""),
                     initialValue: eserciziModel.esercizioBeingEdited == null
                         ? null
                         : eserciziModel.esercizioBeingEdited.nomeEsercizio,
@@ -93,11 +95,13 @@ class CreaEsercizio extends StatelessWidget {
                         decoration: TextDecoration.none,
                       ),
                     ),
+                    maxLength: 2,
                     decoration: const InputDecoration(
                         labelText: "Serie",
                         labelStyle: TextStyle(
                           color: Colors.white,
-                        )),
+                        ),
+                        counterText: ""),
                     initialValue: eserciziModel.esercizioBeingEdited == null
                         ? null
                         : eserciziModel.esercizioBeingEdited.serieEsercizio,
@@ -128,11 +132,13 @@ class CreaEsercizio extends StatelessWidget {
                         decoration: TextDecoration.none,
                       ),
                     ),
+                    maxLength: 3,
                     decoration: const InputDecoration(
                         labelText: "Ripetizioni",
                         labelStyle: TextStyle(
                           color: Colors.white,
-                        )),
+                        ),
+                        counterText: ""),
                     initialValue: eserciziModel.esercizioBeingEdited == null
                         ? null
                         : eserciziModel.esercizioBeingEdited.ripEsercizio,
@@ -162,11 +168,13 @@ class CreaEsercizio extends StatelessWidget {
                         decoration: TextDecoration.none,
                       ),
                     ),
+                    maxLength: 3,
                     decoration: const InputDecoration(
-                        labelText: "Peso",
+                        labelText: "Peso (kg)",
                         labelStyle: TextStyle(
                           color: Colors.white,
-                        )),
+                        ),
+                        counterText: ""),
                     initialValue: eserciziModel.esercizioBeingEdited == null
                         ? null
                         : eserciziModel.esercizioBeingEdited.pesoEsercizio,
@@ -197,11 +205,13 @@ class CreaEsercizio extends StatelessWidget {
                         decoration: TextDecoration.none,
                       ),
                     ),
+                    maxLength: 40,
                     decoration: const InputDecoration(
                         labelText: "Note",
                         labelStyle: TextStyle(
                           color: Colors.white,
-                        )),
+                        ),
+                        counterText: ""),
                     initialValue: eserciziModel.esercizioBeingEdited == null
                         ? null
                         : eserciziModel.esercizioBeingEdited.noteEsercizio,
@@ -312,9 +322,9 @@ class CreaEsercizio extends StatelessWidget {
     });
     VisualizzaScheda.hoCaricatoGliEs = true;
     //print(VisualizzaScheda.hoCaricatoGliEs);
-    /*Base.pageIndexForWidget=12;
-    schedeModel.setStackIndex(6);*/
-    schedeModel.setStackIndex(2);
+    Base.pageIndexForWidget=12;
+    schedeModel.setStackIndex(6);
+    //schedeModel.setStackIndex(2);
 //dd
   }
 }
