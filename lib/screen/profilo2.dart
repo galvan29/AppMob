@@ -242,15 +242,12 @@ class _ProfiloState extends State<Profilo2> {
                   ),
                 ),
               ),
-              const SizedBox(
-                height: 1,
-              ),
               Container(
                   width: MediaQuery
                       .of(context)
                       .size
                       .width * 0.9,
-                  height: 40,
+                  height: 30,
                   decoration: const BoxDecoration(
                       border: Border(
                           bottom: BorderSide(
