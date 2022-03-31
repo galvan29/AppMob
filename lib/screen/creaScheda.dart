@@ -157,18 +157,18 @@ class CreaScheda extends StatelessWidget {
                     Container(
                         decoration: BoxDecoration(
                           border: Border.all(
-                              color: schedeModel.schedaBeingEdited.icona == 58854 ? Colors.white : Colors.black.withOpacity(0),
+                              color: schedeModel.schedaBeingEdited.icona == 984431 ? Colors.white : Colors.black.withOpacity(0),
                               width: 1.5
                           ),
                           color: Colors.white.withOpacity(0),
                           shape: BoxShape.circle,
                         ),
                         child: IconButton(
-                            icon: const Icon(Icons.sports_basketball),
+                            icon: const Icon(Icons.sports_martial_arts),
                             color: Colors.white,
                             onPressed: () {
-                              saveIcona(58854);
-                              schedeModel.setNIcona(58854);
+                              saveIcona(984431);
+                              schedeModel.setNIcona(984431);
                             })),
                     Container(
                         margin: EdgeInsets.only(
