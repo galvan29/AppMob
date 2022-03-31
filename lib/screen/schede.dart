@@ -54,10 +54,11 @@ class _SchedeState extends State<Schede> {
         floatingActionButton: Visibility(
           visible: Schede.valoreOrologio,
           child: FloatingActionButton(
+            backgroundColor: Colors.white,
             onPressed: () {
               schedeModel.setStackIndex(4);
             },
-            child: const Icon(Icons.play_arrow, color: Colors.white),
+            child: const Icon(Icons.play_arrow, color: Colors.black),
           ),
         ),
         body: SingleChildScrollView(
@@ -217,15 +218,16 @@ class _SchedeState extends State<Schede> {
                                         ),
                                         decoration: BoxDecoration(
                                             shape: BoxShape.circle,
+                                            color: const Color.fromARGB(255, 42, 42, 42),
                                             border: Border.all(
-                                                color: Colors.black)),
+                                                color: const Color.fromARGB(255, 42, 42, 42))),
                                         child: IconButton(
                                           icon: Icon(
                                             IconData(scheda.icona,
                                                 fontFamily: 'MaterialIcons'),
                                           ),
                                           onPressed: () {},
-                                          color: Colors.black,
+                                          color: Colors.white,
                                         ),
                                       ),
                                       Container(padding: EdgeInsets.only(top: 15), child: Text(
@@ -246,7 +248,7 @@ class _SchedeState extends State<Schede> {
                                       ),),
                                       Spacer(),
                                       Container(
-                                        padding: EdgeInsets.only(right: 10, top: 23),
+                                        padding: EdgeInsets.only(right: 10, top: 20),
                                         child: Text(
                                           "Durata: " + scheda.durataScheda,
                                           style: GoogleFonts.adventPro(

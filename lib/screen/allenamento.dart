@@ -76,23 +76,8 @@ class _AllenamentoState extends State<Allenamento> {
             _stopWatchTimerPausa.onExecute
                 .add(StopWatchExecute.start);
           },
-          child: Column(
-            children: [
+          child:
               const Icon(Icons.pause, color: Colors.black),
-              Text(
-                "Pausa",
-                style: GoogleFonts.adventPro(
-                  textStyle: const TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 16,
-                    fontStyle: FontStyle.normal,
-                    decoration: TextDecoration.none,
-                  ),
-                ),
-              ),
-            ],
-          ),
         ),
       ),
       body: SingleChildScrollView(
@@ -449,7 +434,8 @@ class _AllenamentoState extends State<Allenamento> {
               bottomLeft: Radius.circular(20),
             ),
             border: Border.all(color: Colors.white)),
-        height: 180.0, // Change as per your requirement
+        height: MediaQuery.of(context).size.height *
+            0.185, // Change as per your requirement // Change as per your requirement
         width: 300.0, // Change as per your requirement
         child: SingleChildScrollView(
           child: Column(

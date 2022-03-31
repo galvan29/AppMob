@@ -80,7 +80,8 @@ class _VisualizzaSchedaState extends State<VisualizzaScheda> {
         floatingActionButton: Visibility(
           visible: checkNumber() && !Schede.valoreOrologio, // Set it to false
           child: FloatingActionButton(
-            child: const Icon(Icons.play_arrow, color: Colors.white),
+            backgroundColor: Colors.white,
+            child: const Icon(Icons.play_arrow, color: Colors.black),
             onPressed: () async {
               schedeModel.setStackIndex(4);
             },
