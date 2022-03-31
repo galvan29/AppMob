@@ -87,12 +87,12 @@ class CreaEsercizio extends StatelessWidget {
                     initialValue: eserciziModel.esercizioBeingEdited == null
                         ? null
                         : eserciziModel.esercizioBeingEdited.nomeEsercizio,
-                    /*validator: (String? inValue){
+                    validator: (String? inValue){
                       if(inValue!.isEmpty){
-                        return "Inserisci Nome";
+                        return "Inserisci Nome Scheda";
                       }
                       return null;
-                    }, */
+                    },
                     onChanged: (String inValue) {
                       eserciziModel.esercizioBeingEdited.nomeEsercizio =
                           inValue;
@@ -126,7 +126,7 @@ class CreaEsercizio extends StatelessWidget {
                         : eserciziModel.esercizioBeingEdited.serieEsercizio,
                     validator: (String? inValue){
                       if(inValue!.isEmpty){
-                        return "Inserisci Nome Scheda";
+                        return "Inserisci NUmero Serie";
                       }
                       return null;
                     },
@@ -164,7 +164,7 @@ class CreaEsercizio extends StatelessWidget {
                         : eserciziModel.esercizioBeingEdited.ripEsercizio,
                     validator: (String? inValue){
                       if(inValue!.isEmpty){
-                        return "Inserisci Numero Serie";
+                        return "Inserisci Numero Ripetizioni";
                       }
                       return null;
                     },

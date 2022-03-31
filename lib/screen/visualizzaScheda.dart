@@ -600,11 +600,11 @@ class _VisualizzaSchedaState extends State<VisualizzaScheda> {
                       Navigator.of(context).pop();
                       /*Timer(
                           const Duration(milliseconds: 200),
-                          () => {
-                                Base.pageIndexForWidget = 2,
-                                schedeModel.setStackIndex(6),
-                              }); */
-                      schedeModel.setStackIndex(2);
+                          () => {*/
+                                Base.pageIndexForWidget = 2;
+                                schedeModel.setStackIndex(6);
+                           //   });
+                      //schedeModel.setStackIndex(2);
                     },
                   ),
                 ],
