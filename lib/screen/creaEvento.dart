@@ -249,7 +249,7 @@ class CreaEvento extends StatelessWidget {
                       onPressed: () {
                         if (int.parse(txt1.text) > 0) {
                           DateTime a = eventiModel.eventoBeingEdited.fine
-                              .add(const Duration(minutes: -10));
+                              .add(const Duration(minutes: -15));
                           eventiModel.eventoBeingEdited.fine = a;
                           txt1.text = (a
                               .subtract(Duration(
@@ -282,7 +282,7 @@ class CreaEvento extends StatelessWidget {
                       color: Colors.white,
                       onPressed: () {
                         DateTime a = eventiModel.eventoBeingEdited.fine
-                            .add(const Duration(minutes: 10));
+                            .add(const Duration(minutes: 15));
                         eventiModel.eventoBeingEdited.fine = a;
                         txt1.text = (a
                             .subtract(Duration(

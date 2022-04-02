@@ -210,7 +210,7 @@ class _HomePageState extends State<HomePage> {
                           for (var app in appointments) {
                             alle += app.eventName +
                                 " alle " +
-                                DateFormat('HH.mm').format(app.from);
+                                DateFormat('HH.mm').format(app.from) + " con durata: " + app.durata;
                             idEve.add(app.id);
                             text.add(alle);
                             print("Dario " + alle);
@@ -682,7 +682,7 @@ List<Meeting> getMeetingData() {
   });
   for (Evento eve in eventiModel.eventiList) {
     listMeetings.add(
-        Meeting(eve.nomeScheda, eve.inizio, eve.fine, eve.id, Colors.black));
+        Meeting(eve.nomeScheda, eve.inizio, eve.fine, eve.id, Colors.black, eve.fine.difference(eve.inizio).inMinutes.toString()));
   }
   print(listMeetings.length);
 
@@ -721,16 +721,22 @@ class MeetingDataSource extends CalendarDataSource {
   Color getColor(int index) {
     return appointments![index].color;
   }
+
+  @override
+  String getDurata(int index){
+    return appointments![index].durata;
+  }
 }
 
 class Meeting {
-  Meeting(this.eventName, this.from, this.to, this.id, this.color);
+  Meeting(this.eventName, this.from, this.to, this.id, this.color, this.durata);
 
   String eventName;
   DateTime from;
   DateTime to;
   int id;
   Color color;
+  String durata;
 
   @override
   String toString() {
