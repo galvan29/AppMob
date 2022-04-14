@@ -383,6 +383,7 @@ class LoginPage extends StatelessWidget {
 
   void _save(BuildContext context) async {
     if (!_formKey.currentState!.validate()) {
+      print("Errore del login");
       return;
     }
     saveValueLogin(utentiModel.up.id);
