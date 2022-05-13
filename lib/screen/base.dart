@@ -10,7 +10,7 @@ import 'package:mytraining/screen/register.dart';
 import 'package:mytraining/widget/Widget.dart';
 import 'package:provider/provider.dart';
 import 'package:double_back_to_close_app/double_back_to_close_app.dart';
-import 'package:mytraining/screen/Info.dart';
+import 'package:mytraining/screen/istruzioni.dart';
 import 'package:flutter/services.dart';
 
 class Base extends StatelessWidget {
