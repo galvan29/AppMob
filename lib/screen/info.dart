@@ -96,9 +96,11 @@ class Info extends StatelessWidget {
               decoration: const BoxDecoration(),
               margin: const EdgeInsets.only(
                 top: 10,
+                right: 10,
+                left: 10
               ),
               child: Text(
-                  r'''Beta Tester: Christian Bolletta, Rebecca Giabardo, Tobia Giabardo, Anna Vaglieri''',
+                  r'''Beta Tester: Christian, Alice, Alessia, Francesco, Luca, Simone''',
                   style: GoogleFonts.adventPro(
                     textStyle: const TextStyle(
                       color: Colors.white,
@@ -145,8 +147,8 @@ class Info extends StatelessWidget {
                     BoxDecoration(shape: BoxShape.circle, color: Colors.white),
                 child: Image.asset(
                   'assets/image/logoGym.png',
-                  height: MediaQuery.of(context).size.height * 0.3,
-                  width: MediaQuery.of(context).size.width * 0.3,
+                  height: MediaQuery.of(context).size.height * 0.25,
+                  width: MediaQuery.of(context).size.width * 0.25,
                 ),
               ),
             ),
