@@ -13,7 +13,7 @@ PreferredSize buildAppBar(BuildContext context) {
         Container(
           padding: EdgeInsets.zero,
           width: double.maxFinite,
-          height: MediaQuery.of(context).size.height * 0.08,
+          height: MediaQuery.of(context).size.height * 0.07,
           decoration: const BoxDecoration(
             color: Color.fromARGB(255, 42, 42, 42),
           ),
