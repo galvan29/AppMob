@@ -116,7 +116,7 @@ class CreaEsercizio extends StatelessWidget {
                     ),
                     maxLength: 2,
                     decoration: const InputDecoration(
-                        labelText: "Serie",
+                        labelText: "Numero Serie",
                         labelStyle: TextStyle(
                           color: Colors.white,
                         ),
@@ -154,7 +154,7 @@ class CreaEsercizio extends StatelessWidget {
                     ),
                     maxLength: 3,
                     decoration: const InputDecoration(
-                        labelText: "Ripetizioni",
+                        labelText: "Numero Ripetizioni",
                         labelStyle: TextStyle(
                           color: Colors.white,
                         ),

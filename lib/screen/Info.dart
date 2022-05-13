@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:mytraining/common/appbar.dart';
-import 'package:mytraining/db/eventiDBworrker.dart';
+import 'package:mytraining/common/appbarInfo.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mytraining/models/schedeModel.dart';
 import 'package:mytraining/models/utentiModel.dart';
-import 'package:mytraining/screen/base.dart';
-import 'package:mytraining/screen/login.dart';
-import 'package:mytraining/models/eventiModel.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+
 
 class Info extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
