@@ -107,7 +107,7 @@ class _AllenamentoState extends State<Allenamento> {
                                 textStyle: const TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.w400,
-                                  fontSize: 40,
+                                  fontSize: 50,
                                   fontStyle: FontStyle.normal,
                                   decoration: TextDecoration.none,
                                 ),
@@ -120,9 +120,6 @@ class _AllenamentoState extends State<Allenamento> {
               ),
             ),
 
-            /// Display stop watch time
-
-            /// Button
             Padding(
               padding: const EdgeInsets.all(2),
               child: Column(
@@ -244,7 +241,7 @@ class _AllenamentoState extends State<Allenamento> {
             )
           ],
         ),
-        const SizedBox(height: 15),
+        const SizedBox(height: 30),
         Container(
           child: Text(
             "Esercizi",
