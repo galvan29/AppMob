@@ -55,7 +55,7 @@ class Info extends StatelessWidget {
               padding: EdgeInsets.zero,
               width: double.maxFinite,
               decoration: const BoxDecoration(),
-              child: Text(r'''Informazioni''',
+              child: Text(r'''Istruzioni''',
                   style: GoogleFonts.adventPro(
                     textStyle: const TextStyle(
                       color: Colors.white,
@@ -68,7 +68,7 @@ class Info extends StatelessWidget {
                   textAlign: TextAlign.center,
                   maxLines: 1),
             ),
-            Container(
+            /*Container(
               padding: EdgeInsets.zero,
               width: double.maxFinite,
               alignment: Alignment.center,
@@ -149,7 +149,7 @@ class Info extends StatelessWidget {
                   width: MediaQuery.of(context).size.width * 0.3,
                 ),
               ),
-            ),
+            ),*/
           ],
         ),
       ),

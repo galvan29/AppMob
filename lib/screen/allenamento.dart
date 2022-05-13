@@ -97,12 +97,12 @@ class _AllenamentoState extends State<Allenamento> {
                     final value = snap.data!;
                     final displayTime =
                         StopWatchTimer.getDisplayTime(value, hours: _isHours);
-                    displayTime2 = displayTime;
+                    displayTime2 = displayTime.substring(0,8);
                     return Column(
                       children: <Widget>[
                         Padding(
                           padding: const EdgeInsets.all(8),
-                          child: Text(displayTime,
+                          child: Text(displayTime.substring(0,8),
                               style: GoogleFonts.adventPro(
                                 textStyle: const TextStyle(
                                   color: Colors.white,
@@ -594,7 +594,7 @@ class _AllenamentoState extends State<Allenamento> {
                         children: <Widget>[
                           Padding(
                             padding: const EdgeInsets.all(8),
-                            child: Text(displayTime,
+                            child: Text(displayTime.substring(0,8),
                                 style: GoogleFonts.adventPro(
                                   textStyle: const TextStyle(
                                     color: Colors.black,
