@@ -71,24 +71,7 @@ class _HomePageState extends State<HomePage> {
                     textAlign: TextAlign.center,
                     maxLines: 1),
               ),
-              Container(
-                padding: EdgeInsets.zero,
-                width: double.maxFinite,
-                decoration: const BoxDecoration(),
-                child: Text(r'''E' ora di fare un po' di esercizi''',
-                    style: GoogleFonts.adventPro(
-                      textStyle: const TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w400,
-                        fontSize: 25,
-                        fontStyle: FontStyle.normal,
-                        decoration: TextDecoration.none,
-                      ),
-                    ),
-                    textAlign: TextAlign.center,
-                    maxLines: 1),
-              ),
-              Container(
+              /*Container(
                 margin: const EdgeInsets.only(
                   left: 30,
                   top: 20,
@@ -127,13 +110,36 @@ class _HomePageState extends State<HomePage> {
                           ),
                           textAlign: TextAlign.center,
                         ))),
+              ),*/
+              Container(
+                margin: const EdgeInsets.only(
+                    left: 30, top: 15, right: 30, bottom: 10),
+                padding: const EdgeInsets.fromLTRB(15, 3, 15, 5),
+                decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(0),
+                  border: Border.all(color: Colors.white),
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20),
+                    bottomRight: Radius.circular(20),
+                    bottomLeft: Radius.circular(20),
+                  ),
+                ),
+                child: Text(element,
+                    style: GoogleFonts.adventPro(
+                      textStyle: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 14,
+                        fontStyle: FontStyle.normal,
+                        decoration: TextDecoration.none,
+                      ),
+                    ),
+                    textAlign: TextAlign.center),
               ),
               Container(
                 margin: EdgeInsets.only(
-                  top: MediaQuery
-                      .of(context)
-                      .size
-                      .width * 0.05,
+                  top: MediaQuery.of(context).size.width * 0.05,
                 ),
                 padding: EdgeInsets.zero,
                 width: double.maxFinite,
@@ -143,7 +149,7 @@ class _HomePageState extends State<HomePage> {
                       textStyle: const TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.w400,
-                        fontSize: 18,
+                        fontSize: 20,
                         fontStyle: FontStyle.normal,
                         decoration: TextDecoration.none,
                       ),
@@ -156,11 +162,7 @@ class _HomePageState extends State<HomePage> {
                 visible: HomePage.hoCaricatoGliEventi,
                 replacement: Container(
                   margin: const EdgeInsets.only(
-                    left: 100,
-                    top: 160,
-                    right: 100,
-                    bottom: 160
-                  ),
+                      left: 100, top: 160, right: 100, bottom: 160),
                   child: CircularProgressIndicator(
                     color: Colors.white,
                   ),
@@ -174,30 +176,44 @@ class _HomePageState extends State<HomePage> {
                   padding: EdgeInsets.zero,
                   width: double.maxFinite,
                   height: 350,
-                  decoration: const BoxDecoration(
-                    color: Color.fromARGB(255, 230, 220, 245),
+                  decoration: BoxDecoration(
+                    color: Color.fromARGB(255, 42, 42, 42),
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(20),
                       topRight: Radius.circular(20),
                       bottomRight: Radius.circular(20),
                       bottomLeft: Radius.circular(20),
                     ),
+                    border: Border.all(color: Colors.white),
                   ),
                   child: SfCalendar(
                       view: CalendarView.month,
                       cellBorderColor: Colors.blue.withOpacity(0),
                       dataSource: MeetingDataSource(getMeetingData()),
-                      todayHighlightColor: Colors.black,
+                      todayHighlightColor: Colors.white.withOpacity(0.5),
+                      headerStyle: CalendarHeaderStyle(
+                          textStyle: TextStyle(color: Colors.white)),
                       selectionDecoration: BoxDecoration(
                         color: Colors.transparent,
-                        border: Border.all(color: Colors.black, width: 2),
+                        border: Border.all(color: Colors.white, width: 1),
                         borderRadius:
-                        const BorderRadius.all(Radius.circular(4)),
+                            const BorderRadius.all(Radius.circular(4)),
                         shape: BoxShape.rectangle,
                       ),
-                      monthViewSettings: const MonthViewSettings(
+                      monthViewSettings:  MonthViewSettings(
+                          monthCellStyle: MonthCellStyle(
+                              textStyle: TextStyle(color: Colors.white),
+                              leadingDatesTextStyle: TextStyle(color: Colors.white.withOpacity(0.2)),
+                        trailingDatesTextStyle: TextStyle( color: Colors.white.withOpacity(0.2)),),
+                          agendaStyle: AgendaStyle(
+                            dayTextStyle: TextStyle(color: Colors.white)),
+
                           appointmentDisplayMode:
-                          MonthAppointmentDisplayMode.appointment),
+                              MonthAppointmentDisplayMode.appointment),
+
+                      viewHeaderStyle: ViewHeaderStyle(
+                          dayTextStyle:
+                          TextStyle(color: Colors.white.withOpacity(0.6))),
                       onTap: (CalendarTapDetails details) async {
                         DateTime date = details.date!;
                         dynamic appointments = details.appointments;
@@ -209,7 +225,9 @@ class _HomePageState extends State<HomePage> {
                           for (var app in appointments) {
                             alle += app.eventName +
                                 " alle " +
-                                DateFormat('HH.mm').format(app.from) + " con durata: " + app.durata;
+                                DateFormat('HH.mm').format(app.from) +
+                                " con durata: " +
+                                app.durata;
                             idEve.add(app.id);
                             text.add(alle);
                             print("Dario " + alle);
@@ -304,7 +322,7 @@ class _HomePageState extends State<HomePage> {
                           textAlign: TextAlign.center,
                         ))),
               ),
-              Container(
+              /*Container(
                 margin: EdgeInsets.only(
                   top: MediaQuery
                       .of(context)
@@ -326,46 +344,16 @@ class _HomePageState extends State<HomePage> {
                     ),
                     textAlign: TextAlign.center,
                     maxLines: 1),
-              ),
+              ),*/
               //suggerimento
-              Container(
-                margin: const EdgeInsets.only(
-                  left: 30,
-                  top: 20,
-                  right: 30,
-                  bottom: 70,
-                ),
-                padding: const EdgeInsets.fromLTRB(15, 3, 15, 5),
-                decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0),
-                  border: Border.all(color: Colors.white),
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(20),
-                    topRight: Radius.circular(20),
-                    bottomRight: Radius.circular(20),
-                    bottomLeft: Radius.circular(20),
-                  ),
-                ),
-                child: Text(element,
-                    style: GoogleFonts.adventPro(
-                      textStyle: const TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w400,
-                        fontSize: 16,
-                        fontStyle: FontStyle.normal,
-                        decoration: TextDecoration.none,
-                      ),
-                    ),
-                    textAlign: TextAlign.center),
-              ),
             ],
           ),
         ),
         bottomNavigationBar: buildBottomNavigationBar(context, _currentIndex));
   }
 
-  void _showDialog(BuildContext context, List<String> text, List<int> idEve,
-      String giorno) {
+  void _showDialog(
+      BuildContext context, List<String> text, List<int> idEve, String giorno) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -379,12 +367,9 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget setupAlertDialoadContainer(List<String> text, List<int> idEve,
-      String giorno) {
-    var height_size = MediaQuery
-        .of(context)
-        .size
-        .height * 0.2;
+  Widget setupAlertDialoadContainer(
+      List<String> text, List<int> idEve, String giorno) {
+    var height_size = MediaQuery.of(context).size.height * 0.2;
     return Container(
         decoration: BoxDecoration(
             color: Colors.white,
@@ -396,12 +381,9 @@ class _HomePageState extends State<HomePage> {
             ),
             border: Border.all(color: Colors.white)),
         // Change as per your requirement
-        width: MediaQuery
-            .of(context)
-            .size
-            .width * 0.80,
+        width: MediaQuery.of(context).size.width * 0.80,
         height: height_size + (idEve.length - 1) * height_size * 0.44 >
-            height_size * 1.55
+                height_size * 1.55
             ? height_size * 1.55
             : height_size + (idEve.length - 1) * height_size * 0.44,
         // Change as per your requirement// Change as per your requirement
@@ -417,10 +399,7 @@ class _HomePageState extends State<HomePage> {
                   textStyle: TextStyle(
                     color: const Color.fromARGB(255, 42, 42, 42),
                     fontWeight: FontWeight.w500,
-                    fontSize: MediaQuery
-                        .of(context)
-                        .size
-                        .width * 0.04,
+                    fontSize: MediaQuery.of(context).size.width * 0.04,
                     fontStyle: FontStyle.normal,
                     decoration: TextDecoration.none,
                   ),
@@ -445,17 +424,14 @@ class _HomePageState extends State<HomePage> {
                             icon: Icons.delete,
                             onTap: () async {
                               Evento ev =
-                              await EventiDBworker.eventiDBworker.get(id);
+                                  await EventiDBworker.eventiDBworker.get(id);
                               Navigator.of(context).pop();
                               _deleteEvento(context, ev);
                             },
                           ),
                         ],
                         child: Container(
-                          height: MediaQuery
-                              .of(context)
-                              .size
-                              .height * 0.07,
+                          height: MediaQuery.of(context).size.height * 0.07,
                           decoration: BoxDecoration(
                               color: const Color.fromARGB(255, 230, 245, 252),
                               borderRadius: const BorderRadius.only(
@@ -473,14 +449,11 @@ class _HomePageState extends State<HomePage> {
                                 style: GoogleFonts.adventPro(
                                   textStyle: TextStyle(
                                     color:
-                                    const Color.fromARGB(255, 42, 42, 42),
+                                        const Color.fromARGB(255, 42, 42, 42),
                                     fontWeight: FontWeight.w500,
                                     fontSize:
-                                    MediaQuery
-                                        .of(context)
-                                        .size
-                                        .width *
-                                        0.04,
+                                        MediaQuery.of(context).size.width *
+                                            0.04,
                                     fontStyle: FontStyle.normal,
                                     decoration: TextDecoration.none,
                                   ),
@@ -499,10 +472,7 @@ class _HomePageState extends State<HomePage> {
                     textStyle: TextStyle(
                       color: const Color.fromARGB(255, 42, 42, 42),
                       fontWeight: FontWeight.w500,
-                      fontSize: MediaQuery
-                          .of(context)
-                          .size
-                          .width * 0.04,
+                      fontSize: MediaQuery.of(context).size.width * 0.04,
                       fontStyle: FontStyle.normal,
                       decoration: TextDecoration.none,
                     ),
@@ -528,15 +498,9 @@ class _HomePageState extends State<HomePage> {
               bottomLeft: Radius.circular(20),
             ),
             border: Border.all(color: Colors.white)),
-        height: MediaQuery
-            .of(context)
-            .size
-            .height *
+        height: MediaQuery.of(context).size.height *
             0.2, // Change as per your requirement
-        width: MediaQuery
-            .of(context)
-            .size
-            .width *
+        width: MediaQuery.of(context).size.width *
             0.80, // Change as per your requirement
         child: SingleChildScrollView(
           child: Column(
@@ -550,10 +514,7 @@ class _HomePageState extends State<HomePage> {
                   textStyle: TextStyle(
                     color: const Color.fromARGB(255, 42, 42, 42),
                     fontWeight: FontWeight.w500,
-                    fontSize: MediaQuery
-                        .of(context)
-                        .size
-                        .width * 0.04,
+                    fontSize: MediaQuery.of(context).size.width * 0.04,
                     fontStyle: FontStyle.normal,
                     decoration: TextDecoration.none,
                   ),
@@ -570,10 +531,7 @@ class _HomePageState extends State<HomePage> {
                   textStyle: TextStyle(
                     color: const Color.fromARGB(255, 42, 42, 42),
                     fontWeight: FontWeight.w500,
-                    fontSize: MediaQuery
-                        .of(context)
-                        .size
-                        .width * 0.04,
+                    fontSize: MediaQuery.of(context).size.width * 0.04,
                     fontStyle: FontStyle.normal,
                     decoration: TextDecoration.none,
                   ),
@@ -593,10 +551,7 @@ class _HomePageState extends State<HomePage> {
                         textStyle: TextStyle(
                           color: const Color.fromARGB(255, 42, 42, 42),
                           fontWeight: FontWeight.w500,
-                          fontSize: MediaQuery
-                              .of(context)
-                              .size
-                              .width * 0.04,
+                          fontSize: MediaQuery.of(context).size.width * 0.04,
                           fontStyle: FontStyle.normal,
                           decoration: TextDecoration.none,
                         ),
@@ -618,10 +573,7 @@ class _HomePageState extends State<HomePage> {
                         textStyle: TextStyle(
                           color: const Color.fromARGB(255, 42, 42, 42),
                           fontWeight: FontWeight.w500,
-                          fontSize: MediaQuery
-                              .of(context)
-                              .size
-                              .width * 0.04,
+                          fontSize: MediaQuery.of(context).size.width * 0.04,
                           fontStyle: FontStyle.normal,
                           decoration: TextDecoration.none,
                         ),
@@ -629,7 +581,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     onPressed: () async {
                       await EventiDBworker.eventiDBworker.delete(ev.id);
-                     // Navigator.of(context).pop();
+                      // Navigator.of(context).pop();
                       setState(() {
                         HomePage.hoCaricatoGliEventi = false;
                       });
@@ -680,8 +632,8 @@ List<Meeting> getMeetingData() {
     await eventiModel.loadData(EventiDBworker.eventiDBworker, val);
   });
   for (Evento eve in eventiModel.eventiList) {
-    listMeetings.add(
-        Meeting(eve.nomeScheda, eve.inizio, eve.fine, eve.id, Colors.black, eve.fine.difference(eve.inizio).inMinutes.toString()));
+    listMeetings.add(Meeting(eve.nomeScheda, eve.inizio, eve.fine, eve.id,
+        Colors.white.withOpacity(0.5), eve.fine.difference(eve.inizio).inMinutes.toString()));
   }
   print(listMeetings.length);
 
@@ -722,7 +674,7 @@ class MeetingDataSource extends CalendarDataSource {
   }
 
   @override
-  String getDurata(int index){
+  String getDurata(int index) {
     return appointments![index].durata;
   }
 }
