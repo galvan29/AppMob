@@ -1,18 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mytraining/common/appbar.dart';
-import 'package:mytraining/db/eserciziDBworker.dart';
 import 'package:mytraining/db/registriDBworker.dart';
 import 'package:mytraining/models/eserciziModel.dart';
 import 'package:mytraining/models/registriModel.dart';
 import 'package:mytraining/models/schedeModel.dart';
-import 'package:mytraining/models/utentiModel.dart';
-import 'package:mytraining/screen/base.dart';
 import 'package:mytraining/screen/fineAllenamento.dart';
 import 'package:mytraining/screen/schede.dart';
-import 'package:mytraining/screen/visualizzaScheda.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
 
 class Allenamento extends StatefulWidget {

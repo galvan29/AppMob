@@ -2,11 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mytraining/db/utentiDBworker.dart';
 import 'package:mytraining/models/utentiModel.dart';
-import 'package:mytraining/screen/base.dart';
-
 import '../common/appbar.dart';
 
-// This class handles the Page to edit the Name Section of the User Profile.
 class EditNameFormPage extends StatefulWidget {
   const EditNameFormPage({Key? key}) : super(key: key);
 
@@ -87,10 +84,6 @@ class EditNameFormPageState extends State<EditNameFormPage> {
                     ),
                   ),
                 )),
-
-
-
-
             Padding(
                 padding: const EdgeInsets.fromLTRB(0, 40, 0, 0),
                 child: SizedBox(
@@ -126,10 +119,6 @@ class EditNameFormPageState extends State<EditNameFormPage> {
                           )),
                       controller: userNameController,
                     ))),
-
-
-
-
             Padding(
                 padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                 child: SizedBox(
@@ -145,12 +134,6 @@ class EditNameFormPageState extends State<EditNameFormPage> {
                           decoration: TextDecoration.none,
                         ),
                       ),
-                     /* validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter your first name';
-                        }
-                        return null;
-                      }, */
                       decoration: InputDecoration(labelText: 'Nome',
                           enabledBorder: UnderlineInputBorder(
                             borderSide: BorderSide(
@@ -178,13 +161,6 @@ class EditNameFormPageState extends State<EditNameFormPage> {
                           decoration: TextDecoration.none,
                         ),
                       ),
-                      // Handles Form Validation for First Name
-                      /* validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter your first name';
-                          }
-                          return null;
-                        }, */
                       decoration:
                           const InputDecoration(labelText: 'Cognome',
                               enabledBorder: UnderlineInputBorder(
@@ -214,13 +190,6 @@ class EditNameFormPageState extends State<EditNameFormPage> {
                         ),
                       ),
                       keyboardType: TextInputType.number,
-                      // Handles Form Validation for First Name
-                      /* validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter your first name';
-                          }
-                          return null;
-                        }, */
                       decoration: const InputDecoration(labelText: 'Età',
                           enabledBorder: UnderlineInputBorder(
                             borderSide: BorderSide(
@@ -249,13 +218,6 @@ class EditNameFormPageState extends State<EditNameFormPage> {
                         ),
                       ),
                       keyboardType: TextInputType.number,
-                      // Handles Form Validation for First Name
-                      /* validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter your first name';
-                          }
-                          return null;
-                        }, */
                       decoration: const InputDecoration(labelText: 'Altezza',
                           enabledBorder: UnderlineInputBorder(
                             borderSide: BorderSide(
@@ -284,13 +246,6 @@ class EditNameFormPageState extends State<EditNameFormPage> {
                           decoration: TextDecoration.none,
                         ),
                       ),
-                      // Handles Form Validation for First Name
-                      /* validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter your first name';
-                          }
-                          return null;
-                        }, */
                       decoration: const InputDecoration(labelText: 'Peso',
                           enabledBorder: UnderlineInputBorder(
                             borderSide: BorderSide(

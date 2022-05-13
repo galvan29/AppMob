@@ -23,9 +23,7 @@ var list = [
   'Sbagli il 100% dei colpi che non spari. (Wayne Gretzky)',
   'Se puoi sognarlo, puoi farlo. (Walt Disney)',
   'Non arrenderti. Rischieresti di farlo un’ora prima del miracolo. (Proverbio arabo)',
-  'Il primo passo che devi fare se vuoi essere una persona di successo è decidere che tipo di persona vuoi essere. Esistono 3 tipi di persone: coloro che fanno accadere le cose; coloro che guardano accadere le cose e coloro che si meravigliano di ciò che accade. (John M. Capozzi)',
   'Non avrai mai fallito finché continuerai a provare. (Anonimo)',
-  'Tra vent’anni non sarete delusi delle cose che avete fatto ma da quelle che non avete fatto. Allora levate l’ancora,abbandonate i porti sicuri, catturate il vento nelle vostre vele. Esplorate. Sognate. Scoprite. (Mark Twain)',
   'Non aver paura di lottare per ciò in cui credi, anche se questo significa lottare da solo. (Anonimo)',
   'Piccole opportunità sono spesso l’inizio di grandi imprese. (Demostene)'
 ];
@@ -71,46 +69,6 @@ class _HomePageState extends State<HomePage> {
                     textAlign: TextAlign.center,
                     maxLines: 1),
               ),
-              /*Container(
-                margin: const EdgeInsets.only(
-                  left: 30,
-                  top: 20,
-                  right: 30,
-                ),
-                padding: EdgeInsets.zero,
-                width: double.maxFinite,
-                decoration: const BoxDecoration(),
-                child: GestureDetector(
-                    onTap: () {
-                      utentiModel.setStackIndex(4);
-                    },
-                    child: Container(
-                        width: 10,
-                        height: 50,
-                        padding: const EdgeInsets.only(top: 8),
-                        decoration: BoxDecoration(
-                            color: const Color.fromARGB(255, 230, 245, 252),
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(20),
-                              topRight: Radius.circular(20),
-                              bottomRight: Radius.circular(20),
-                              bottomLeft: Radius.circular(20),
-                            ),
-                            border: Border.all(color: Colors.white)),
-                        child: Text(
-                          '''Scheda''',
-                          style: GoogleFonts.adventPro(
-                            textStyle: const TextStyle(
-                              color: const Color.fromARGB(255, 42, 42, 42),
-                              fontWeight: FontWeight.w500,
-                              fontSize: 20,
-                              fontStyle: FontStyle.normal,
-                              decoration: TextDecoration.none,
-                            ),
-                          ),
-                          textAlign: TextAlign.center,
-                        ))),
-              ),*/
               Container(
                 margin: const EdgeInsets.only(
                     left: 30, top: 15, right: 30, bottom: 10),
@@ -274,7 +232,7 @@ class _HomePageState extends State<HomePage> {
                             '''Programma Allenamento''',
                             style: GoogleFonts.adventPro(
                               textStyle: const TextStyle(
-                                color: const Color.fromARGB(255, 42, 42, 42),
+                                color: Colors.white,
                                 fontWeight: FontWeight.w500,
                                 fontSize: 20,
                                 fontStyle: FontStyle.normal,
@@ -322,30 +280,6 @@ class _HomePageState extends State<HomePage> {
                           textAlign: TextAlign.center,
                         ))),
               ),
-              /*Container(
-                margin: EdgeInsets.only(
-                  top: MediaQuery
-                      .of(context)
-                      .size
-                      .height * 0.02,
-                ),
-                padding: EdgeInsets.zero,
-                width: double.maxFinite,
-                decoration: const BoxDecoration(),
-                child: Text(r'''Suggerimento Utile''',
-                    style: GoogleFonts.adventPro(
-                      textStyle: const TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w400,
-                        fontSize: 30,
-                        fontStyle: FontStyle.normal,
-                        decoration: TextDecoration.none,
-                      ),
-                    ),
-                    textAlign: TextAlign.center,
-                    maxLines: 1),
-              ),*/
-              //suggerimento
             ],
           ),
         ),
@@ -601,12 +535,6 @@ class _HomePageState extends State<HomePage> {
                           HomePage.hoCaricatoGliEventi = true;
                         });
                       });
-                      /*Timer(
-                          const Duration(milliseconds: 160),
-                              () => {
-                            Base.pageIndexForWidget = 3,
-                            utentiModel.setStackIndex(7),
-                          });*/
                       utentiModel.setStackIndex(3);
                     },
                   ),

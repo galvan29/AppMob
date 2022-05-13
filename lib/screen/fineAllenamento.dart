@@ -4,10 +4,9 @@ import 'package:mytraining/common/appbar.dart';
 import 'package:mytraining/db/registriDBworker.dart';
 import 'package:mytraining/models/registriModel.dart';
 import 'package:mytraining/models/schedeModel.dart';
-import 'package:mytraining/models/utentiModel.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:mytraining/screen/schede.dart';
-import 'package:intl/intl.dart';
+
 class FineAllenamento extends StatelessWidget {
   final datasets = <String, dynamic>{};
   ValueNotifier<bool> isDialOpen = ValueNotifier(false);

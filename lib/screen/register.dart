@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mytraining/db/utentiDBworker.dart';
-import 'package:mytraining/models/eserciziModel.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mytraining/models/utentiModel.dart';
-import 'package:mytraining/screen/base.dart';
-import 'package:mytraining/screen/login.dart';
 
 class RegisterPage extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();

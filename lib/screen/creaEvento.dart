@@ -217,18 +217,6 @@ class CreaEvento extends StatelessWidget {
                                 .requestFocus(FocusNode());
                           }),
                     )),
-                /*Text(
-                  " minuti",
-                  style: GoogleFonts.adventPro(
-                    textStyle: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w500,
-                      fontSize: MediaQuery.of(context).size.width * 0.045,
-                      fontStyle: FontStyle.normal,
-                      decoration: TextDecoration.none,
-                    ),
-                  ),
-                ),*/
                 const Spacer(),
                 Container(
                   margin: EdgeInsets.only(

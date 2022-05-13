@@ -10,11 +10,7 @@ import 'package:mytraining/models/registriModel.dart';
 import 'package:mytraining/models/schedeModel.dart';
 import 'package:mytraining/models/utentiModel.dart';
 import 'package:lottie/lottie.dart';
-import 'package:mytraining/screen/base.dart';
 import 'package:mytraining/screen/login.dart';
-import 'package:mytraining/screen/profilo2.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:intl/intl.dart';
 
 class FirstPage2 extends StatefulWidget {
   const FirstPage2({Key? key}) : super(key: key);

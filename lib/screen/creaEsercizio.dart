@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mytraining/common/appbar.dart';
 import 'package:mytraining/db/eserciziDBworker.dart';
-import 'package:mytraining/db/eserciziDBworker.dart';
-import 'package:mytraining/db/eserciziDBworker.dart';
-import 'package:mytraining/db/schedeDBworker.dart';
 import 'package:mytraining/models/eserciziModel.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mytraining/models/schedeModel.dart';
-import 'package:mytraining/models/utentiModel.dart';
 import 'package:mytraining/screen/base.dart';
 import 'package:mytraining/screen/schede.dart';
 import 'package:mytraining/screen/visualizzaScheda.dart';

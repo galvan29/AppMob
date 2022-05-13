@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -7,13 +6,10 @@ import 'package:mytraining/common/appbar.dart';
 import 'package:mytraining/db/eserciziDBworker.dart';
 import 'package:mytraining/db/registriDBworker.dart';
 import 'package:mytraining/db/schedeDBworker.dart';
-import 'package:mytraining/db/utentiDBworker.dart';
 import 'package:mytraining/models/eserciziModel.dart';
 import 'package:mytraining/models/registriModel.dart';
 import 'package:mytraining/models/schedeModel.dart';
 import 'package:mytraining/models/utentiModel.dart';
-import 'package:mytraining/screen/base.dart';
-import 'package:mytraining/screen/creaScheda.dart';
 import 'package:mytraining/screen/login.dart';
 import 'package:mytraining/screen/visualizzaScheda.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -398,12 +394,6 @@ class _SchedeState extends State<Schede> {
                         Schede.hoCaricatoleSchede = true;
                       });
                       utentiModel.setStackIndex(4);
-                      /*Timer(
-                          const Duration(milliseconds: 0),
-                          () => {
-                                Base.pageIndexForWidget = 4,
-                                utentiModel.setStackIndex(7),
-                              }); */
                     },
                   ),
                 ],
@@ -412,25 +402,4 @@ class _SchedeState extends State<Schede> {
           ),
         ));
   }
-
-/*double calcolaStelleAlle(int id) {
-    double tot = 0;
-    updateList(id);
-    print("Aggiorno e creo " + id.toString());
-    for(Registro r in registriModel.registriList2){
-      tot += (2*double.parse(r.voto)).floorToDouble()/2;
-      print(id.toString() + " cd " +r.id.toString() + " ji " +tot.toString());
-    }
-    tot = tot/registriModel.registriList2.length;
-    print(tot.toString());
-    if(registriModel.registriList2.length > 0)
-      registriModel.registriList2 = [];
-    return tot;
-  }
-
-  Future<int> updateList(int id) async {
-    await registriModel.loadData2(
-        RegistriDBworker.registriDBworker, id);
-    return 0;
-  } */
 }

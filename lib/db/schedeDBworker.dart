@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:mytraining/db/eserciziDBworker.dart';
 import 'package:mytraining/db/registriDBworker.dart';
 import 'package:mytraining/models/eserciziModel.dart';

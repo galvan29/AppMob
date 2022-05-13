@@ -4,10 +4,9 @@ import 'package:mytraining/db/schedeDBworker.dart';
 import 'package:mytraining/models/schedeModel.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mytraining/models/utentiModel.dart';
-import 'package:mytraining/screen/base.dart';
 import 'package:mytraining/screen/login.dart';
 import 'package:mytraining/screen/schede.dart';
-import 'package:flutter_iconpicker/flutter_iconpicker.dart';
+
 
 class CreaScheda extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -125,7 +124,7 @@ class CreaScheda extends StatelessWidget {
                       schedeModel.schedaBeingEdited.durataScheda = inValue;
                     },
                     decoration: const InputDecoration(
-                        labelText: "Durata Scheda",
+                        labelText: "Durata Scheda (m)",
                         labelStyle: TextStyle(
                           color: Colors.white,
                         ),

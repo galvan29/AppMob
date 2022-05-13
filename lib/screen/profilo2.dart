@@ -5,7 +5,6 @@ import 'package:mytraining/common/appbar.dart';
 import 'package:mytraining/db/utentiDBworker.dart';
 import 'package:mytraining/editProfile/EditFormPage.dart';
 import 'package:mytraining/models/utentiModel.dart';
-import 'package:mytraining/screen/base.dart';
 import 'package:mytraining/screen/login.dart';
 
 import '../common/bottomNavigationBar.dart';

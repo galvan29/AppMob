@@ -44,16 +44,6 @@ class DisplayImage extends StatelessWidget {
     );
   }
 
-  // Builds Edit Icon on Profile Picture
-  /*Widget buildEditIcon(Color color) => buildCircle(
-      all: 8,
-      child: Icon(
-        Icons.edit ,
-        color: color,
-        size: 20,
-      )); */
-
-  // Builds/Makes Circle for Edit Icon on Profile Picture
   Widget buildCircle({
     required Widget child,
     required double all,

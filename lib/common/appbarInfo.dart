@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import '../models/utentiModel.dart';
 
 PreferredSize buildAppBar(BuildContext context) {
@@ -51,7 +50,7 @@ PreferredSize buildAppBar(BuildContext context) {
                   top: MediaQuery.of(context).size.width * 0.07,
                 ),
                 child: IconButton(
-                  icon: const Icon(Icons.info ),
+                  icon: const Icon(Icons.info),
                   onPressed: () {
                     utentiModel.setStackIndex(9);
                   },
