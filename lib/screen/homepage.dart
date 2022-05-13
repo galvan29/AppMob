@@ -226,8 +226,8 @@ class _HomePageState extends State<HomePage> {
                             alle += app.eventName +
                                 " alle " +
                                 DateFormat('HH.mm').format(app.from) +
-                                " con durata: " +
-                                app.durata;
+                                " di " +
+                                app.durata +" min";
                             idEve.add(app.id);
                             text.add(alle);
                             print("Dario " + alle);
@@ -262,7 +262,7 @@ class _HomePageState extends State<HomePage> {
                           height: 50,
                           padding: const EdgeInsets.only(top: 8),
                           decoration: BoxDecoration(
-                              color: const Color.fromARGB(255, 230, 245, 252),
+                              color: const Color.fromARGB(255, 230, 245, 252).withOpacity(0.6),
                               borderRadius: const BorderRadius.only(
                                 topLeft: Radius.circular(20),
                                 topRight: Radius.circular(20),
@@ -431,16 +431,19 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ],
                         child: Container(
-                          height: MediaQuery.of(context).size.height * 0.07,
+                          height: MediaQuery
+                              .of(context)
+                              .size
+                              .height * 0.07,
                           decoration: BoxDecoration(
-                              color: const Color.fromARGB(255, 230, 245, 252),
+                              color: Colors.white,
                               borderRadius: const BorderRadius.only(
                                 topLeft: Radius.circular(20),
                                 topRight: Radius.circular(20),
                                 bottomRight: Radius.circular(20),
                                 bottomLeft: Radius.circular(20),
                               ),
-                              border: Border.all(color: Colors.white)),
+                              border: Border.all(color: Colors.black)),
                           child: Row(
                             children: [
                               const SizedBox(width: 10),
@@ -449,11 +452,14 @@ class _HomePageState extends State<HomePage> {
                                 style: GoogleFonts.adventPro(
                                   textStyle: TextStyle(
                                     color:
-                                        const Color.fromARGB(255, 42, 42, 42),
+                                    const Color.fromARGB(255, 42, 42, 42),
                                     fontWeight: FontWeight.w500,
                                     fontSize:
-                                        MediaQuery.of(context).size.width *
-                                            0.04,
+                                    MediaQuery
+                                        .of(context)
+                                        .size
+                                        .width *
+                                        0.04,
                                     fontStyle: FontStyle.normal,
                                     decoration: TextDecoration.none,
                                   ),
