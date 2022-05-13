@@ -11,6 +11,7 @@ import 'package:mytraining/widget/Widget.dart';
 import 'package:provider/provider.dart';
 import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:mytraining/screen/istruzioni.dart';
+import 'package:mytraining/screen/info.dart';
 import 'package:flutter/services.dart';
 
 class Base extends StatelessWidget {
@@ -42,6 +43,7 @@ class Base extends StatelessWidget {
                   Profilo2(),
                   CreaEvento(),
                   WidgetClass(),
+                  Instruzioni(),
                   Info()
                 ],
               );

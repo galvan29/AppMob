@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mytraining/common/appbar.dart';
+import 'package:mytraining/common/appbarIstru.dart';
 import 'package:mytraining/db/eventiDBworrker.dart';
 import 'package:mytraining/models/eventiModel.dart';
 import 'package:mytraining/models/schedeModel.dart';

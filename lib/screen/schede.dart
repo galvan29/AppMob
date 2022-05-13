@@ -54,6 +54,7 @@ class _SchedeState extends State<Schede> {
         floatingActionButton: Visibility(
           visible: Schede.valoreOrologio,
           child: FloatingActionButton(
+            elevation: 10,
             backgroundColor: Colors.white,
             onPressed: () {
               schedeModel.setStackIndex(4);

@@ -41,7 +41,21 @@ PreferredSize buildAppBar(BuildContext context) {
                     ),
                     textAlign: TextAlign.left,
                     maxLines: 1),
-
+              ),
+              Container(
+                padding: EdgeInsets.zero,
+                decoration: const BoxDecoration(),
+                margin: EdgeInsets.only(
+                  left: MediaQuery.of(context).size.width * 0.01,
+                  top: MediaQuery.of(context).size.width * 0.07,
+                ),
+                child: IconButton(
+                  icon: const Icon(Icons.question_mark_sharp ),
+                  onPressed: () {
+                    utentiModel.setStackIndex(8);
+                  },
+                  color: Colors.white,
+                ),
               ),
             ],
           ),
