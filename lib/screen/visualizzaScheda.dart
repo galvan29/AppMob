@@ -226,7 +226,8 @@ class _VisualizzaSchedaState extends State<VisualizzaScheda> {
                               },
                             ),
                           ],
-                          child: GestureDetector(
+                          child:
+                          GestureDetector(
                               onLongPress: () async {
                                 eserciziModel.esercizioBeingEdited =
                                 await EserciziDBworker.eserciziDBworker
@@ -354,7 +355,8 @@ class _VisualizzaSchedaState extends State<VisualizzaScheda> {
                                     ),
                                   ],
                                 ),
-                              ))),
+                              ))
+                      ),
                     );
                   },
                 )
