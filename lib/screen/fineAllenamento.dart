@@ -65,7 +65,7 @@ class FineAllenamento extends StatelessWidget {
                 margin: EdgeInsets.only(
                   top: MediaQuery.of(context).size.width * 0.05,
                 ),
-                child: Text(r'''Come valuti il tuo allenamento?''',
+                child: Text('Come valuti il tuo allenamento?',
                     style: GoogleFonts.adventPro(
                       textStyle: const TextStyle(
                         color: Colors.white,
@@ -93,12 +93,11 @@ class FineAllenamento extends StatelessWidget {
                   allowHalfRating: true,
                   itemCount: 5,
                   itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
-                  itemBuilder: (context, _) => Icon(
+                  itemBuilder: (context, _) => const Icon(
                     Icons.star,
                     color: Colors.amber,
                   ),
                   onRatingUpdate: (rating) {
-                    print(rating);
                     rat = rating;
                   },
                 ),

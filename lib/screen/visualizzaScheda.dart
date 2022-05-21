@@ -161,6 +161,43 @@ class _VisualizzaSchedaState extends State<VisualizzaScheda> {
                   ),
                 ),
               ),
+                  Visibility(
+                    visible: eserciziModel.eserciziList.length > 0 ? false : true,
+                    child: Container(
+                        margin: const EdgeInsets.only(
+                          left: 30,
+                          top: 20,
+                          right: 30,
+                        ),
+                        padding: EdgeInsets.zero,
+                        width: double.maxFinite,
+                        decoration: const BoxDecoration(),
+                        child: Container(
+                            padding: const EdgeInsets.fromLTRB(2.5, 3, 2.5, 5),
+                            decoration: BoxDecoration(
+                                color: const Color.fromARGB(255, 230, 245, 252)
+                                    .withOpacity(0),
+                                borderRadius: const BorderRadius.only(
+                                  topLeft: Radius.circular(20),
+                                  topRight: Radius.circular(20),
+                                  bottomRight: Radius.circular(20),
+                                  bottomLeft: Radius.circular(20),
+                                ),
+                                border: Border.all(color: Colors.white)),
+                            child: Text(
+                              "Crea degli esercizi per iniziare un allenamento.",
+                              style: GoogleFonts.adventPro(
+                                textStyle: const TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 16,
+                                  fontStyle: FontStyle.normal,
+                                  decoration: TextDecoration.none,
+                                ),
+                              ),
+                              textAlign: TextAlign.center,
+                            ))),
+                  ),
               Visibility(
                 visible: VisualizzaScheda.hoCaricatoGliEs,
                 replacement: const CircularProgressIndicator(
@@ -358,7 +395,7 @@ class _VisualizzaSchedaState extends State<VisualizzaScheda> {
                         ),
                       )),
               Visibility(
-                visible: registriModel.registriList.length > 0 ? true : false,
+                visible: registriModel.registriList.length > 1 ? true : false,
                 child: Container(
                     margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                     height: 320,
@@ -418,7 +455,7 @@ class _VisualizzaSchedaState extends State<VisualizzaScheda> {
                     )),
               ),
               Visibility(
-                visible: registriModel.registriList.length > 0 ? false : true,
+                visible: registriModel.registriList.length > 1 ? false : true,
                 child: Container(
                     margin: const EdgeInsets.only(
                       left: 30,
@@ -441,7 +478,7 @@ class _VisualizzaSchedaState extends State<VisualizzaScheda> {
                             ),
                             border: Border.all(color: Colors.white)),
                         child: Text(
-                          "Per visualizzare le statistiche devi prima effettuare un allenamento",
+                          "Per visualizzare le statistiche devi prima effettuare almeno due allenamenti",
                           style: GoogleFonts.adventPro(
                             textStyle: const TextStyle(
                               color: Colors.white,

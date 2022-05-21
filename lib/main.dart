@@ -21,7 +21,7 @@ class MyTraining extends StatelessWidget {
       home: Scaffold(
         resizeToAvoidBottomInset: false,
         /* appBar: AppBar(
-          //title: const Text("Notebook"),   BARRA SOPRA METTERE QUI
+          //title: const Text("myTraining"),   BARRA SOPRA METTERE QUI
         ), */
         body: Base(),
       ),
