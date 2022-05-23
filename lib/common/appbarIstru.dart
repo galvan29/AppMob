@@ -49,7 +49,7 @@ PreferredSize buildAppBar(BuildContext context) {
                   top: MediaQuery.of(context).size.width * 0.07,
                 ),
                 child: IconButton(
-                  icon: const Icon(Icons.question_mark_sharp),
+                  icon: const Icon(Icons.warning_outlined),
                   onPressed: () {
                     utentiModel.setStackIndex(8);
                   },

@@ -606,7 +606,10 @@ class _AllenamentoState extends State<Allenamento> {
               bottomLeft: Radius.circular(20),
             ),
             border: Border.all(color: Colors.white)),
-        height: 180, // Change as per your requirement
+        height: MediaQuery
+            .of(context)
+            .size
+            .height * 0.185, // Change as per your requirement
         width: 330, // Change as per your requirement
         child: SingleChildScrollView(
           child: Column(
