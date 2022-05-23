@@ -85,6 +85,8 @@ Per modificare una Scheda/Esercizio è necessario tenere premuto l'elemento scel
 Durante l'allenamento, tramite il tasto in basso a destra, è possibile far partire un secondo timer che permette di effettuare una pausa senza fermare il timer principale.
 
 Durante l'allenamento è possibile utilizzare l'applicazione in tutte le schermate, tuttavia non è possibile iniziare un secondo allenamento. Per riprendere l'allenamento in corso comprarirà un pulsante in basso a destra che permetterà di riprendere l'allenamento.
+
+Durante l'allenamento sarà possibile tenere conto degli esercizi svolti o meno tenendo premuto l'esercizio in questione. Questo diventerà di colore verde, per toglierlo sarà necessario premere di nuovo l'esercizio.
 ''',
                   style: GoogleFonts.adventPro(
                     textStyle: const TextStyle(
@@ -97,7 +99,7 @@ Durante l'allenamento è possibile utilizzare l'applicazione in tutte le scherma
                     ),
                   ),
                   textAlign: TextAlign.left,
-                  maxLines: 20),
+                  maxLines: 50),
             ),
           ],
         ),
