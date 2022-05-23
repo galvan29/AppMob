@@ -431,7 +431,7 @@ class _VisualizzaSchedaState extends State<VisualizzaScheda> {
                                         fontStyle: FontStyle.italic,
                                         fontWeight: FontWeight.w300)),
                               ),
-                              primaryYAxis: DateTimeAxis(
+                              primaryYAxis: NumericAxis(
                                 title: AxisTitle(
                                     text: 'Durata',
                                     textStyle: const TextStyle(
@@ -657,6 +657,7 @@ class _VisualizzaSchedaState extends State<VisualizzaScheda> {
 
   int fromDateToMinute(String durataFinale) {
     var parsedDate = DateTime.parse('2022-03-20 ' + durataFinale);
+    print("afa "+parsedDate.hour.toString());
     return parsedDate.minute + parsedDate.hour * 60;
   }
 }
