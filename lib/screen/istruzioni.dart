@@ -86,7 +86,7 @@ Durante l'allenamento, tramite il tasto in basso a destra, è possibile far part
 
 Durante l'allenamento è possibile utilizzare l'applicazione in tutte le schermate, tuttavia non è possibile iniziare un secondo allenamento. Per riprendere l'allenamento in corso comprarirà un pulsante in basso a destra che permetterà di riprendere l'allenamento.
 
-Durante l'allenamento sarà possibile tenere conto degli esercizi svolti o meno tenendo premuto l'esercizio in questione. Questo diventerà di colore verde, per toglierlo sarà necessario premere di nuovo l'esercizio.
+Durante l'allenamento sarà possibile tenere conto degli esercizi svolti: tenendo premuto il singolo esercizio diventerà di colore verde. 
 ''',
                   style: GoogleFonts.adventPro(
                     textStyle: const TextStyle(
