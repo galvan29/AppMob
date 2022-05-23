@@ -12,6 +12,8 @@ class FineAllenamento extends StatelessWidget {
   ValueNotifier<bool> isDialOpen = ValueNotifier(false);
   static int idTempRegistro = 0;
   static String durataStringa = "";
+  static bool votato = false;
+
   @override
   Widget build(BuildContext context) {
     double rat = 0;
@@ -86,7 +88,7 @@ class FineAllenamento extends StatelessWidget {
                   top: MediaQuery.of(context).size.width * 0.10,
                 ),
                 alignment: Alignment.center,
-                child:  RatingBar.builder(
+                child: RatingBar.builder(
                   initialRating: 0,
                   minRating: 0,
                   direction: Axis.horizontal,
@@ -99,6 +101,7 @@ class FineAllenamento extends StatelessWidget {
                   ),
                   onRatingUpdate: (rating) {
                     rat = rating;
+                    votato = true;
                   },
                 ),
               ),
@@ -113,12 +116,24 @@ class FineAllenamento extends StatelessWidget {
                 decoration: const BoxDecoration(),
                 child: GestureDetector(
                     onTap: () async {
-                      registriModel.registroBeingEdited = await RegistriDBworker.registriDBworker.get(FineAllenamento.idTempRegistro);
-                      registriModel.registroBeingEdited.voto = rat.toString();
-                      registriModel.registroBeingEdited.giorno = DateTime.now().toString();
-                      await RegistriDBworker.registriDBworker.update(registriModel.registroBeingEdited);
-                      await registriModel.loadData(RegistriDBworker.registriDBworker, Schede.schedaAllenamento);
-                      schedeModel.setStackIndex(0);
+                      if(votato){
+                        registriModel.registroBeingEdited = await RegistriDBworker
+                            .registriDBworker
+                            .get(FineAllenamento.idTempRegistro);
+                        registriModel.registroBeingEdited.voto = rat.toString();
+                        registriModel.registroBeingEdited.giorno =
+                            DateTime.now().toString();
+                        await RegistriDBworker.registriDBworker
+                            .update(registriModel.registroBeingEdited);
+                        await registriModel.loadData(
+                            RegistriDBworker.registriDBworker,
+                            Schede.schedaAllenamento);
+                        schedeModel.setStackIndex(0);
+                        votato = false;
+                      }
+                      else{
+                        mostraPopUp(context);
+                      }
                     },
                     child: Container(
                         width: 10,
@@ -134,10 +149,10 @@ class FineAllenamento extends StatelessWidget {
                             ),
                             border: Border.all(color: Colors.white)),
                         child: Text(
-                          '''Registra Risposta''',
+                          'Registra Risposta',
                           style: GoogleFonts.adventPro(
                             textStyle: const TextStyle(
-                              color:  Color.fromARGB(255, 230, 245, 252),
+                              color: Color.fromARGB(255, 230, 245, 252),
                               fontWeight: FontWeight.w500,
                               fontSize: 20,
                               fontStyle: FontStyle.normal,
@@ -150,28 +165,118 @@ class FineAllenamento extends StatelessWidget {
             ],
           ),
         ),
-      bottomNavigationBar: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-          child: Row(
-            children: [
-              FlatButton(
-                onPressed: (){
-                  schedeModel.setStackIndex(0);
-                },
-                child: Text("Indietro",
-                  style: GoogleFonts.adventPro(
-                    textStyle: const TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w400,
-                      fontSize: 20,
-                      fontStyle: FontStyle.normal,
-                      decoration: TextDecoration.none,
+        bottomNavigationBar: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+            child: Row(
+              children: [
+                FlatButton(
+                  onPressed: () {
+                    schedeModel.setStackIndex(0);
+                  },
+                  child: Text(
+                    "Indietro",
+                    style: GoogleFonts.adventPro(
+                      textStyle: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 20,
+                        fontStyle: FontStyle.normal,
+                        decoration: TextDecoration.none,
+                      ),
                     ),
                   ),
                 ),
+              ],
+            )));
+  }
+
+  setupAlertDialoadContainer(BuildContext context) {
+    return Container(
+        decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(20),
+              topRight: Radius.circular(20),
+              bottomRight: Radius.circular(20),
+              bottomLeft: Radius.circular(20),
+            ),
+            border: Border.all(color: Colors.white)),
+        height: MediaQuery.of(context).size.height * 0.193,
+        // Change as per your requirement // Change as per your requirement
+        width: 300.0,
+        // Change as per your requirement
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              const SizedBox(
+                height: 20,
               ),
-            ],
-          )
-      ));
+              Text(
+                "Seleziona valutazione",
+                style: GoogleFonts.adventPro(
+                  textStyle: TextStyle(
+                    color: const Color.fromARGB(255, 42, 42, 42),
+                    fontWeight: FontWeight.w500,
+                    fontSize: MediaQuery.of(context).size.width * 0.04,
+                    fontStyle: FontStyle.normal,
+                    decoration: TextDecoration.none,
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Text(
+                "Seleziona una valutazione e poi termina l'allenamento",
+                style: GoogleFonts.adventPro(
+                  textStyle: TextStyle(
+                    color: const Color.fromARGB(255, 42, 42, 42),
+                    fontWeight: FontWeight.w500,
+                    fontSize: MediaQuery.of(context).size.width * 0.04,
+                    fontStyle: FontStyle.normal,
+                    decoration: TextDecoration.none,
+                  ),
+                ),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              FlatButton(
+                    child: Text(
+                      "Ok",
+                      style: GoogleFonts.adventPro(
+                        textStyle: TextStyle(
+                          color: const Color.fromARGB(255, 42, 42, 42),
+                          fontWeight: FontWeight.w500,
+                          fontSize: MediaQuery.of(context).size.width * 0.04,
+                          fontStyle: FontStyle.normal,
+                          decoration: TextDecoration.none,
+                        ),
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              ),
+        ));
+  }
+
+  void mostraPopUp(BuildContext context) async {
+    return showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext inAlertContext) {
+          return Dialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: setupAlertDialoadContainer(context),
+          );
+        });
   }
 }
+
+
