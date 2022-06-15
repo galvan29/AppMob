@@ -104,7 +104,7 @@ class CreaScheda extends StatelessWidget {
                       textStyle: const TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.w500,
-                        fontSize: 20,
+                        fontSize: MediaQuery.of(context).size.width * 0.045,
                         fontStyle: FontStyle.normal,
                         decoration: TextDecoration.none,
                       ),
