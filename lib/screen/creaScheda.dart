@@ -101,7 +101,7 @@ class CreaScheda extends StatelessWidget {
                   width: MediaQuery.of(context).size.width * 0.9,
                   child: TextFormField(
                     style: GoogleFonts.adventPro(
-                      textStyle: const TextStyle(
+                      textStyle: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.w500,
                         fontSize: MediaQuery.of(context).size.width * 0.045,
