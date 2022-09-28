@@ -10,21 +10,14 @@ import 'package:mytraining/screen/login.dart';
 import 'package:mytraining/models/eventiModel.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:intl/intl.dart';
-
-class CreaEvento extends StatefulWidget {
-  @override
-  State<CreaEvento> createState() => _CreaEventoState();
-}
-
-class _CreaEventoState extends State<CreaEvento> {
-  static DateTime inidata = DateTime.now();
+class CreaEvento extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  static DateTime inidata = DateTime.now();
 
+  static DateTime findata = DateTime.now();
   var txt = TextEditingController(),
       txt1 = TextEditingController();
-
   int selectedRadio = -1;
-
   var nomeScheda = TextEditingController();
 
   DateTime selectedDate = DateTime.now();
@@ -47,9 +40,7 @@ class _CreaEventoState extends State<CreaEvento> {
       lastDate: DateTime(2025),
     );
     if (selected != null && selected != selectedDate) {
-      setState(() {
         selectedDate = selected;
-      });
     }
     return selectedDate;
   }
@@ -61,9 +52,7 @@ class _CreaEventoState extends State<CreaEvento> {
       initialTime: selectedTime,
     );
     if (selected != null && selected != selectedTime) {
-      setState(() {
         selectedTime = selected;
-      });
     }
     return selectedTime;
   }
@@ -76,7 +65,6 @@ class _CreaEventoState extends State<CreaEvento> {
     final time = await _selectTime(context);
 
     if (time == null) return;
-    setState(() {
       dateTime = DateTime(
         date.year,
         date.month,
@@ -84,7 +72,6 @@ class _CreaEventoState extends State<CreaEvento> {
         time.hour,
         time.minute,
       );
-    });
   }
 
   DateTime getDateTime() {
@@ -235,7 +222,7 @@ class _CreaEventoState extends State<CreaEvento> {
                     },
                     controller: txt,
                     decoration: const InputDecoration(
-                        labelText: "Data inizio",
+                        labelText: "Data inizio 1",
                         labelStyle: TextStyle(
                           color: Colors.white,
                         )),
@@ -247,10 +234,10 @@ class _CreaEventoState extends State<CreaEvento> {
                           minTime: DateTime(2022, 1, 1),
                           onConfirm: (date) {
                             inidata = date;
-                            txt.text = CreaEvento.inidata.toString();
+                            txt.text = inidata.toString();
                             txt1.text = "0";
-                            eventiModel.eventoBeingEdited.inizio = CreaEvento.inidata;
-                            eventiModel.eventoBeingEdited.fine = CreaEvento.inidata;
+                            eventiModel.eventoBeingEdited.inizio = inidata;
+                            eventiModel.eventoBeingEdited.fine = inidata;
                           },
                           currentTime: DateTime.now(),
                           locale: LocaleType.it);
@@ -293,16 +280,17 @@ class _CreaEventoState extends State<CreaEvento> {
                         )),
                     onTap: () async {
                       FocusScope.of(context).requestFocus(FocusNode());
-                      _selectDateTime(context);
+                      await _selectDateTime(context);
                       showDateTime = true;
                       inidata = getDateTime();
-                      txt.text = DateFormat('dd-MM-yyyy hh:mm').format(_CreaEventoState.inidata);
+                      txt.text = DateFormat('dd-MM-yyyy hh:mm').format(CreaEvento.inidata);
                       txt1.text = "0";
-                      eventiModel.eventoBeingEdited.inizio = _CreaEventoState.inidata;
-                      eventiModel.eventoBeingEdited.fine = _CreaEventoState.inidata;
+                      eventiModel.eventoBeingEdited.inizio = CreaEvento.inidata;
+                      eventiModel.eventoBeingEdited.fine = CreaEvento.inidata;
                     },
                     onChanged: (String inValue) {
-                      eventiModel.eventoBeingEdited.inizio = _CreaEventoState.inidata;
+                      eventiModel.eventoBeingEdited.inizio = CreaEvento.inidata;
+                      eventiModel.eventoBeingEdited.inizio = inidata;
                     },
                   ),
                 )),
