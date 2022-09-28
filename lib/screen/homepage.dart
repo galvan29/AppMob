@@ -214,6 +214,8 @@ class _HomePageState extends State<HomePage> {
                   child: GestureDetector(
                       onTap: () async {
                         eventiModel.eventoBeingEdited = Evento();
+                        eventiModel.eventoBeingEdited.inizio = DateTime.now();
+                        eventiModel.eventoBeingEdited.fine = DateTime.now();
                         utentiModel.setStackIndex(6);
                       },
                       child: Container(

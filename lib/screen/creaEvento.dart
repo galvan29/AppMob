@@ -27,17 +27,11 @@ class _CreaEventoState extends State<CreaEvento> {
   int selectedRadio = -1;
 
   var nomeScheda = TextEditingController();
-
   DateTime selectedDate = DateTime.now();
-
   TimeOfDay selectedTime = TimeOfDay.now();
-
   DateTime dateTime = DateTime.now();
-
   bool showDate = false;
-
   bool showTime = false;
-
   bool showDateTime = false;
 
   Future<DateTime> _selectDate(BuildContext context) async {
@@ -148,17 +142,17 @@ class _CreaEventoState extends State<CreaEvento> {
             SizedBox(
                 width: 330,
                 child: Text(
-                    "Programma il tuo allenamento!",
-                    textAlign: TextAlign.center,
-                    style: GoogleFonts.adventPro(
-                      textStyle: const TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w400,
-                        fontSize: 24,
-                        fontStyle: FontStyle.normal,
-                        decoration: TextDecoration.none,
-                      ),
+                  "Programma il tuo allenamento!",
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.adventPro(
+                    textStyle: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 24,
+                      fontStyle: FontStyle.normal,
+                      decoration: TextDecoration.none,
                     ),
+                  ),
                 )),
             Container(
               margin: EdgeInsets.only(
@@ -220,57 +214,7 @@ class _CreaEventoState extends State<CreaEvento> {
                     controller: nomeScheda,
                   ),
                 )),
-            /*Padding(
-                padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                child: SizedBox(
-                  height: 70,
-                  width: MediaQuery
-                      .of(context)
-                      .size
-                      .width * 0.9,
-                  child: TextFormField(
-                    style: GoogleFonts.adventPro(
-                      textStyle: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w400,
-                        fontSize: MediaQuery.of(context).size.width * 0.045,
-                        fontStyle: FontStyle.normal,
-                        decoration: TextDecoration.none,
-                      ),
-                    ),
-                    validator: (String? inValue) {
-                      if (inValue!.isEmpty) {
-                        return "Scegli Data ed Orario ";
-                      }
-                      return null;
-                    },
-                    controller: txt,
-                    decoration: const InputDecoration(
-                        labelText: "Data inizio",
-                        labelStyle: TextStyle(
-                          color: Colors.white,
-                        )),
-                    onTap: () async {
-                      FocusScope.of(context).requestFocus(FocusNode());
-                      DateTime? picked = await DatePicker.showDateTimePicker(
-                          context,
-                          showTitleActions: true,
-                          minTime: DateTime(2022, 1, 1),
-                          onConfirm: (date) {
-                            inidata = date;
-                            txt.text = CreaEvento.inidata.toString();
-                            txt1.text = "0";
-                            eventiModel.eventoBeingEdited.inizio = CreaEvento.inidata;
-                            eventiModel.eventoBeingEdited.fine = CreaEvento.inidata;
-                          },
-                          currentTime: DateTime.now(),
-                          locale: LocaleType.it);
-                    },
-                    onChanged: (String inValue) {
-                      eventiModel.eventoBeingEdited.inizio = CreaEvento.inidata;
-                    },
-                  ),
-                )),*/
+
             //test
             Padding(
                 padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
@@ -307,13 +251,14 @@ class _CreaEventoState extends State<CreaEvento> {
                       _selectDateTime(context);
                       showDateTime = true;
                       inidata = getDateTime();
-                      txt.text = DateFormat('dd-MM-yyyy hh:mm').format(_CreaEventoState.inidata);
+                      txt.text = DateFormat('dd-MM-yyyy HH:mm').format(_CreaEventoState.inidata);
                       txt1.text = "0";
                       eventiModel.eventoBeingEdited.inizio = _CreaEventoState.inidata;
                       eventiModel.eventoBeingEdited.fine = _CreaEventoState.inidata;
                     },
                     onChanged: (String inValue) {
                       eventiModel.eventoBeingEdited.inizio = _CreaEventoState.inidata;
+                      txt.text = DateFormat('dd-MM-yyyy hh:mm').format(_CreaEventoState.inidata);
                     },
                   ),
                 )),
