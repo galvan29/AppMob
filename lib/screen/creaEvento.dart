@@ -9,15 +9,91 @@ import 'package:mytraining/screen/homepage.dart';
 import 'package:mytraining/screen/login.dart';
 import 'package:mytraining/models/eventiModel.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:intl/intl.dart';
 
-class CreaEvento extends StatelessWidget {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+class CreaEvento extends StatefulWidget {
+  @override
+  State<CreaEvento> createState() => _CreaEventoState();
+}
+
+class _CreaEventoState extends State<CreaEvento> {
   static DateTime inidata = DateTime.now();
-  static DateTime findata = DateTime.now();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
   var txt = TextEditingController(),
       txt1 = TextEditingController();
+
   int selectedRadio = -1;
+
   var nomeScheda = TextEditingController();
+
+  DateTime selectedDate = DateTime.now();
+
+  TimeOfDay selectedTime = TimeOfDay.now();
+
+  DateTime dateTime = DateTime.now();
+
+  bool showDate = false;
+
+  bool showTime = false;
+
+  bool showDateTime = false;
+
+  Future<DateTime> _selectDate(BuildContext context) async {
+    final selected = await showDatePicker(
+      context: context,
+      initialDate: selectedDate,
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2025),
+    );
+    if (selected != null && selected != selectedDate) {
+      setState(() {
+        selectedDate = selected;
+      });
+    }
+    return selectedDate;
+  }
+
+// Select for Time
+  Future<TimeOfDay> _selectTime(BuildContext context) async {
+    final selected = await showTimePicker(
+      context: context,
+      initialTime: selectedTime,
+    );
+    if (selected != null && selected != selectedTime) {
+      setState(() {
+        selectedTime = selected;
+      });
+    }
+    return selectedTime;
+  }
+
+  // select date time picker
+  Future _selectDateTime(BuildContext context) async {
+    final date = await _selectDate(context);
+    if (date == null) return;
+
+    final time = await _selectTime(context);
+
+    if (time == null) return;
+    setState(() {
+      dateTime = DateTime(
+        date.year,
+        date.month,
+        date.day,
+        time.hour,
+        time.minute,
+      );
+    });
+  }
+
+  DateTime getDateTime() {
+    if (dateTime == null) {
+      return DateTime.now();
+    } else {
+      return dateTime;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -61,17 +137,17 @@ class CreaEvento extends StatelessWidget {
             SizedBox(
                 width: 330,
                 child: Text(
-                    "Programma il tuo allenamento!",
-                    textAlign: TextAlign.center,
-                    style: GoogleFonts.adventPro(
-                      textStyle: const TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w400,
-                        fontSize: 24,
-                        fontStyle: FontStyle.normal,
-                        decoration: TextDecoration.none,
-                      ),
+                  "Programma il tuo allenamento!",
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.adventPro(
+                    textStyle: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 24,
+                      fontStyle: FontStyle.normal,
+                      decoration: TextDecoration.none,
                     ),
+                  ),
                 )),
             Container(
               margin: EdgeInsets.only(
@@ -133,7 +209,7 @@ class CreaEvento extends StatelessWidget {
                     controller: nomeScheda,
                   ),
                 )),
-            Padding(
+            /*Padding(
                 padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                 child: SizedBox(
                   height: 70,
@@ -171,16 +247,62 @@ class CreaEvento extends StatelessWidget {
                           minTime: DateTime(2022, 1, 1),
                           onConfirm: (date) {
                             inidata = date;
-                            txt.text = inidata.toString();
+                            txt.text = CreaEvento.inidata.toString();
                             txt1.text = "0";
-                            eventiModel.eventoBeingEdited.inizio = inidata;
-                            eventiModel.eventoBeingEdited.fine = inidata;
+                            eventiModel.eventoBeingEdited.inizio = CreaEvento.inidata;
+                            eventiModel.eventoBeingEdited.fine = CreaEvento.inidata;
                           },
                           currentTime: DateTime.now(),
                           locale: LocaleType.it);
                     },
                     onChanged: (String inValue) {
-                      eventiModel.eventoBeingEdited.inizio = inidata;
+                      eventiModel.eventoBeingEdited.inizio = CreaEvento.inidata;
+                    },
+                  ),
+                )),*/
+            //test
+            Padding(
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                child: SizedBox(
+                  height: 70,
+                  width: MediaQuery
+                      .of(context)
+                      .size
+                      .width * 0.9,
+                  child: TextFormField(
+                    style: GoogleFonts.adventPro(
+                      textStyle: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w400,
+                        fontSize: MediaQuery.of(context).size.width * 0.045,
+                        fontStyle: FontStyle.normal,
+                        decoration: TextDecoration.none,
+                      ),
+                    ),
+                    validator: (String? inValue) {
+                      if (inValue!.isEmpty) {
+                        return "Scegli Data ed Orario";
+                      }
+                      return null;
+                    },
+                    controller: txt,
+                    decoration: const InputDecoration(
+                        labelText: "Data inizio",
+                        labelStyle: TextStyle(
+                          color: Colors.white,
+                        )),
+                    onTap: () async {
+                      FocusScope.of(context).requestFocus(FocusNode());
+                      _selectDateTime(context);
+                      showDateTime = true;
+                      inidata = getDateTime();
+                      txt.text = DateFormat('dd-MM-yyyy hh:mm').format(_CreaEventoState.inidata);
+                      txt1.text = "0";
+                      eventiModel.eventoBeingEdited.inizio = _CreaEventoState.inidata;
+                      eventiModel.eventoBeingEdited.fine = _CreaEventoState.inidata;
+                    },
+                    onChanged: (String inValue) {
+                      eventiModel.eventoBeingEdited.inizio = _CreaEventoState.inidata;
                     },
                   ),
                 )),
@@ -299,6 +421,7 @@ class CreaEvento extends StatelessWidget {
                   onTap: () {
                     if (_formKey.currentState!.validate()) {
                       _save(context);
+                      //txt.text = "";
                     }
                   },
                   child: Container(
