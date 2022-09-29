@@ -283,7 +283,7 @@ class CreaEvento extends StatelessWidget {
                       await _selectDateTime(context);
                       showDateTime = true;
                       inidata = getDateTime();
-                      txt.text = DateFormat('dd-MM-yyyy hh:mm').format(CreaEvento.inidata);
+                      txt.text = DateFormat('dd-MM-yyyy HH:mm').format(CreaEvento.inidata);
                       txt1.text = "0";
                       eventiModel.eventoBeingEdited.inizio = CreaEvento.inidata;
                       eventiModel.eventoBeingEdited.fine = CreaEvento.inidata;

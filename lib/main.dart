@@ -18,6 +18,10 @@ class MyTraining extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        theme: ThemeData(
+        colorScheme: ColorScheme.light(primary: const Color(0xff2a2a2a)),
+        buttonTheme: ButtonThemeData(textTheme: ButtonTextTheme.primary),
+    ),
       home: Scaffold(
         resizeToAvoidBottomInset: false,
         /* appBar: AppBar(
