@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:mytraining/screen/base.dart';
 
 void main() async {
@@ -18,6 +19,14 @@ class MyTraining extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        localizationsDelegates: [
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: [
+          const Locale('it')
+        ],
         theme: ThemeData(
         colorScheme: ColorScheme.light(primary: const Color(0xff2a2a2a)),
         buttonTheme: ButtonThemeData(textTheme: ButtonTextTheme.primary),

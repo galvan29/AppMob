@@ -35,6 +35,7 @@ class CreaEvento extends StatelessWidget {
   Future<DateTime> _selectDate(BuildContext context) async {
     final selected = await showDatePicker(
       context: context,
+      locale: const Locale("it", ""),
       initialDate: selectedDate,
       firstDate: DateTime(2000),
       lastDate: DateTime(2025),
